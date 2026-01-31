@@ -1,0 +1,247 @@
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+<div class="testimonials section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="testimonials__wrapper page-width">
+    {% if section.settings.heading != blank %}
+      <div class="testimonials__header">
+        <h2 class="testimonials__heading h2">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="testimonials__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="testimonials__grid testimonials__grid--{{ section.blocks.size }}">
+      {% for block in section.blocks %}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars">
+            {% for i in (1..5) %}
+              {% if i <= block.settings.rating %}
+                <svg class="testimonial-card__star testimonial-card__star--filled" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+              {% else %}
+                <svg class="testimonial-card__star" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <blockquote class="testimonial-card__quote">
+            "{{ block.settings.quote }}"
+          </blockquote>
+
+          <div class="testimonial-card__attribution">
+            {% if block.settings.image != blank %}
+              <div class="testimonial-card__avatar">
+                {{ block.settings.image | image_url: width: 60 | image_tag: loading: 'lazy', class: 'testimonial-card__avatar-image' }}
+              </div>
+            {% endif %}
+            <div class="testimonial-card__author-info">
+              <span class="testimonial-card__author">{{ block.settings.author }}</span>
+              {% if block.settings.location != blank %}
+                <span class="testimonial-card__location">{{ block.settings.location }}</span>
+              {% endif %}
+              {% if block.settings.product != blank %}
+                <span class="testimonial-card__product">Purchased: {{ block.settings.product }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .testimonials {
+    padding: 60px 0;
+  }
+  .testimonials__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .testimonials__heading {
+    margin-bottom: 0.5rem;
+  }
+  .testimonials__subheading {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+  }
+  .testimonials__grid {
+    display: grid;
+    gap: 2rem;
+  }
+  .testimonials__grid--1 { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+  .testimonials__grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .testimonials__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 989px) {
+    .testimonials__grid--3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 749px) {
+    .testimonials__grid--2,
+    .testimonials__grid--3 { grid-template-columns: 1fr; }
+  }
+  .testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .testimonial-card__stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 1rem;
+    color: #c9a227;
+  }
+  .testimonial-card__quote {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    font-style: italic;
+    color: #333;
+  }
+  .testimonial-card__attribution {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .testimonial-card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .testimonial-card__avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .testimonial-card__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .testimonial-card__author {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .testimonial-card__location,
+  .testimonial-card__product {
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.5);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section-testimonials",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Real reviews from real customers"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The quality exceeded my expectations. The engraving is crisp and the slate has a beautiful natural texture."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Grand Rapids, MI"
+        },
+        {
+          "type": "text",
+          "id": "product",
+          "label": "Product Purchased"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Author Photo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The quality exceeded my expectations. The engraving is crisp and the slate has a beautiful natural texture. Perfect gift!",
+            "author": "Sarah M.",
+            "location": "Grand Rapids, MI",
+            "product": "Custom Photo Coaster Set"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Ordered logo coasters for our office. Everyone loves them! Great communication throughout the process.",
+            "author": "Mike T.",
+            "location": "Detroit, MI",
+            "product": "Business Logo Coasters"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Got these for my husband's golf buddies. The course map engraving was stunning. Will definitely order again!",
+            "author": "Jennifer K.",
+            "location": "Ann Arbor, MI",
+            "product": "Golf Course Coasters"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

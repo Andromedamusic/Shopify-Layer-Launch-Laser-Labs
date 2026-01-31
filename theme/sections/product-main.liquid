@@ -1,0 +1,524 @@
+{%- comment -%}
+  Main Product Section
+  Includes personalization form, bulk order CTA, and product details
+{%- endcomment -%}
+
+<div class="product-main page-width section-{{ section.id }}-padding">
+  <div class="product-main__grid">
+    {%- comment -%} Product Gallery {%- endcomment -%}
+    <div class="product-main__gallery">
+      <div class="product-gallery">
+        {% if product.images.size > 0 %}
+          <div class="product-gallery__main">
+            {{ product.featured_image | image_url: width: 800 | image_tag:
+              loading: 'eager',
+              class: 'product-gallery__main-image',
+              id: 'product-main-image',
+              alt: product.featured_image.alt | default: product.title
+            }}
+          </div>
+          {% if product.images.size > 1 %}
+            <div class="product-gallery__thumbnails">
+              {% for image in product.images %}
+                <button
+                  class="product-gallery__thumbnail {% if forloop.first %}active{% endif %}"
+                  data-image-url="{{ image | image_url: width: 800 }}"
+                  data-index="{{ forloop.index0 }}"
+                >
+                  {{ image | image_url: width: 100 | image_tag:
+                    loading: 'lazy',
+                    alt: image.alt | default: product.title
+                  }}
+                </button>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="product-gallery__placeholder">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {%- comment -%} Product Info {%- endcomment -%}
+    <div class="product-main__info">
+      {%- comment -%} Breadcrumb {%- endcomment -%}
+      <nav class="product-breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        {% if collection %}
+          <a href="{{ collection.url }}">{{ collection.title }}</a>
+          <span>/</span>
+        {% endif %}
+        <span>{{ product.title }}</span>
+      </nav>
+
+      <h1 class="product-main__title h2">{{ product.title }}</h1>
+
+      {%- comment -%} Price {%- endcomment -%}
+      <div class="product-main__price">
+        {% if product.compare_at_price > product.price %}
+          <span class="product-main__price-compare">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+        <span class="product-main__price-current">{{ product.price | money }}</span>
+        {% if section.settings.price_includes_personalization %}
+          <span class="product-main__price-note">Personalization included</span>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Product Form {%- endcomment -%}
+      {% form 'product', product, class: 'product-form', data-product-form: '' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- comment -%} Variant Selector (if multiple variants) {%- endcomment -%}
+        {% if product.variants.size > 1 %}
+          <div class="product-form__variants">
+            {% for option in product.options_with_values %}
+              <div class="product-form__option">
+                <label for="option-{{ option.name | handle }}">{{ option.name }}</label>
+                <select id="option-{{ option.name | handle }}" name="options[{{ option.name }}]" class="product-form__select">
+                  {% for value in option.values %}
+                    <option value="{{ value }}" {% if option.selected_value == value %}selected{% endif %}>
+                      {{ value }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {%- comment -%} Personalization Fields {%- endcomment -%}
+        {% if section.settings.enable_personalization %}
+          {% render 'product-personalization-form', product: product %}
+        {% endif %}
+
+        {%- comment -%} Quantity & Add to Cart {%- endcomment -%}
+        <div class="product-form__actions">
+          <div class="product-form__quantity">
+            <label for="quantity">Quantity</label>
+            <div class="quantity-selector">
+              <button type="button" class="quantity-btn quantity-btn--minus" aria-label="Decrease quantity">−</button>
+              <input type="number" id="quantity" name="quantity" value="1" min="1" max="99">
+              <button type="button" class="quantity-btn quantity-btn--plus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <button type="submit" class="product-form__submit button button--primary" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}
+              Add to Cart
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        </div>
+      {% endform %}
+
+      {%- comment -%} Bulk Order CTA {%- endcomment -%}
+      {% if section.settings.show_bulk_cta %}
+        {% render 'bulk-order-cta', product: product %}
+      {% endif %}
+
+      {%- comment -%} Trust Badges {%- endcomment -%}
+      <div class="product-main__trust">
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
+            <path d="M16 8H20C20.5304 8 21.0391 8.21071 21.4142 8.58579C21.7893 8.96086 22 9.46957 22 10V18C22 18.5304 21.7893 19.0391 21.4142 19.4142C21.0391 19.7893 20.5304 20 20 20H4C3.46957 20 2.96086 19.7893 2.58579 19.4142C2.21071 19.0391 2 18.5304 2 18V16"/>
+            <circle cx="12" cy="14" r="2"/>
+          </svg>
+          <span>Secure Checkout</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+            <path d="M12 6V12L16 14"/>
+          </svg>
+          <span>{{ section.settings.shipping_estimate | default: 'Ships in 5-7 days' }}</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.54871 7.04097 1.54871 8.5C1.54871 9.95903 2.1283 11.3583 3.16 12.39L12 21.23L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.61Z"/>
+          </svg>
+          <span>Satisfaction Guaranteed</span>
+        </div>
+      </div>
+
+      {%- comment -%} Product Details Accordion {%- endcomment -%}
+      <div class="product-main__details">
+        <details class="product-details" open>
+          <summary>
+            <span>Description</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="product-details__content">
+            {{ product.description }}
+          </div>
+        </details>
+
+        {% if section.settings.materials_info != blank %}
+          <details class="product-details">
+            <summary>
+              <span>Materials & Specs</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <div class="product-details__content">
+              {{ section.settings.materials_info }}
+            </div>
+          </details>
+        {% endif %}
+
+        {% if section.settings.care_info != blank %}
+          <details class="product-details">
+            <summary>
+              <span>Care Instructions</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <div class="product-details__content">
+              {{ section.settings.care_info }}
+            </div>
+          </details>
+        {% endif %}
+
+        <details class="product-details">
+          <summary>
+            <span>Shipping & Returns</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="product-details__content">
+            <p><strong>Processing Time:</strong> {{ section.settings.processing_time | default: '3-5 business days' }}</p>
+            <p><strong>Shipping:</strong> Free standard shipping on orders over $75. Express options available at checkout.</p>
+            <p><strong>Returns:</strong> Due to the personalized nature of our products, we cannot accept returns unless there is a defect. <a href="/policies/refund-policy">View full policy</a></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-main {
+    padding: 40px 0 80px;
+  }
+  .product-main__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 989px) {
+    .product-main__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* Gallery */
+  .product-gallery__main {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+  .product-gallery__main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .product-gallery__thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+  .product-gallery__thumbnail {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f8f8f8;
+  }
+  .product-gallery__thumbnail.active {
+    border-color: #1a1a1a;
+  }
+  .product-gallery__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Breadcrumb */
+  .product-breadcrumb {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: rgba(0,0,0,0.5);
+  }
+  .product-breadcrumb a {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+  }
+  .product-breadcrumb a:hover {
+    color: #1a1a1a;
+  }
+  .product-breadcrumb span {
+    margin: 0 0.5rem;
+  }
+
+  /* Title & Price */
+  .product-main__title {
+    margin-bottom: 0.75rem;
+  }
+  .product-main__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .product-main__price-current {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .product-main__price-compare {
+    font-size: 1.1rem;
+    color: rgba(0,0,0,0.4);
+    text-decoration: line-through;
+  }
+  .product-main__price-note {
+    font-size: 0.875rem;
+    color: #2e7d32;
+  }
+
+  /* Form */
+  .product-form__variants {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .product-form__option label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .product-form__select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  .product-form__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .product-form__quantity {
+    flex-shrink: 0;
+  }
+  .product-form__quantity label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .quantity-btn {
+    width: 40px;
+    height: 44px;
+    border: none;
+    background: #f8f8f8;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background 0.2s;
+  }
+  .quantity-btn:hover {
+    background: #eee;
+  }
+  .quantity-selector input {
+    width: 50px;
+    height: 44px;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+  .quantity-selector input::-webkit-outer-spin-button,
+  .quantity-selector input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .product-form__submit {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: auto;
+  }
+
+  /* Trust Badges */
+  .product-main__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.6);
+  }
+  .trust-badge svg {
+    color: #2e7d32;
+  }
+
+  /* Details Accordion */
+  .product-main__details {
+    margin-top: 1.5rem;
+  }
+  .product-details {
+    border-bottom: 1px solid #eee;
+  }
+  .product-details summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+  }
+  .product-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .product-details summary svg {
+    transition: transform 0.2s;
+  }
+  .product-details[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .product-details__content {
+    padding: 0 0 1rem 0;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+  .product-details__content p {
+    margin: 0 0 0.75rem 0;
+  }
+  .product-details__content a {
+    color: #1a1a1a;
+  }
+</style>
+
+<script>
+  // Quantity buttons
+  document.querySelectorAll('.quantity-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('input');
+      const currentVal = parseInt(input.value) || 1;
+
+      if (btn.classList.contains('quantity-btn--minus') && currentVal > 1) {
+        input.value = currentVal - 1;
+      } else if (btn.classList.contains('quantity-btn--plus') && currentVal < 99) {
+        input.value = currentVal + 1;
+      }
+    });
+  });
+
+  // Thumbnail gallery
+  document.querySelectorAll('.product-gallery__thumbnail').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const mainImage = document.getElementById('product-main-image');
+      mainImage.src = thumb.dataset.imageUrl;
+
+      document.querySelectorAll('.product-gallery__thumbnail').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "tag": "section",
+  "class": "section-product-main",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Personalization"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_personalization",
+      "label": "Enable Personalization Form",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "price_includes_personalization",
+      "label": "Show 'Personalization Included' Badge",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bulk Orders"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bulk_cta",
+      "label": "Show Bulk Order CTA",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product Information"
+    },
+    {
+      "type": "richtext",
+      "id": "materials_info",
+      "label": "Materials & Specs",
+      "default": "<p><strong>Material:</strong> Natural slate stone</p><p><strong>Dimensions:</strong> 4\" x 4\" x 0.25\"</p><p><strong>Weight:</strong> Approx. 0.5 lb per coaster</p><p><strong>Finish:</strong> Natural edge with foam backing</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "care_info",
+      "label": "Care Instructions",
+      "default": "<p>Wipe clean with a damp cloth. Do not submerge in water or place in dishwasher. Avoid harsh chemicals. For best results, use coasters on flat surfaces.</p>"
+    },
+    {
+      "type": "text",
+      "id": "shipping_estimate",
+      "label": "Shipping Estimate Text",
+      "default": "Ships in 5-7 days"
+    },
+    {
+      "type": "text",
+      "id": "processing_time",
+      "label": "Processing Time",
+      "default": "3-5 business days"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,72 @@
+{%- comment -%}
+  Bulk Order CTA Snippet
+  Shows a call-to-action for bulk/corporate orders on product pages.
+
+  Usage:
+  {% render 'bulk-order-cta', product: product %}
+{%- endcomment -%}
+
+{% if settings.show_bulk_cta %}
+  {% assign bulk_url = settings.bulk_quote_url | default: '/pages/request-quote' %}
+  {% assign bulk_text = settings.bulk_cta_text | default: 'Need 25+ or a logo run? Request a Quote' %}
+
+  <div class="bulk-order-cta">
+    <div class="bulk-order-cta__icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"/>
+        <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"/>
+      </svg>
+    </div>
+    <div class="bulk-order-cta__content">
+      <span class="bulk-order-cta__text">{{ bulk_text }}</span>
+      <a href="{{ bulk_url }}" class="bulk-order-cta__link">
+        Get Quote →
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+  .bulk-order-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+  .bulk-order-cta__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    color: #666;
+  }
+  .bulk-order-cta__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .bulk-order-cta__text {
+    font-size: 0.875rem;
+    color: #333;
+  }
+  .bulk-order-cta__link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+  .bulk-order-cta__link:hover {
+    text-decoration: underline;
+  }
+</style>

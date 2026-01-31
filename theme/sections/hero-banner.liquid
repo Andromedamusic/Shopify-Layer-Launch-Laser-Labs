@@ -1,0 +1,160 @@
+{{ 'section-hero-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="hero-banner hero-banner--{{ section.settings.height }}" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.background_image != blank %}
+    <div class="hero-banner__image-wrapper">
+      {{ section.settings.background_image | image_url: width: 1920 | image_tag:
+        loading: 'eager',
+        class: 'hero-banner__image',
+        alt: section.settings.heading
+      }}
+      <div class="hero-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+  {% endif %}
+
+  <div class="hero-banner__content page-width">
+    <div class="hero-banner__text-wrapper hero-banner__text-wrapper--{{ section.settings.text_alignment }}">
+      {% if section.settings.subheading != blank %}
+        <p class="hero-banner__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="hero-banner__heading h0">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="hero-banner__description">{{ section.settings.description }}</div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link }}" class="hero-banner__button button button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+
+      {% if section.settings.secondary_button_label != blank %}
+        <a href="{{ section.settings.secondary_button_link }}" class="hero-banner__button hero-banner__button--secondary button button--secondary">
+          {{ section.settings.secondary_button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "section-hero-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section Height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full Screen" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Premium Custom Engraving"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Personalized Slate Coasters"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Transform your photos, logos, and ideas into premium engraved products that last a lifetime.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Coasters"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary Button Label",
+      "default": "View Design Library"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "settings": {
+        "subheading": "Premium Custom Engraving",
+        "heading": "Personalized Slate Coasters",
+        "description": "<p>Transform your photos, logos, and ideas into premium engraved products that last a lifetime.</p>",
+        "button_label": "Shop Coasters",
+        "secondary_button_label": "View Design Library"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-custom-upload",
+      "settings": {
+        "heading": "Upload Your Image",
+        "description": "Complete this form after placing your order to upload your photo or logo for engraving.",
+        "show_requirements": true
+      }
+    }
+  },
+  "order": ["main"]
+}

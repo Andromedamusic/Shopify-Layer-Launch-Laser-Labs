@@ -1,0 +1,261 @@
+<div class="why-different section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="why-different__wrapper page-width">
+    <div class="why-different__content">
+      {% if section.settings.subheading != blank %}
+        <p class="why-different__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="why-different__heading h2">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="why-different__description">{{ section.settings.description }}</div>
+      {% endif %}
+
+      <ul class="why-different__features">
+        {% for block in section.blocks %}
+          <li class="why-different__feature" {{ block.shopify_attributes }}>
+            {% if block.settings.icon != blank %}
+              <span class="why-different__feature-icon">
+                {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
+              </span>
+            {% else %}
+              <span class="why-different__feature-icon why-different__feature-icon--default">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <path d="M22 4L12 14.01L9 11.01"/>
+                </svg>
+              </span>
+            {% endif %}
+            <div class="why-different__feature-content">
+              <strong class="why-different__feature-title">{{ block.settings.title }}</strong>
+              {% if block.settings.description != blank %}
+                <p class="why-different__feature-description">{{ block.settings.description }}</p>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link }}" class="why-different__button button button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.image != blank %}
+      <div class="why-different__image-wrapper">
+        {{ section.settings.image | image_url: width: 800 | image_tag:
+          loading: 'lazy',
+          class: 'why-different__image',
+          alt: section.settings.heading
+        }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .why-different {
+    padding: 60px 0;
+  }
+  .why-different__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  @media (max-width: 989px) {
+    .why-different__wrapper {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  .why-different__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 0.5rem;
+  }
+  .why-different__heading {
+    margin-bottom: 1rem;
+  }
+  .why-different__description {
+    color: rgba(0,0,0,0.7);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .why-different__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .why-different__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .why-different__feature-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    color: #c9a227;
+  }
+  .why-different__feature-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .why-different__feature-content {
+    flex: 1;
+  }
+  .why-different__feature-title {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .why-different__feature-description {
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .why-different__image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .why-different__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Why We're Different",
+  "tag": "section",
+  "class": "section-why-different",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The LayerLaunch Difference"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not Your Generic Big-Box Coasters"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Each piece we create is made to order with precision laser engraving on premium natural slate. The result is a product that feels personal, permanent, and unmistakably different from mass-produced alternatives.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn Our Process"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium Natural Slate"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Real stone with natural texture and weight you can feel."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why We're Different",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Natural Slate",
+            "description": "Real stone with natural texture and weight you can feel."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Precision Laser Engraving",
+            "description": "Crisp, high-contrast lines that capture every detail."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Made to Order",
+            "description": "Each piece is crafted specifically for you, not mass-produced."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "True Personalization",
+            "description": "Your photos, logos, names, and ideas brought to life."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Michigan Made",
+            "description": "Proudly designed and crafted in Michigan, shipped nationwide."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

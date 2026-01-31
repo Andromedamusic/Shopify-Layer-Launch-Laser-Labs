@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["main"]
+}

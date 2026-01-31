@@ -1,0 +1,213 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "LayerLaunch Laser Labs",
+    "theme_version": "1.0.0",
+    "theme_author": "Andromeda Media LLC",
+    "theme_documentation_url": "https://github.com/Andromedamusic/Shopify-Layer-Launch-Laser-Labs",
+    "theme_support_url": "https://layerlaunchlaserlabs.com/contact"
+  },
+  {
+    "name": "Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color",
+        "default": "#f5f5f5"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#c9a227"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Color",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "montserrat_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "open_sans_n4"
+      }
+    ]
+  },
+  {
+    "name": "Trust Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "trust_bar_enabled",
+        "label": "Enable Trust Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_item_1",
+        "label": "Trust Item 1",
+        "default": "Made in Michigan"
+      },
+      {
+        "type": "text",
+        "id": "trust_item_2",
+        "label": "Trust Item 2",
+        "default": "Free Shipping $75+"
+      },
+      {
+        "type": "text",
+        "id": "trust_item_3",
+        "label": "Trust Item 3",
+        "default": "Premium Quality"
+      },
+      {
+        "type": "text",
+        "id": "trust_item_4",
+        "label": "Trust Item 4",
+        "default": "Custom Engraving"
+      }
+    ]
+  },
+  {
+    "name": "Personalization Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_personalization_fields",
+        "label": "Show Personalization Fields on Products",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "max_engraving_chars",
+        "label": "Max Characters for Engraving",
+        "default": 25
+      },
+      {
+        "type": "textarea",
+        "id": "personalization_help_text",
+        "label": "Personalization Help Text",
+        "default": "Enter your custom engraving text. Each line will be centered on the product."
+      }
+    ]
+  },
+  {
+    "name": "Bulk Order Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_bulk_cta",
+        "label": "Show Bulk Order CTA on Products",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "bulk_threshold",
+        "label": "Bulk Order Threshold",
+        "default": 25,
+        "info": "Show 'Need more?' CTA when quantity threshold applies"
+      },
+      {
+        "type": "url",
+        "id": "bulk_quote_url",
+        "label": "Bulk Quote Page URL",
+        "default": "/pages/request-quote"
+      },
+      {
+        "type": "text",
+        "id": "bulk_cta_text",
+        "label": "Bulk CTA Button Text",
+        "default": "Need 25+ or a logo run? Request a Quote"
+      }
+    ]
+  },
+  {
+    "name": "Upload Settings",
+    "settings": [
+      {
+        "type": "url",
+        "id": "upload_page_url",
+        "label": "Custom Upload Page URL",
+        "default": "/pages/custom-upload"
+      },
+      {
+        "type": "text",
+        "id": "upload_cta_text",
+        "label": "Upload CTA Text",
+        "default": "Have a photo or logo? Upload it here after ordering."
+      }
+    ]
+  },
+  {
+    "name": "Social Proof",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_reviews",
+        "label": "Show Review Section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "review_heading",
+        "label": "Review Section Heading",
+        "default": "What Our Customers Say"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_newsletter",
+        "label": "Show Newsletter Signup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_heading",
+        "label": "Newsletter Heading",
+        "default": "Join Our Community"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Newsletter Description",
+        "default": "Subscribe for exclusive designs, early access to new products, and 10% off your first order."
+      },
+      {
+        "type": "text",
+        "id": "footer_tagline",
+        "label": "Footer Tagline",
+        "default": "Premium custom engraved products, made to order in Michigan."
+      }
+    ]
+  }
+]
