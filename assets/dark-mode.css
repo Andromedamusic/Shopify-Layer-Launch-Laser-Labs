@@ -434,6 +434,272 @@
   .testimonials-slider__item {
     border-color: var(--color-border);
   }
+
+  /* ============================================
+     Homepage Section Dark Mode Overrides
+     ============================================ */
+
+  /* Why Different / Features Section */
+  .why-different,
+  .features-section,
+  .why-choose-us {
+    background: var(--color-background-secondary);
+  }
+
+  .why-different__title,
+  .features-section__title,
+  .why-choose-us__title {
+    color: #ffffff !important;
+  }
+
+  .why-different__description,
+  .features-section__description,
+  .why-choose-us__description {
+    color: #c0c0c0;
+  }
+
+  .feature-card,
+  .why-different__card {
+    background: var(--color-background-tertiary);
+    border-color: var(--color-border);
+  }
+
+  .feature-card__title,
+  .why-different__card-title {
+    color: #ffffff;
+  }
+
+  .feature-card__description,
+  .why-different__card-description {
+    color: #b0b0b0;
+  }
+
+  .feature-card__icon,
+  .why-different__icon {
+    color: var(--color-accent);
+  }
+
+  /* Newsletter Section */
+  .newsletter,
+  .newsletter-section {
+    background: linear-gradient(135deg,
+      var(--color-background-secondary) 0%,
+      var(--color-background-tertiary) 100%
+    );
+  }
+
+  .newsletter__title,
+  .newsletter-section__title {
+    color: #ffffff !important;
+  }
+
+  .newsletter__description,
+  .newsletter-section__description {
+    color: #c0c0c0;
+  }
+
+  .newsletter__input,
+  .newsletter-section input[type="email"] {
+    background: var(--color-background);
+    border-color: var(--color-border);
+    color: #ffffff;
+  }
+
+  .newsletter__input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  /* Featured Collections Section */
+  .featured-collections,
+  .collection-list {
+    background: transparent;
+  }
+
+  .featured-collections__title,
+  .collection-list__title {
+    color: #ffffff !important;
+  }
+
+  .featured-collections__description,
+  .collection-list__description {
+    color: #c0c0c0;
+  }
+
+  .collection-card,
+  .featured-collection-card {
+    background: var(--color-background-secondary);
+    border-color: var(--color-border);
+  }
+
+  .collection-card__title,
+  .featured-collection-card__title {
+    color: #ffffff !important;
+  }
+
+  .collection-card__description,
+  .featured-collection-card__description {
+    color: #b0b0b0;
+  }
+
+  .collection-card__count,
+  .featured-collection-card__count {
+    color: #a0a0a0;
+  }
+
+  /* Trust Bar / Trust Badges */
+  .trust-bar,
+  .trust-badges {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--color-border);
+  }
+
+  .trust-bar__item,
+  .trust-badge {
+    color: #ffffff;
+  }
+
+  .trust-bar__icon,
+  .trust-badge__icon {
+    color: var(--color-accent);
+  }
+
+  .trust-bar__text,
+  .trust-badge__text {
+    color: #c0c0c0;
+  }
+
+  /* Testimonials Section */
+  .testimonials,
+  .testimonials-section {
+    background: var(--color-background-secondary);
+  }
+
+  .testimonials__title,
+  .testimonials-section__title {
+    color: #ffffff !important;
+  }
+
+  .testimonial-card {
+    background: var(--color-background);
+    border-color: var(--color-border);
+  }
+
+  .testimonial-card__text,
+  .testimonial-card__quote {
+    color: #e0e0e0;
+  }
+
+  .testimonial-card__author {
+    color: #ffffff;
+  }
+
+  .testimonial-card__role {
+    color: #a0a0a0;
+  }
+
+  /* CTA Sections */
+  .cta-section,
+  .promo-banner {
+    background: linear-gradient(135deg,
+      var(--color-background-tertiary) 0%,
+      var(--color-background-secondary) 100%
+    );
+    border-color: var(--color-border);
+  }
+
+  .cta-section__title,
+  .promo-banner__title {
+    color: #ffffff !important;
+  }
+
+  .cta-section__description,
+  .promo-banner__description {
+    color: #c0c0c0;
+  }
+
+  /* Text with rgba(0,0,0,x) that becomes invisible */
+  [style*="color: rgba(0, 0, 0"],
+  [style*="color: rgba(0,0,0"] {
+    color: #ffffff !important;
+  }
+
+  /* Common text elements with black text */
+  .section-header__title,
+  .section-title {
+    color: #ffffff !important;
+  }
+
+  .section-header__description,
+  .section-description {
+    color: #c0c0c0;
+  }
+
+  /* Process/How It Works Section */
+  .process-section,
+  .how-it-works {
+    background: var(--color-background-secondary);
+  }
+
+  .process-step,
+  .how-it-works__step {
+    background: var(--color-background);
+    border-color: var(--color-border);
+  }
+
+  .process-step__number,
+  .how-it-works__number {
+    background: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  .process-step__title,
+  .how-it-works__title {
+    color: #ffffff;
+  }
+
+  .process-step__description,
+  .how-it-works__description {
+    color: #b0b0b0;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    background: var(--color-background);
+  }
+
+  .faq-section__title {
+    color: #ffffff !important;
+  }
+
+  .faq-item {
+    background: var(--color-background-secondary);
+    border-color: var(--color-border);
+  }
+
+  .faq-item__question {
+    color: #ffffff;
+  }
+
+  .faq-item__answer {
+    color: #c0c0c0;
+  }
+
+  /* Logo/Brand Text */
+  .brand-name,
+  .site-title {
+    color: #ffffff !important;
+  }
+
+  /* Generic dark mode text fixes */
+  .text-dark,
+  .text-black {
+    color: #ffffff !important;
+  }
+
+  .bg-light,
+  .bg-white {
+    background: var(--color-background-secondary) !important;
+  }
 }
 
 /* Dark mode toggle button styles */
