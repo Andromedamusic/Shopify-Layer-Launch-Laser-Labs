@@ -1,0 +1,304 @@
+<div class="page-custom-upload page-width section-{{ section.id }}-padding">
+  <div class="page-custom-upload__header">
+    <h1 class="page-custom-upload__title h1">{{ section.settings.heading | default: page.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="page-custom-upload__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="page-custom-upload__container">
+    <div class="page-custom-upload__form-wrapper">
+      <form class="page-custom-upload__form" action="/contact#contact_form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[subject]" value="Custom Image Upload">
+
+        <div class="form-group form-group--required">
+          <label for="order-number">Order Number</label>
+          <input type="text" id="order-number" name="contact[order_number]" required placeholder="e.g., #1001">
+          <span class="form-help">Enter the order number from your confirmation email</span>
+        </div>
+
+        <div class="form-group form-group--required">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="contact[email]" required placeholder="your@email.com">
+        </div>
+
+        <div class="form-group form-group--required">
+          <label for="product">Product Ordered</label>
+          <select id="product" name="contact[product]" required>
+            <option value="">Select product...</option>
+            <option value="Slate Coaster - Single">Slate Coaster - Single</option>
+            <option value="Slate Coaster - Set of 4">Slate Coaster - Set of 4</option>
+            <option value="Slate Coaster - Set of 10">Slate Coaster - Set of 10</option>
+            <option value="Slate Coaster - Set of 25">Slate Coaster - Set of 25</option>
+            <option value="Golf Ball Marker">Golf Ball Marker</option>
+            <option value="Logo Coasters - Business Pack">Logo Coasters - Business Pack</option>
+            <option value="Other">Other (specify in notes)</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group--file">
+          <label for="file-upload">Upload Your Image</label>
+          <div class="file-upload-wrapper">
+            <input type="file" id="file-upload" name="contact[attachment]" accept=".png,.jpg,.jpeg,.pdf,.ai,.svg" required>
+            <div class="file-upload-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <span>Click to upload or drag and drop</span>
+              <span class="file-types">PNG, JPG, PDF, AI, SVG (max 10MB)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Engraving Notes</label>
+          <textarea id="notes" name="contact[body]" rows="4" placeholder="Please include any specific instructions:
+- Crop preferences
+- Text to add (if any)
+- Orientation preferences
+- Any special requests"></textarea>
+        </div>
+
+        <div class="form-group form-group--checkbox">
+          <label>
+            <input type="checkbox" name="contact[rights_confirmed]" value="Yes" required>
+            <span>I confirm I have the rights to use this image/logo for engraving.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="button button--primary">Submit Upload</button>
+      </form>
+    </div>
+
+    {% if section.settings.show_requirements %}
+      <div class="page-custom-upload__sidebar">
+        <div class="upload-requirements">
+          <h3>Image Requirements</h3>
+          <ul>
+            <li><strong>File types:</strong> PNG, JPG, PDF, AI, SVG</li>
+            <li><strong>Max file size:</strong> 10MB</li>
+            <li><strong>Resolution:</strong> 300 DPI recommended for best results</li>
+            <li><strong>Format:</strong> High contrast images engrave best</li>
+          </ul>
+
+          <h3>What Happens Next</h3>
+          <ol>
+            <li>We receive your upload</li>
+            <li>We prepare a digital proof</li>
+            <li>You review and approve the proof via email</li>
+            <li>We begin production</li>
+            <li>Your order ships within 3-5 business days</li>
+          </ol>
+
+          <h3>Tips for Best Results</h3>
+          <ul>
+            <li>Photos with good contrast (light and dark areas) engrave beautifully</li>
+            <li>Logos should be high resolution, preferably vector format</li>
+            <li>Simple designs often produce the crispest results</li>
+            <li>Avoid very thin lines or small text</li>
+          </ul>
+
+          <div class="upload-questions">
+            <p><strong>Questions?</strong></p>
+            <p>Email us at <a href="mailto:hello@layerlaunchlaserlabs.com">hello@layerlaunchlaserlabs.com</a></p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .page-custom-upload {
+    padding: 40px 0 80px;
+  }
+  .page-custom-upload__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .page-custom-upload__title {
+    margin-bottom: 0.75rem;
+  }
+  .page-custom-upload__description {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .page-custom-upload__container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (max-width: 989px) {
+    .page-custom-upload__container {
+      grid-template-columns: 1fr;
+    }
+  }
+  .page-custom-upload__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .form-group--required label::after {
+    content: ' *';
+    color: #c62828;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #1a1a1a;
+  }
+  .form-help {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.5);
+  }
+  .file-upload-wrapper {
+    position: relative;
+  }
+  .file-upload-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .file-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .file-upload-wrapper:hover .file-upload-placeholder {
+    border-color: #1a1a1a;
+    background: #f9f9f9;
+  }
+  .file-upload-placeholder svg {
+    margin-bottom: 0.75rem;
+    color: #999;
+  }
+  .file-upload-placeholder span {
+    display: block;
+    color: #666;
+  }
+  .file-types {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 0.25rem;
+  }
+  .form-group--checkbox label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  .form-group--checkbox input[type="checkbox"] {
+    margin-top: 2px;
+  }
+  .page-custom-upload__form .button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  /* Sidebar */
+  .upload-requirements {
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: sticky;
+    top: 2rem;
+  }
+  .upload-requirements h3 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .upload-requirements h3:not(:first-child) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .upload-requirements ul,
+  .upload-requirements ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.7);
+  }
+  .upload-requirements li {
+    margin-bottom: 0.5rem;
+  }
+  .upload-questions {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+  }
+  .upload-questions p {
+    margin: 0;
+  }
+  .upload-questions a {
+    color: #1a1a1a;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Upload Page",
+  "tag": "section",
+  "class": "section-page-custom-upload",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Upload Your Image"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Complete this form after placing your order to upload your photo or logo for engraving."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_requirements",
+      "label": "Show Requirements Sidebar",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

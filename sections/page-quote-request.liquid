@@ -1,0 +1,364 @@
+<div class="page-quote page-width section-{{ section.id }}-padding">
+  <div class="page-quote__header">
+    <h1 class="page-quote__title h1">{{ section.settings.heading | default: page.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="page-quote__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="page-quote__container">
+    <div class="page-quote__form-wrapper">
+      <form class="page-quote__form" action="/contact#contact_form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[subject]" value="Quote Request">
+
+        <div class="form-row">
+          <div class="form-group form-group--required">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="contact[name]" required placeholder="Full name">
+          </div>
+
+          <div class="form-group form-group--required">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="contact[email]" required placeholder="your@email.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Company/Organization</label>
+            <input type="text" id="company" name="contact[company]" placeholder="Company name (if applicable)">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="contact[phone]" placeholder="(555) 123-4567">
+          </div>
+        </div>
+
+        <div class="form-group form-group--required">
+          <label for="project-type">Project Type</label>
+          <select id="project-type" name="contact[project_type]" required>
+            <option value="">Select project type...</option>
+            <option value="Bulk Slate Coasters">Bulk Slate Coasters (25+)</option>
+            <option value="Corporate Logo Products">Corporate Logo Products</option>
+            <option value="Event/Wedding Gifts">Event/Wedding Gifts</option>
+            <option value="Team/Club Merchandise">Team/Club Merchandise</option>
+            <option value="Golf Tournament Prizes">Golf Tournament Prizes</option>
+            <option value="Custom Design Project">Custom Design Project</option>
+            <option value="Wholesale Inquiry">Wholesale Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group form-group--required">
+            <label for="quantity">Estimated Quantity</label>
+            <select id="quantity" name="contact[quantity]" required>
+              <option value="">Select quantity range...</option>
+              <option value="25-50">25-50 pieces</option>
+              <option value="51-100">51-100 pieces</option>
+              <option value="101-250">101-250 pieces</option>
+              <option value="251-500">251-500 pieces</option>
+              <option value="500+">500+ pieces</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="deadline">Needed By (optional)</label>
+            <input type="date" id="deadline" name="contact[deadline]">
+          </div>
+        </div>
+
+        <div class="form-group form-group--required">
+          <label for="design-source">Design Source</label>
+          <select id="design-source" name="contact[design_source]" required>
+            <option value="">How will you provide the design?</option>
+            <option value="I have a logo/image to upload">I have a logo/image to upload</option>
+            <option value="Choose from Design Library">I'll choose from your Design Library</option>
+            <option value="Need design assistance">I need design assistance</option>
+            <option value="Text only engraving">Text only engraving</option>
+            <option value="Multiple designs needed">Multiple designs needed</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Budget Range (optional)</label>
+          <select id="budget" name="contact[budget]">
+            <option value="">Select budget range...</option>
+            <option value="Under $500">Under $500</option>
+            <option value="$500-$1,000">$500-$1,000</option>
+            <option value="$1,000-$2,500">$1,000-$2,500</option>
+            <option value="$2,500-$5,000">$2,500-$5,000</option>
+            <option value="$5,000+">$5,000+</option>
+            <option value="Flexible">Flexible</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group--file">
+          <label for="file-upload">Upload Logo/Design (optional)</label>
+          <div class="file-upload-wrapper">
+            <input type="file" id="file-upload" name="contact[attachment]" accept=".png,.jpg,.jpeg,.pdf,.ai,.svg">
+            <div class="file-upload-placeholder">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <span>Click to upload or drag and drop</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group form-group--required">
+          <label for="details">Project Details</label>
+          <textarea id="details" name="contact[body]" rows="5" required placeholder="Please describe your project:
+- What products are you interested in?
+- What will be engraved (logo, text, design)?
+- Any specific requirements or questions?"></textarea>
+        </div>
+
+        <button type="submit" class="button button--primary">Submit Quote Request</button>
+
+        <p class="form-note">We typically respond to quote requests within 1-2 business days.</p>
+      </form>
+    </div>
+
+    <div class="page-quote__sidebar">
+      <div class="quote-info">
+        <h3>Why Request a Quote?</h3>
+        <ul>
+          <li><strong>Volume Pricing:</strong> Better per-unit pricing on larger orders</li>
+          <li><strong>Custom Options:</strong> Special packaging, designs, or materials</li>
+          <li><strong>Dedicated Support:</strong> Personal project manager for your order</li>
+          <li><strong>Flexible Timelines:</strong> Rush options available for urgent projects</li>
+        </ul>
+
+        <h3>Popular Bulk Orders</h3>
+        <ul class="popular-orders">
+          <li>
+            <strong>Corporate Gifts</strong>
+            <span>Logo coasters for clients and employees</span>
+          </li>
+          <li>
+            <strong>Wedding Favors</strong>
+            <span>Personalized coasters for guests</span>
+          </li>
+          <li>
+            <strong>Golf Tournaments</strong>
+            <span>Custom ball markers and prizes</span>
+          </li>
+          <li>
+            <strong>Real Estate Closing Gifts</strong>
+            <span>Address-engraved coasters for new homeowners</span>
+          </li>
+        </ul>
+
+        <div class="quote-contact">
+          <h3>Prefer to Talk?</h3>
+          <p>Email: <a href="mailto:hello@layerlaunchlaserlabs.com">hello@layerlaunchlaserlabs.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-quote {
+    padding: 40px 0 80px;
+  }
+  .page-quote__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .page-quote__title {
+    margin-bottom: 0.75rem;
+  }
+  .page-quote__description {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .page-quote__container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 989px) {
+    .page-quote__container {
+      grid-template-columns: 1fr;
+    }
+  }
+  .page-quote__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 749px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .form-group--required label::after {
+    content: ' *';
+    color: #c62828;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #1a1a1a;
+  }
+  .file-upload-wrapper {
+    position: relative;
+  }
+  .file-upload-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .file-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .file-upload-wrapper:hover .file-upload-placeholder {
+    border-color: #1a1a1a;
+  }
+  .file-upload-placeholder svg {
+    margin-bottom: 0.5rem;
+    color: #999;
+  }
+  .file-upload-placeholder span {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .page-quote__form .button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .form-note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgba(0,0,0,0.5);
+    margin: 0;
+  }
+
+  /* Sidebar */
+  .quote-info {
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: sticky;
+    top: 2rem;
+  }
+  .quote-info h3 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .quote-info h3:not(:first-child) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .quote-info > ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.7);
+  }
+  .quote-info > ul li {
+    margin-bottom: 0.5rem;
+  }
+  .popular-orders {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .popular-orders li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .popular-orders li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .popular-orders strong {
+    display: block;
+    font-size: 0.9rem;
+  }
+  .popular-orders span {
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.5);
+  }
+  .quote-contact {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .quote-contact p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  .quote-contact a {
+    color: #1a1a1a;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Quote Request Page",
+  "tag": "section",
+  "class": "section-page-quote",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Planning a bulk order, corporate gift, or custom project? Tell us about it and we'll provide a personalized quote."
+    }
+  ]
+}
+{% endschema %}

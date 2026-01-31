@@ -1,0 +1,383 @@
+<div class="design-library-preview section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="design-library-preview__wrapper page-width">
+    <div class="design-library-preview__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="design-library-preview__heading h2">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="design-library-preview__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="design-library-preview__categories">
+      {% for block in section.blocks %}
+        {% if block.type == 'category' %}
+          <button class="design-library-preview__category-btn {% if forloop.first %}active{% endif %}"
+                  data-category="{{ block.settings.category_tag | handle }}"
+                  {{ block.shopify_attributes }}>
+            {{ block.settings.category_name }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="design-library-preview__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'design' %}
+          <div class="design-library-preview__item"
+               data-category="{{ block.settings.category_tag | handle }}"
+               {{ block.shopify_attributes }}>
+            <div class="design-library-preview__image-wrapper">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 400 | image_tag:
+                  loading: 'lazy',
+                  class: 'design-library-preview__image',
+                  alt: block.settings.design_name
+                }}
+              {% else %}
+                <div class="design-library-preview__placeholder">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {% endif %}
+              <div class="design-library-preview__item-overlay">
+                <span class="design-library-preview__item-name">{{ block.settings.design_name }}</span>
+                <a href="{{ block.settings.product_link | default: section.settings.library_link }}" class="design-library-preview__item-cta">
+                  {{ block.settings.cta_text | default: 'Request This Design' }}
+                </a>
+              </div>
+            </div>
+            {% if block.settings.design_tag != blank %}
+              <span class="design-library-preview__tag">{{ block.settings.design_tag }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.button_label != blank %}
+      <div class="design-library-preview__footer">
+        <a href="{{ section.settings.library_link }}" class="design-library-preview__button button button--secondary">
+          {{ section.settings.button_label }}
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4.16669 10H15.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 4.16669L15.8333 10L10 15.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .design-library-preview {
+    padding: 60px 0;
+  }
+  .design-library-preview__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .design-library-preview__heading {
+    margin-bottom: 0.5rem;
+  }
+  .design-library-preview__subheading {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+  }
+  .design-library-preview__categories {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .design-library-preview__category-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .design-library-preview__category-btn:hover,
+  .design-library-preview__category-btn.active {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+  .design-library-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  @media (min-width: 750px) {
+    .design-library-preview__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media (min-width: 990px) {
+    .design-library-preview__grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  .design-library-preview__item {
+    position: relative;
+  }
+  .design-library-preview__image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+  .design-library-preview__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .design-library-preview__item:hover .design-library-preview__image {
+    transform: scale(1.05);
+  }
+  .design-library-preview__item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 1rem;
+    text-align: center;
+  }
+  .design-library-preview__item:hover .design-library-preview__item-overlay {
+    opacity: 1;
+  }
+  .design-library-preview__item-name {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .design-library-preview__item-cta {
+    color: white;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .design-library-preview__tag {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .design-library-preview__footer {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  .design-library-preview__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .design-library-preview__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Design Library Preview",
+  "tag": "section",
+  "class": "section-design-library-preview",
+  "max_blocks": 24,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Browse Our Design Library"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Choose from our curated collection or request a custom design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "View All Button Label",
+      "default": "View Full Design Library"
+    },
+    {
+      "type": "url",
+      "id": "library_link",
+      "label": "Design Library Page Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Filter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Michigan"
+        },
+        {
+          "type": "text",
+          "id": "category_tag",
+          "label": "Category Tag",
+          "default": "michigan",
+          "info": "Used to filter designs. Must match design category tags."
+        }
+      ]
+    },
+    {
+      "type": "design",
+      "name": "Design",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Design Image"
+        },
+        {
+          "type": "text",
+          "id": "design_name",
+          "label": "Design Name",
+          "default": "Michigan State Outline"
+        },
+        {
+          "type": "text",
+          "id": "design_tag",
+          "label": "Design Tag",
+          "info": "e.g., 'New', 'Popular', 'Best Seller'"
+        },
+        {
+          "type": "text",
+          "id": "category_tag",
+          "label": "Category Tag",
+          "default": "michigan",
+          "info": "Match to a category filter above"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "Request This Design"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Design Library Preview",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "All",
+            "category_tag": "all"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Michigan",
+            "category_tag": "michigan"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Golf",
+            "category_tag": "golf"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_name": "Seasonal",
+            "category_tag": "seasonal"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Michigan State Outline",
+            "category_tag": "michigan",
+            "design_tag": "Popular"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Great Lakes Map",
+            "category_tag": "michigan"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Golf Ball Pattern",
+            "category_tag": "golf",
+            "design_tag": "New"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Crossed Clubs",
+            "category_tag": "golf"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Snowflake",
+            "category_tag": "seasonal"
+          }
+        },
+        {
+          "type": "design",
+          "settings": {
+            "design_name": "Autumn Leaves",
+            "category_tag": "seasonal"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

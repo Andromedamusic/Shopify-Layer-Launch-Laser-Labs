@@ -1,0 +1,190 @@
+<div class="newsletter section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="newsletter__wrapper page-width">
+    <div class="newsletter__content">
+      {% if section.settings.heading != blank %}
+        <h2 class="newsletter__heading h3">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="newsletter__description">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="newsletter__form-wrapper">
+      {% form 'customer', class: 'newsletter__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter__field-wrapper">
+          <input
+            type="email"
+            name="contact[email]"
+            class="newsletter__input"
+            placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          >
+          <button type="submit" class="newsletter__button button button--primary">
+            {{ section.settings.button_label | default: 'Subscribe' }}
+          </button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="newsletter__success">{{ section.settings.success_message | default: 'Thanks for subscribing!' }}</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="newsletter__error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+        {% endif %}
+      {% endform %}
+
+      {% if section.settings.incentive != blank %}
+        <p class="newsletter__incentive">{{ section.settings.incentive }}</p>
+      {% endif %}
+
+      {% if section.settings.privacy_text != blank %}
+        <p class="newsletter__privacy">{{ section.settings.privacy_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .newsletter {
+    padding: 60px 0;
+  }
+  .newsletter__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  @media (max-width: 989px) {
+    .newsletter__wrapper {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  .newsletter__content {
+    flex: 1;
+    max-width: 500px;
+  }
+  .newsletter__heading {
+    margin-bottom: 0.5rem;
+  }
+  .newsletter__description {
+    color: rgba(0,0,0,0.7);
+    margin: 0;
+  }
+  .newsletter__form-wrapper {
+    flex: 1;
+    max-width: 500px;
+    width: 100%;
+  }
+  .newsletter__field-wrapper {
+    display: flex;
+    gap: 0.5rem;
+  }
+  @media (max-width: 749px) {
+    .newsletter__field-wrapper {
+      flex-direction: column;
+    }
+  }
+  .newsletter__input {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  .newsletter__input:focus {
+    outline: none;
+    border-color: #1a1a1a;
+  }
+  .newsletter__button {
+    padding: 0.875rem 1.5rem;
+    white-space: nowrap;
+  }
+  .newsletter__incentive {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: #c9a227;
+    font-weight: 500;
+  }
+  .newsletter__privacy {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(0,0,0,0.5);
+  }
+  .newsletter__success {
+    margin-top: 0.75rem;
+    color: #2e7d32;
+    font-size: 0.875rem;
+  }
+  .newsletter__error {
+    margin-top: 0.75rem;
+    color: #c62828;
+    font-size: 0.875rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join Our Community"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Subscribe for exclusive designs, early access to new products, and special offers."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "incentive",
+      "label": "Incentive Text",
+      "default": "Get 10% off your first order!"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thanks for subscribing! Check your email for your discount code."
+    },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "Privacy Text",
+      "default": "We respect your privacy. Unsubscribe at any time."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

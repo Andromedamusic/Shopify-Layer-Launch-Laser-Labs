@@ -1,0 +1,518 @@
+<div class="page-design-library page-width section-{{ section.id }}-padding">
+  <div class="page-design-library__header">
+    <h1 class="page-design-library__title h1">{{ section.settings.heading | default: page.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="page-design-library__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  {%- comment -%} Filter Buttons {%- endcomment -%}
+  <div class="page-design-library__filters">
+    {% for block in section.blocks %}
+      {% if block.type == 'filter' %}
+        <button
+          class="design-filter-btn {% if forloop.first %}active{% endif %}"
+          data-filter="{{ block.settings.tag | handle }}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.label }}
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {%- comment -%} Design Grid - Uses metaobjects or static content {%- endcomment -%}
+  <div class="page-design-library__grid" id="design-grid">
+    {%- comment -%}
+      In production, this would loop through metaobjects or a collection.
+      For the template, we show placeholder structure.
+    {%- endcomment -%}
+
+    {% assign designs = section.settings.designs_collection.products %}
+    {% if designs.size > 0 %}
+      {% for product in designs limit: 48 %}
+        <div class="design-card" data-tags="{{ product.tags | join: ' ' | handle }}">
+          <div class="design-card__image-wrapper">
+            {% if product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 400 | image_tag:
+                loading: 'lazy',
+                class: 'design-card__image',
+                alt: product.title
+              }}
+            {% else %}
+              <div class="design-card__placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% endif %}
+            <div class="design-card__overlay">
+              <span class="design-card__name">{{ product.title }}</span>
+              <a href="{{ product.url }}" class="design-card__cta button button--small">
+                Request This Design
+              </a>
+            </div>
+          </div>
+          {% if product.tags contains 'new' %}
+            <span class="design-card__badge design-card__badge--new">New</span>
+          {% elsif product.tags contains 'popular' %}
+            <span class="design-card__badge design-card__badge--popular">Popular</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      {%- comment -%} Placeholder designs for template preview {%- endcomment -%}
+      {% for i in (1..12) %}
+        <div class="design-card" data-tags="all michigan">
+          <div class="design-card__image-wrapper">
+            <div class="design-card__placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="design-card__overlay">
+              <span class="design-card__name">Design Name {{ i }}</span>
+              <button class="design-card__cta button button--small">
+                Request This Design
+              </button>
+            </div>
+          </div>
+          {% if i == 1 or i == 5 %}
+            <span class="design-card__badge design-card__badge--new">New</span>
+          {% elsif i == 3 or i == 7 %}
+            <span class="design-card__badge design-card__badge--popular">Popular</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {%- comment -%} Custom Design CTA {%- endcomment -%}
+  <div class="page-design-library__custom-cta">
+    <div class="custom-design-cta">
+      <div class="custom-design-cta__icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+      </div>
+      <div class="custom-design-cta__content">
+        <h3>Don't See What You're Looking For?</h3>
+        <p>We can create custom designs based on your ideas, photos, or logos.</p>
+        <div class="custom-design-cta__buttons">
+          <a href="/pages/custom-upload" class="button button--primary">Upload Your Image</a>
+          <a href="/pages/request-quote" class="button button--secondary">Request Custom Design</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Design Request Modal {%- endcomment -%}
+<div class="design-modal" id="design-modal" hidden>
+  <div class="design-modal__backdrop"></div>
+  <div class="design-modal__content">
+    <button class="design-modal__close" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <h3>Request This Design</h3>
+    <p class="design-modal__design-name"></p>
+    <form class="design-modal__form" action="/contact#contact_form" method="post">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="utf8" value="✓">
+      <input type="hidden" name="contact[subject]" value="Design Library Request">
+      <input type="hidden" name="contact[design_name]" class="design-name-input" value="">
+
+      <div class="form-group">
+        <label for="modal-email">Email</label>
+        <input type="email" id="modal-email" name="contact[email]" required>
+      </div>
+
+      <div class="form-group">
+        <label for="modal-product">Product</label>
+        <select id="modal-product" name="contact[product]" required>
+          <option value="">Select product...</option>
+          <option value="Slate Coaster - Single">Slate Coaster - Single</option>
+          <option value="Slate Coaster - Set of 4">Slate Coaster - Set of 4</option>
+          <option value="Slate Coaster - Set of 10">Slate Coaster - Set of 10</option>
+          <option value="Golf Ball Marker">Golf Ball Marker</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="modal-customization">Customization (optional)</label>
+        <textarea id="modal-customization" name="contact[body]" rows="3" placeholder="Add names, dates, or other personalization to this design?"></textarea>
+      </div>
+
+      <button type="submit" class="button button--primary">Submit Request</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .page-design-library {
+    padding: 40px 0 80px;
+  }
+  .page-design-library__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .page-design-library__title {
+    margin-bottom: 0.75rem;
+  }
+  .page-design-library__description {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Filters */
+  .page-design-library__filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .design-filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .design-filter-btn:hover,
+  .design-filter-btn.active {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+
+  /* Design Grid */
+  .page-design-library__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  @media (min-width: 750px) {
+    .page-design-library__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media (min-width: 990px) {
+    .page-design-library__grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  /* Design Card */
+  .design-card {
+    position: relative;
+  }
+  .design-card.hidden {
+    display: none;
+  }
+  .design-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+  .design-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .design-card:hover .design-card__image {
+    transform: scale(1.05);
+  }
+  .design-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+  }
+  .design-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 1rem;
+    text-align: center;
+  }
+  .design-card:hover .design-card__overlay {
+    opacity: 1;
+  }
+  .design-card__name {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .design-card__cta {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  .design-card__badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 1;
+  }
+  .design-card__badge--new {
+    background: #c9a227;
+    color: white;
+  }
+  .design-card__badge--popular {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  /* Custom Design CTA */
+  .page-design-library__custom-cta {
+    margin-top: 4rem;
+  }
+  .custom-design-cta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+  }
+  @media (max-width: 749px) {
+    .custom-design-cta {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  .custom-design-cta__icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    color: #c9a227;
+  }
+  .custom-design-cta__content h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  .custom-design-cta__content p {
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 1rem 0;
+  }
+  .custom-design-cta__buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 749px) {
+    .custom-design-cta__buttons {
+      justify-content: center;
+    }
+  }
+
+  /* Modal */
+  .design-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .design-modal[hidden] {
+    display: none;
+  }
+  .design-modal__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+  .design-modal__content {
+    position: relative;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .design-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .design-modal__content h3 {
+    margin: 0 0 0.25rem 0;
+  }
+  .design-modal__design-name {
+    color: #c9a227;
+    font-weight: 500;
+    margin: 0 0 1.5rem 0;
+  }
+  .design-modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .design-modal__form .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .design-modal__form input,
+  .design-modal__form select,
+  .design-modal__form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  .design-modal__form .button {
+    margin-top: 0.5rem;
+  }
+</style>
+
+<script>
+  // Filter functionality
+  document.querySelectorAll('.design-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active state
+      document.querySelectorAll('.design-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter cards
+      document.querySelectorAll('.design-card').forEach(card => {
+        const tags = card.dataset.tags || '';
+        if (filter === 'all' || tags.includes(filter)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Modal functionality
+  const modal = document.getElementById('design-modal');
+  const modalDesignName = modal.querySelector('.design-modal__design-name');
+  const modalDesignInput = modal.querySelector('.design-name-input');
+
+  document.querySelectorAll('.design-card__cta').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = btn.closest('.design-card');
+      const designName = card.querySelector('.design-card__name').textContent;
+
+      modalDesignName.textContent = designName;
+      modalDesignInput.value = designName;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  modal.querySelector('.design-modal__close').addEventListener('click', closeModal);
+  modal.querySelector('.design-modal__backdrop').addEventListener('click', closeModal);
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Design Library Page",
+  "tag": "section",
+  "class": "section-page-design-library",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Design Library"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Browse our collection of ready-to-engrave designs. Select any design to request it on your product."
+    },
+    {
+      "type": "collection",
+      "id": "designs_collection",
+      "label": "Designs Collection",
+      "info": "Select a collection containing design products to display"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filter Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Filter Label",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Filter Tag",
+          "default": "category",
+          "info": "Products with this tag will show when filter is active"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Design Library Page"
+    }
+  ]
+}
+{% endschema %}
