@@ -67,8 +67,13 @@
             <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
           </p>
         {%- endif -%}
-        {%- if section.settings.address != blank -%}
-          <p class="footer__contact-item">{{ section.settings.address }}</p>
+        {%- if section.settings.phone != blank -%}
+          <p class="footer__contact-item">
+            <a href="tel:{{ section.settings.phone | remove: '(' | remove: ')' | remove: '-' | remove: ' ' }}">{{ section.settings.phone }}</a>
+          </p>
+        {%- endif -%}
+        {%- if section.settings.location != blank -%}
+          <p class="footer__contact-item">{{ section.settings.location }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -252,15 +257,26 @@
       "default": "Premium custom engraved products, made to order in Michigan."
     },
     {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
       "type": "text",
       "id": "email",
       "label": "Email",
-      "default": "hello@layerlaunchlaserlabs.com"
+      "default": "HunterBos@Gmail.com"
     },
     {
-      "type": "textarea",
-      "id": "address",
-      "label": "Address"
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "(248) 838-8314"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location",
+      "default": "Southeast Michigan"
     }
   ],
   "blocks": [

@@ -29,6 +29,98 @@
     {% endif %}
   </div>
 
+  {%- comment -%} Meet the Founder Section {%- endcomment -%}
+  <div class="page-about__founder">
+    <div class="page-width">
+      <div class="founder-grid">
+        <div class="founder-image">
+          {% if section.settings.founder_image != blank %}
+            {{ section.settings.founder_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'founder-image__photo' }}
+          {% else %}
+            <div class="founder-image__placeholder">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <p>Add your photo</p>
+            </div>
+          {% endif %}
+        </div>
+        <div class="founder-content">
+          <p class="founder-label">Meet the Founder</p>
+          <h2 class="founder-name">Hunter Bos</h2>
+          <p class="founder-title">Founder & Lead Craftsman</p>
+
+          <div class="founder-bio">
+            <p>I'm Hunter Bos — an automotive industry veteran turned laser engraving enthusiast. With over 9 years of experience as a Subject Matter Expert and Technical Curriculum Developer at Ford Motor Company, I've spent my career mastering precision, quality control, and attention to detail.</p>
+
+            <p>My background spans electric vehicle technology, aerospace systems, and advanced manufacturing processes. That same technical precision and commitment to excellence now drives every product we create at LayerLaunch Laser Labs.</p>
+
+            <p>When I'm not running the laser, I operate <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener">Bos Business Services</a> — offering professional photography, aerial cinematography (FAA Part 107 certified), photogrammetry, and multimedia production throughout Southeast Michigan.</p>
+          </div>
+
+          <div class="founder-credentials">
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>9+ Years Automotive Industry Experience</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>FAA Part 107 Certified Drone Pilot</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>EV & High-Voltage Systems Specialist</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <span>Based in Southeast Michigan</span>
+            </div>
+          </div>
+
+          <div class="founder-social">
+            <a href="https://www.linkedin.com/in/hunterbos/" target="_blank" rel="noopener" class="founder-social__link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <span>Connect on LinkedIn</span>
+            </a>
+            <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener" class="founder-social__link founder-social__link--secondary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>Bos Business Services</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {%- comment -%} Process Section {%- endcomment -%}
   <div class="page-about__process">
     <div class="page-width">
@@ -185,15 +277,166 @@
   }
   .page-about__story h2 {
     margin-bottom: 1.5rem;
+    font-size: 2.8rem;
   }
   .page-about__story p {
     color: rgba(0,0,0,0.7);
     line-height: 1.8;
     margin-bottom: 1rem;
+    font-size: 1.7rem;
   }
   .page-about__story-image img {
     width: 100%;
     border-radius: 8px;
+  }
+
+  /* Founder Section */
+  .page-about__founder {
+    background: #f8f8f8;
+    padding: 80px 0;
+  }
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 989px) {
+    .founder-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+  .founder-image {
+    position: sticky;
+    top: 100px;
+  }
+  @media (max-width: 989px) {
+    .founder-image {
+      position: static;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+  .founder-image__photo {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  .founder-image__placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: white;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+  .founder-image__placeholder p {
+    margin: 1rem 0 0;
+    font-size: 1.4rem;
+  }
+  .founder-label {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: #c9a227;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+  .founder-name {
+    font-size: 3.2rem;
+    margin: 0 0 0.25rem 0;
+    color: #1a1a1a;
+  }
+  .founder-title {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 2rem 0;
+  }
+  .founder-bio p {
+    font-size: 1.7rem;
+    line-height: 1.75;
+    color: rgba(0,0,0,0.75);
+    margin-bottom: 1.25rem;
+  }
+  .founder-bio a {
+    color: #c9a227;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .founder-bio a:hover {
+    text-decoration: underline;
+  }
+  .founder-credentials {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 749px) {
+    .founder-credentials {
+      grid-template-columns: 1fr;
+    }
+  }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-radius: 8px;
+  }
+  .credential__icon {
+    color: #c9a227;
+    flex-shrink: 0;
+  }
+  .credential span {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+  }
+  .founder-social {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .founder-social__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: #0077B5;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .founder-social__link:hover {
+    transform: translateY(-2px);
+    background: #005f8f;
+  }
+  .founder-social__link--secondary {
+    background: #1a1a1a;
+  }
+  .founder-social__link--secondary:hover {
+    background: #333;
+  }
+  @media (max-width: 749px) {
+    .founder-name {
+      font-size: 2.6rem;
+    }
+    .founder-social {
+      flex-direction: column;
+    }
+    .founder-social__link {
+      justify-content: center;
+    }
   }
 
   /* Process Section */
@@ -356,6 +599,16 @@
       "type": "image_picker",
       "id": "story_image",
       "label": "Story Section Image"
+    },
+    {
+      "type": "header",
+      "content": "Meet the Founder"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo",
+      "info": "Recommended: Square image, at least 500x500px"
     }
   ]
 }

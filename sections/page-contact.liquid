@@ -1,0 +1,518 @@
+<div class="page-contact">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <div class="page-contact__hero">
+    <div class="page-contact__hero-content page-width">
+      <h1 class="page-contact__title h1">{{ section.settings.heading | default: 'Get in Touch' }}</h1>
+      {% if section.settings.intro != blank %}
+        <p class="page-contact__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="page-contact__main page-width">
+    <div class="page-contact__grid">
+      {%- comment -%} Contact Form {%- endcomment -%}
+      <div class="page-contact__form-section">
+        <h2 class="page-contact__section-title">Send Us a Message</h2>
+        <p class="page-contact__section-desc">Have a question about custom orders, bulk pricing, or something else? We'd love to hear from you.</p>
+
+        {% form 'contact', class: 'contact-form' %}
+          {% if form.posted_successfully? %}
+            <div class="contact-form__success">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <p>Thanks for reaching out! We'll get back to you within 24 hours.</p>
+            </div>
+          {% else %}
+            {% if form.errors %}
+              <div class="contact-form__error">
+                <p>{{ form.errors | default_errors }}</p>
+              </div>
+            {% endif %}
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="contact-name">Name *</label>
+                <input type="text" id="contact-name" name="contact[name]" required placeholder="Your name">
+              </div>
+              <div class="contact-form__field">
+                <label for="contact-email">Email *</label>
+                <input type="email" id="contact-email" name="contact[email]" required placeholder="your@email.com">
+              </div>
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-phone">Phone (Optional)</label>
+              <input type="tel" id="contact-phone" name="contact[phone]" placeholder="(248) 555-1234">
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-subject">Subject *</label>
+              <select id="contact-subject" name="contact[subject]" required>
+                <option value="">Select a topic...</option>
+                <option value="Custom Order">Custom Order Inquiry</option>
+                <option value="Bulk/Corporate">Bulk or Corporate Order</option>
+                <option value="Design Help">Design Assistance</option>
+                <option value="Order Status">Order Status</option>
+                <option value="Returns">Returns or Issues</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-message">Message *</label>
+              <textarea id="contact-message" name="contact[body]" rows="5" required placeholder="Tell us about your project or question..."></textarea>
+            </div>
+
+            <button type="submit" class="button button--primary contact-form__submit">
+              Send Message
+            </button>
+          {% endif %}
+        {% endform %}
+      </div>
+
+      {%- comment -%} Contact Info Sidebar {%- endcomment -%}
+      <div class="page-contact__info-section">
+        <div class="contact-info">
+          <h2 class="page-contact__section-title">Contact Information</h2>
+
+          <div class="contact-info__items">
+            {% if section.settings.email != blank %}
+              <div class="contact-info__item">
+                <div class="contact-info__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div class="contact-info__content">
+                  <h3>Email</h3>
+                  <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.phone != blank %}
+              <div class="contact-info__item">
+                <div class="contact-info__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </div>
+                <div class="contact-info__content">
+                  <h3>Phone</h3>
+                  <a href="tel:{{ section.settings.phone | remove: '(' | remove: ')' | remove: '-' | remove: ' ' }}">{{ section.settings.phone }}</a>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.location != blank %}
+              <div class="contact-info__item">
+                <div class="contact-info__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div class="contact-info__content">
+                  <h3>Location</h3>
+                  <p>{{ section.settings.location }}</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.hours != blank %}
+              <div class="contact-info__item">
+                <div class="contact-info__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div class="contact-info__content">
+                  <h3>Availability</h3>
+                  <p>{{ section.settings.hours }}</p>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {%- comment -%} Social Links {%- endcomment -%}
+          <div class="contact-info__social">
+            <h3>Connect With Us</h3>
+            <div class="contact-info__social-links">
+              {% if section.settings.facebook_url != blank %}
+                <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="contact-info__social-link" aria-label="Facebook">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
+                </a>
+              {% endif %}
+              {% if section.settings.instagram_url != blank %}
+                <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" class="contact-info__social-link" aria-label="Instagram">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                </a>
+              {% endif %}
+              {% if section.settings.linkedin_url != blank %}
+                <a href="{{ section.settings.linkedin_url }}" target="_blank" rel="noopener" class="contact-info__social-link" aria-label="LinkedIn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </a>
+              {% endif %}
+              {% if section.settings.etsy_url != blank %}
+                <a href="{{ section.settings.etsy_url }}" target="_blank" rel="noopener" class="contact-info__social-link contact-info__social-link--etsy" aria-label="Etsy">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.56 3.07c-.33.17-.51.57-.51 1.11v1.94c0 .17.05.29.17.36.33.17 3.03.1 3.49.1.45 0 .62.38.62.67v.85c0 .33-.17.71-.62.71-.45 0-3.15.07-3.49-.1a.4.4 0 0 1-.17-.36v-2.02c0-.33-.17-.71-.62-.71H5.4c-.45 0-.62.38-.62.71v2.14c0 .54.17.94.51 1.11.33.17.99.17 1.66.17h1.3c.33 0 .62.29.62.62v5.58c0 .33-.29.62-.62.62h-1.86c-.67 0-1.33 0-1.66.17-.35.17-.51.57-.51 1.11v2.14c0 .33.17.71.62.71h2.02c.45 0 .62-.38.62-.71v-2.14c0-.17-.05-.29-.17-.36-.33-.17-3.03-.1-3.49-.1-.45 0-.62-.38-.62-.67v-.85c0-.33.17-.71.62-.71.45 0 3.15-.07 3.49.1.12.07.17.19.17.36v2.02c0 .33.17.71.62.71h2.02c.45 0 .62-.38.62-.71V3.28c0-.33-.17-.71-.62-.71H6.11c-.45 0-.62.38-.62.71v2.14c0 .54.17.94.51 1.11.33.17.99.17 1.66.17h.9V3.07z"/>
+                  </svg>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+
+          {%- comment -%} Response Time {%- endcomment -%}
+          <div class="contact-info__response">
+            <div class="contact-info__response-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <p>We typically respond within <strong>24 hours</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} FAQ Teaser {%- endcomment -%}
+  <div class="page-contact__faq">
+    <div class="page-width">
+      <h2>Common Questions</h2>
+      <p>Find quick answers to frequently asked questions.</p>
+      <a href="/pages/faq" class="button button--secondary">View FAQ</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-contact__hero {
+    background: #1a1a1a;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .page-contact__title {
+    margin-bottom: 0.75rem;
+    font-size: 3.6rem;
+  }
+  .page-contact__intro {
+    font-size: 1.8rem;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .page-contact__main {
+    padding: 80px 0;
+  }
+  .page-contact__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
+  }
+  @media (max-width: 989px) {
+    .page-contact__grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .page-contact__section-title {
+    font-size: 2.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .page-contact__section-desc {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 2rem;
+  }
+
+  /* Contact Form */
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 749px) {
+    .contact-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .contact-form__field {
+    margin-bottom: 1.5rem;
+  }
+  .contact-form__field label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+  }
+  .contact-form__field input,
+  .contact-form__field select,
+  .contact-form__field textarea {
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .contact-form__field input:focus,
+  .contact-form__field select:focus,
+  .contact-form__field textarea:focus {
+    outline: none;
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgba(26,26,26,0.1);
+  }
+  .contact-form__field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .contact-form__submit {
+    width: 100%;
+    padding: 1.4rem 2rem;
+    font-size: 1.6rem;
+  }
+  .contact-form__success {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: #2e7d32;
+  }
+  .contact-form__success svg {
+    margin-bottom: 1rem;
+    color: #2e7d32;
+  }
+  .contact-form__success p {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+  .contact-form__error {
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #c62828;
+    font-size: 1.5rem;
+  }
+
+  /* Contact Info */
+  .contact-info {
+    background: #f8f8f8;
+    padding: 2.5rem;
+    border-radius: 12px;
+  }
+  .contact-info__items {
+    margin-top: 2rem;
+  }
+  .contact-info__item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .contact-info__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    flex-shrink: 0;
+    color: #c9a227;
+  }
+  .contact-info__content h3 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(0,0,0,0.5);
+    margin: 0 0 0.25rem 0;
+  }
+  .contact-info__content p,
+  .contact-info__content a {
+    font-size: 1.6rem;
+    margin: 0;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+  .contact-info__content a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-info__social {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .contact-info__social h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .contact-info__social-links {
+    display: flex;
+    gap: 1rem;
+  }
+  .contact-info__social-link {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .contact-info__social-link:hover {
+    transform: translateY(-2px);
+    background: #333;
+  }
+  .contact-info__social-link--etsy {
+    background: #F1641E;
+  }
+  .contact-info__social-link--etsy:hover {
+    background: #d9571a;
+  }
+
+  .contact-info__response {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: #e8f5e9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .contact-info__response-icon {
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+  .contact-info__response p {
+    font-size: 1.5rem;
+    color: #2e7d32;
+    margin: 0;
+  }
+
+  /* FAQ Teaser */
+  .page-contact__faq {
+    background: #f8f8f8;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .page-contact__faq h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2.4rem;
+  }
+  .page-contact__faq p {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 749px) {
+    .page-contact__title {
+      font-size: 2.8rem;
+    }
+    .page-contact__section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "tag": "section",
+  "class": "section-page-contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Questions about custom orders, bulk pricing, or anything else? We're here to help."
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "HunterBos@Gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "(248) 838-8314"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location",
+      "default": "Southeast Michigan"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Availability/Hours",
+      "default": "24/7 availability for your convenience"
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "url",
+      "id": "etsy_url",
+      "label": "Etsy URL"
+    }
+  ]
+}
+{% endschema %}
