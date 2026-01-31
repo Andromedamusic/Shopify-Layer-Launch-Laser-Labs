@@ -1,53 +1,88 @@
 {%- comment -%}
-  Main Collection Section
-  Displays collection products with filtering and sorting
+  Enhanced Collection Section
+  With psychological marketing: social proof, urgency, trust signals
 {%- endcomment -%}
 
 <div class="collection-main page-width section-{{ section.id }}-padding">
-  {%- comment -%} Collection Header {%- endcomment -%}
+  {%- comment -%} Collection Header with Trust Signals {%- endcomment -%}
   <div class="collection-main__header">
+    <nav class="collection-main__breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="/collections">Collections</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>{{ collection.title }}</span>
+    </nav>
     <h1 class="collection-main__title h1">{{ collection.title }}</h1>
     {% if collection.description != blank %}
       <div class="collection-main__description">{{ collection.description }}</div>
     {% endif %}
+
+    {%- comment -%} Trust Badges Row {%- endcomment -%}
+    <div class="collection-main__trust-badges">
+      <div class="trust-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Quality Guaranteed</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Free Shipping $75+</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>3-5 Day Production</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/></svg>
+        <span>Made in Michigan</span>
+      </div>
+    </div>
   </div>
 
   {%- comment -%} Toolbar {%- endcomment -%}
   <div class="collection-main__toolbar">
     <div class="collection-main__count">
-      {{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}
+      <strong>{{ collection.products_count }}</strong> {{ collection.products_count | pluralize: 'product', 'products' }} available
     </div>
 
-    <div class="collection-main__sort">
-      <label for="sort-by">Sort by:</label>
-      <select id="sort-by" class="collection-sort-select">
-        <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
-        <option value="best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
-        <option value="title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>A-Z</option>
-        <option value="title-descending" {% if collection.sort_by == 'title-descending' %}selected{% endif %}>Z-A</option>
-        <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
-        <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
-        <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
-      </select>
+    <div class="collection-main__actions">
+      <div class="collection-main__sort">
+        <label for="sort-by">Sort:</label>
+        <select id="sort-by" class="collection-sort-select">
+          <option value="best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+          <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+          <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+          <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+          <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
     </div>
   </div>
+
+  {%- comment -%} Urgency Banner {%- endcomment -%}
+  {% if section.settings.show_urgency_banner %}
+    <div class="collection-main__urgency">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span><strong>Order by 2PM ET</strong> for same-day production start</span>
+    </div>
+  {% endif %}
 
   {%- comment -%} Product Grid {%- endcomment -%}
   {% paginate collection.products by 24 %}
     {% if collection.products.size > 0 %}
       <div class="collection-main__grid">
         {% for product in collection.products %}
-          <div class="product-card">
+          <div class="product-card" data-product-id="{{ product.id }}">
             <a href="{{ product.url }}" class="product-card__link">
               <div class="product-card__image-wrapper">
                 {% if product.featured_image != blank %}
-                  {{ product.featured_image | image_url: width: 500 | image_tag:
+                  {{ product.featured_image | image_url: width: 600 | image_tag:
                     loading: 'lazy',
                     class: 'product-card__image',
                     alt: product.featured_image.alt | default: product.title
                   }}
                   {% if product.images.size > 1 %}
-                    {{ product.images[1] | image_url: width: 500 | image_tag:
+                    {{ product.images[1] | image_url: width: 600 | image_tag:
                       loading: 'lazy',
                       class: 'product-card__image product-card__image--hover',
                       alt: product.images[1].alt | default: product.title
@@ -59,15 +94,28 @@
                   </div>
                 {% endif %}
 
-                {% if product.compare_at_price > product.price %}
-                  <span class="product-card__badge product-card__badge--sale">Sale</span>
-                {% elsif product.tags contains 'new' %}
-                  <span class="product-card__badge product-card__badge--new">New</span>
-                {% endif %}
+                {%- comment -%} Badges {%- endcomment -%}
+                <div class="product-card__badges">
+                  {% if product.compare_at_price > product.price %}
+                    {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                    <span class="product-card__badge product-card__badge--sale">{{ savings }}% OFF</span>
+                  {% elsif product.tags contains 'new' %}
+                    <span class="product-card__badge product-card__badge--new">New</span>
+                  {% elsif product.tags contains 'bestseller' or product.tags contains 'best-seller' %}
+                    <span class="product-card__badge product-card__badge--bestseller">Best Seller</span>
+                  {% endif %}
 
-                {% unless product.available %}
-                  <span class="product-card__badge product-card__badge--soldout">Sold Out</span>
-                {% endunless %}
+                  {% unless product.available %}
+                    <span class="product-card__badge product-card__badge--soldout">Sold Out</span>
+                  {% endunless %}
+                </div>
+
+                {%- comment -%} Quick customize overlay {%- endcomment -%}
+                {% if product.available %}
+                  <div class="product-card__quick-action">
+                    <span class="product-card__customize-btn">Customize Now →</span>
+                  </div>
+                {% endif %}
               </div>
 
               <div class="product-card__info">
@@ -77,47 +125,135 @@
                   <p class="product-card__vendor">{{ product.vendor }}</p>
                 {% endif %}
 
+                {%- comment -%} Social Proof - Review Stars {%- endcomment -%}
+                {% if product.metafields.reviews.rating.value != blank %}
+                  <div class="product-card__rating">
+                    {% assign rating = product.metafields.reviews.rating.value.rating %}
+                    {% assign review_count = product.metafields.reviews.rating_count %}
+                    <div class="product-card__stars" style="--rating: {{ rating }};">★★★★★</div>
+                    <span class="product-card__review-count">({{ review_count }})</span>
+                  </div>
+                {% endif %}
+
                 <div class="product-card__price">
                   {% if product.compare_at_price > product.price %}
                     <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
                   {% endif %}
                   <span class="product-card__price-current {% if product.compare_at_price > product.price %}sale{% endif %}">
-                    {{ product.price | money }}
+                    {% if product.price_varies %}From {% endif %}{{ product.price | money }}
                   </span>
                 </div>
 
+                {%- comment -%} Personalization Indicator {%- endcomment -%}
+                {% assign is_personalizable = false %}
                 {% if product.metafields.custom.personalization_available %}
-                  <span class="product-card__personalization">✓ Personalization Available</span>
+                  {% assign is_personalizable = true %}
+                {% elsif product.tags contains 'personalized' or product.tags contains 'custom' or product.tags contains 'engraved' %}
+                  {% assign is_personalizable = true %}
                 {% endif %}
+
+                {% if is_personalizable %}
+                  <div class="product-card__personalization">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    <span>Personalize with your text or photo</span>
+                  </div>
+                {% endif %}
+
+                {%- comment -%} Turnaround indicator {%- endcomment -%}
+                <div class="product-card__turnaround">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>Ships in 3-5 business days</span>
+                </div>
               </div>
             </a>
           </div>
         {% endfor %}
       </div>
 
-      {%- comment -%} Pagination {%- endcomment -%}
+      {%- comment -%} Load More / Pagination {%- endcomment -%}
       {% if paginate.pages > 1 %}
         <div class="collection-main__pagination">
           {{ paginate | default_pagination }}
         </div>
       {% endif %}
     {% else %}
-    <div class="collection-main__empty">
-      <p>No products found in this collection.</p>
-      <a href="/collections/all" class="button button--primary">View All Products</a>
+      <div class="collection-main__empty">
+        <div class="empty-state">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <h3>No products yet</h3>
+          <p>This collection is being stocked. Check back soon or browse our other products!</p>
+          <a href="/collections/all" class="button button--primary">View All Products</a>
+        </div>
+      </div>
+    {% endif %}
+  {% endpaginate %}
+
+  {%- comment -%} Value Proposition Banner {%- endcomment -%}
+  {% if section.settings.show_value_banner %}
+    <div class="collection-main__value-banner">
+      <div class="value-banner__item">
+        <div class="value-banner__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="value-banner__content">
+          <h4>Quality Guarantee</h4>
+          <p>100% satisfaction or we'll make it right</p>
+        </div>
+      </div>
+      <div class="value-banner__item">
+        <div class="value-banner__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2">
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <div class="value-banner__content">
+          <h4>True Personalization</h4>
+          <p>Your photos, names & designs engraved</p>
+        </div>
+      </div>
+      <div class="value-banner__item">
+        <div class="value-banner__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div class="value-banner__content">
+          <h4>Fast & Careful Shipping</h4>
+          <p>Free shipping on orders $75+</p>
+        </div>
+      </div>
     </div>
   {% endif %}
-  {% endpaginate %}
 
   {%- comment -%} Bulk Order CTA {%- endcomment -%}
   {% if section.settings.show_bulk_cta %}
     <div class="collection-main__bulk-cta">
       <div class="bulk-cta-banner">
-        <div class="bulk-cta-banner__content">
-          <h3>Need Bulk Orders or Custom Work?</h3>
-          <p>We offer volume pricing on orders of 25+ items, plus custom design services for businesses and events.</p>
+        <div class="bulk-cta-banner__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
         </div>
-        <a href="/pages/request-quote" class="button button--secondary">Request a Quote</a>
+        <div class="bulk-cta-banner__content">
+          <h3>Need 10+ Items? Get Volume Discounts!</h3>
+          <p>Perfect for weddings, corporate events, tournaments & gifts. Custom designs welcome!</p>
+        </div>
+        <div class="bulk-cta-banner__action">
+          <a href="/pages/custom-orders" class="button button--gold">Learn About Custom Orders</a>
+          <a href="/pages/request-quote" class="button button--outline-light">Request a Quote</a>
+        </div>
       </div>
     </div>
   {% endif %}
@@ -125,20 +261,62 @@
 
 <style>
   .collection-main {
-    padding: 40px 0 80px;
+    padding: 30px 0 80px;
   }
+
+  /* Breadcrumbs */
+  .collection-main__breadcrumbs {
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 1.5rem;
+  }
+  .collection-main__breadcrumbs a {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+  }
+  .collection-main__breadcrumbs a:hover {
+    color: #c9a227;
+  }
+  .breadcrumb-sep {
+    margin: 0 0.5rem;
+  }
+
+  /* Header */
   .collection-main__header {
     text-align: center;
     margin-bottom: 2rem;
   }
   .collection-main__title {
+    font-size: 3.2rem;
     margin-bottom: 0.75rem;
   }
   .collection-main__description {
     color: rgba(0,0,0,0.6);
+    font-size: 1.7rem;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     line-height: 1.6;
+  }
+
+  /* Trust Badges */
+  .collection-main__trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.4rem;
+    color: #333;
+  }
+  .trust-badge svg {
+    color: #c9a227;
   }
 
   /* Toolbar */
@@ -146,50 +324,67 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     flex-wrap: wrap;
     gap: 1rem;
   }
   .collection-main__count {
-    font-size: 0.9rem;
-    color: rgba(0,0,0,0.5);
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.6);
   }
   .collection-main__sort {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    gap: 0.75rem;
+    font-size: 1.5rem;
   }
   .collection-sort-select {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.25rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    border-radius: 6px;
+    font-size: 1.5rem;
     cursor: pointer;
+    background: white;
+  }
+
+  /* Urgency Banner */
+  .collection-main__urgency {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(90deg, #c9a227 0%, #d4b445 100%);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
   }
 
   /* Product Grid */
   .collection-main__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 2.5rem;
   }
-  @media (max-width: 989px) {
+  @media (max-width: 1199px) {
     .collection-main__grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
     }
   }
   @media (max-width: 749px) {
     .collection-main__grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 1.25rem;
     }
   }
 
   /* Product Card */
+  .product-card {
+    position: relative;
+  }
   .product-card__link {
     text-decoration: none;
     color: inherit;
@@ -199,7 +394,7 @@
     position: relative;
     aspect-ratio: 1;
     background: #f8f8f8;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     margin-bottom: 1rem;
   }
@@ -207,7 +402,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
   }
   .product-card__image--hover {
     position: absolute;
@@ -221,16 +416,26 @@
   .product-card:hover .product-card__image:not(.product-card__image--hover) {
     opacity: 0;
   }
-  .product-card__badge {
+  .product-card:hover .product-card__image {
+    transform: scale(1.03);
+  }
+
+  /* Badges */
+  .product-card__badges {
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.7rem;
-    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .product-card__badge {
+    padding: 0.35rem 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     text-transform: uppercase;
     border-radius: 4px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
   }
   .product-card__badge--sale {
     background: #c62828;
@@ -240,43 +445,120 @@
     background: #c9a227;
     color: white;
   }
+  .product-card__badge--bestseller {
+    background: #1a1a1a;
+    color: white;
+  }
   .product-card__badge--soldout {
     background: #666;
     color: white;
   }
+
+  /* Quick Customize Overlay */
+  .product-card__quick-action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .product-card:hover .product-card__quick-action {
+    opacity: 1;
+  }
+  .product-card__customize-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #c9a227;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  .product-card:hover .product-card__customize-btn:hover {
+    background: #b8922a;
+  }
+
+  /* Product Info */
   .product-card__info {
     text-align: left;
+    padding: 0 0.25rem;
   }
   .product-card__title {
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 0 0.25rem 0;
-    line-height: 1.3;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.35;
+    color: #1a1a1a;
   }
   .product-card__vendor {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
     color: rgba(0,0,0,0.5);
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.35rem 0;
   }
+
+  /* Rating Stars */
+  .product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+  .product-card__stars {
+    font-size: 1.3rem;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #c9a227 calc(var(--rating) / 5 * 100%), #ddd calc(var(--rating) / 5 * 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .product-card__review-count {
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.5);
+  }
+
+  /* Price */
   .product-card__price {
-    font-size: 0.95rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
   }
   .product-card__price-compare {
     color: rgba(0,0,0,0.4);
     text-decoration: line-through;
     margin-right: 0.5rem;
+    font-size: 1.4rem;
   }
   .product-card__price-current {
-    font-weight: 500;
+    font-weight: 700;
+    color: #1a1a1a;
   }
   .product-card__price-current.sale {
     color: #c62828;
   }
+
+  /* Personalization Indicator */
   .product-card__personalization {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
     color: #2e7d32;
+    margin-bottom: 0.35rem;
+  }
+  .product-card__personalization svg {
+    flex-shrink: 0;
+  }
+
+  /* Turnaround */
+  .product-card__turnaround {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.5);
   }
 
   /* Pagination */
@@ -285,15 +567,99 @@
     display: flex;
     justify-content: center;
   }
+  .collection-main__pagination .pagination {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .collection-main__pagination a,
+  .collection-main__pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #333;
+  }
+  .collection-main__pagination a:hover {
+    border-color: #c9a227;
+    color: #c9a227;
+  }
+  .collection-main__pagination .current {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: white;
+  }
 
   /* Empty State */
   .collection-main__empty {
-    text-align: center;
     padding: 4rem 0;
   }
-  .collection-main__empty p {
-    color: rgba(0,0,0,0.5);
+  .empty-state {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .empty-state svg {
     margin-bottom: 1.5rem;
+  }
+  .empty-state h3 {
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+  }
+  .empty-state p {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.5);
+    margin: 0 0 1.5rem;
+  }
+
+  /* Value Banner */
+  .collection-main__value-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+  }
+  @media (max-width: 749px) {
+    .collection-main__value-banner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+  .value-banner__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .value-banner__icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .value-banner__content h4 {
+    font-size: 1.6rem;
+    margin: 0 0 0.25rem;
+  }
+  .value-banner__content p {
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0;
   }
 
   /* Bulk CTA Banner */
@@ -303,32 +669,105 @@
   .bulk-cta-banner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f8f8f8 0%, #eee 100%);
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
     border-radius: 12px;
+    color: white;
   }
-  @media (max-width: 749px) {
+  @media (max-width: 989px) {
     .bulk-cta-banner {
       flex-direction: column;
       text-align: center;
     }
   }
+  .bulk-cta-banner__icon {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  .bulk-cta-banner__content {
+    flex: 1;
+  }
   .bulk-cta-banner__content h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem;
   }
   .bulk-cta-banner__content p {
+    font-size: 1.5rem;
     margin: 0;
-    color: rgba(0,0,0,0.6);
-    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .bulk-cta-banner__action {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  @media (max-width: 749px) {
+    .bulk-cta-banner__action {
+      flex-direction: column;
+      width: 100%;
+    }
+    .bulk-cta-banner__action .button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .button--gold {
+    background: #c9a227;
+    color: white;
+    padding: 1rem 1.75rem;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .button--gold:hover {
+    background: #b8922a;
+    color: white;
+  }
+  .button--outline-light {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+    padding: 0.9rem 1.75rem;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .button--outline-light:hover {
+    background: white;
+    color: #1a1a1a;
+    border-color: white;
+  }
+
+  @media (max-width: 749px) {
+    .collection-main__title {
+      font-size: 2.6rem;
+    }
+    .collection-main__description {
+      font-size: 1.5rem;
+    }
+    .collection-main__trust-badges {
+      gap: 1rem;
+    }
+    .trust-badge {
+      font-size: 1.2rem;
+    }
   }
 </style>
 
 <script>
   // Sort functionality
-  document.querySelector('.collection-sort-select').addEventListener('change', function() {
+  document.querySelector('.collection-sort-select')?.addEventListener('change', function() {
     const url = new URL(window.location.href);
     url.searchParams.set('sort_by', this.value);
     window.location.href = url.toString();
@@ -346,6 +785,19 @@
       "id": "show_vendor",
       "label": "Show Product Vendor",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_banner",
+      "label": "Show Urgency Banner",
+      "default": true,
+      "info": "Displays 'Order by 2PM' message"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_value_banner",
+      "label": "Show Value Proposition Banner",
+      "default": true
     },
     {
       "type": "checkbox",

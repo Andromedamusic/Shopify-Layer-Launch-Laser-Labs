@@ -4,6 +4,8 @@
       "type": "collection-main",
       "settings": {
         "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
         "show_bulk_cta": true
       }
     }
