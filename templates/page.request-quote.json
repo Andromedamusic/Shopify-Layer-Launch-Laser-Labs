@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-quote-request",
+      "settings": {
+        "heading": "Request a Quote",
+        "description": "Planning a bulk order, corporate gift, or custom project? Tell us about it and we'll provide a personalized quote."
+      }
+    }
+  },
+  "order": ["main"]
+}

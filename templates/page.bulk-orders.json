@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-bulk-orders",
+      "settings": {
+        "heading": "Bulk & Corporate Orders",
+        "subheading": "Volume discounts and dedicated service for businesses, events, and organizations.",
+        "email": "orders@layerlaunchlaserlabs.com",
+        "phone": "(248) 838-8314"
+      }
+    }
+  },
+  "order": ["main"]
+}
