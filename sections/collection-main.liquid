@@ -33,79 +33,81 @@
   </div>
 
   {%- comment -%} Product Grid {%- endcomment -%}
-  {% if collection.products.size > 0 %}
-    <div class="collection-main__grid">
-      {% for product in collection.products %}
-        <div class="product-card">
-          <a href="{{ product.url }}" class="product-card__link">
-            <div class="product-card__image-wrapper">
-              {% if product.featured_image != blank %}
-                {{ product.featured_image | image_url: width: 500 | image_tag:
-                  loading: 'lazy',
-                  class: 'product-card__image',
-                  alt: product.featured_image.alt | default: product.title
-                }}
-                {% if product.images.size > 1 %}
-                  {{ product.images[1] | image_url: width: 500 | image_tag:
+  {% paginate collection.products by 24 %}
+    {% if collection.products.size > 0 %}
+      <div class="collection-main__grid">
+        {% for product in collection.products %}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card__link">
+              <div class="product-card__image-wrapper">
+                {% if product.featured_image != blank %}
+                  {{ product.featured_image | image_url: width: 500 | image_tag:
                     loading: 'lazy',
-                    class: 'product-card__image product-card__image--hover',
-                    alt: product.images[1].alt | default: product.title
+                    class: 'product-card__image',
+                    alt: product.featured_image.alt | default: product.title
                   }}
+                  {% if product.images.size > 1 %}
+                    {{ product.images[1] | image_url: width: 500 | image_tag:
+                      loading: 'lazy',
+                      class: 'product-card__image product-card__image--hover',
+                      alt: product.images[1].alt | default: product.title
+                    }}
+                  {% endif %}
+                {% else %}
+                  <div class="product-card__placeholder">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
                 {% endif %}
-              {% else %}
-                <div class="product-card__placeholder">
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                </div>
-              {% endif %}
 
-              {% if product.compare_at_price > product.price %}
-                <span class="product-card__badge product-card__badge--sale">Sale</span>
-              {% elsif product.tags contains 'new' %}
-                <span class="product-card__badge product-card__badge--new">New</span>
-              {% endif %}
-
-              {% unless product.available %}
-                <span class="product-card__badge product-card__badge--soldout">Sold Out</span>
-              {% endunless %}
-            </div>
-
-            <div class="product-card__info">
-              <h3 class="product-card__title">{{ product.title }}</h3>
-
-              {% if section.settings.show_vendor and product.vendor != blank %}
-                <p class="product-card__vendor">{{ product.vendor }}</p>
-              {% endif %}
-
-              <div class="product-card__price">
                 {% if product.compare_at_price > product.price %}
-                  <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                  <span class="product-card__badge product-card__badge--sale">Sale</span>
+                {% elsif product.tags contains 'new' %}
+                  <span class="product-card__badge product-card__badge--new">New</span>
                 {% endif %}
-                <span class="product-card__price-current {% if product.compare_at_price > product.price %}sale{% endif %}">
-                  {{ product.price | money }}
-                </span>
+
+                {% unless product.available %}
+                  <span class="product-card__badge product-card__badge--soldout">Sold Out</span>
+                {% endunless %}
               </div>
 
-              {% if product.metafields.custom.personalization_available %}
-                <span class="product-card__personalization">✓ Personalization Available</span>
-              {% endif %}
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">{{ product.title }}</h3>
 
-    {%- comment -%} Pagination {%- endcomment -%}
-    {% if paginate.pages > 1 %}
-      <div class="collection-main__pagination">
-        {{ paginate | default_pagination }}
+                {% if section.settings.show_vendor and product.vendor != blank %}
+                  <p class="product-card__vendor">{{ product.vendor }}</p>
+                {% endif %}
+
+                <div class="product-card__price">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="product-card__price-current {% if product.compare_at_price > product.price %}sale{% endif %}">
+                    {{ product.price | money }}
+                  </span>
+                </div>
+
+                {% if product.metafields.custom.personalization_available %}
+                  <span class="product-card__personalization">✓ Personalization Available</span>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        {% endfor %}
       </div>
-    {% endif %}
-  {% else %}
+
+      {%- comment -%} Pagination {%- endcomment -%}
+      {% if paginate.pages > 1 %}
+        <div class="collection-main__pagination">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% else %}
     <div class="collection-main__empty">
       <p>No products found in this collection.</p>
       <a href="/collections/all" class="button button--primary">View All Products</a>
     </div>
   {% endif %}
+  {% endpaginate %}
 
   {%- comment -%} Bulk Order CTA {%- endcomment -%}
   {% if section.settings.show_bulk_cta %}
