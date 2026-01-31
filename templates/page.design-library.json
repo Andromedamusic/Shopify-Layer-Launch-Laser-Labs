@@ -49,7 +49,8 @@
             "tag": "monogram"
           }
         }
-      }
+      },
+      "block_order": ["filter-all", "filter-michigan", "filter-golf", "filter-seasonal", "filter-nature", "filter-monogram"]
     }
   },
   "order": ["main"]
