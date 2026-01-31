@@ -151,24 +151,24 @@
         </span>
       </button>
     </div>
-    <ul class="header__mobile-menu" role="list" style="display: block !important; visibility: visible !important;">
+    <ul class="header__mobile-menu" role="list" style="display: block !important; visibility: visible !important; min-height: 200px;">
       {%- comment -%} Home {%- endcomment -%}
-      <li class="header__mobile-item" style="display: block !important;">
-        <a href="/" class="header__mobile-link {% if request.path == '/' %}header__mobile-link--active{% endif %}" style="display: flex !important; align-items: center; color: inherit;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>Home</span>
+      <li class="header__mobile-item" style="display: block !important; min-height: 56px;">
+        <a href="/" class="header__mobile-link {% if request.path == '/' %}header__mobile-link--active{% endif %}" style="display: flex !important; align-items: center; color: #ffffff !important; padding: 18px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="color: #ffffff;">Home</span>
         </a>
       </li>
 
       {%- comment -%} Collections with Expandable Submenu {%- endcomment -%}
-      <li class="header__mobile-item header__mobile-item--expandable" style="display: block !important;">
+      <li class="header__mobile-item header__mobile-item--expandable" style="display: block !important; min-height: 56px;">
         <div class="header__mobile-link-wrapper" style="display: flex !important; align-items: center; justify-content: space-between;">
-          <a href="/collections" class="header__mobile-link" style="display: flex !important; align-items: center; flex: 1; color: inherit;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span>Collections</span>
+          <a href="/collections" class="header__mobile-link" style="display: flex !important; align-items: center; flex: 1; color: #ffffff !important; padding: 18px 20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span style="color: #ffffff;">Collections</span>
           </a>
-          <button type="button" class="header__mobile-expand" aria-label="Expand collections" aria-expanded="false" style="color: inherit;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <button type="button" class="header__mobile-expand" aria-label="Expand collections" aria-expanded="false" style="color: #ffffff !important; padding: 18px 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
@@ -200,22 +200,22 @@
       </li>
 
       {%- comment -%} Catalog {%- endcomment -%}
-      <li class="header__mobile-item" style="display: block !important;">
-        <a href="/collections/all" class="header__mobile-link" style="display: flex !important; align-items: center; color: inherit;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span>Catalog</span>
+      <li class="header__mobile-item" style="display: block !important; min-height: 56px;">
+        <a href="/collections/all" class="header__mobile-link" style="display: flex !important; align-items: center; color: #ffffff !important; padding: 18px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span style="color: #ffffff;">Catalog</span>
         </a>
       </li>
 
       {%- comment -%} Pages with Expandable Submenu {%- endcomment -%}
-      <li class="header__mobile-item header__mobile-item--expandable" style="display: block !important;">
+      <li class="header__mobile-item header__mobile-item--expandable" style="display: block !important; min-height: 56px;">
         <div class="header__mobile-link-wrapper" style="display: flex !important; align-items: center; justify-content: space-between;">
-          <a href="/pages/about" class="header__mobile-link" style="display: flex !important; align-items: center; flex: 1; color: inherit;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            <span>Pages</span>
+          <a href="/pages/about" class="header__mobile-link" style="display: flex !important; align-items: center; flex: 1; color: #ffffff !important; padding: 18px 20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span style="color: #ffffff;">Pages</span>
           </a>
-          <button type="button" class="header__mobile-expand" aria-label="Expand pages" aria-expanded="false" style="color: inherit;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <button type="button" class="header__mobile-expand" aria-label="Expand pages" aria-expanded="false" style="color: #ffffff !important; padding: 18px 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
@@ -240,18 +240,18 @@
       </li>
 
       {%- comment -%} Contact {%- endcomment -%}
-      <li class="header__mobile-item" style="display: block !important;">
-        <a href="/pages/contact" class="header__mobile-link" style="display: flex !important; align-items: center; color: inherit;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <span>Contact</span>
+      <li class="header__mobile-item" style="display: block !important; min-height: 56px;">
+        <a href="/pages/contact" class="header__mobile-link" style="display: flex !important; align-items: center; color: #ffffff !important; padding: 18px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span style="color: #ffffff;">Contact</span>
         </a>
       </li>
 
       {%- comment -%} Custom Orders CTA {%- endcomment -%}
-      <li class="header__mobile-item header__mobile-item--cta" style="display: block !important;">
-        <a href="/pages/custom-orders" class="header__mobile-link header__mobile-link--cta" style="display: flex !important; align-items: center; justify-content: center; gap: 10px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          <span>Custom Orders</span>
+      <li class="header__mobile-item header__mobile-item--cta" style="display: block !important; min-height: 56px; margin-top: 10px; padding: 0 20px;">
+        <a href="/pages/custom-orders" class="header__mobile-link header__mobile-link--cta" style="display: flex !important; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #c9a227 0%, #d4b340 100%); color: #ffffff !important; border-radius: 8px; padding: 14px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span style="color: #ffffff;">Custom Orders</span>
         </a>
       </li>
     </ul>
