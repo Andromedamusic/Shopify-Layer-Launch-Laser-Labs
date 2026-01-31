@@ -1,0 +1,21 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free Shipping on Orders Over $75!",
+        "link": "/collections/all"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

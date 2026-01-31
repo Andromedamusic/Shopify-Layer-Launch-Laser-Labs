@@ -1,0 +1,38 @@
+<div class="page-404 page-width">
+  <div class="page-404__content">
+    <h1 class="page-404__title">{{ 'templates.404.title' | t }}</h1>
+    <p class="page-404__text">The page you're looking for cannot be found.</p>
+    <a href="/" class="button button--primary">Return Home</a>
+  </div>
+</div>
+
+<style>
+  .page-404 {
+    padding: 100px 20px;
+    text-align: center;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-404__title {
+    font-size: 8rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+  }
+
+  .page-404__text {
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "tag": "section",
+  "class": "section-404"
+}
+{% endschema %}

@@ -1,0 +1,143 @@
+<div class="search-page page-width">
+  <h1 class="search-page__title h1">{{ 'templates.search.title' | t }}</h1>
+
+  <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+    <div class="search-form__field">
+      <input
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'general.search.search' | t }}"
+        class="search-form__input"
+      >
+      <button type="submit" class="search-form__submit button button--primary">
+        {{ 'general.search.search' | t }}
+      </button>
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <p class="search-page__no-results">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+    {%- else -%}
+      <p class="search-page__results-count">
+        {{ 'templates.search.results_with_count' | t: count: search.results_count }}
+      </p>
+
+      <div class="search-results">
+        {%- for item in search.results -%}
+          <div class="search-result">
+            {%- if item.featured_image -%}
+              <a href="{{ item.url }}" class="search-result__image">
+                {{ item.featured_image | image_url: width: 150 | image_tag: loading: 'lazy', alt: item.title }}
+              </a>
+            {%- endif -%}
+            <div class="search-result__content">
+              <h2 class="search-result__title h4">
+                <a href="{{ item.url }}">{{ item.title }}</a>
+              </h2>
+              {%- if item.object_type == 'product' -%}
+                <p class="search-result__price">{{ item.price | money }}</p>
+              {%- endif -%}
+              <p class="search-result__excerpt">{{ item.content | strip_html | truncate: 150 }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        {{ paginate | default_pagination }}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+<style>
+  .search-page {
+    padding: 40px 0 80px;
+  }
+
+  .search-page__title {
+    margin-bottom: 2rem;
+  }
+
+  .search-form {
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .search-form__field {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .search-form__input {
+    flex: 1;
+  }
+
+  .search-page__no-results {
+    color: rgba(0,0,0,0.6);
+    padding: 2rem 0;
+  }
+
+  .search-page__results-count {
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+  }
+
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .search-result {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-result__image {
+    flex-shrink: 0;
+    width: 100px;
+  }
+
+  .search-result__image img {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .search-result__title {
+    margin: 0 0 0.5rem;
+  }
+
+  .search-result__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .search-result__title a:hover {
+    text-decoration: underline;
+  }
+
+  .search-result__price {
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .search-result__excerpt {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.4rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Search Page",
+  "tag": "section",
+  "class": "section-search"
+}
+{% endschema %}
