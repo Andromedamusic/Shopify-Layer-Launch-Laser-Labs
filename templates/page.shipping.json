@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-shipping",
+      "settings": {
+        "heading": "Shipping & Delivery",
+        "subheading": "Everything you need to know about getting your custom-engraved products delivered to your door."
+      }
+    }
+  },
+  "order": ["main"]
+}

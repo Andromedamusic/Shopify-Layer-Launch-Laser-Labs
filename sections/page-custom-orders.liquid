@@ -1,0 +1,633 @@
+<div class="page-custom-orders">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <div class="page-custom-orders__hero">
+    {% if section.settings.hero_image != blank %}
+      <div class="page-custom-orders__hero-image">
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: loading: 'eager' }}
+      </div>
+    {% endif %}
+    <div class="page-custom-orders__hero-overlay"></div>
+    <div class="page-custom-orders__hero-content page-width">
+      <h1 class="page-custom-orders__title">{{ section.settings.heading }}</h1>
+      <p class="page-custom-orders__subtitle">{{ section.settings.subheading }}</p>
+    </div>
+  </div>
+
+  {%- comment -%} Order Types Section {%- endcomment -%}
+  <div class="page-custom-orders__types">
+    <div class="page-width">
+      <h2 class="section-heading">{{ section.settings.types_heading }}</h2>
+      <p class="section-intro">{{ section.settings.types_description }}</p>
+
+      <div class="order-types-grid">
+        <div class="order-type-card">
+          <div class="order-type-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>Personal Gifts</h3>
+          <p>Create meaningful, one-of-a-kind gifts for weddings, anniversaries, birthdays, or any special occasion.</p>
+          <ul>
+            <li>Single items or small quantities</li>
+            <li>Custom text and images</li>
+            <li>Gift wrapping available</li>
+          </ul>
+        </div>
+
+        <div class="order-type-card">
+          <div class="order-type-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <h3>Corporate & Business</h3>
+          <p>Impress clients and recognize employees with custom branded products that leave a lasting impression.</p>
+          <ul>
+            <li>Logo engraving on all products</li>
+            <li>Employee recognition awards</li>
+            <li>Client appreciation gifts</li>
+          </ul>
+        </div>
+
+        <div class="order-type-card">
+          <div class="order-type-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Events & Bulk Orders</h3>
+          <p>Perfect for weddings, reunions, tournaments, and special events requiring multiple matching pieces.</p>
+          <ul>
+            <li>Volume discounts available</li>
+            <li>Consistent quality across all items</li>
+            <li>Coordinated delivery timing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Process Section {%- endcomment -%}
+  <div class="page-custom-orders__process">
+    <div class="page-width">
+      <h2 class="section-heading">How Custom Orders Work</h2>
+      <p class="section-intro">From your initial idea to the finished product in your hands</p>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-step__number">1</div>
+          <div class="process-step__content">
+            <h3>Submit Your Request</h3>
+            <p>Fill out our custom order form with your design ideas, quantity needs, and timeline. Upload any logos, images, or reference materials.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__number">2</div>
+          <div class="process-step__content">
+            <h3>Receive Your Quote</h3>
+            <p>Within 24-48 hours, you'll receive a detailed quote including pricing, production timeline, and any design recommendations.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__number">3</div>
+          <div class="process-step__content">
+            <h3>Approve Your Proof</h3>
+            <p>We'll create a digital proof showing exactly how your design will look. Request revisions until it's perfect—no production begins until you approve.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__number">4</div>
+          <div class="process-step__content">
+            <h3>Production & Delivery</h3>
+            <p>Once approved, we laser engrave each piece with precision and care. Your order ships directly to you (or multiple addresses for gifts).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Pricing Section {%- endcomment -%}
+  <div class="page-custom-orders__pricing">
+    <div class="page-width">
+      <h2 class="section-heading">Volume Pricing</h2>
+      <p class="section-intro">The more you order, the more you save</p>
+
+      <div class="pricing-table">
+        <div class="pricing-tier">
+          <div class="pricing-tier__header">
+            <span class="pricing-tier__quantity">1-9 items</span>
+            <span class="pricing-tier__label">Standard</span>
+          </div>
+          <p>Regular pricing applies. Perfect for personal gifts and small orders.</p>
+        </div>
+
+        <div class="pricing-tier pricing-tier--featured">
+          <div class="pricing-tier__header">
+            <span class="pricing-tier__quantity">10-24 items</span>
+            <span class="pricing-tier__discount">10% OFF</span>
+          </div>
+          <p>Ideal for small events, wedding parties, or team recognition.</p>
+        </div>
+
+        <div class="pricing-tier">
+          <div class="pricing-tier__header">
+            <span class="pricing-tier__quantity">25-49 items</span>
+            <span class="pricing-tier__discount">15% OFF</span>
+          </div>
+          <p>Great for medium events and corporate gift programs.</p>
+        </div>
+
+        <div class="pricing-tier">
+          <div class="pricing-tier__header">
+            <span class="pricing-tier__quantity">50+ items</span>
+            <span class="pricing-tier__discount">20%+ OFF</span>
+          </div>
+          <p>Large orders receive custom quotes with maximum savings.</p>
+        </div>
+      </div>
+
+      <p class="pricing-note">* Discounts apply to identical or similar designs. Mix-and-match orders may vary. Contact us for a custom quote.</p>
+    </div>
+  </div>
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  <div class="page-custom-orders__cta">
+    <div class="page-width">
+      <div class="cta-box">
+        <div class="cta-box__content">
+          <h2>Ready to Start Your Custom Order?</h2>
+          <p>Tell us about your project and we'll get back to you within 24 hours with a quote.</p>
+        </div>
+        <div class="cta-box__actions">
+          <a href="/pages/request-quote" class="button button--primary">Request a Quote</a>
+          <a href="mailto:{{ section.settings.email }}" class="button button--secondary">Email Us Directly</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} FAQ Mini Section {%- endcomment -%}
+  <div class="page-custom-orders__faq">
+    <div class="page-width">
+      <h2 class="section-heading">Common Questions</h2>
+
+      <div class="mini-faq">
+        <details class="mini-faq__item">
+          <summary>What's the minimum order for custom designs?</summary>
+          <p>There's no minimum! We happily create single custom pieces. However, volume discounts start at 10 items.</p>
+        </details>
+
+        <details class="mini-faq__item">
+          <summary>How long does a custom order take?</summary>
+          <p>Typical turnaround is 5-10 business days after proof approval. Rush orders may be available—ask us!</p>
+        </details>
+
+        <details class="mini-faq__item">
+          <summary>What file formats do you accept for logos?</summary>
+          <p>We prefer vector files (AI, EPS, SVG, PDF) for best results. High-resolution PNG or JPG (300+ DPI) also work well.</p>
+        </details>
+
+        <details class="mini-faq__item">
+          <summary>Can I see a sample before ordering in bulk?</summary>
+          <p>Yes! We offer sample orders at regular pricing. Once you're satisfied, we apply the volume discount to your full order.</p>
+        </details>
+      </div>
+
+      <p class="faq-link">Have more questions? <a href="/pages/faq">View our full FAQ</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-custom-orders__hero {
+    position: relative;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+  }
+  .page-custom-orders__hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .page-custom-orders__hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .page-custom-orders__hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+  .page-custom-orders__hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px;
+  }
+  .page-custom-orders__title {
+    font-size: 3.6rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .page-custom-orders__subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Section Headings */
+  .section-heading {
+    text-align: center;
+    font-size: 2.8rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .section-intro {
+    text-align: center;
+    font-size: 1.7rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 3rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Order Types */
+  .page-custom-orders__types {
+    padding: 80px 0;
+  }
+  .order-types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 989px) {
+    .order-types-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+  .order-type-card {
+    background: #f8f8f8;
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .order-type-card__icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a227;
+  }
+  .order-type-card h3 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+  }
+  .order-type-card p {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.7);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+  }
+  .order-type-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  .order-type-card li {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(0,0,0,0.8);
+  }
+  .order-type-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #c9a227;
+    font-weight: bold;
+  }
+
+  /* Process Section */
+  .page-custom-orders__process {
+    background: #f8f8f8;
+    padding: 80px 0;
+  }
+  .process-timeline {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .process-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .process-step:last-child {
+    margin-bottom: 0;
+  }
+  .process-step__number {
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .process-step__content h3 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .process-step__content p {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.7);
+    margin: 0;
+    line-height: 1.6;
+  }
+  @media (max-width: 749px) {
+    .process-step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+  }
+
+  /* Pricing Section */
+  .page-custom-orders__pricing {
+    padding: 80px 0;
+  }
+  .pricing-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (max-width: 989px) {
+    .pricing-table {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 599px) {
+    .pricing-table {
+      grid-template-columns: 1fr;
+    }
+  }
+  .pricing-tier {
+    background: #f8f8f8;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .pricing-tier--featured {
+    background: #1a1a1a;
+    color: white;
+  }
+  .pricing-tier--featured p {
+    color: rgba(255,255,255,0.8);
+  }
+  .pricing-tier__header {
+    margin-bottom: 1rem;
+  }
+  .pricing-tier__quantity {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .pricing-tier__label {
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.5);
+  }
+  .pricing-tier__discount {
+    display: inline-block;
+    background: #c9a227;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .pricing-tier p {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.7);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .pricing-note {
+    text-align: center;
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.5);
+    margin-top: 2rem;
+  }
+
+  /* CTA Section */
+  .page-custom-orders__cta {
+    background: #1a1a1a;
+    padding: 60px 0;
+  }
+  .cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-box__content {
+    flex: 1;
+    min-width: 300px;
+  }
+  .cta-box__content h2 {
+    color: white;
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .cta-box__content p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  .cta-box__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .cta-box__actions .button--primary {
+    background: #c9a227;
+  }
+  .cta-box__actions .button--primary:hover {
+    background: #b8922a;
+  }
+  .cta-box__actions .button--secondary {
+    border-color: white;
+    color: white;
+  }
+  .cta-box__actions .button--secondary:hover {
+    background: white;
+    color: #1a1a1a;
+  }
+  @media (max-width: 749px) {
+    .cta-box {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cta-box__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    .cta-box__actions .button {
+      width: 100%;
+    }
+  }
+
+  /* Mini FAQ Section */
+  .page-custom-orders__faq {
+    padding: 80px 0;
+    background: #f8f8f8;
+  }
+  .mini-faq {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .mini-faq__item {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .mini-faq__item summary {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mini-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .mini-faq__item summary::after {
+    content: '+';
+    font-size: 2rem;
+    color: #c9a227;
+  }
+  .mini-faq__item[open] summary::after {
+    content: '−';
+  }
+  .mini-faq__item p {
+    padding: 0 1.5rem 1.25rem;
+    margin: 0;
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.6;
+  }
+  .faq-link {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+  }
+  .faq-link a {
+    color: #c9a227;
+    font-weight: 600;
+  }
+
+  @media (max-width: 749px) {
+    .page-custom-orders__title {
+      font-size: 2.8rem;
+    }
+    .page-custom-orders__subtitle {
+      font-size: 1.6rem;
+    }
+    .section-heading {
+      font-size: 2.4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Orders Page",
+  "tag": "section",
+  "class": "section-page-custom-orders",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Custom Orders"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From single personalized gifts to bulk corporate orders, we bring your vision to life with precision laser engraving."
+    },
+    {
+      "type": "header",
+      "content": "Order Types Section"
+    },
+    {
+      "type": "text",
+      "id": "types_heading",
+      "label": "Section Heading",
+      "default": "What We Create"
+    },
+    {
+      "type": "textarea",
+      "id": "types_description",
+      "label": "Section Description",
+      "default": "Every project is unique—here are some of the ways we can help"
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "HunterBos@Gmail.com"
+    }
+  ]
+}
+{% endschema %}
