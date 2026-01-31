@@ -1,12 +1,5 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "text": "Free Shipping on Orders Over $75!",
-        "link": "/collections/all"
-      }
-    },
     "trust-bar": {
       "type": "trust-bar",
       "blocks": {
