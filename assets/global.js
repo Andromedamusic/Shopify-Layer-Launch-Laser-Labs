@@ -66,9 +66,50 @@
     return format.replace('{{amount}}', value);
   };
 
+  // Mobile menu functionality
+  const initMobileMenu = () => {
+    const mobileToggle = document.querySelector('.header__mobile-toggle');
+    const mobileDrawer = document.querySelector('.header__mobile-drawer');
+    const mobileOverlay = document.querySelector('.header__mobile-overlay');
+    const mobileClose = document.querySelector('.header__mobile-close');
+
+    if (!mobileToggle || !mobileDrawer) return;
+
+    const openMenu = () => {
+      mobileDrawer.classList.add('is-open');
+      mobileOverlay?.classList.add('is-visible');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+      mobileDrawer.classList.remove('is-open');
+      mobileOverlay?.classList.remove('is-visible');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = mobileDrawer.classList.contains('is-open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    mobileClose?.addEventListener('click', closeMenu);
+    mobileOverlay?.addEventListener('click', closeMenu);
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawer.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+  };
+
   // Initialize on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
-    // Initialize any global components here
+    // Initialize mobile menu
+    initMobileMenu();
+
     console.log('LayerLaunch Laser Labs - Theme initialized');
   });
 

@@ -54,6 +54,23 @@
                     </li>
                   {%- endfor -%}
                 </ul>
+              {%- else -%}
+                {%- comment -%} Default links if no menu selected {%- endcomment -%}
+                <ul class="footer__menu-list">
+                  {%- if block.settings.heading == 'Shop' -%}
+                    <li class="footer__menu-item"><a href="/collections/all" class="footer__menu-link">All Products</a></li>
+                    <li class="footer__menu-item"><a href="/pages/design-library" class="footer__menu-link">Design Library</a></li>
+                    <li class="footer__menu-item"><a href="/pages/custom-orders" class="footer__menu-link">Custom Orders</a></li>
+                  {%- elsif block.settings.heading == 'Help' -%}
+                    <li class="footer__menu-item"><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+                    <li class="footer__menu-item"><a href="/pages/shipping" class="footer__menu-link">Shipping Info</a></li>
+                    <li class="footer__menu-item"><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+                  {%- else -%}
+                    <li class="footer__menu-item"><a href="/" class="footer__menu-link">Home</a></li>
+                    <li class="footer__menu-item"><a href="/pages/about" class="footer__menu-link">About</a></li>
+                    <li class="footer__menu-item"><a href="/pages/contact" class="footer__menu-link">Contact</a></li>
+                  {%- endif -%}
+                </ul>
               {%- endif -%}
             </div>
         {%- endcase -%}
