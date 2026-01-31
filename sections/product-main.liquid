@@ -3,6 +3,9 @@
   Includes personalization form, bulk order CTA, and product details
 {%- endcomment -%}
 
+{% render 'product-schema' %}
+{% render 'breadcrumb-schema' %}
+
 <div class="product-main page-width section-{{ section.id }}-padding">
   <div class="product-main__grid">
     {%- comment -%} Product Gallery {%- endcomment -%}

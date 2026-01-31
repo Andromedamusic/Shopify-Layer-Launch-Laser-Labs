@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#1a1a1a">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -28,6 +30,35 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+
+    {%- comment -%} Organization Schema {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}",
+      "logo": "{{ shop.url }}{{ 'logo.png' | asset_url }}",
+      "description": "{{ shop.description | strip_html | truncate: 250 }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "MI",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "orders@layerlaunchlaserlabs.com",
+        "telephone": "+1-248-838-8314",
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        "{{ settings.social_facebook }}",
+        "{{ settings.social_instagram }}",
+        "{{ settings.social_etsy }}",
+        "{{ settings.social_linkedin }}"
+      ]
+    }
+    </script>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     {{ content_for_header }}
@@ -165,6 +196,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'dark-mode.css' | asset_url | stylesheet_tag }}
+    {{ 'print.css' | asset_url | stylesheet_tag: media: 'print' }}
   </head>
 
   <body class="template-{{ template.name }}">
@@ -180,6 +213,9 @@
     </main>
 
     {% section 'footer' %}
+    {% section 'cart-drawer' %}
+    {% render 'quick-view' %}
+    {% render 'wishlist' %}
 
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');

@@ -1,3 +1,25 @@
+{%- comment -%} FAQPage Schema for SEO {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'faq' -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.answer | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
 <div class="page-faq page-width section-{{ section.id }}-padding">
   <div class="page-faq__header">
     <h1 class="page-faq__title h1">{{ section.settings.heading | default: page.title }}</h1>
@@ -33,7 +55,7 @@
       <div class="faq-contact">
         <h3>Still Have Questions?</h3>
         <p>We're here to help! Reach out and we'll get back to you within 24 hours.</p>
-        <a href="mailto:HunterBos@Gmail.com" class="button button--secondary">
+        <a href="mailto:orders@layerlaunchlaserlabs.com" class="button button--secondary">
           Email Us
         </a>
       </div>

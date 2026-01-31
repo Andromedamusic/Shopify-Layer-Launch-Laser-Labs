@@ -159,7 +159,7 @@
         "type": "text",
         "id": "contact_email",
         "label": "Contact Email",
-        "default": "HunterBos@Gmail.com"
+        "default": "orders@layerlaunchlaserlabs.com"
       },
       {
         "type": "text",

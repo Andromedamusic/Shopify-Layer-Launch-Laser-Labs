@@ -5,9 +5,11 @@
       <a href="/" class="header__logo-link">
         {%- if section.settings.logo != blank -%}
           {{ section.settings.logo | image_url: width: 200 | image_tag:
-            loading: 'lazy',
+            loading: 'eager',
             class: 'header__logo-image',
-            alt: shop.name
+            alt: shop.name,
+            width: 200,
+            height: 55
           }}
         {%- else -%}
           <span class="header__logo-text">{{ shop.name }}</span>
