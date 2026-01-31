@@ -26,19 +26,49 @@
         <div class="hero-banner__description">{{ section.settings.description }}</div>
       {% endif %}
 
-      {% if section.settings.button_label != blank %}
-        <a href="{{ section.settings.button_link }}" class="hero-banner__button button button--primary">
-          {{ section.settings.button_label }}
-        </a>
+      {% if section.settings.button_label != blank or section.settings.secondary_button_label != blank %}
+        <div class="hero-banner__buttons">
+          {% if section.settings.button_label != blank %}
+            <a href="{{ section.settings.button_link }}" class="hero-banner__button hero-banner__button--primary">
+              {{ section.settings.button_label }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.secondary_button_label != blank %}
+            <a href="{{ section.settings.secondary_button_link }}" class="hero-banner__button hero-banner__button--secondary">
+              {{ section.settings.secondary_button_label }}
+            </a>
+          {% endif %}
+        </div>
       {% endif %}
 
-      {% if section.settings.secondary_button_label != blank %}
-        <a href="{{ section.settings.secondary_button_link }}" class="hero-banner__button hero-banner__button--secondary button button--secondary">
-          {{ section.settings.secondary_button_label }}
-        </a>
+      {% if section.settings.show_trust_row %}
+        <div class="hero-banner__trust-row">
+          <div class="hero-banner__trust-item">
+            <span class="hero-banner__trust-value">100%</span>
+            <span class="hero-banner__trust-label">Handcrafted</span>
+          </div>
+          <div class="hero-banner__trust-item">
+            <span class="hero-banner__trust-value">MI</span>
+            <span class="hero-banner__trust-label">Made in Michigan</span>
+          </div>
+          <div class="hero-banner__trust-item">
+            <span class="hero-banner__trust-value">5★</span>
+            <span class="hero-banner__trust-label">Customer Rated</span>
+          </div>
+        </div>
       {% endif %}
     </div>
   </div>
+
+  {% if section.settings.show_scroll_indicator %}
+    <div class="hero-banner__scroll-indicator">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+      <span>Scroll</span>
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -142,6 +172,24 @@
       "type": "url",
       "id": "secondary_button_link",
       "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Additional Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_row",
+      "label": "Show Trust Indicators",
+      "default": true,
+      "info": "Displays handcrafted, Made in Michigan, and customer rating badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "Show Scroll Indicator",
+      "default": true,
+      "info": "Animated scroll arrow at bottom of hero"
     }
   ],
   "presets": [
