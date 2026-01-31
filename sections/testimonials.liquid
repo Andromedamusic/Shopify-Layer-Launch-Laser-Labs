@@ -11,105 +11,163 @@
       </div>
     {% endif %}
 
-    <div class="testimonials__grid testimonials__grid--{{ section.blocks.size }}">
-      {% for block in section.blocks %}
-        <div class="testimonial-card" {{ block.shopify_attributes }}>
-          <div class="testimonial-card__stars">
-            {% for i in (1..5) %}
-              {% if i <= block.settings.rating %}
-                <svg class="testimonial-card__star testimonial-card__star--filled" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                </svg>
-              {% else %}
-                <svg class="testimonial-card__star" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                </svg>
+    {% if section.blocks.size > 0 %}
+      <div class="testimonials__grid testimonials__grid--{{ section.blocks.size }}">
+        {% for block in section.blocks %}
+          <div class="testimonial-card" {{ block.shopify_attributes }}>
+            <div class="testimonial-card__stars">
+              {% for i in (1..5) %}
+                {% if i <= block.settings.rating %}
+                  <svg class="testimonial-card__star testimonial-card__star--filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                  </svg>
+                {% else %}
+                  <svg class="testimonial-card__star" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                  </svg>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <blockquote class="testimonial-card__quote">
+              "{{ block.settings.quote }}"
+            </blockquote>
+
+            <div class="testimonial-card__attribution">
+              {% if block.settings.image != blank %}
+                <div class="testimonial-card__avatar">
+                  {{ block.settings.image | image_url: width: 60 | image_tag: loading: 'lazy', class: 'testimonial-card__avatar-image' }}
+                </div>
               {% endif %}
-            {% endfor %}
-          </div>
-
-          <blockquote class="testimonial-card__quote">
-            "{{ block.settings.quote }}"
-          </blockquote>
-
-          <div class="testimonial-card__attribution">
-            {% if block.settings.image != blank %}
-              <div class="testimonial-card__avatar">
-                {{ block.settings.image | image_url: width: 60 | image_tag: loading: 'lazy', class: 'testimonial-card__avatar-image' }}
+              <div class="testimonial-card__author-info">
+                <span class="testimonial-card__author">{{ block.settings.author }}</span>
+                {% if block.settings.location != blank %}
+                  <span class="testimonial-card__location">{{ block.settings.location }}</span>
+                {% endif %}
+                {% if block.settings.product != blank %}
+                  <span class="testimonial-card__product">Purchased: {{ block.settings.product }}</span>
+                {% endif %}
+                {% if block.settings.source != blank %}
+                  <span class="testimonial-card__source">via {{ block.settings.source }}</span>
+                {% endif %}
               </div>
-            {% endif %}
-            <div class="testimonial-card__author-info">
-              <span class="testimonial-card__author">{{ block.settings.author }}</span>
-              {% if block.settings.location != blank %}
-                <span class="testimonial-card__location">{{ block.settings.location }}</span>
-              {% endif %}
-              {% if block.settings.product != blank %}
-                <span class="testimonial-card__product">Purchased: {{ block.settings.product }}</span>
-              {% endif %}
             </div>
           </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      {%- comment -%} Empty state - no reviews yet {%- endcomment -%}
+      <div class="testimonials__empty">
+        <div class="testimonials__empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
         </div>
-      {% endfor %}
+        <h3 class="testimonials__empty-title">Be the First to Review Us!</h3>
+        <p class="testimonials__empty-text">
+          We'd love to hear about your experience with our custom engraved products.
+        </p>
+      </div>
+    {% endif %}
+
+    {%- comment -%} External Review Links {%- endcomment -%}
+    <div class="testimonials__external">
+      <p class="testimonials__external-text">See more reviews and share your experience:</p>
+      <div class="testimonials__external-links">
+        {% if section.settings.etsy_url != blank %}
+          <a href="{{ section.settings.etsy_url }}" target="_blank" rel="noopener" class="testimonials__external-link testimonials__external-link--etsy">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.559 3.067c-.333.166-.512.57-.512 1.108v1.941c0 .166.05.285.166.357.333.166 3.035.095 3.488.095.453 0 .619.38.619.666v.856c0 .333-.166.714-.619.714-.453 0-3.155.071-3.488-.095a.398.398 0 0 1-.166-.357V6.33c0-.333-.166-.714-.619-.714H5.404c-.453 0-.619.38-.619.714v2.137c0 .538.166.942.512 1.108.333.166.988.166 1.654.166h1.297c.333 0 .619.285.619.619v5.583c0 .333-.285.619-.619.619H6.392c-.666 0-1.321 0-1.654.166-.346.166-.512.57-.512 1.108v2.137c0 .333.166.714.619.714h2.024c.453 0 .619-.38.619-.714v-2.137c0-.166-.05-.285-.166-.357-.333-.166-3.035-.095-3.488-.095-.453 0-.619-.38-.619-.666v-.856c0-.333.166-.714.619-.714.453 0 3.155-.071 3.488.095.116.072.166.19.166.357v2.022c0 .333.166.714.619.714h2.024c.453 0 .619-.38.619-.714V3.281c0-.333-.166-.714-.619-.714H6.107c-.453 0-.619.38-.619.714v2.137c0 .538.166.942.512 1.108.333.166.988.166 1.654.166h.905v-3.625c0-.333-.166-.714-.619-.714H5.404c-.453 0-.619.38-.619.714v14.352c0 .538.179.942.512 1.108.346.166 1.001.166 1.654.166h8.098c.666 0 1.321 0 1.654-.166.346-.166.512-.57.512-1.108V3.281c0-.538-.166-.942-.512-1.108-.333-.166-.988-.166-1.654-.166H8.559z"/>
+            </svg>
+            <span>Review us on Etsy</span>
+          </a>
+        {% endif %}
+        {% if section.settings.facebook_url != blank %}
+          <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="testimonials__external-link testimonials__external-link--facebook">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            <span>Review us on Facebook</span>
+          </a>
+        {% endif %}
+        {% if section.settings.google_url != blank %}
+          <a href="{{ section.settings.google_url }}" target="_blank" rel="noopener" class="testimonials__external-link testimonials__external-link--google">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <span>Review us on Google</span>
+          </a>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
 
 <style>
   .testimonials {
-    padding: 60px 0;
+    padding: 80px 0;
   }
   .testimonials__header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
   .testimonials__heading {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 3.2rem;
   }
   .testimonials__subheading {
     color: rgba(0,0,0,0.6);
-    font-size: 1.1rem;
+    font-size: 1.8rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
   .testimonials__grid {
     display: grid;
-    gap: 2rem;
+    gap: 2.5rem;
   }
-  .testimonials__grid--1 { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+  .testimonials__grid--1 { grid-template-columns: 1fr; max-width: 700px; margin: 0 auto; }
   .testimonials__grid--2 { grid-template-columns: repeat(2, 1fr); }
   .testimonials__grid--3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 989px) {
     .testimonials__grid--3 { grid-template-columns: repeat(2, 1fr); }
+    .testimonials__heading { font-size: 2.8rem; }
   }
   @media (max-width: 749px) {
     .testimonials__grid--2,
     .testimonials__grid--3 { grid-template-columns: 1fr; }
+    .testimonials__heading { font-size: 2.4rem; }
+    .testimonials__subheading { font-size: 1.6rem; }
   }
   .testimonial-card {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   }
   .testimonial-card__stars {
     display: flex;
-    gap: 2px;
-    margin-bottom: 1rem;
+    gap: 4px;
+    margin-bottom: 1.5rem;
     color: #c9a227;
   }
   .testimonial-card__quote {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem 0;
+    font-size: 1.8rem;
+    line-height: 1.7;
+    margin: 0 0 2rem 0;
     font-style: italic;
     color: #333;
   }
   .testimonial-card__attribution {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
   .testimonial-card__avatar {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
@@ -122,16 +180,110 @@
   .testimonial-card__author-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
   .testimonial-card__author {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.6rem;
+    color: #1a1a1a;
   }
   .testimonial-card__location,
   .testimonial-card__product {
-    font-size: 0.8rem;
-    color: rgba(0,0,0,0.5);
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.55);
+  }
+  .testimonial-card__source {
+    font-size: 1.3rem;
+    color: #c9a227;
+    font-weight: 500;
+  }
+
+  /* Empty state styles */
+  .testimonials__empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .testimonials__empty-icon {
+    color: #c9a227;
+    margin-bottom: 1.5rem;
+  }
+  .testimonials__empty-title {
+    font-size: 2.4rem;
+    margin: 0 0 1rem 0;
+    color: #1a1a1a;
+  }
+  .testimonials__empty-text {
+    font-size: 1.8rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* External review links */
+  .testimonials__external {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .testimonials__external-text {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 1.5rem 0;
+  }
+  .testimonials__external-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .testimonials__external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .testimonials__external-link--etsy {
+    background: #F1641E;
+    color: white;
+  }
+  .testimonials__external-link--etsy:hover {
+    background: #d9571a;
+  }
+  .testimonials__external-link--facebook {
+    background: #1877F2;
+    color: white;
+  }
+  .testimonials__external-link--facebook:hover {
+    background: #1565d8;
+  }
+  .testimonials__external-link--google {
+    background: #4285F4;
+    color: white;
+  }
+  .testimonials__external-link--google:hover {
+    background: #3574d8;
+  }
+  @media (max-width: 749px) {
+    .testimonials__external-links {
+      flex-direction: column;
+      align-items: center;
+    }
+    .testimonials__external-link {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
   }
 </style>
 
@@ -159,6 +311,28 @@
       "id": "background_color",
       "label": "Background Color",
       "default": "#f8f8f8"
+    },
+    {
+      "type": "header",
+      "content": "External Review Links"
+    },
+    {
+      "type": "url",
+      "id": "etsy_url",
+      "label": "Etsy Shop URL",
+      "info": "Link to your Etsy shop or reviews page"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook Page URL",
+      "info": "Link to your Facebook page for reviews"
+    },
+    {
+      "type": "url",
+      "id": "google_url",
+      "label": "Google Business URL",
+      "info": "Link to your Google Business reviews"
     }
   ],
   "blocks": [
@@ -185,18 +359,30 @@
           "type": "text",
           "id": "author",
           "label": "Author Name",
-          "default": "Sarah M."
+          "default": "Happy Customer"
         },
         {
           "type": "text",
           "id": "location",
-          "label": "Location",
-          "default": "Grand Rapids, MI"
+          "label": "Location"
         },
         {
           "type": "text",
           "id": "product",
           "label": "Product Purchased"
+        },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Review Source",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "Etsy", "label": "Etsy" },
+            { "value": "Facebook", "label": "Facebook" },
+            { "value": "Google", "label": "Google" },
+            { "value": "Email", "label": "Email" }
+          ],
+          "default": ""
         },
         {
           "type": "image_picker",
@@ -208,39 +394,7 @@
   ],
   "presets": [
     {
-      "name": "Testimonials",
-      "blocks": [
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "The quality exceeded my expectations. The engraving is crisp and the slate has a beautiful natural texture. Perfect gift!",
-            "author": "Sarah M.",
-            "location": "Grand Rapids, MI",
-            "product": "Custom Photo Coaster Set"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Ordered logo coasters for our office. Everyone loves them! Great communication throughout the process.",
-            "author": "Mike T.",
-            "location": "Detroit, MI",
-            "product": "Business Logo Coasters"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Got these for my husband's golf buddies. The course map engraving was stunning. Will definitely order again!",
-            "author": "Jennifer K.",
-            "location": "Ann Arbor, MI",
-            "product": "Golf Course Coasters"
-          }
-        }
-      ]
+      "name": "Testimonials"
     }
   ]
 }

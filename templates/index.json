@@ -233,47 +233,12 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "blocks": {
-        "testimonial-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "The quality exceeded my expectations. The engraving is crisp and the slate has a beautiful natural texture. Perfect gift!",
-            "author": "Sarah M.",
-            "location": "Grand Rapids, MI",
-            "product": "Custom Photo Coaster Set"
-          }
-        },
-        "testimonial-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Ordered logo coasters for our office. Everyone loves them! Great communication throughout the process.",
-            "author": "Mike T.",
-            "location": "Detroit, MI",
-            "product": "Business Logo Coasters"
-          }
-        },
-        "testimonial-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Got these for my husband's golf buddies. The course map engraving was stunning. Will definitely order again!",
-            "author": "Jennifer K.",
-            "location": "Ann Arbor, MI",
-            "product": "Golf Course Coasters"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial-1",
-        "testimonial-2",
-        "testimonial-3"
-      ],
       "settings": {
         "heading": "What Our Customers Say",
-        "subheading": "Real reviews from real customers",
-        "background_color": "#f8f8f8"
+        "subheading": "Share your experience with our custom engraved products",
+        "background_color": "#f8f8f8",
+        "etsy_url": "https://www.etsy.com/shop/LayerLaunchLaserLab",
+        "facebook_url": "https://www.facebook.com/LayerLaunchLaserLab"
       }
     },
     "newsletter": {
