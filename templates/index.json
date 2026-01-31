@@ -74,26 +74,26 @@
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "slate-coasters",
             "title": "Slate Coasters",
             "description": "Premium natural slate with custom engraving",
             "button_label": "Shop Coasters"
           }
         },
-        "collection_cT3GQm": {
+        "collection-4": {
           "type": "collection",
           "settings": {
-            "collection": "",
-            "title": "",
-            "description": "",
-            "button_label": "Shop Now"
+            "collection": "photo-engraving",
+            "title": "Photo Engravings",
+            "description": "Transform your photos into stunning keepsakes",
+            "button_label": "Shop Photo"
           }
         },
         "collection-2": {
           "type": "collection",
           "settings": {
-            "collection": "",
-            "title": "Golf Items",
+            "collection": "golf-items",
+            "title": "Golf Ball Markers",
             "description": "Personalized accessories for the course",
             "button_label": "Shop Golf"
           }
@@ -101,16 +101,16 @@
         "collection-3": {
           "type": "collection",
           "settings": {
-            "collection": "",
-            "title": "Branding Gifts",
-            "description": "Corporate and business gift solutions",
+            "collection": "branding-gifts",
+            "title": "Custom & Corporate",
+            "description": "Business gifts and custom order solutions",
             "button_label": "Shop Gifts"
           }
         }
       },
       "block_order": [
         "collection-1",
-        "collection_cT3GQm",
+        "collection-4",
         "collection-2",
         "collection-3"
       ],

@@ -15,8 +15,13 @@
       {% case block.type %}
         {% when 'collection' %}
           {% assign collection = collections[block.settings.collection] %}
+          {% assign collection_url = collection.url %}
+          {% if collection_url == blank and block.settings.collection != blank %}
+            {% assign collection_url = '/collections/' | append: block.settings.collection %}
+          {% endif %}
+          {% assign collection_url = collection_url | default: '/collections/all' %}
           <div class="featured-collections__item" {{ block.shopify_attributes }}>
-            <a href="{{ collection.url | default: '#' }}" class="featured-collections__link">
+            <a href="{{ collection_url }}" class="featured-collections__link">
               <div class="featured-collections__image-wrapper">
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 600 | image_tag:
