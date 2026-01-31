@@ -314,8 +314,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
-    gap: 2rem;
+    padding: clamp(14px, 1.5vw, 24px) clamp(20px, 3vw, 60px);
+    gap: clamp(1.5rem, 3vw, 4rem);
+    max-width: var(--container-full, 2400px);
+    margin: 0 auto;
   }
 
   .header__logo-link {
@@ -325,7 +327,7 @@
   }
 
   .header__logo-image {
-    max-height: 55px;
+    max-height: clamp(45px, 5vw, 75px);
     width: auto;
   }
 
@@ -337,7 +339,7 @@
   }
 
   .header__logo-tagline {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 0.8vw, 1.3rem);
     font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -346,7 +348,7 @@
   }
 
   .header__logo-text {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 1.8vw, 3rem);
     font-weight: 800;
     color: #1a1a1a;
     letter-spacing: -0.02em;
@@ -366,10 +368,10 @@
     justify-content: center;
   }
 
-  /* Expanded Navigation */
+  /* Expanded Navigation - Fluid Sizing */
   .header__menu {
     display: flex;
-    gap: 0.5rem;
+    gap: clamp(0.25rem, 0.5vw, 1rem);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -382,15 +384,15 @@
   .header__menu-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 12px 24px;
-    font-size: 1.5rem;
+    gap: clamp(4px, 0.4vw, 8px);
+    padding: clamp(10px, 1vw, 16px) clamp(16px, 1.5vw, 32px);
+    font-size: clamp(1.3rem, 1vw, 1.8rem);
     font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     color: #1a1a1a;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: clamp(4px, 0.4vw, 8px);
     transition: all 0.25s ease;
   }
 
@@ -404,6 +406,38 @@
     color: #c9a227;
     background: rgba(201, 162, 39, 0.08);
     text-decoration: none;
+  }
+
+  /* Large Display Enhancements for Header */
+  @media (min-width: 1440px) {
+    .header__wrapper {
+      padding: clamp(16px, 1.8vw, 28px) clamp(30px, 4vw, 80px);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .header__wrapper {
+      gap: clamp(2rem, 4vw, 5rem);
+    }
+
+    .header__menu {
+      gap: clamp(0.5rem, 0.8vw, 1.5rem);
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .header__wrapper {
+      padding: clamp(20px, 2vw, 32px) clamp(50px, 5vw, 100px);
+      gap: clamp(3rem, 5vw, 6rem);
+    }
+
+    .header__logo-image {
+      max-height: clamp(60px, 6vw, 90px);
+    }
+
+    .header__menu-link {
+      padding: clamp(14px, 1.2vw, 20px) clamp(24px, 2vw, 40px);
+    }
   }
 
   .header__menu-link--active {
@@ -472,19 +506,19 @@
   }
 
   /* ============================================
-     Mega Dropdown Styles
+     Mega Dropdown Styles - Responsive
      ============================================ */
   .header__mega-dropdown {
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    min-width: 700px;
+    min-width: clamp(600px, 50vw, 900px);
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
+    border-radius: clamp(10px, 0.8vw, 16px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    padding: 24px;
+    padding: clamp(20px, 2vw, 36px);
     opacity: 0;
     visibility: hidden;
     transition: all 0.25s ease;
@@ -500,29 +534,31 @@
   .header__mega-inner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: clamp(24px, 2.5vw, 48px);
   }
 
   .header__mega-column {
-    min-width: 180px;
+    min-width: clamp(150px, 12vw, 220px);
   }
 
   .header__mega-heading {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 1.3rem;
+    gap: clamp(6px, 0.5vw, 10px);
+    font-size: clamp(1.2rem, 0.9vw, 1.6rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #1a1a1a;
-    margin: 0 0 12px;
-    padding-bottom: 10px;
+    margin: 0 0 clamp(10px, 1vw, 16px);
+    padding-bottom: clamp(8px, 0.8vw, 14px);
     border-bottom: 2px solid #c9a227;
   }
 
   .header__mega-heading svg {
     color: #c9a227;
+    width: clamp(16px, 1.2vw, 22px);
+    height: clamp(16px, 1.2vw, 22px);
   }
 
   .header__mega-list {
@@ -532,16 +568,16 @@
   }
 
   .header__mega-list li {
-    margin-bottom: 2px;
+    margin-bottom: clamp(2px, 0.2vw, 4px);
   }
 
   .header__mega-link {
     display: block;
-    padding: 8px 12px;
-    font-size: 1.4rem;
+    padding: clamp(6px, 0.6vw, 12px) clamp(10px, 0.8vw, 16px);
+    font-size: clamp(1.3rem, 1vw, 1.7rem);
     color: #444;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: clamp(4px, 0.4vw, 8px);
     transition: all 0.2s;
   }
 
@@ -550,6 +586,24 @@
     color: #c9a227;
     text-decoration: none;
     padding-left: 16px;
+  }
+
+  /* Mega dropdown large display enhancements */
+  @media (min-width: 1920px) {
+    .header__mega-dropdown {
+      min-width: clamp(750px, 45vw, 1000px);
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .header__mega-dropdown {
+      min-width: clamp(900px, 40vw, 1200px);
+      padding: clamp(28px, 2.5vw, 48px);
+    }
+
+    .header__mega-inner {
+      gap: clamp(36px, 3vw, 60px);
+    }
   }
 
   .header__mega-link--featured {

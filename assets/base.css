@@ -1,5 +1,53 @@
 /* LayerLaunch Laser Labs - Base Styles */
 
+/* ============================================
+   CSS Custom Properties for Responsive Scaling
+   ============================================ */
+:root {
+  /* Base spacing unit - scales with viewport */
+  --spacing-unit: clamp(0.5rem, 0.4rem + 0.25vw, 1rem);
+
+  /* Container widths - fluid scaling for all displays */
+  --container-max: clamp(1200px, 75vw, 1800px);
+  --container-wide: clamp(1400px, 85vw, 2200px);
+  --container-full: clamp(1600px, 92vw, 2400px);
+
+  /* Responsive padding */
+  --page-padding: clamp(20px, 3vw, 80px);
+
+  /* Fluid typography scale */
+  --text-xs: clamp(1.1rem, 1rem + 0.15vw, 1.4rem);
+  --text-sm: clamp(1.3rem, 1.2rem + 0.2vw, 1.6rem);
+  --text-base: clamp(1.5rem, 1.4rem + 0.25vw, 1.9rem);
+  --text-lg: clamp(1.7rem, 1.5rem + 0.4vw, 2.4rem);
+  --text-xl: clamp(2rem, 1.8rem + 0.6vw, 3rem);
+  --text-2xl: clamp(2.4rem, 2rem + 0.9vw, 4rem);
+  --text-3xl: clamp(3rem, 2.4rem + 1.3vw, 5.2rem);
+  --text-4xl: clamp(3.6rem, 2.8rem + 1.8vw, 6.4rem);
+
+  /* Element sizing */
+  --header-height: clamp(70px, 8vh, 110px);
+  --logo-size: clamp(45px, 4vw, 75px);
+  --icon-size: clamp(20px, 1.8vw, 32px);
+  --button-padding-x: clamp(20px, 2vw, 36px);
+  --button-padding-y: clamp(12px, 1.2vw, 20px);
+
+  /* Gap/spacing */
+  --gap-xs: clamp(0.25rem, 0.3vw, 0.5rem);
+  --gap-sm: clamp(0.5rem, 0.6vw, 1rem);
+  --gap-md: clamp(1rem, 1.5vw, 2.5rem);
+  --gap-lg: clamp(2rem, 3vw, 5rem);
+  --gap-xl: clamp(3rem, 5vw, 8rem);
+
+  /* Section padding */
+  --section-padding-y: clamp(50px, 8vw, 120px);
+
+  /* Border radius scaling */
+  --radius-sm: clamp(4px, 0.4vw, 8px);
+  --radius-md: clamp(8px, 0.6vw, 14px);
+  --radius-lg: clamp(12px, 1vw, 20px);
+}
+
 /* Reset & Base */
 *,
 *::before,
@@ -14,7 +62,7 @@ html {
 
 body {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: var(--text-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,11 +84,22 @@ body {
   top: 10px;
 }
 
-/* Layout */
+/* Layout - Fluid Container System */
 .page-width {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--page-padding);
+  width: 100%;
+}
+
+/* Wider container for featured sections */
+.page-width--wide {
+  max-width: var(--container-wide);
+}
+
+/* Full-width for hero sections */
+.page-width--full {
+  max-width: var(--container-full);
 }
 
 .main-content {
@@ -80,16 +139,16 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Buttons */
+/* Buttons - Fluid Sizing */
 .button {
   display: inline-block;
-  padding: 12px 24px;
-  font-size: 1.4rem;
+  padding: var(--button-padding-y) var(--button-padding-x);
+  font-size: var(--text-sm);
   font-weight: 600;
   text-align: center;
   text-decoration: none;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -232,10 +291,10 @@ img {
   text-align: right;
 }
 
-/* Grid */
+/* Grid - Responsive with Large Display Support */
 .grid {
   display: grid;
-  gap: 2rem;
+  gap: var(--gap-md);
 }
 
 .grid--2 {
@@ -250,20 +309,112 @@ img {
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* Tablet breakpoint (1024px) */
+.grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid--6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* ============================================
+   Large Display Breakpoints (1440px+)
+   ============================================ */
+
+/* 1440p+ Displays (QHD, Ultrawide) */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: clamp(1400px, 78vw, 2000px);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-lg);
+  }
+
+  .grid--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* 1920p+ Displays (Full HD+) */
+@media (min-width: 1920px) {
+  :root {
+    --container-max: clamp(1600px, 80vw, 2200px);
+    --page-padding: clamp(40px, 4vw, 100px);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid--3 {
+    gap: var(--gap-lg);
+  }
+}
+
+/* 2560p+ Displays (QHD Ultrawide, 4K) */
+@media (min-width: 2560px) {
+  :root {
+    --container-max: clamp(1800px, 75vw, 2400px);
+    --page-padding: clamp(60px, 5vw, 120px);
+    --text-base: clamp(1.7rem, 1.5rem + 0.3vw, 2.2rem);
+    --text-lg: clamp(2rem, 1.8rem + 0.5vw, 2.8rem);
+    --text-xl: clamp(2.4rem, 2.2rem + 0.7vw, 3.4rem);
+    --text-2xl: clamp(3rem, 2.6rem + 1vw, 4.4rem);
+    --gap-md: clamp(1.5rem, 2vw, 3rem);
+    --gap-lg: clamp(3rem, 4vw, 6rem);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid--5, .grid--6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* 3440p+ Displays (Ultra-Ultrawide) */
+@media (min-width: 3440px) {
+  :root {
+    --container-max: clamp(2200px, 70vw, 2800px);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ============================================
+   Standard Breakpoints (Tablet & Mobile)
+   ============================================ */
+
+/* Tablet breakpoint */
 @media (max-width: 1024px) {
   .grid--4 {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .page-width {
-    padding: 0 20px;
+  .grid--5,
+  .grid--6 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 989px) {
   .grid--3,
-  .grid--4 {
+  .grid--4,
+  .grid--5,
+  .grid--6 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -271,7 +422,9 @@ img {
 @media (max-width: 749px) {
   .grid--2,
   .grid--3,
-  .grid--4 {
+  .grid--4,
+  .grid--5,
+  .grid--6 {
     grid-template-columns: 1fr;
   }
 }
