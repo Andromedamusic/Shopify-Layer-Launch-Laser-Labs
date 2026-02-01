@@ -236,6 +236,8 @@
 <style>
   .page-custom-upload {
     padding: 40px 0 80px;
+    background: #ffffff;
+    color: #1a1a1a;
   }
   .page-custom-upload__header {
     text-align: center;
@@ -244,9 +246,10 @@
   .page-custom-upload__title {
     margin-bottom: 0.75rem;
     font-size: clamp(2.4rem, 3vw, 3.2rem);
+    color: #1a1a1a;
   }
   .page-custom-upload__description {
-    color: rgba(0,0,0,0.6);
+    color: #555555;
     font-size: clamp(1.4rem, 1.2vw, 1.6rem);
     max-width: 600px;
     margin: 0 auto;
@@ -258,6 +261,13 @@
     gap: 3rem;
     max-width: 1000px;
     margin: 0 auto;
+  }
+  .page-custom-upload__form-wrapper {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e5e5;
   }
   @media (max-width: 989px) {
     .page-custom-upload__container {
@@ -320,7 +330,10 @@
     transition: color 0.3s ease;
   }
   .upload-step.active .upload-step__label {
-    color: #1a1a1a;
+    color: #1a1a1a !important;
+  }
+  .upload-step__label {
+    color: #666666 !important;
   }
   @media (max-width: 500px) {
     .upload-step__label {
@@ -358,7 +371,7 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
   }
   .form-group--required label::after {
     content: ' *';
@@ -370,11 +383,16 @@
   .form-group textarea {
     width: 100%;
     padding: 1rem 1.2rem;
-    border: 2px solid #e5e5e5;
+    border: 2px solid #d0d0d0;
     border-radius: 8px;
     font-size: 1.5rem;
     transition: border-color 0.2s, box-shadow 0.2s;
-    background: #fafafa;
+    background: #ffffff;
+    color: #1a1a1a !important;
+  }
+  .form-group select option {
+    color: #1a1a1a;
+    background: #ffffff;
   }
   .form-group input:focus,
   .form-group select:focus,
@@ -388,7 +406,7 @@
     display: block;
     margin-top: 0.4rem;
     font-size: 1.2rem;
-    color: rgba(0,0,0,0.5);
+    color: #666666 !important;
   }
 
   /* File Upload Zone */
@@ -427,13 +445,13 @@
   }
   .upload-main-text {
     font-size: 1.5rem;
-    color: #555;
+    color: #333333 !important;
     font-weight: 500;
     margin-bottom: 0.5rem;
   }
   .file-types {
     font-size: 1.2rem;
-    color: #999;
+    color: #666666 !important;
   }
 
   /* File Preview */
@@ -459,13 +477,13 @@
     display: block;
     font-weight: 600;
     font-size: 1.4rem;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
     word-break: break-all;
   }
   .file-size {
     display: block;
     font-size: 1.2rem;
-    color: #666;
+    color: #555555 !important;
     margin-top: 0.25rem;
   }
   .remove-file {
@@ -506,7 +524,7 @@
   }
   .progress-text {
     font-size: 1.3rem;
-    color: #666;
+    color: #555555 !important;
   }
 
   /* Upload Error */
@@ -591,6 +609,7 @@
   .review-section h3 {
     margin: 0 0 1.25rem 0;
     font-size: 1.6rem;
+    color: #1a1a1a !important;
   }
   .review-grid {
     display: grid;
@@ -608,13 +627,13 @@
   }
   .review-label {
     font-size: 1.2rem;
-    color: #666;
+    color: #555555 !important;
     display: block;
   }
   .review-value {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
   }
   .review-image img {
     width: 120px;
@@ -640,7 +659,7 @@
   }
   .checkbox-text {
     font-size: 1.35rem;
-    color: #444;
+    color: #333333 !important;
     line-height: 1.5;
   }
 
@@ -675,7 +694,7 @@
   }
   .form-success p {
     font-size: 1.4rem;
-    color: #555;
+    color: #333333 !important;
     margin-bottom: 1rem;
   }
   .form-success ol {
@@ -687,7 +706,7 @@
   .form-success li {
     font-size: 1.35rem;
     margin-bottom: 0.5rem;
-    color: #444;
+    color: #333333 !important;
   }
   .success-note {
     background: #f0fdf4;
@@ -705,51 +724,58 @@
 
   /* Sidebar */
   .upload-requirements {
-    background: #f8f8f8;
+    background: #f5f5f5;
     padding: 1.75rem;
     border-radius: 12px;
     position: sticky;
     top: 2rem;
+    border: 1px solid #e0e0e0;
   }
   .upload-requirements h3 {
     font-size: 1.4rem;
     margin: 0 0 1rem 0;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
+    font-weight: 700;
   }
   .upload-requirements h3:not(:first-child) {
     margin-top: 1.75rem;
     padding-top: 1.75rem;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid #d0d0d0;
   }
   .upload-requirements ul,
   .upload-requirements ol {
     margin: 0;
     padding-left: 1.5rem;
     font-size: 1.3rem;
-    color: rgba(0,0,0,0.7);
+    color: #333333 !important;
     line-height: 1.6;
   }
   .upload-requirements li {
     margin-bottom: 0.6rem;
+    color: #333333 !important;
   }
   .upload-requirements strong {
-    color: #1a1a1a;
+    color: #1a1a1a !important;
+    font-weight: 600;
   }
   .upload-questions {
     margin-top: 1.75rem;
     padding-top: 1.75rem;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid #d0d0d0;
     font-size: 1.3rem;
+    color: #333333 !important;
   }
   .upload-questions p {
     margin: 0 0 0.25rem 0;
+    color: #333333 !important;
   }
   .upload-questions a {
-    color: #c9a227;
-    font-weight: 500;
+    color: #b8922a;
+    font-weight: 600;
   }
   .upload-questions a:hover {
     text-decoration: underline;
+    color: #a07f1f;
   }
 </style>
 
