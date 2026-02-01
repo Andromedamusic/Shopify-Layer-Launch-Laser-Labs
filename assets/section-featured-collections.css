@@ -1,12 +1,17 @@
 /* Featured Collections Section - Premium Tesla/Rivian Inspired Design */
 
 /* ============================================
-   Section Container
+   Section Container - Soft Rounded Edges
    ============================================ */
 .featured-collections {
   padding: var(--section-padding-y, clamp(60px, 10vw, 140px)) 0;
   background: linear-gradient(180deg, #f8f8f8 0%, #fafafa 50%, #f8f8f8 100%);
   position: relative;
+  /* Soften section edges with large border-radius */
+  border-radius: 48px 48px 0 0;
+  margin-top: -24px;
+  /* Subtle top shadow for depth separation */
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.06);
 }
 
 /* Decorative gold accent line at top */
@@ -90,7 +95,7 @@
    ============================================ */
 .featured-collections__item {
   position: relative;
-  border-radius: 16px;
+  border-radius: 24px;
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.04),
     0 8px 16px rgba(0, 0, 0, 0.08),
@@ -150,7 +155,7 @@
 .featured-collections__link:focus-visible {
   outline: 3px solid #c9a227;
   outline-offset: 4px;
-  border-radius: 16px;
+  border-radius: 24px;
 }
 
 /* ============================================
@@ -161,7 +166,7 @@
   aspect-ratio: 3 / 4;
   background: #1a1a1a;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 24px;
 }
 
 .featured-collections__image {
@@ -283,6 +288,8 @@
   );
   z-index: 2;
   transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  /* Soft rounded bottom corners matching card */
+  border-radius: 0 0 24px 24px;
 }
 
 .featured-collections__link:hover .featured-collections__content {
@@ -374,8 +381,25 @@
 }
 
 @media (max-width: 749px) {
+  .featured-collections {
+    border-radius: 32px 32px 0 0;
+    margin-top: -16px;
+  }
+
   .featured-collections__image-wrapper {
     aspect-ratio: 4 / 5;
+  }
+
+  .featured-collections__item {
+    border-radius: 20px;
+  }
+
+  .featured-collections__image-wrapper {
+    border-radius: 20px;
+  }
+
+  .featured-collections__content {
+    border-radius: 0 0 20px 20px;
   }
 
   .featured-collections__item:hover {
