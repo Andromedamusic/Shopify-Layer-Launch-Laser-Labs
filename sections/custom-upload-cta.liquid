@@ -73,6 +73,17 @@
     /* Softer gradient with warm undertones instead of stark black */
     background: linear-gradient(135deg, #2a2520 0%, #1a1815 50%, #1a1a1a 100%);
   }
+  .custom-upload-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(248, 248, 248, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
   .custom-upload-cta__bg-image {
     position: absolute;
     top: 0;

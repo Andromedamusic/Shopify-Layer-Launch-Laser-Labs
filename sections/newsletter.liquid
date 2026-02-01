@@ -58,9 +58,22 @@
 <style>
   .newsletter {
     padding: clamp(60px, 8vw, 100px) 0;
-    /* White background with top border to differentiate from footer */
-    background: #ffffff !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    /* Gradient bridge: dark custom-upload section above transitions to light */
+    background: linear-gradient(180deg,
+      rgba(26, 26, 26, 0.06) 0%,
+      #f8f8f8 12%,
+      #f8f8f8 100%);
+    position: relative;
+  }
+  .newsletter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.1) 0%, transparent 100%);
+    pointer-events: none;
   }
   .newsletter__wrapper {
     display: flex;

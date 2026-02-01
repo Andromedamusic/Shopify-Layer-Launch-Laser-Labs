@@ -2,7 +2,8 @@
 
 .featured-collections {
   padding: 60px 0;
-  background: #ffffff;
+  /* Brand standard light background for consistency */
+  background: #f8f8f8;
 }
 
 .featured-collections__header {
