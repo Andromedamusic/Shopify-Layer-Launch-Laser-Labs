@@ -44,16 +44,6 @@
           }
         },
         "order": ["announcement-bar", "header"]
-      },
-      "footer-group": {
-        "type": "footer",
-        "sections": {
-          "footer": {
-            "type": "footer",
-            "settings": {}
-          }
-        },
-        "order": ["footer"]
       }
     },
     "content_for_index": []

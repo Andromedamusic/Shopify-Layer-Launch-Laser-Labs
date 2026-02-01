@@ -1,0 +1,115 @@
+{%- comment -%}Contact Location Section - Celebrating Michigan Made{%- endcomment -%}
+
+<div class="location-section" id="location-{{ section.id }}">
+  <div class="location-section__inner page-width">
+    <div class="location-section__header">
+      <div class="location-section__michigan">
+        <svg viewBox="0 0 120 140" class="michigan-outline" aria-label="Michigan state outline">
+          <path d="M45 5 L55 3 L65 5 L75 8 L82 15 L88 12 L95 15 L100 20 L98 28 L102 35 L108 32 L115 38 L112 45 L105 48 L100 55 L95 52 L88 55 L82 60 L78 68 L72 72 L68 65 L60 62 L52 65 L45 70 L38 68 L32 72 L25 70 L20 65 L15 58 L18 50 L12 45 L8 38 L15 32 L22 28 L28 22 L35 15 L40 10 Z" fill="{{ section.settings.michigan_fill }}" stroke="{{ section.settings.michigan_stroke }}" stroke-width="2"/>
+          <path d="M25 85 L35 80 L45 82 L55 85 L65 88 L72 95 L78 92 L85 95 L90 102 L88 110 L82 118 L75 125 L68 130 L58 135 L48 132 L38 128 L30 120 L25 112 L22 102 L20 92 Z" fill="{{ section.settings.michigan_fill }}" stroke="{{ section.settings.michigan_stroke }}" stroke-width="2"/>
+          <circle cx="65" cy="105" r="5" fill="{{ section.settings.accent_color }}" class="location-dot"/>
+        </svg>
+      </div>
+      <h2 class="location-section__title">{{ section.settings.heading }}</h2>
+      <p class="location-section__subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="location-section__cards">
+      <div class="location-card">
+        <div class="location-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>{{ section.settings.regional_title }}</h3>
+        <p>{{ section.settings.regional_text }}</p>
+      </div>
+      <div class="location-card">
+        <div class="location-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M21 8v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><path d="M10 12h4"/></svg>
+        </div>
+        <h3>{{ section.settings.shipping_title }}</h3>
+        <p>{{ section.settings.shipping_text }}</p>
+      </div>
+      <div class="location-card">
+        <div class="location-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>{{ section.settings.pickup_title }}</h3>
+        <p>{{ section.settings.pickup_text }}</p>
+      </div>
+    </div>
+
+    <div class="location-section__badge">
+      <span class="michigan-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        {{ section.settings.badge_text }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  #location-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 50%, #fafafa 100%);
+  }
+  #location-{{ section.id }} .location-section__inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  #location-{{ section.id }} .location-section__header { text-align: center; margin-bottom: 3rem; }
+  #location-{{ section.id }} .location-section__michigan { margin-bottom: 1.5rem; }
+  #location-{{ section.id }} .michigan-outline { width: 80px; height: 95px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+  #location-{{ section.id }} .location-dot { animation: pulse-dot-{{ section.id }} 2s ease-in-out infinite; }
+  @keyframes pulse-dot-{{ section.id }} { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  #location-{{ section.id }} .location-section__title { font-size: clamp(2.4rem, 4vw, 3.2rem); font-weight: 700; color: {{ section.settings.heading_color }}; margin: 0 0 0.75rem; }
+  #location-{{ section.id }} .location-section__subtitle { font-size: clamp(1.5rem, 2vw, 1.8rem); color: {{ section.settings.text_color }}; opacity: 0.85; margin: 0; }
+  #location-{{ section.id }} .location-section__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2.5rem; }
+  @media (max-width: 900px) {
+    #location-{{ section.id }} .location-section__cards { grid-template-columns: repeat(2, 1fr); }
+    #location-{{ section.id }} .location-section__cards .location-card:last-child { grid-column: span 2; max-width: 400px; justify-self: center; }
+  }
+  @media (max-width: 600px) {
+    #location-{{ section.id }} .location-section__cards { grid-template-columns: 1fr; }
+    #location-{{ section.id }} .location-section__cards .location-card:last-child { grid-column: span 1; max-width: none; }
+  }
+  #location-{{ section.id }} .location-card { background: #fff; border: 2px solid {{ section.settings.accent_color }}; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+  #location-{{ section.id }} .location-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  #location-{{ section.id }} .location-card__icon { width: 48px; height: 48px; margin: 0 auto 1rem; color: {{ section.settings.accent_color }}; }
+  #location-{{ section.id }} .location-card__icon svg { width: 100%; height: 100%; }
+  #location-{{ section.id }} .location-card h3 { font-size: 1.6rem; font-weight: 600; color: {{ section.settings.heading_color }}; margin: 0 0 0.5rem; }
+  #location-{{ section.id }} .location-card p { font-size: 1.4rem; color: {{ section.settings.text_color }}; line-height: 1.5; margin: 0; }
+  #location-{{ section.id }} .location-section__badge { text-align: center; }
+  #location-{{ section.id }} .michigan-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: {{ section.settings.heading_color }}; color: {{ section.settings.accent_color }}; padding: 0.75rem 1.5rem; border-radius: 50px; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; }
+</style>
+
+{% schema %}
+{
+  "name": "Location - Michigan Made",
+  "tag": "section",
+  "class": "section-location",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made in Southeast Michigan" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Proudly crafted in the heart of the Great Lakes State" },
+    { "type": "header", "content": "Regional Card" },
+    { "type": "text", "id": "regional_title", "label": "Title", "default": "Local Craftsmanship" },
+    { "type": "textarea", "id": "regional_text", "label": "Text", "default": "Every piece is handcrafted with care in Southeast Michigan, supporting local business and artisan traditions." },
+    { "type": "header", "content": "Shipping Card" },
+    { "type": "text", "id": "shipping_title", "label": "Title", "default": "Ships Nationwide" },
+    { "type": "textarea", "id": "shipping_text", "label": "Text", "default": "We ship to all 50 states with careful packaging to ensure your custom pieces arrive safely." },
+    { "type": "header", "content": "Pickup Card" },
+    { "type": "text", "id": "pickup_title", "label": "Title", "default": "Local Pickup Available" },
+    { "type": "textarea", "id": "pickup_text", "label": "Text", "default": "Southeast Michigan customers can arrange pickup by appointment. Contact us to schedule." },
+    { "type": "header", "content": "Badge" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Michigan Made" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 20, "max": 100, "step": 5, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 20, "max": 100, "step": 5, "unit": "px", "default": 60 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#1a1a1a" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#4a4a4a" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#c9a227" },
+    { "type": "color", "id": "michigan_fill", "label": "Michigan fill", "default": "#c9a227" },
+    { "type": "color", "id": "michigan_stroke", "label": "Michigan stroke", "default": "#1a1a1a" }
+  ],
+  "presets": [{ "name": "Location - Michigan Made" }],
+  "templates": ["page", "index", "article", "collection", "product"]
+}
+{% endschema %}

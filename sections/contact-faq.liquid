@@ -1,0 +1,207 @@
+{%- comment -%} Contact Page Mini FAQ - Native details/summary accordion {%- endcomment -%}
+
+{%- capture chevron_svg -%}
+<svg class="contact-faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+{%- endcapture -%}
+
+<div class="contact-faq section-{{ section.id }}" id="contact-faq">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <div class="contact-faq__header">
+        <h2 class="contact-faq__title">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="contact-faq__subtitle">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="contact-faq__list">
+      {%- comment -%} Preset FAQs {%- endcomment -%}
+      {% if section.settings.show_preset_faqs %}
+        <details class="contact-faq__item">
+          <summary class="contact-faq__question"><span>How long until I receive my order?</span>{{ chevron_svg }}</summary>
+          <div class="contact-faq__answer"><p>Most orders ship within 3-5 business days. Custom and bulk orders may take 7-14 business days depending on complexity. You'll receive tracking information once your order ships.</p></div>
+        </details>
+        <details class="contact-faq__item">
+          <summary class="contact-faq__question"><span>What file formats do you accept?</span>{{ chevron_svg }}</summary>
+          <div class="contact-faq__answer"><p>We accept PNG, JPG, SVG, AI, and PDF files. For best results, provide high-resolution images (300 DPI or higher) with transparent backgrounds when possible. Vector files (SVG, AI) produce the sharpest engravings.</p></div>
+        </details>
+        <details class="contact-faq__item">
+          <summary class="contact-faq__question"><span>Do you offer bulk pricing?</span>{{ chevron_svg }}</summary>
+          <div class="contact-faq__answer"><p>Yes! We offer tiered pricing for bulk orders. Discounts typically start at 10+ items. Contact us with your quantity and requirements for a custom quote - corporate and event orders are our specialty.</p></div>
+        </details>
+        <details class="contact-faq__item">
+          <summary class="contact-faq__question"><span>Can I see a proof before production?</span>{{ chevron_svg }}</summary>
+          <div class="contact-faq__answer"><p>Absolutely! For custom orders, we provide a digital proof for your approval before we begin production. This ensures your design looks exactly the way you want it.</p></div>
+        </details>
+        <details class="contact-faq__item">
+          <summary class="contact-faq__question"><span>What if there's a mistake on my order?</span>{{ chevron_svg }}</summary>
+          <div class="contact-faq__answer"><p>If we make an error, we'll fix it at no cost to you. Please contact us within 7 days of receiving your order with photos of the issue. We stand behind our work and want you to be 100% satisfied.</p></div>
+        </details>
+      {% endif %}
+
+      {%- comment -%} Custom FAQ Blocks {%- endcomment -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'faq' and block.settings.question != blank %}
+          <details class="contact-faq__item" {{ block.shopify_attributes }}>
+            <summary class="contact-faq__question"><span>{{ block.settings.question }}</span>{{ chevron_svg }}</summary>
+            <div class="contact-faq__answer"><p>{{ block.settings.answer }}</p></div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_faq_link %}
+      <div class="contact-faq__footer">
+        <a href="/pages/faq" class="button button--secondary contact-faq__link">
+          {{ section.settings.faq_link_text | default: 'View All FAQs' }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .contact-faq { padding: 50px 0 60px; background: #ffffff; }
+  .contact-faq__header { text-align: center; margin-bottom: 2.5rem; }
+  .contact-faq__title { font-size: 2.4rem; margin: 0 0 0.5rem 0; color: #1a1a1a; }
+  .contact-faq__subtitle { font-size: 1.6rem; color: rgba(0,0,0,0.6); margin: 0 auto; max-width: 500px; }
+  .contact-faq__list { max-width: 700px; margin: 0 auto; }
+
+  /* FAQ Item */
+  .contact-faq__item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .contact-faq__item:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+
+  /* Question/Summary - Touch-friendly */
+  .contact-faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #1a1a1a;
+    gap: 1rem;
+    transition: color 0.2s ease;
+    min-height: 56px; /* Touch-friendly */
+  }
+  .contact-faq__question::-webkit-details-marker { display: none; }
+  .contact-faq__question::marker { display: none; content: ''; }
+  .contact-faq__question:hover { color: #c9a227; }
+  .contact-faq__question:focus { outline: 2px solid #c9a227; outline-offset: 2px; border-radius: 4px; }
+  .contact-faq__question span { flex: 1; }
+
+  /* Chevron Icon - Rotates on open */
+  .contact-faq__chevron {
+    flex-shrink: 0;
+    transition: transform 0.3s ease, color 0.2s ease;
+    color: rgba(0,0,0,0.4);
+  }
+  .contact-faq__item[open] .contact-faq__chevron { transform: rotate(180deg); color: #c9a227; }
+
+  /* Gold accent on open state */
+  .contact-faq__item[open] .contact-faq__question { color: #c9a227; }
+
+  /* Answer with fade animation */
+  .contact-faq__answer { padding: 0 0.5rem 1.5rem 0.5rem; animation: contactFaqFade 0.2s ease; }
+  @keyframes contactFaqFade {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .contact-faq__answer p { margin: 0; color: rgba(0,0,0,0.7); line-height: 1.7; font-size: 1.5rem; }
+
+  /* Footer / Link to Full FAQ */
+  .contact-faq__footer { text-align: center; margin-top: 2.5rem; }
+  .contact-faq__link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-size: 1.5rem; }
+  .contact-faq__link svg { transition: transform 0.2s ease; }
+  .contact-faq__link:hover svg { transform: translateX(4px); }
+
+  /* Responsive */
+  @media (max-width: 749px) {
+    .contact-faq { padding: 40px 0 50px; }
+    .contact-faq__title { font-size: 2rem; }
+    .contact-faq__question { font-size: 1.5rem; padding: 1.1rem 0.25rem; }
+    .contact-faq__answer { padding: 0 0.25rem 1.25rem 0.25rem; }
+    .contact-faq__answer p { font-size: 1.4rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact FAQ",
+  "tag": "section",
+  "class": "section-contact-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quick Answers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Common questions about orders and custom work"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_preset_faqs",
+      "label": "Show preset FAQs",
+      "default": true,
+      "info": "Display the 5 default contact-related questions"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faq_link",
+      "label": "Show link to full FAQ",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "faq_link_text",
+      "label": "Link text",
+      "default": "View All FAQs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Custom FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question here?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Your answer goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact FAQ",
+      "settings": {
+        "heading": "Quick Answers",
+        "subheading": "Common questions about orders and custom work",
+        "show_preset_faqs": true,
+        "show_faq_link": true,
+        "faq_link_text": "View All FAQs"
+      }
+    }
+  ]
+}
+{% endschema %}
