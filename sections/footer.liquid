@@ -192,7 +192,8 @@
     margin-bottom: 1.25rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #1a1a1a;
+    /* WCAG AA compliant - strong contrast on light background */
+    color: #1a1a1a !important;
   }
 
   .footer__menu-list {
@@ -207,7 +208,8 @@
 
   .footer__menu-link,
   .footer__contact-item a {
-    color: #4a4a4a;
+    /* WCAG AA compliant link color */
+    color: #4a4a4a !important;
     font-size: 1.6rem;
     text-decoration: none;
     transition: color 0.2s;
@@ -220,7 +222,8 @@
   }
 
   .footer__contact-item {
-    color: #4a4a4a;
+    /* WCAG AA compliant text color */
+    color: #4a4a4a !important;
     font-size: 1.6rem;
     margin-bottom: 0.75rem;
     line-height: 1.5;
@@ -281,13 +284,13 @@
       "type": "text",
       "id": "email",
       "label": "Email",
-      "default": "orders@layerlaunchlaserlabs.com"
+      "default": "hunterbos@bosbusinessservices.org"
     },
     {
       "type": "text",
       "id": "phone",
       "label": "Phone",
-      "default": "(248) 838-8314"
+      "default": ""
     },
     {
       "type": "text",
