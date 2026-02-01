@@ -169,8 +169,8 @@
       ],
       "settings": {
         "subheading": "The LayerLaunch Difference",
-        "heading": "Not Your Generic Big-Box Coasters",
-        "description": "<p>Each piece we create is made to order with precision laser engraving on premium natural slate. The result is a product that feels personal, permanent, and unmistakably different from mass-produced alternatives.</p>",
+        "heading": "Craftsmanship That Stands Apart",
+        "description": "<p>Every piece we create is made to order with precision laser engraving on premium materials—slate, wood, leather, metal, and more. The result is a keepsake that feels personal, permanent, and unmistakably different from mass-produced alternatives.</p>",
         "background_color": "#ffffff",
         "button_label": "Learn Our Process",
         "button_link": "/pages/about"
@@ -233,12 +233,49 @@
     },
     "testimonials": {
       "type": "testimonials",
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Beautiful coasters. Fast communication and shipping. Love them!",
+            "author": "Lynn",
+            "location": "Michigan",
+            "product": "Custom Coasters",
+            "source": "Facebook"
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Great seller, phenomenal communication and lightning fast shipping.",
+            "author": "Scott",
+            "location": "Michigan",
+            "source": "Facebook"
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Excellent quality!! Very professional and delivered the product. VERY pleased!",
+            "author": "Heidi",
+            "location": "Michigan",
+            "source": "Facebook"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ],
       "settings": {
         "heading": "What Our Customers Say",
-        "subheading": "Share your experience with our custom engraved products",
+        "subheading": "5-star rated on Facebook Marketplace with 15+ reviews",
         "background_color": "#f8f8f8",
-        "etsy_url": "https://www.etsy.com/shop/LayerLaunchLaserLab",
-        "facebook_url": "https://www.facebook.com/LayerLaunchLaserLab"
+        "facebook_url": "https://www.facebook.com/marketplace/profile/100003393673828/"
       }
     },
     "newsletter": {
