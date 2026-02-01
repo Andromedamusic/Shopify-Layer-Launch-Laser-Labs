@@ -1,0 +1,317 @@
+/* Hero Banner Section Styles - Rivian/Tesla Inspired Premium Design */
+
+.hero-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.hero-banner--small {
+  min-height: 350px;
+}
+
+.hero-banner--medium {
+  min-height: 500px;
+}
+
+.hero-banner--large {
+  min-height: 85vh;
+}
+
+.hero-banner--full {
+  min-height: 100vh;
+}
+
+.hero-banner__image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-banner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  animation: heroImageZoom 20s ease-out forwards;
+}
+
+/* heroImageZoom animation defined in animations.css */
+
+.hero-banner__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Using standardized overlay-light values from animations.css */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, var(--overlay-light-start, 0.2)) 0%,
+    rgba(0, 0, 0, var(--overlay-light-end, 0.6)) 100%
+  );
+}
+
+.hero-banner__content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.hero-banner__text-wrapper {
+  max-width: 800px;
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroContentFade 1s ease-out 0.3s forwards;
+}
+
+/* heroContentFade animation defined in animations.css */
+
+.hero-banner__text-wrapper--left {
+  margin-right: auto;
+  text-align: left;
+}
+
+.hero-banner__text-wrapper--center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-banner__text-wrapper--right {
+  margin-left: auto;
+  text-align: right;
+}
+
+.hero-banner__subheading {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #c9a227;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-banner__subheading::before,
+.hero-banner__subheading::after {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: #c9a227;
+  opacity: 0.6;
+}
+
+.hero-banner__text-wrapper--left .hero-banner__subheading::before,
+.hero-banner__text-wrapper--right .hero-banner__subheading::after {
+  display: none;
+}
+
+.hero-banner__heading {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.05;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.hero-banner__description {
+  font-size: 1.25rem;
+  opacity: 1;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.hero-banner__text-wrapper--center .hero-banner__description {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-banner__description p {
+  margin: 0;
+}
+
+/* Premium Button Styles - Inspired by Tesla/Rivian */
+.hero-banner__buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-banner__text-wrapper--center .hero-banner__buttons {
+  justify-content: center;
+}
+
+.hero-banner__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  letter-spacing: 0.02em;
+  min-width: 180px;
+}
+
+.hero-banner__button--primary {
+  background: #c9a227;
+  color: #1a1a1a;
+  border: none;
+}
+
+.hero-banner__button--primary:hover {
+  background: #d4ad2e;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+}
+
+.hero-banner__button--secondary {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+}
+
+.hero-banner__button--secondary:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+}
+
+/* Scroll Indicator */
+.hero-banner__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  opacity: var(--opacity-secondary, 0.7);
+  animation: scrollBounceCentered 2s ease-in-out infinite;
+}
+
+/* scrollBounceCentered animation defined in animations.css */
+
+.hero-banner__scroll-indicator span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Trust Indicators Row */
+.hero-banner__trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-banner__trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-banner__trust-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #c9a227;
+  line-height: 1;
+}
+
+.hero-banner__trust-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 989px) {
+  .hero-banner--large {
+    min-height: 75vh; /* Standardized: desktop 85vh → tablet 75vh */
+  }
+
+  .hero-banner__trust-row {
+    gap: 2rem;
+  }
+
+  .hero-banner__trust-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 749px) {
+  .hero-banner--large {
+    min-height: 65vh; /* Standardized: tablet 75vh → mobile 65vh (proper hierarchy) */
+  }
+
+  .hero-banner--full {
+    min-height: 85vh; /* Full still takes most of screen on mobile */
+  }
+
+  .hero-banner__content {
+    padding: var(--bridge-height-sm, 60px) 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: inherit;
+  }
+
+  .hero-banner__heading {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero-banner__description {
+    font-size: 1.1rem;
+  }
+
+  .hero-banner__subheading::before,
+  .hero-banner__subheading::after {
+    width: 20px;
+  }
+
+  .hero-banner__button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+
+  .hero-banner__button--secondary {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .hero-banner__trust-row {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .hero-banner__trust-item {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+
+  .hero-banner__scroll-indicator {
+    display: none;
+  }
+}

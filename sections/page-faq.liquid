@@ -1,0 +1,275 @@
+{%- comment -%} FAQPage Schema for SEO {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'faq' -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.answer | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+<div class="page-faq page-width section-{{ section.id }}-padding">
+  <div class="page-faq__header">
+    <h1 class="page-faq__title h1">{{ section.settings.heading | default: page.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="page-faq__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="page-faq__content">
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'category' %}
+            <h2 class="faq-category" {{ block.shopify_attributes }}>{{ block.settings.title }}</h2>
+
+          {% when 'faq' %}
+            <details class="faq-item" {{ block.shopify_attributes }}>
+              <summary class="faq-item__question">
+                <span>{{ block.settings.question }}</span>
+                <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <div class="faq-item__answer">
+                <p>{{ block.settings.answer }}</p>
+              </div>
+            </details>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <div class="faq-sidebar">
+      <div class="faq-contact">
+        <h3>Still Have Questions?</h3>
+        <p>We're here to help! Reach out and we'll get back to you within 24 hours.</p>
+        <a href="mailto:HunterBos@BosBusinessServices.org" class="button button--secondary">
+          Email Us
+        </a>
+      </div>
+
+      <div class="faq-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/pages/custom-upload">Upload Your Image</a></li>
+          <li><a href="/pages/request-quote">Request a Quote</a></li>
+          <li><a href="/pages/design-library">Browse Design Library</a></li>
+          <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+          <li><a href="/policies/refund-policy">Returns Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-faq {
+    padding: 40px 0 80px;
+  }
+  .page-faq__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .page-faq__title {
+    margin-bottom: 0.75rem;
+  }
+  .page-faq__description {
+    color: rgba(0,0,0,0.6);
+    font-size: 1.7rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .page-faq__content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (max-width: 989px) {
+    .page-faq__content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* FAQ List */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .faq-category {
+    font-size: 2rem;
+    margin: 2.5rem 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #1a1a1a;
+  }
+  .faq-category:first-child {
+    margin-top: 0;
+  }
+  .faq-item {
+    border-bottom: 1px solid #eee;
+  }
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 1.7rem;
+    gap: 1rem;
+  }
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item__icon {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(180deg);
+  }
+  .faq-item__answer {
+    padding: 0 0 1.25rem 0;
+  }
+  .faq-item__answer p {
+    margin: 0;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.7;
+    font-size: 1.6rem;
+  }
+
+  /* Sidebar */
+  .faq-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  @media (max-width: 989px) {
+    .faq-sidebar {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .faq-contact,
+    .faq-links {
+      flex: 1;
+      min-width: 250px;
+    }
+  }
+  .faq-contact,
+  .faq-links {
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .faq-contact h3,
+  .faq-links h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .faq-contact p {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.7);
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+  }
+  .faq-contact .button {
+    width: 100%;
+  }
+  .faq-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .faq-links li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .faq-links li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .faq-links a {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+  .faq-links a:hover {
+    color: #c9a227;
+    text-decoration: underline;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Page",
+  "tag": "section",
+  "class": "section-page-faq",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Find answers to common questions about our products, personalization, shipping, and more."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question goes here?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Answer to the question goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Page"
+    }
+  ]
+}
+{% endschema %}

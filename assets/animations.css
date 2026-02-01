@@ -1,0 +1,250 @@
+/* ============================================
+   Centralized Animation Keyframes
+   LayerLaunch Laser Labs - Unified Animation System
+   ============================================ */
+
+/* ============================================
+   Animation Timing Tokens
+   ============================================ */
+:root {
+  /* Standard durations */
+  --animation-duration-fast: 200ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 400ms;
+  --animation-duration-slower: 600ms;
+  --animation-duration-entrance: 800ms;
+
+  /* Standard easing - Premium feel */
+  --animation-easing-premium: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --animation-easing-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --animation-easing-smooth: ease-out;
+
+  /* Opacity tokens for consistency */
+  --opacity-disabled: 0.5;
+  --opacity-muted: 0.6;
+  --opacity-secondary: 0.7;
+  --opacity-secondary-strong: 0.75;
+  --opacity-subtle: 0.8;
+  --opacity-light: 0.85;
+  --opacity-near-full: 0.9;
+
+  /* ============================================
+     Overlay Gradient Tokens
+     Standardized darkness levels for overlays
+     ============================================ */
+
+  /* Light overlay (for hero banners with visible imagery) */
+  --overlay-light-start: 0.2;
+  --overlay-light-end: 0.6;
+
+  /* Medium overlay (balanced visibility) */
+  --overlay-medium-start: 0.4;
+  --overlay-medium-end: 0.75;
+
+  /* Strong overlay (for text-heavy areas) */
+  --overlay-strong-start: 0.6;
+  --overlay-strong-end: 0.85;
+
+  /* Card overlay (for collection cards) */
+  --overlay-card-start: 0.85;
+  --overlay-card-mid: 0.3;
+  --overlay-card-end: 0;
+
+  /* Section transition bridge heights */
+  --bridge-height-sm: 60px;
+  --bridge-height-md: 80px;
+  --bridge-height-lg: 120px;
+}
+
+/* ============================================
+   Loading & Skeleton Animations
+   ============================================ */
+
+/* Shimmer effect for loading skeletons */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================
+   Page Transition Animations
+   ============================================ */
+
+/* Fade in with subtle upward movement */
+@keyframes pageTransitionFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Generic fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fade in with transform - for content reveals */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from bottom with fade */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Hero Section Animations
+   ============================================ */
+
+/* Ken Burns zoom effect for hero images */
+@keyframes heroImageZoom {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Hero content fade in with upward movement */
+@keyframes heroContentFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium Ken Burns for collection heroes */
+@keyframes heroKenBurns {
+  0% {
+    transform: scale(1.08) translateX(-1%);
+    filter: brightness(0.92);
+  }
+  100% {
+    transform: scale(1.15) translateX(1%);
+    filter: brightness(1);
+  }
+}
+
+/* ============================================
+   Scroll & Navigation Indicators
+   ============================================ */
+
+/* Bouncing scroll indicator */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* Scroll indicator with centered positioning */
+@keyframes scrollBounceCentered {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ============================================
+   Interactive Element Animations
+   ============================================ */
+
+/* Focus ring pulse for accessibility */
+@keyframes focusRingPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--color-brand-light), 0 0 0 4px var(--color-brand-gold);
+  }
+  50% {
+    box-shadow: 0 0 0 3px var(--color-brand-light), 0 0 0 6px rgba(201, 162, 39, 0.5);
+  }
+}
+
+/* Icon bounce on hover */
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-4px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(-2px); }
+}
+
+/* ============================================
+   Highlight & Sweep Animations
+   ============================================ */
+
+/* Gold highlight sweep effect */
+@keyframes highlightSweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Badge & Notification Animations
+   ============================================ */
+
+/* Subtle badge pulse */
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Warning/urgency pulse - opacity based */
+@keyframes pulseWarning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Icon pulse with scale */
+@keyframes pulseIcon {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* Clock/timer pulse */
+@keyframes pulseClock {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ============================================
+   Loading Spinner Animations
+   ============================================ */
+
+/* Universal spinner rotation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

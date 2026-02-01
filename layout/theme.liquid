@@ -1,0 +1,226 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#1a1a1a">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.font_heading.system? and settings.font_body.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    {%- comment -%} Organization Schema {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}",
+      "logo": "{{ shop.url }}{{ 'logo.png' | asset_url }}",
+      "description": "{{ shop.description | strip_html | truncate: 250 }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "MI",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "HunterBos@BosBusinessServices.org",
+        "telephone": "+1-248-838-8314",
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        "{{ settings.social_facebook }}",
+        "{{ settings.social_instagram }}",
+        "{{ settings.social_etsy }}",
+        "{{ settings.social_linkedin }}"
+      ]
+    }
+    </script>
+
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font_bold = settings.font_body | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.font_body | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.font_body | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.font_heading | font_face: font_display: 'swap' }}
+
+      :root {
+        --font-body-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+        --font-body-style: {{ settings.font_body.style }};
+        --font-body-weight: {{ settings.font_body.weight }};
+        --font-heading-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+        --font-heading-style: {{ settings.font_heading.style }};
+        --font-heading-weight: {{ settings.font_heading.weight }};
+
+        --color-primary: {{ settings.color_primary }};
+        --color-secondary: {{ settings.color_secondary }};
+        --color-accent: {{ settings.color_accent }};
+        --color-text: {{ settings.color_text }};
+        --color-background: {{ settings.color_background }};
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+        height: 100%;
+      }
+
+      body {
+        min-height: 100%;
+        margin: 0;
+        font-size: 1.8rem;
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+        color: var(--color-text);
+        background-color: var(--color-background);
+        line-height: 1.7;
+      }
+
+      p {
+        font-size: 1.8rem;
+        line-height: 1.7;
+        margin: 0 0 1.5rem;
+      }
+
+      h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6 {
+        font-family: var(--font-heading-family);
+        font-style: var(--font-heading-style);
+        font-weight: var(--font-heading-weight);
+        line-height: 1.25;
+        margin: 0 0 1rem;
+      }
+
+      .h0 { font-size: 4.4rem; }
+      .h1, h1 { font-size: 3.6rem; }
+      .h2, h2 { font-size: 3rem; }
+      .h3, h3 { font-size: 2.4rem; }
+      .h4, h4 { font-size: 2rem; }
+      .h5, h5 { font-size: 1.8rem; }
+      .h6, h6 { font-size: 1.6rem; }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .page-width {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 14px 28px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .button--primary {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      .button--primary:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .button--secondary {
+        background-color: transparent;
+        color: var(--color-primary);
+        border: 2px solid var(--color-primary);
+      }
+
+      .button--secondary:hover {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      @media (max-width: 749px) {
+        body, p { font-size: 1.7rem; }
+        .h0 { font-size: 3.2rem; }
+        .h1, h1 { font-size: 2.8rem; }
+        .h2, h2 { font-size: 2.4rem; }
+        .h3, h3 { font-size: 2rem; }
+        .button { padding: 12px 24px; font-size: 1.5rem; }
+      }
+    {% endstyle %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'animations.css' | asset_url | stylesheet_tag }}
+    {{ 'dark-mode.css' | asset_url | stylesheet_tag }}
+    {{ 'print.css' | asset_url | stylesheet_tag: media: 'print' }}
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-to-content-link button" href="#MainContent">
+      {{ "accessibility.skip_to_content" | t }}
+    </a>
+
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+    {% section 'cart-drawer' %}
+    {% render 'quick-view' %}
+    {% render 'wishlist' %}
+    {% render 'social-proof-popup' %}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+  </body>
+</html>

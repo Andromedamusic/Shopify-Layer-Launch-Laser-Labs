@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-custom-orders",
+      "settings": {
+        "heading": "Custom Orders",
+        "subheading": "From single personalized gifts to bulk corporate orders, we bring your vision to life with precision laser engraving.",
+        "types_heading": "What We Create",
+        "types_description": "Every project is unique—here are some of the ways we can help",
+        "email": "HunterBos@BosBusinessServices.org"
+      }
+    }
+  },
+  "order": ["main"]
+}

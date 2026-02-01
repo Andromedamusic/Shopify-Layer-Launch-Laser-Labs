@@ -1,0 +1,231 @@
+{%- comment -%}
+  Wishlist functionality using localStorage
+  Usage: {% render 'wishlist' %}
+{%- endcomment -%}
+
+<style>
+  .wishlist-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #666;
+    transition: color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wishlist-btn:hover {
+    color: #c9a227;
+    transform: scale(1.1);
+  }
+
+  .wishlist-btn.is-wishlisted {
+    color: #e53935;
+  }
+
+  .wishlist-btn.is-wishlisted svg {
+    fill: #e53935;
+  }
+
+  .wishlist-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: fill 0.2s;
+  }
+
+  /* Wishlist count badge */
+  .wishlist-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background: #e53935;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
+  }
+
+  .wishlist-count:empty,
+  .wishlist-count[data-count="0"] {
+    display: none;
+  }
+
+  /* Wishlist page styles */
+  .wishlist-page {
+    padding: 40px 0 80px;
+  }
+
+  .wishlist-page__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .wishlist-page__title {
+    margin-bottom: 0.5rem;
+  }
+
+  .wishlist-page__count {
+    color: #666;
+    font-size: 1.6rem;
+  }
+
+  .wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 989px) {
+    .wishlist-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 575px) {
+    .wishlist-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .wishlist-empty {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .wishlist-empty svg {
+    width: 64px;
+    height: 64px;
+    color: #ddd;
+    margin-bottom: 1.5rem;
+  }
+
+  .wishlist-empty p {
+    font-size: 1.7rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<script>
+(function() {
+  const WISHLIST_KEY = 'llll_wishlist';
+
+  // Get wishlist from localStorage
+  function getWishlist() {
+    try {
+      return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  // Save wishlist to localStorage
+  function saveWishlist(wishlist) {
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+    updateWishlistUI();
+  }
+
+  // Add product to wishlist
+  window.addToWishlist = function(productId, productData) {
+    const wishlist = getWishlist();
+    if (!wishlist.find(item => item.id === productId)) {
+      wishlist.push({
+        id: productId,
+        title: productData.title,
+        url: productData.url,
+        image: productData.image,
+        price: productData.price,
+        addedAt: Date.now()
+      });
+      saveWishlist(wishlist);
+    }
+  };
+
+  // Remove product from wishlist
+  window.removeFromWishlist = function(productId) {
+    const wishlist = getWishlist().filter(item => item.id !== productId);
+    saveWishlist(wishlist);
+  };
+
+  // Toggle product in wishlist
+  window.toggleWishlist = function(productId, productData) {
+    if (isInWishlist(productId)) {
+      removeFromWishlist(productId);
+    } else {
+      addToWishlist(productId, productData);
+    }
+  };
+
+  // Check if product is in wishlist
+  window.isInWishlist = function(productId) {
+    return getWishlist().some(item => item.id === productId);
+  };
+
+  // Get wishlist count
+  window.getWishlistCount = function() {
+    return getWishlist().length;
+  };
+
+  // Get full wishlist
+  window.getWishlistItems = function() {
+    return getWishlist();
+  };
+
+  // Update UI elements
+  function updateWishlistUI() {
+    const count = getWishlistCount();
+
+    // Update all wishlist count badges
+    document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+      el.textContent = count;
+      el.dataset.count = count;
+    });
+
+    // Update all wishlist buttons
+    document.querySelectorAll('[data-wishlist-btn]').forEach(btn => {
+      const productId = parseInt(btn.dataset.productId);
+      if (isInWishlist(productId)) {
+        btn.classList.add('is-wishlisted');
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('title', 'Remove from wishlist');
+      } else {
+        btn.classList.remove('is-wishlisted');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('title', 'Add to wishlist');
+      }
+    });
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    updateWishlistUI();
+
+    // Attach click handlers to wishlist buttons
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-wishlist-btn]');
+      if (!btn) return;
+
+      e.preventDefault();
+      const productId = parseInt(btn.dataset.productId);
+      const productData = {
+        title: btn.dataset.productTitle,
+        url: btn.dataset.productUrl,
+        image: btn.dataset.productImage,
+        price: btn.dataset.productPrice
+      };
+
+      toggleWishlist(productId, productData);
+    });
+  });
+
+  // Expose for external use
+  window.updateWishlistUI = updateWishlistUI;
+})();
+</script>

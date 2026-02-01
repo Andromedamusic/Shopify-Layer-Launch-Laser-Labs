@@ -1,0 +1,202 @@
+<div class="trust-bar" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  <div class="trust-bar__wrapper page-width">
+    {% for block in section.blocks %}
+      <div class="trust-bar__item" {{ block.shopify_attributes }}>
+        {% if block.settings.icon != blank %}
+          <span class="trust-bar__icon">
+            {{ block.settings.icon | image_url: width: 24 | image_tag: loading: 'lazy', alt: block.settings.text }}
+          </span>
+        {% elsif block.settings.icon_name != blank %}
+          <span class="trust-bar__icon trust-bar__icon--svg">
+            {% case block.settings.icon_name %}
+              {% when 'shipping' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 16L19 16L20.5 13.5L22 11V8H16V16Z"/>
+                  <path d="M1 8H16V16H8"/>
+                  <circle cx="5.5" cy="16.5" r="2.5"/>
+                  <circle cx="17.5" cy="16.5" r="2.5"/>
+                </svg>
+              {% when 'quality' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+              {% when 'custom' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20H21"/>
+                  <path d="M16.5 3.5C16.8978 3.10217 17.4374 2.87868 18 2.87868C18.2786 2.87868 18.5544 2.93355 18.8118 3.04015C19.0692 3.14676 19.303 3.30301 19.5 3.5C19.697 3.69698 19.8532 3.93083 19.9598 4.1882C20.0665 4.44557 20.1213 4.72142 20.1213 5C20.1213 5.27858 20.0665 5.55443 19.9598 5.8118C19.8532 6.06917 19.697 6.30302 19.5 6.5L7 19L3 20L4 16L16.5 3.5Z"/>
+                </svg>
+              {% when 'location' %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              {% else %}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <path d="M22 4L12 14.01L9 11.01"/>
+                </svg>
+              {% endcase %}
+          </span>
+        {% endif %}
+        <span class="trust-bar__text">{{ block.settings.text }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .trust-bar {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(90deg, rgba(201,162,39,0.06) 0%, transparent 50%, rgba(201,162,39,0.06) 100%);
+  }
+  .trust-bar__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .trust-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .trust-bar__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a227;
+    min-width: 28px;
+  }
+  .trust-bar__icon svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 2;
+  }
+  .trust-bar__text {
+    opacity: 1;
+  }
+  /* Separator between items (desktop only) */
+  .trust-bar__item:not(:last-child)::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.15);
+    margin-left: 3rem;
+  }
+  @media (max-width: 989px) {
+    .trust-bar__item:not(:last-child)::after {
+      display: none;
+    }
+  }
+  @media (max-width: 749px) {
+    .trust-bar {
+      padding: 16px 0;
+    }
+    .trust-bar__wrapper {
+      gap: 1.5rem;
+    }
+    .trust-bar__item {
+      font-size: 0.9rem;
+    }
+    .trust-bar__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "tag": "section",
+  "class": "section-trust-bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_name",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping Truck" },
+            { "value": "quality", "label": "Quality Star" },
+            { "value": "custom", "label": "Custom/Pen" },
+            { "value": "location", "label": "Location Pin" },
+            { "value": "checkmark", "label": "Checkmark" }
+          ],
+          "default": "checkmark"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom Icon Image",
+          "info": "Overrides icon selection above"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Trust Point"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "location",
+            "text": "Made in Michigan"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "shipping",
+            "text": "Free Shipping $75+"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "quality",
+            "text": "Premium Quality"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "custom",
+            "text": "Custom Engraving"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "badge": "Our Collection",
+        "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "material_style": "default",
+        "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

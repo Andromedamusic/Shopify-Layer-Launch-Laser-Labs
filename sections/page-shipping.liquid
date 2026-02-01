@@ -1,0 +1,579 @@
+<div class="page-shipping">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <div class="page-shipping__hero">
+    <div class="page-shipping__hero-content page-width">
+      <h1 class="page-shipping__title">{{ section.settings.heading }}</h1>
+      <p class="page-shipping__subtitle">{{ section.settings.subheading }}</p>
+    </div>
+  </div>
+
+  {%- comment -%} Shipping Overview {%- endcomment -%}
+  <div class="page-shipping__overview">
+    <div class="page-width">
+      <div class="shipping-highlights">
+        <div class="shipping-highlight">
+          <div class="shipping-highlight__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <h3>Free Shipping</h3>
+          <p>On orders over $75</p>
+        </div>
+
+        <div class="shipping-highlight">
+          <div class="shipping-highlight__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Made to Order</h3>
+          <p>3-5 business days production</p>
+        </div>
+
+        <div class="shipping-highlight">
+          <div class="shipping-highlight__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3>Ships from Michigan</h3>
+          <p>Fast delivery to most US locations</p>
+        </div>
+
+        <div class="shipping-highlight">
+          <div class="shipping-highlight__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Careful Packaging</h3>
+          <p>Every item protected for safe delivery</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Main Content {%- endcomment -%}
+  <div class="page-shipping__content">
+    <div class="page-width">
+      <div class="shipping-grid">
+        <div class="shipping-main">
+          {%- comment -%} Production Time {%- endcomment -%}
+          <div class="shipping-section">
+            <h2>Production Time</h2>
+            <p>Since every item is custom-made just for you, we need time to create your masterpiece:</p>
+            <ul class="info-list">
+              <li><strong>Standard Orders:</strong> 3-5 business days production time</li>
+              <li><strong>Custom/Complex Designs:</strong> 5-7 business days production time</li>
+              <li><strong>Bulk Orders (10+ items):</strong> 7-14 business days depending on quantity</li>
+              <li><strong>Rush Production:</strong> Available for an additional fee—contact us!</li>
+            </ul>
+            <div class="info-note">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>Production begins after you approve your proof. We won't engrave until you're 100% happy with the design!</span>
+            </div>
+          </div>
+
+          {%- comment -%} Shipping Methods {%- endcomment -%}
+          <div class="shipping-section">
+            <h2>Shipping Methods & Rates</h2>
+            <div class="shipping-table">
+              <div class="shipping-row shipping-row--header">
+                <span>Method</span>
+                <span>Delivery Time</span>
+                <span>Cost</span>
+              </div>
+              <div class="shipping-row">
+                <span><strong>Standard Shipping</strong></span>
+                <span>5-7 business days</span>
+                <span>$5.99 (Free over $75)</span>
+              </div>
+              <div class="shipping-row">
+                <span><strong>Priority Shipping</strong></span>
+                <span>2-3 business days</span>
+                <span>$12.99</span>
+              </div>
+              <div class="shipping-row">
+                <span><strong>Express Shipping</strong></span>
+                <span>1-2 business days</span>
+                <span>$24.99</span>
+              </div>
+            </div>
+            <p class="small-note">* Delivery times are estimates after your order ships. Does not include production time.</p>
+          </div>
+
+          {%- comment -%} Total Delivery Time {%- endcomment -%}
+          <div class="shipping-section">
+            <h2>Total Delivery Time</h2>
+            <p>Your total wait time = Production Time + Shipping Time</p>
+            <div class="timeline-example">
+              <div class="timeline-step">
+                <span class="timeline-label">Day 1-2</span>
+                <span class="timeline-desc">Proof creation & approval</span>
+              </div>
+              <div class="timeline-arrow">→</div>
+              <div class="timeline-step">
+                <span class="timeline-label">Day 3-7</span>
+                <span class="timeline-desc">Production</span>
+              </div>
+              <div class="timeline-arrow">→</div>
+              <div class="timeline-step">
+                <span class="timeline-label">Day 8-14</span>
+                <span class="timeline-desc">Shipping & delivery</span>
+              </div>
+            </div>
+            <p><strong>Example:</strong> A standard order with standard shipping typically arrives within 10-14 business days from order placement.</p>
+          </div>
+
+          {%- comment -%} Tracking {%- endcomment -%}
+          <div class="shipping-section">
+            <h2>Order Tracking</h2>
+            <p>We keep you informed every step of the way:</p>
+            <ul class="info-list">
+              <li><strong>Order Confirmation:</strong> Immediate email with order details</li>
+              <li><strong>Proof Ready:</strong> Email notification when your proof is ready for review</li>
+              <li><strong>Production Started:</strong> Update when we begin engraving your order</li>
+              <li><strong>Shipped:</strong> Email with tracking number and carrier information</li>
+            </ul>
+          </div>
+
+          {%- comment -%} Packaging {%- endcomment -%}
+          <div class="shipping-section">
+            <h2>Packaging & Protection</h2>
+            <p>We take extra care to ensure your custom pieces arrive safely:</p>
+            <ul class="info-list">
+              <li>Each item individually wrapped in protective material</li>
+              <li>Sturdy boxes with cushioning for fragile items</li>
+              <li>Discreet packaging (no product images on outside)</li>
+              <li>Gift-ready presentation on request</li>
+            </ul>
+          </div>
+        </div>
+
+        {%- comment -%} Sidebar {%- endcomment -%}
+        <div class="shipping-sidebar">
+          <div class="sidebar-card">
+            <h3>Need It Faster?</h3>
+            <p>Rush production is available for most orders. Contact us to discuss your timeline and we'll do our best to accommodate.</p>
+            <a href="/pages/contact" class="button button--secondary">Contact Us</a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Shipping to Multiple Addresses?</h3>
+            <p>Perfect for corporate gifts or event favors! We can ship items to multiple addresses. Additional shipping charges apply.</p>
+            <a href="/pages/custom-orders" class="button button--secondary">Learn More</a>
+          </div>
+
+          <div class="sidebar-card sidebar-card--dark">
+            <h3>International Shipping</h3>
+            <p>We currently ship within the United States. International shipping may be available for special orders—please contact us to inquire.</p>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Returns & Exchanges</h3>
+            <p>Due to the custom nature of our products, we don't accept returns on personalized items. However, if there's an issue with your order, we'll make it right!</p>
+            <a href="/policies/refund-policy" class="sidebar-link">View Return Policy →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} FAQ Section {%- endcomment -%}
+  <div class="page-shipping__faq">
+    <div class="page-width">
+      <h2 class="section-heading">Shipping FAQ</h2>
+
+      <div class="faq-grid">
+        <details class="faq-item">
+          <summary>What carriers do you use?</summary>
+          <p>We primarily ship via USPS for standard orders and UPS/FedEx for priority and express shipping. The carrier is selected based on your location and chosen shipping speed.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I change my shipping address after ordering?</summary>
+          <p>Contact us immediately! If production hasn't started, we can usually update your address. Once an order ships, we cannot change the destination.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What if my package is damaged in transit?</summary>
+          <p>We're sorry that happened! Take photos of the damage and contact us within 48 hours of delivery. We'll work with you to resolve the issue, typically by replacing the item at no charge.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you offer local pickup?</summary>
+          <p>Yes! If you're in Southeast Michigan, local pickup is available. Select "Local Pickup" at checkout or contact us to arrange.</p>
+        </details>
+      </div>
+
+      <p class="faq-more">Have more questions? <a href="/pages/faq">Visit our full FAQ</a> or <a href="/pages/contact">contact us</a>.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Hero */
+  .page-shipping__hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .page-shipping__title {
+    font-size: 3.6rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .page-shipping__subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Highlights */
+  .page-shipping__overview {
+    background: #f8f8f8;
+    padding: 50px 0;
+  }
+  .shipping-highlights {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 989px) {
+    .shipping-highlights {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 599px) {
+    .shipping-highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+  .shipping-highlight {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .shipping-highlight__icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a227;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+  .shipping-highlight h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.25rem 0;
+  }
+  .shipping-highlight p {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0;
+  }
+
+  /* Main Content */
+  .page-shipping__content {
+    padding: 60px 0;
+  }
+  .shipping-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+  }
+  @media (max-width: 989px) {
+    .shipping-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  /* Shipping Sections */
+  .shipping-section {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #eee;
+  }
+  .shipping-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .shipping-section h2 {
+    font-size: 2.2rem;
+    margin: 0 0 1rem 0;
+  }
+  .shipping-section p {
+    font-size: 1.7rem;
+    color: rgba(0,0,0,0.75);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+  .info-list li {
+    font-size: 1.6rem;
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    color: rgba(0,0,0,0.8);
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .info-list li:last-child {
+    border-bottom: none;
+  }
+  .info-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #c9a227;
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  .info-note {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: #fff8e7;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border-left: 4px solid #c9a227;
+    margin-top: 1.5rem;
+  }
+  .info-note svg {
+    flex-shrink: 0;
+    color: #c9a227;
+  }
+  .info-note span {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.8);
+    line-height: 1.5;
+  }
+
+  /* Shipping Table */
+  .shipping-table {
+    background: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+  .shipping-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  .shipping-row:last-child {
+    border-bottom: none;
+  }
+  .shipping-row--header {
+    background: #1a1a1a;
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+  .shipping-row span {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 599px) {
+    .shipping-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .shipping-row--header {
+      display: none;
+    }
+  }
+  .small-note {
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.5);
+    margin-top: 0.75rem;
+  }
+
+  /* Timeline */
+  .timeline-example {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .timeline-step {
+    text-align: center;
+  }
+  .timeline-label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #c9a227;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-desc {
+    font-size: 1.3rem;
+    color: rgba(0,0,0,0.7);
+  }
+  .timeline-arrow {
+    font-size: 1.8rem;
+    color: #ddd;
+  }
+  @media (max-width: 599px) {
+    .timeline-example {
+      flex-direction: column;
+    }
+    .timeline-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Sidebar */
+  .shipping-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .sidebar-card {
+    background: #f8f8f8;
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  .sidebar-card--dark {
+    background: #1a1a1a;
+    color: white;
+  }
+  .sidebar-card--dark p {
+    color: rgba(255,255,255,0.8);
+  }
+  .sidebar-card h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.75rem 0;
+  }
+  .sidebar-card p {
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.7);
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+  }
+  .sidebar-card .button {
+    width: 100%;
+    text-align: center;
+  }
+  .sidebar-link {
+    color: #c9a227;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .sidebar-link:hover {
+    text-decoration: underline;
+  }
+
+  /* FAQ Section */
+  .page-shipping__faq {
+    background: #f8f8f8;
+    padding: 60px 0;
+  }
+  .section-heading {
+    text-align: center;
+    font-size: 2.6rem;
+    margin: 0 0 2rem 0;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media (max-width: 749px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .faq-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item p {
+    padding: 0 1.5rem 1.25rem;
+    margin: 0;
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.6;
+  }
+  .faq-more {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+  }
+  .faq-more a {
+    color: #c9a227;
+    font-weight: 600;
+  }
+
+  @media (max-width: 749px) {
+    .page-shipping__title {
+      font-size: 2.8rem;
+    }
+    .page-shipping__subtitle {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Shipping Page",
+  "tag": "section",
+  "class": "section-page-shipping",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Shipping & Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about getting your custom-engraved products delivered to your door."
+    }
+  ]
+}
+{% endschema %}

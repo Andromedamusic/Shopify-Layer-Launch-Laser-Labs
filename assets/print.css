@@ -1,0 +1,237 @@
+/* LayerLaunch Laser Labs - Print Stylesheet */
+
+@media print {
+  /* Hide non-essential elements */
+  .header,
+  .footer,
+  .announcement-bar,
+  .cart-drawer,
+  .header__mobile-drawer,
+  .header__mobile-overlay,
+  .skip-to-content-link,
+  .product-gallery__zoom-hint,
+  .product-zoom-modal,
+  .product-sticky-cart,
+  .social-sharing,
+  .product-form__submit,
+  .button--primary,
+  .button--secondary,
+  .collection-filters,
+  .newsletter-signup,
+  .back-to-top,
+  video,
+  iframe,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and colors for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
+  /* Typography adjustments */
+  h1 { font-size: 24pt; }
+  h2 { font-size: 18pt; }
+  h3 { font-size: 14pt; }
+  h4, h5, h6 { font-size: 12pt; }
+
+  p, li {
+    font-size: 11pt;
+    line-height: 1.6;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Links */
+  a {
+    text-decoration: underline;
+    color: black !important;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+  a[href^="/"]:after {
+    content: " (https://{{ shop.domain }}" attr(href) ")";
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+  /* Don't show URL for certain links */
+  a[href^="#"]:after,
+  a[href^="javascript"]:after,
+  a[href^="mailto"]:after,
+  a[href^="tel"]:after {
+    content: "";
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Product pages */
+  .product-main__grid {
+    display: block !important;
+  }
+
+  .product-main__gallery {
+    width: 50% !important;
+    float: left;
+    margin-right: 2cm;
+    margin-bottom: 1cm;
+  }
+
+  .product-gallery__thumbnails {
+    display: none !important;
+  }
+
+  .product-main__info {
+    overflow: hidden;
+  }
+
+  .product-main__price {
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 0.5cm;
+  }
+
+  .product-main__description {
+    margin-top: 1cm;
+    border-top: 1px solid #ccc;
+    padding-top: 0.5cm;
+  }
+
+  /* Product details */
+  .product-details-tabs {
+    display: none !important;
+  }
+
+  .product-details-content {
+    display: block !important;
+    border: none !important;
+  }
+
+  /* Collection pages */
+  .collection-grid {
+    display: block !important;
+  }
+
+  .product-card {
+    display: inline-block;
+    width: 45%;
+    vertical-align: top;
+    margin-bottom: 1cm;
+    page-break-inside: avoid;
+  }
+
+  .product-card__image {
+    max-height: 5cm;
+    object-fit: contain;
+  }
+
+  .product-card__title {
+    font-size: 11pt;
+    font-weight: bold;
+  }
+
+  .product-card__price {
+    font-size: 10pt;
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+
+  th, td {
+    padding: 0.25cm;
+    text-align: left;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Page breaks */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  pre, blockquote {
+    page-break-inside: avoid;
+  }
+
+  /* FAQ page */
+  .faq-item {
+    page-break-inside: avoid;
+  }
+
+  .faq-item[open] .faq-item__icon {
+    display: none;
+  }
+
+  .faq-item summary {
+    font-weight: bold;
+  }
+
+  .faq-sidebar {
+    display: none !important;
+  }
+
+  /* Cart/Order pages */
+  .cart-drawer {
+    display: none !important;
+  }
+
+  /* Contact info */
+  .print-contact-info {
+    display: block !important;
+    margin-top: 1cm;
+    padding-top: 0.5cm;
+    border-top: 1px solid #ccc;
+    font-size: 10pt;
+  }
+
+  /* Add shop info at bottom */
+  body:after {
+    content: "LayerLaunch Laser Labs | HunterBos@BosBusinessServices.org | (248) 838-8314";
+    display: block;
+    margin-top: 2cm;
+    padding-top: 0.5cm;
+    border-top: 1px solid #ccc;
+    font-size: 9pt;
+    text-align: center;
+  }
+}

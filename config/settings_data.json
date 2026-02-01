@@ -1,0 +1,70 @@
+{
+  "current": {
+    "color_primary": "#1a1a1a",
+    "color_secondary": "#f5f5f5",
+    "color_accent": "#c9a227",
+    "color_text": "#333333",
+    "color_background": "#ffffff",
+    "font_heading": "montserrat_n7",
+    "font_body": "open_sans_n4",
+    "trust_bar_enabled": true,
+    "trust_item_1": "Made in Michigan",
+    "trust_item_2": "Free Shipping $75+",
+    "trust_item_3": "Premium Quality",
+    "trust_item_4": "Custom Engraving",
+    "show_personalization_fields": true,
+    "max_engraving_chars": 25,
+    "personalization_help_text": "Enter your custom engraving text. Each line will be centered on the product.",
+    "show_bulk_cta": true,
+    "bulk_threshold": 25,
+    "bulk_quote_url": "/pages/request-quote",
+    "bulk_cta_text": "Need 25+ or a logo run? Request a Quote",
+    "upload_page_url": "/pages/custom-upload",
+    "upload_cta_text": "Have a photo or logo? Upload it here after ordering.",
+    "show_reviews": true,
+    "review_heading": "What Our Customers Say",
+    "show_newsletter": true,
+    "newsletter_heading": "Join Our Community",
+    "newsletter_text": "Subscribe for exclusive designs, early access to new products, and 10% off your first order.",
+    "footer_tagline": "Premium custom engraved products, made to order in Michigan.",
+    "sections": {
+      "header-group": {
+        "type": "header",
+        "sections": {
+          "announcement-bar": {
+            "type": "announcement-bar",
+            "settings": {
+              "text": "Free Shipping on Orders Over $75!",
+              "link": "/collections/all"
+            }
+          },
+          "header": {
+            "type": "header",
+            "settings": {}
+          }
+        },
+        "order": ["announcement-bar", "header"]
+      },
+      "footer-group": {
+        "type": "footer",
+        "sections": {
+          "footer": {
+            "type": "footer",
+            "settings": {}
+          }
+        },
+        "order": ["footer"]
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {
+    "Default": {
+      "color_primary": "#1a1a1a",
+      "color_secondary": "#f5f5f5",
+      "color_accent": "#c9a227",
+      "color_text": "#333333",
+      "color_background": "#ffffff"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{%- comment -%}
+  Low Stock Warning Indicator
+  Usage: {% render 'low-stock-warning', product: product, threshold: 5 %}
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = threshold | default: 5
+  assign variant = product.selected_or_first_available_variant
+  assign inventory_quantity = variant.inventory_quantity | default: 0
+  assign inventory_policy = variant.inventory_policy
+  assign inventory_management = variant.inventory_management
+
+  assign show_warning = false
+  if inventory_management == 'shopify' and inventory_policy == 'deny'
+    if inventory_quantity > 0 and inventory_quantity <= threshold
+      assign show_warning = true
+    endif
+  endif
+-%}
+
+{% if show_warning %}
+  <div class="low-stock-warning" role="alert">
+    <svg class="low-stock-warning__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span class="low-stock-warning__text">
+      {%- if inventory_quantity == 1 -%}
+        Only 1 left in stock!
+      {%- else -%}
+        Only {{ inventory_quantity }} left in stock - order soon!
+      {%- endif -%}
+    </span>
+  </div>
+{% endif %}
+
+<style>
+  .low-stock-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #fff3e0;
+    border: 1px solid #ffb74d;
+    border-radius: 6px;
+    color: #e65100;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 1rem 0;
+  }
+
+  .low-stock-warning__icon {
+    flex-shrink: 0;
+    color: #f57c00;
+  }
+
+  .low-stock-warning__text {
+    line-height: 1.3;
+  }
+
+  /* pulseWarning animation defined in animations.css */
+
+  .low-stock-warning--urgent {
+    animation: pulseWarning 2s ease-in-out infinite;
+    background: #ffebee;
+    border-color: #ef5350;
+    color: #c62828;
+  }
+
+  .low-stock-warning--urgent .low-stock-warning__icon {
+    color: #e53935;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .low-stock-warning {
+      background: #3e2723;
+      border-color: #8d6e63;
+      color: #ffcc80;
+    }
+
+    .low-stock-warning__icon {
+      color: #ffb74d;
+    }
+
+    .low-stock-warning--urgent {
+      background: #3e2723;
+      border-color: #ef5350;
+      color: #ef9a9a;
+    }
+
+    .low-stock-warning--urgent .low-stock-warning__icon {
+      color: #ef5350;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Pet Products",
+        "badge": "For Your Best Friend",
+        "subtitle": "Durable & Personalized with Love",
+        "description": "Custom pet tags, memorial items, and accessories crafted for your furry family members. Durable materials and precision engraving ensure their name stays visible through every adventure and tail wag.",
+        "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "2-3 Day Production",
+        "cta_text": "Shop Pet Gifts",
+        "material_style": "metal",
+        "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

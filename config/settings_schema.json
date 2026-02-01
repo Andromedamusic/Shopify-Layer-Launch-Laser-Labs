@@ -1,0 +1,329 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "LayerLaunch Laser Labs",
+    "theme_version": "1.0.0",
+    "theme_author": "LayerLaunch",
+    "theme_documentation_url": "https://layerlaunchlaserlab.com/pages/help",
+    "theme_support_url": "https://layerlaunchlaserlab.com/pages/contact"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#1a1a1a",
+        "info": "Used for buttons, links, and accents"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color",
+        "default": "#f8f8f8",
+        "info": "Used for backgrounds and sections"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (Gold)",
+        "default": "#c9a227",
+        "info": "Used for highlights, badges, and CTAs"
+      },
+      {
+        "type": "header",
+        "content": "Text Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body Text Color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Light Text Color",
+        "default": "#666666",
+        "info": "Used for secondary text and descriptions"
+      },
+      {
+        "type": "header",
+        "content": "Background Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Page Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background_secondary",
+        "label": "Secondary Background",
+        "default": "#f8f8f8",
+        "info": "Used for alternating sections"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Heading Size Scale",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      },
+      {
+        "type": "header",
+        "content": "Body Text"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "label": "Body Size Scale",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page Width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "default": 1200,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Section Spacing",
+        "min": 20,
+        "max": 100,
+        "step": 10,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable Scroll Animations",
+        "default": true,
+        "info": "Adds fade-in effects as sections come into view"
+      }
+    ]
+  },
+  {
+    "name": "Contact Information",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Business Details"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact Email",
+        "default": "HunterBos@BosBusinessServices.org"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone Number",
+        "default": "(248) 838-8314"
+      },
+      {
+        "type": "text",
+        "id": "contact_location",
+        "label": "Location",
+        "default": "Southeast Michigan"
+      },
+      {
+        "type": "text",
+        "id": "business_hours",
+        "label": "Business Hours",
+        "default": "24/7 availability for your convenience"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL",
+        "default": "https://www.facebook.com/LayerLaunchLaserLab"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_etsy",
+        "label": "Etsy Shop URL",
+        "default": "https://www.etsy.com/shop/LayerLaunchLaserLab"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin",
+        "label": "LinkedIn URL",
+        "default": "https://www.linkedin.com/in/hunterbos"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter/X URL"
+      }
+    ]
+  },
+  {
+    "name": "Product Features",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Personalization"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_personalization",
+        "label": "Enable Personalization Features",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_personalization_badge",
+        "label": "Show 'Personalization Included' Badge",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Bulk Orders"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_bulk_cta",
+        "label": "Show Bulk Order CTAs",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "bulk_minimum_quantity",
+        "label": "Minimum Bulk Order Quantity",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "Trust Signals"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_trust_badges",
+        "label": "Show Trust Badges on Product Pages",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "shipping_estimate",
+        "label": "Default Shipping Estimate",
+        "default": "Ships in 3-5 business days"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold",
+        "default": "$75"
+      }
+    ]
+  },
+  {
+    "name": "Checkout & Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cart Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Enable Cart Drawer",
+        "default": true,
+        "info": "Opens cart in a slide-out drawer instead of redirecting"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_recommendations",
+        "label": "Show Product Recommendations in Cart",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "SEO & Analytics",
+    "settings": [
+      {
+        "type": "header",
+        "content": "SEO Settings"
+      },
+      {
+        "type": "text",
+        "id": "seo_title_suffix",
+        "label": "Title Suffix",
+        "default": "| LayerLaunch Laser Lab",
+        "info": "Appended to all page titles"
+      },
+      {
+        "type": "textarea",
+        "id": "default_meta_description",
+        "label": "Default Meta Description",
+        "default": "Premium custom laser engraving on natural slate. Personalized coasters, golf markers, and gifts. Made in Michigan with precision craftsmanship."
+      }
+    ]
+  }
+]

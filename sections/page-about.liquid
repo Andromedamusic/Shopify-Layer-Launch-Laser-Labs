@@ -1,0 +1,615 @@
+<div class="page-about">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <div class="page-about__hero">
+    {% if section.settings.hero_image != blank %}
+      <div class="page-about__hero-image">
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: loading: 'eager', class: 'page-about__hero-bg' }}
+        <div class="page-about__hero-overlay"></div>
+      </div>
+    {% endif %}
+    <div class="page-about__hero-content page-width">
+      <h1 class="page-about__title h0">{{ section.settings.heading | default: page.title }}</h1>
+      {% if section.settings.intro != blank %}
+        <p class="page-about__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {%- comment -%} Story Section {%- endcomment -%}
+  <div class="page-about__story page-width">
+    <div class="page-about__story-content">
+      <h2>Our Story</h2>
+      <p>LayerLaunch Laser Labs started with a simple idea: create products that people actually want to keep — not throw in a drawer. Based in Michigan, we combine precision laser technology with thoughtful design to transform everyday items into meaningful keepsakes.</p>
+      <p>Whether it's a photo of a beloved pet, a company logo, or a favorite golf course, we turn your ideas into premium engraved products that last a lifetime. Each piece is made to order in our Michigan workshop with attention to detail that mass manufacturers simply can't match.</p>
+    </div>
+    {% if section.settings.story_image != blank %}
+      <div class="page-about__story-image">
+        {{ section.settings.story_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+      </div>
+    {% endif %}
+  </div>
+
+  {%- comment -%} Meet the Founder Section {%- endcomment -%}
+  <div class="page-about__founder">
+    <div class="page-width">
+      <div class="founder-grid">
+        <div class="founder-image">
+          {% if section.settings.founder_image != blank %}
+            {{ section.settings.founder_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'founder-image__photo' }}
+          {% else %}
+            <div class="founder-image__placeholder">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <p>Add your photo</p>
+            </div>
+          {% endif %}
+        </div>
+        <div class="founder-content">
+          <p class="founder-label">Meet the Founder</p>
+          <h2 class="founder-name">Hunter Bos</h2>
+          <p class="founder-title">Founder & Lead Craftsman</p>
+
+          <div class="founder-bio">
+            <p>I'm Hunter Bos — an automotive industry veteran turned laser engraving enthusiast. With over 9 years of experience as a Subject Matter Expert and Technical Curriculum Developer at Ford Motor Company, I've spent my career mastering precision, quality control, and attention to detail.</p>
+
+            <p>My background spans electric vehicle technology, aerospace systems, and advanced manufacturing processes. That same technical precision and commitment to excellence now drives every product we create at LayerLaunch Laser Labs.</p>
+
+            <p>When I'm not running the laser, I operate <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener">Bos Business Services</a> — offering professional photography, aerial cinematography (FAA Part 107 certified), photogrammetry, and multimedia production throughout Southeast Michigan.</p>
+          </div>
+
+          <div class="founder-credentials">
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>9+ Years Automotive Industry Experience</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>FAA Part 107 Certified Drone Pilot</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <span>EV & High-Voltage Systems Specialist</span>
+            </div>
+            <div class="credential">
+              <div class="credential__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <span>Based in Southeast Michigan</span>
+            </div>
+          </div>
+
+          <div class="founder-social">
+            <a href="https://www.linkedin.com/in/hunterbos/" target="_blank" rel="noopener" class="founder-social__link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <span>Connect on LinkedIn</span>
+            </a>
+            <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener" class="founder-social__link founder-social__link--secondary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>Bos Business Services</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Process Section {%- endcomment -%}
+  <div class="page-about__process">
+    <div class="page-width">
+      <h2 class="page-about__section-heading">Our Process</h2>
+      <p class="page-about__section-intro">From your idea to finished product, here's how we create your custom piece.</p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-step__number">1</div>
+          <h3>Choose Your Product</h3>
+          <p>Select from our collection of premium slate coasters, golf items, or branding products. Pick a design from our library or prepare your own image.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">2</div>
+          <h3>Personalize It</h3>
+          <p>Add your custom text, upload your photo or logo, or select from our design library. Our team reviews every submission for quality.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">3</div>
+          <h3>Approve Your Proof</h3>
+          <p>For photo and logo orders, we'll send a digital proof for your approval. Make sure everything looks perfect before we engrave.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">4</div>
+          <h3>Precision Engraving</h3>
+          <p>Using our professional laser equipment, we carefully engrave your design onto premium materials with crisp, high-contrast results.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">5</div>
+          <h3>Quality Check & Ship</h3>
+          <p>Every piece is inspected before packaging. We ship directly to you with tracking so you know exactly when to expect your creation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Quality Section {%- endcomment -%}
+  <div class="page-about__quality page-width">
+    <div class="quality-grid">
+      <div class="quality-item">
+        <div class="quality-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <h3>Premium Materials</h3>
+        <p>We use only high-quality natural slate with consistent thickness and texture for beautiful, durable results.</p>
+      </div>
+      <div class="quality-item">
+        <div class="quality-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Made to Order</h3>
+        <p>Nothing sits on a shelf. Every product is created specifically for you, ensuring freshness and care in every piece.</p>
+      </div>
+      <div class="quality-item">
+        <div class="quality-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>Michigan Made</h3>
+        <p>Proudly designed and produced in Michigan. We're a small team that takes pride in American craftsmanship.</p>
+      </div>
+      <div class="quality-item">
+        <div class="quality-item__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3>Satisfaction Guaranteed</h3>
+        <p>If there's ever an issue with your order, we'll make it right. Your happiness is our priority.</p>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  <div class="page-about__cta">
+    <div class="page-width">
+      <h2>Ready to Create Something Special?</h2>
+      <p>Browse our collection or contact us for custom projects.</p>
+      <div class="page-about__cta-buttons">
+        <a href="/collections/all" class="button button--primary">Shop Now</a>
+        <a href="/pages/request-quote" class="button button--secondary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-about__hero {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+  }
+  .page-about__hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .page-about__hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .page-about__hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+  .page-about__hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px;
+  }
+  .page-about__title {
+    margin-bottom: 1rem;
+  }
+  .page-about__intro {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Story Section */
+  .page-about__story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 80px 0;
+  }
+  @media (max-width: 989px) {
+    .page-about__story {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  .page-about__story h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.8rem;
+  }
+  .page-about__story p {
+    color: rgba(0,0,0,0.7);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+  }
+  .page-about__story-image img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  /* Founder Section */
+  .page-about__founder {
+    background: #f8f8f8;
+    padding: 80px 0;
+  }
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 989px) {
+    .founder-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+  .founder-image {
+    position: sticky;
+    top: 100px;
+  }
+  @media (max-width: 989px) {
+    .founder-image {
+      position: static;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+  .founder-image__photo {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  .founder-image__placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: white;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+  .founder-image__placeholder p {
+    margin: 1rem 0 0;
+    font-size: 1.4rem;
+  }
+  .founder-label {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: #c9a227;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+  .founder-name {
+    font-size: 3.2rem;
+    margin: 0 0 0.25rem 0;
+    color: #1a1a1a;
+  }
+  .founder-title {
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 2rem 0;
+  }
+  .founder-bio p {
+    font-size: 1.7rem;
+    line-height: 1.75;
+    color: rgba(0,0,0,0.75);
+    margin-bottom: 1.25rem;
+  }
+  .founder-bio a {
+    color: #c9a227;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .founder-bio a:hover {
+    text-decoration: underline;
+  }
+  .founder-credentials {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 749px) {
+    .founder-credentials {
+      grid-template-columns: 1fr;
+    }
+  }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-radius: 8px;
+  }
+  .credential__icon {
+    color: #c9a227;
+    flex-shrink: 0;
+  }
+  .credential span {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+  }
+  .founder-social {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .founder-social__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: #0077B5;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .founder-social__link:hover {
+    transform: translateY(-2px);
+    background: #005f8f;
+  }
+  .founder-social__link--secondary {
+    background: #1a1a1a;
+  }
+  .founder-social__link--secondary:hover {
+    background: #333;
+  }
+  @media (max-width: 749px) {
+    .founder-name {
+      font-size: 2.6rem;
+    }
+    .founder-social {
+      flex-direction: column;
+    }
+    .founder-social__link {
+      justify-content: center;
+    }
+  }
+
+  /* Process Section */
+  .page-about__process {
+    background: #f8f8f8;
+    padding: 80px 0;
+  }
+  .page-about__section-heading {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .page-about__section-intro {
+    text-align: center;
+    color: rgba(0,0,0,0.6);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 989px) {
+    .process-steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 749px) {
+    .process-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+  .process-step {
+    text-align: center;
+  }
+  .process-step__number {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 auto 1rem;
+  }
+  .process-step h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .process-step p {
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.6);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Quality Section */
+  .page-about__quality {
+    padding: 80px 0;
+  }
+  .quality-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 989px) {
+    .quality-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 749px) {
+    .quality-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .quality-item {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .quality-item__icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    color: #c9a227;
+  }
+  .quality-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .quality-item p {
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.6);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .page-about__cta {
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .page-about__cta h2 {
+    margin-bottom: 0.5rem;
+  }
+  .page-about__cta p {
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+  .page-about__cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .page-about__cta .button--primary {
+    background: white;
+    color: #1a1a1a;
+  }
+  .page-about__cta .button--secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Page",
+  "tag": "section",
+  "class": "section-page-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "About LayerLaunch Laser Labs"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "We create premium custom engraved products that feel personal and permanent — not mass-produced."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story Section Image"
+    },
+    {
+      "type": "header",
+      "content": "Meet the Founder"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo",
+      "info": "Recommended: Square image, at least 500x500px"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-about",
+      "settings": {
+        "heading": "About LayerLaunch Laser Labs",
+        "intro": "We create premium custom engraved products that feel personal and permanent — not mass-produced."
+      }
+    }
+  },
+  "order": ["main"]
+}

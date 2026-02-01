@@ -1,0 +1,352 @@
+<div class="custom-upload-cta" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.background_image != blank %}
+    <div class="custom-upload-cta__bg-image">
+      {{ section.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', class: 'custom-upload-cta__bg' }}
+      <div class="custom-upload-cta__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+  {% endif %}
+
+  <div class="custom-upload-cta__wrapper page-width">
+    <div class="custom-upload-cta__content">
+      {% if section.settings.icon_type == 'upload' %}
+        <div class="custom-upload-cta__icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+      {% elsif section.settings.icon_type == 'photo' %}
+        <div class="custom-upload-cta__icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-upload-cta__heading h2">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="custom-upload-cta__description">{{ section.settings.description }}</div>
+      {% endif %}
+
+      <div class="custom-upload-cta__steps">
+        {% for block in section.blocks %}
+          <div class="custom-upload-cta__step" {{ block.shopify_attributes }}>
+            <span class="custom-upload-cta__step-number">{{ forloop.index }}</span>
+            <span class="custom-upload-cta__step-text">{{ block.settings.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link }}" class="custom-upload-cta__button button button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+
+      {%- comment -%} Urgency trigger - proof timeline {%- endcomment -%}
+      <div class="custom-upload-cta__urgency">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span><strong>Order by 2pm</strong> for your proof by tomorrow</span>
+      </div>
+
+      {% if section.settings.note != blank %}
+        <p class="custom-upload-cta__note">{{ section.settings.note }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-upload-cta {
+    position: relative;
+    padding: clamp(60px, 8vw, 100px) 0;
+    color: white;
+    /* Softer gradient with warm undertones instead of stark black */
+    background: linear-gradient(135deg, #2a2520 0%, #1a1815 50%, #1a1a1a 100%);
+  }
+  .custom-upload-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(248, 248, 248, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .custom-upload-cta__bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .custom-upload-cta__bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .custom-upload-cta__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(42, 37, 32, 0.85) 0%, rgba(26, 26, 26, 0.9) 100%);
+  }
+  .custom-upload-cta__wrapper {
+    position: relative;
+    z-index: 1;
+  }
+  .custom-upload-cta__content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .custom-upload-cta__icon {
+    margin-bottom: clamp(1.25rem, 2vw, 2rem);
+    color: #c9a227;
+  }
+  .custom-upload-cta__icon svg {
+    width: clamp(56px, 5vw, 72px);
+    height: clamp(56px, 5vw, 72px);
+  }
+  .custom-upload-cta__heading {
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    color: inherit;
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    font-weight: 700;
+  }
+  .custom-upload-cta__description {
+    font-size: clamp(1.5rem, 1.2vw, 1.8rem);
+    opacity: 0.9;
+    margin-bottom: clamp(2rem, 3vw, 3rem);
+    line-height: 1.6;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .custom-upload-cta__description p {
+    margin: 0;
+  }
+  .custom-upload-cta__steps {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-bottom: clamp(2rem, 3vw, 3rem);
+    flex-wrap: wrap;
+  }
+  .custom-upload-cta__step {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 1vw, 1rem);
+  }
+  .custom-upload-cta__step-number {
+    width: clamp(36px, 3vw, 44px);
+    height: clamp(36px, 3vw, 44px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(201, 162, 39, 0.25) 0%, rgba(201, 162, 39, 0.15) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.4);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 1vw, 1.5rem);
+    color: #c9a227;
+  }
+  .custom-upload-cta__step-text {
+    font-size: clamp(1.4rem, 1.1vw, 1.6rem);
+    font-weight: 500;
+  }
+  .custom-upload-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #c9a227 0%, #d4b340 100%);
+    color: white;
+    padding: clamp(14px, 1.5vw, 18px) clamp(28px, 3vw, 40px);
+    font-size: clamp(1.4rem, 1.1vw, 1.7rem);
+    font-weight: 600;
+    border: none;
+    border-radius: clamp(6px, 0.5vw, 10px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 162, 39, 0.3);
+  }
+  .custom-upload-cta__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+    background: linear-gradient(135deg, #d4b340 0%, #c9a227 100%);
+  }
+  .custom-upload-cta__urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: clamp(1.25rem, 1.5vw, 1.75rem);
+    padding: 0.6rem 1.2rem;
+    background: rgba(201, 162, 39, 0.2);
+    border: 1px solid rgba(201, 162, 39, 0.4);
+    border-radius: 50px;
+    font-size: clamp(1.25rem, 1vw, 1.45rem);
+    color: #f0d76c;
+  }
+  .custom-upload-cta__urgency svg {
+    color: #c9a227;
+    animation: pulseClock 2s ease-in-out infinite;
+  }
+  .custom-upload-cta__urgency strong {
+    color: #c9a227;
+  }
+  /* pulseClock animation defined in animations.css */
+  .custom-upload-cta__note {
+    margin-top: clamp(1rem, 1.5vw, 1.5rem);
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
+    opacity: 0.7;
+  }
+  @media (max-width: 749px) {
+    .custom-upload-cta__steps {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  /* Large displays */
+  @media (min-width: 1440px) {
+    .custom-upload-cta__content {
+      max-width: 900px;
+    }
+  }
+  @media (min-width: 1920px) {
+    .custom-upload-cta__content {
+      max-width: 1000px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Upload CTA",
+  "tag": "section",
+  "class": "section-custom-upload-cta",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon_type",
+      "label": "Icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "upload", "label": "Upload Arrow" },
+        { "value": "photo", "label": "Photo" }
+      ],
+      "default": "photo"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Have a Photo or Logo to Engrave?"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Transform your favorite memories, business logo, or custom artwork into a stunning engraved keepsake. Our photo engraving process captures incredible detail on natural slate.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color (fallback)",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Upload Your Image"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note Text",
+      "default": "Accepted formats: PNG, JPG. We'll send a proof before production."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Step Text",
+          "default": "Order your product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Upload CTA",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "text": "Order your product"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "Upload your image"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "Approve the proof"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "Receive your creation"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

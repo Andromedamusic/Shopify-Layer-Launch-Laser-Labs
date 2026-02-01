@@ -1,0 +1,1102 @@
+<div class="page-custom-upload page-width section-{{ section.id }}-padding">
+  <div class="page-custom-upload__header">
+    <h1 class="page-custom-upload__title h1">{{ section.settings.heading | default: page.title }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="page-custom-upload__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="page-custom-upload__container">
+    <div class="page-custom-upload__form-wrapper">
+      <!-- Step indicator -->
+      <div class="upload-steps">
+        <div class="upload-step active" data-step="1">
+          <span class="upload-step__number">1</span>
+          <span class="upload-step__label">Your Details</span>
+        </div>
+        <div class="upload-step" data-step="2">
+          <span class="upload-step__number">2</span>
+          <span class="upload-step__label">Upload Image</span>
+        </div>
+        <div class="upload-step" data-step="3">
+          <span class="upload-step__number">3</span>
+          <span class="upload-step__label">Review & Submit</span>
+        </div>
+      </div>
+
+      <form class="page-custom-upload__form" id="custom-upload-form">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[subject]" value="Custom Image Upload">
+        <input type="hidden" id="image-data" name="contact[image_data]" value="">
+
+        <!-- Step 1: Customer Details -->
+        <div class="form-step active" data-step="1">
+          <div class="form-group form-group--required">
+            <label for="order-number">Order Number</label>
+            <input type="text" id="order-number" name="contact[order_number]" required placeholder="e.g., #1001">
+            <span class="form-help">Enter the order number from your confirmation email</span>
+          </div>
+
+          <div class="form-group form-group--required">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="contact[email]" required placeholder="your@email.com">
+          </div>
+
+          <div class="form-group form-group--required">
+            <label for="product">Product Ordered</label>
+            <select id="product" name="contact[product]" required>
+              <option value="">Select product...</option>
+              <option value="Slate Coaster - Single">Slate Coaster - Single</option>
+              <option value="Slate Coaster - Set of 4">Slate Coaster - Set of 4</option>
+              <option value="Slate Coaster - Set of 10">Slate Coaster - Set of 10</option>
+              <option value="Slate Coaster - Set of 25">Slate Coaster - Set of 25</option>
+              <option value="Golf Ball Marker">Golf Ball Marker</option>
+              <option value="Logo Coasters - Business Pack">Logo Coasters - Business Pack</option>
+              <option value="Photo Engraving - Small">Photo Engraving - Small</option>
+              <option value="Photo Engraving - Medium">Photo Engraving - Medium</option>
+              <option value="Photo Engraving - Large">Photo Engraving - Large</option>
+              <option value="Other">Other (specify in notes)</option>
+            </select>
+          </div>
+
+          <button type="button" class="button button--primary next-step-btn" data-next="2">Continue to Upload</button>
+        </div>
+
+        <!-- Step 2: File Upload -->
+        <div class="form-step" data-step="2">
+          <div class="form-group form-group--file">
+            <label>Upload Your Image</label>
+            <div class="file-upload-zone" id="file-upload-zone">
+              <input type="file" id="file-upload" accept=".png,.jpg,.jpeg,.webp" class="file-input">
+              <div class="file-upload-placeholder" id="upload-placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span class="upload-main-text">Click to upload or drag and drop</span>
+                <span class="file-types">PNG, JPG, WEBP (max 5MB)</span>
+              </div>
+              <div class="file-preview" id="file-preview" style="display: none;">
+                <img id="preview-image" src="" alt="Preview">
+                <div class="file-info">
+                  <span class="file-name" id="file-name"></span>
+                  <span class="file-size" id="file-size"></span>
+                </div>
+                <button type="button" class="remove-file" id="remove-file" title="Remove file">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="upload-progress" id="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="progress-text" id="progress-text">Processing...</span>
+              </div>
+            </div>
+            <div class="upload-error" id="upload-error" style="display: none;"></div>
+          </div>
+
+          <div class="image-quality-tips">
+            <h4>For Best Results</h4>
+            <ul>
+              <li>Use high contrast images (clear lights and darks)</li>
+              <li>Avoid blurry or low-resolution photos</li>
+              <li>Simple designs engrave most crisply</li>
+            </ul>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="button button--secondary prev-step-btn" data-prev="1">Back</button>
+            <button type="button" class="button button--primary next-step-btn" data-next="3" id="continue-to-review" disabled>Continue to Review</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Review & Submit -->
+        <div class="form-step" data-step="3">
+          <div class="review-section">
+            <h3>Review Your Submission</h3>
+
+            <div class="review-grid">
+              <div class="review-details">
+                <div class="review-item">
+                  <span class="review-label">Order Number:</span>
+                  <span class="review-value" id="review-order"></span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Email:</span>
+                  <span class="review-value" id="review-email"></span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Product:</span>
+                  <span class="review-value" id="review-product"></span>
+                </div>
+              </div>
+              <div class="review-image">
+                <img id="review-preview" src="" alt="Your upload">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Engraving Notes (Optional)</label>
+            <textarea id="notes" name="contact[body]" rows="4" placeholder="Please include any specific instructions:
+- Crop preferences
+- Text to add (if any)
+- Orientation preferences
+- Any special requests"></textarea>
+          </div>
+
+          <div class="form-group form-group--checkbox">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rights-checkbox" name="contact[rights_confirmed]" value="Yes" required>
+              <span class="checkbox-custom"></span>
+              <span class="checkbox-text">I confirm I have the rights to use this image for engraving.</span>
+            </label>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="button button--secondary prev-step-btn" data-prev="2">Back</button>
+            <button type="submit" class="button button--primary submit-btn" id="submit-btn" disabled>
+              <span class="btn-text">Submit Upload</span>
+              <span class="btn-loading" style="display: none;">
+                <svg class="spinner" viewBox="0 0 24 24" width="20" height="20">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                </svg>
+                Submitting...
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="form-success" id="form-success" style="display: none;">
+          <div class="success-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h2>Upload Successful!</h2>
+          <p>We've received your image and order details. Here's what happens next:</p>
+          <ol>
+            <li>We'll prepare a digital proof of your engraving</li>
+            <li>You'll receive the proof via email within 24-48 hours</li>
+            <li>Reply to approve or request changes</li>
+            <li>Once approved, we begin production</li>
+          </ol>
+          <p class="success-note">Check your email at <strong id="success-email"></strong> for updates.</p>
+          <a href="/collections/all" class="button button--primary">Continue Shopping</a>
+        </div>
+      </form>
+    </div>
+
+    {% if section.settings.show_requirements %}
+      <div class="page-custom-upload__sidebar">
+        <div class="upload-requirements">
+          <h3>Image Requirements</h3>
+          <ul>
+            <li><strong>File types:</strong> PNG, JPG, PDF, AI, SVG</li>
+            <li><strong>Max file size:</strong> 10MB</li>
+            <li><strong>Resolution:</strong> 300 DPI recommended for best results</li>
+            <li><strong>Format:</strong> High contrast images engrave best</li>
+          </ul>
+
+          <h3>What Happens Next</h3>
+          <ol>
+            <li>We receive your upload</li>
+            <li>We prepare a digital proof</li>
+            <li>You review and approve the proof via email</li>
+            <li>We begin production</li>
+            <li>Your order ships within 3-5 business days</li>
+          </ol>
+
+          <h3>Tips for Best Results</h3>
+          <ul>
+            <li>Photos with good contrast (light and dark areas) engrave beautifully</li>
+            <li>Logos should be high resolution, preferably vector format</li>
+            <li>Simple designs often produce the crispest results</li>
+            <li>Avoid very thin lines or small text</li>
+          </ul>
+
+          <div class="upload-questions">
+            <p><strong>Questions?</strong></p>
+            <p>Email us at <a href="mailto:HunterBos@BosBusinessServices.org">HunterBos@BosBusinessServices.org</a></p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .page-custom-upload {
+    padding: 40px 0 80px;
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+  .page-custom-upload__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .page-custom-upload__title {
+    margin-bottom: 0.75rem;
+    font-size: clamp(2.4rem, 3vw, 3.2rem);
+    color: #1a1a1a;
+  }
+  .page-custom-upload__description {
+    color: #555555;
+    font-size: clamp(1.4rem, 1.2vw, 1.6rem);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .page-custom-upload__container {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .page-custom-upload__form-wrapper {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e5e5;
+  }
+  @media (max-width: 989px) {
+    .page-custom-upload__container {
+      grid-template-columns: 1fr;
+    }
+    .page-custom-upload__sidebar {
+      order: -1;
+    }
+  }
+
+  /* Step Indicator */
+  .upload-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .upload-steps::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: #e5e5e5;
+  }
+  .upload-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .upload-step__number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+  }
+  .upload-step.active .upload-step__number,
+  .upload-step.completed .upload-step__number {
+    background: #c9a227;
+    color: white;
+  }
+  .upload-step.completed .upload-step__number {
+    background: #22c55e;
+  }
+  .upload-step__label {
+    font-size: 1.2rem;
+    color: #888;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  .upload-step.active .upload-step__label {
+    color: #1a1a1a !important;
+  }
+  .upload-step__label {
+    color: #666666 !important;
+  }
+  @media (max-width: 500px) {
+    .upload-step__label {
+      font-size: 1rem;
+    }
+    .upload-steps::before {
+      left: 20px;
+      right: 20px;
+    }
+  }
+
+  /* Form Steps */
+  .form-step {
+    display: none;
+  }
+  .form-step.active {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+  }
+  /* fadeInUp animation defined in animations.css */
+
+  .page-custom-upload__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    color: #1a1a1a !important;
+  }
+  .form-group--required label::after {
+    content: ' *';
+    color: #c62828;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 2px solid #d0d0d0;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #ffffff;
+    color: #1a1a1a !important;
+  }
+  .form-group select option {
+    color: #1a1a1a;
+    background: #ffffff;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #c9a227;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+    background: #fff;
+  }
+  .form-help {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
+    color: #666666 !important;
+  }
+
+  /* File Upload Zone */
+  .file-upload-zone {
+    position: relative;
+    min-height: 200px;
+  }
+  .file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .file-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: #fafafa;
+  }
+  .file-upload-zone:hover .file-upload-placeholder,
+  .file-upload-zone.dragover .file-upload-placeholder {
+    border-color: #c9a227;
+    background: rgba(201, 162, 39, 0.05);
+  }
+  .file-upload-placeholder svg {
+    margin-bottom: 1rem;
+    color: #999;
+  }
+  .upload-main-text {
+    font-size: 1.5rem;
+    color: #333333 !important;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .file-types {
+    font-size: 1.2rem;
+    color: #666666 !important;
+  }
+
+  /* File Preview */
+  .file-preview {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+    border: 2px solid #22c55e;
+  }
+  .file-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .file-info {
+    flex: 1;
+  }
+  .file-name {
+    display: block;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #1a1a1a !important;
+    word-break: break-all;
+  }
+  .file-size {
+    display: block;
+    font-size: 1.2rem;
+    color: #555555 !important;
+    margin-top: 0.25rem;
+  }
+  .remove-file {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #ef4444;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .remove-file:hover {
+    background: #dc2626;
+  }
+
+  /* Upload Progress */
+  .upload-progress {
+    padding: 2rem;
+    text-align: center;
+  }
+  .progress-bar {
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c9a227, #d4b340);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .progress-text {
+    font-size: 1.3rem;
+    color: #555555 !important;
+  }
+
+  /* Upload Error */
+  .upload-error {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #dc2626;
+    font-size: 1.3rem;
+  }
+
+  /* Image Quality Tips */
+  .image-quality-tips {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #c9a227;
+    margin: 1rem 0;
+  }
+  .image-quality-tips h4 {
+    font-size: 1.3rem;
+    margin: 0 0 0.75rem 0;
+    color: #92400e;
+  }
+  .image-quality-tips ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .image-quality-tips li {
+    font-size: 1.25rem;
+    color: #78350f;
+    margin-bottom: 0.35rem;
+  }
+
+  /* Form Buttons */
+  .form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .form-buttons .button {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+  }
+  .button--secondary {
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    color: #1a1a1a;
+  }
+  .button--secondary:hover {
+    background: #1a1a1a;
+    color: white;
+  }
+  .button--primary {
+    background: linear-gradient(135deg, #c9a227 0%, #d4b340 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .button--primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #b8922a 0%, #c9a227 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+  }
+  .button--primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Review Section */
+  .review-section {
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .review-section h3 {
+    margin: 0 0 1.25rem 0;
+    font-size: 1.6rem;
+    color: #1a1a1a !important;
+  }
+  .review-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  @media (max-width: 600px) {
+    .review-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .review-item {
+    margin-bottom: 0.75rem;
+  }
+  .review-label {
+    font-size: 1.2rem;
+    color: #555555 !important;
+    display: block;
+  }
+  .review-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a1a !important;
+  }
+  .review-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e5e5;
+  }
+
+  /* Checkbox styling */
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: normal !important;
+  }
+  .checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: #c9a227;
+  }
+  .checkbox-text {
+    font-size: 1.35rem;
+    color: #333333 !important;
+    line-height: 1.5;
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+  /* spin animation defined in animations.css */
+
+  /* Success State */
+  .form-success {
+    text-align: center;
+    padding: 2rem;
+    animation: fadeInUp 0.5s ease;
+  }
+  .success-icon {
+    margin-bottom: 1.5rem;
+  }
+  .form-success h2 {
+    color: #22c55e;
+    margin-bottom: 1rem;
+    font-size: 2.4rem;
+  }
+  .form-success p {
+    font-size: 1.4rem;
+    color: #333333 !important;
+    margin-bottom: 1rem;
+  }
+  .form-success ol {
+    text-align: left;
+    max-width: 400px;
+    margin: 1.5rem auto;
+    padding-left: 1.5rem;
+  }
+  .form-success li {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+    color: #333333 !important;
+  }
+  .success-note {
+    background: #f0fdf4;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+  .form-success .button {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  /* Sidebar */
+  .upload-requirements {
+    background: #f5f5f5;
+    padding: 1.75rem;
+    border-radius: 12px;
+    position: sticky;
+    top: 2rem;
+    border: 1px solid #e0e0e0;
+  }
+  .upload-requirements h3 {
+    font-size: 1.4rem;
+    margin: 0 0 1rem 0;
+    color: #1a1a1a !important;
+    font-weight: 700;
+  }
+  .upload-requirements h3:not(:first-child) {
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #d0d0d0;
+  }
+  .upload-requirements ul,
+  .upload-requirements ol {
+    margin: 0;
+    padding-left: 1.5rem;
+    font-size: 1.3rem;
+    color: #333333 !important;
+    line-height: 1.6;
+  }
+  .upload-requirements li {
+    margin-bottom: 0.6rem;
+    color: #333333 !important;
+  }
+  .upload-requirements strong {
+    color: #1a1a1a !important;
+    font-weight: 600;
+  }
+  .upload-questions {
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #d0d0d0;
+    font-size: 1.3rem;
+    color: #333333 !important;
+  }
+  .upload-questions p {
+    margin: 0 0 0.25rem 0;
+    color: #333333 !important;
+  }
+  .upload-questions a {
+    color: #b8922a;
+    font-weight: 600;
+  }
+  .upload-questions a:hover {
+    text-decoration: underline;
+    color: #a07f1f;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('custom-upload-form');
+  const fileInput = document.getElementById('file-upload');
+  const fileUploadZone = document.getElementById('file-upload-zone');
+  const uploadPlaceholder = document.getElementById('upload-placeholder');
+  const filePreview = document.getElementById('file-preview');
+  const previewImage = document.getElementById('preview-image');
+  const fileName = document.getElementById('file-name');
+  const fileSize = document.getElementById('file-size');
+  const removeFileBtn = document.getElementById('remove-file');
+  const uploadProgress = document.getElementById('upload-progress');
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+  const uploadError = document.getElementById('upload-error');
+  const continueToReview = document.getElementById('continue-to-review');
+  const submitBtn = document.getElementById('submit-btn');
+  const rightsCheckbox = document.getElementById('rights-checkbox');
+  const formSuccess = document.getElementById('form-success');
+  const imageDataInput = document.getElementById('image-data');
+
+  let uploadedFile = null;
+  let imageBase64 = null;
+
+  // Step navigation
+  const steps = document.querySelectorAll('.upload-step');
+  const formSteps = document.querySelectorAll('.form-step');
+  const nextBtns = document.querySelectorAll('.next-step-btn');
+  const prevBtns = document.querySelectorAll('.prev-step-btn');
+
+  function goToStep(stepNum) {
+    // Update step indicators
+    steps.forEach((step, index) => {
+      step.classList.remove('active', 'completed');
+      if (index + 1 < stepNum) {
+        step.classList.add('completed');
+      } else if (index + 1 === stepNum) {
+        step.classList.add('active');
+      }
+    });
+
+    // Update form steps
+    formSteps.forEach(step => {
+      step.classList.remove('active');
+      if (parseInt(step.dataset.step) === stepNum) {
+        step.classList.add('active');
+      }
+    });
+
+    // Update review section when going to step 3
+    if (stepNum === 3) {
+      updateReview();
+    }
+  }
+
+  function validateStep(stepNum) {
+    if (stepNum === 1) {
+      const orderNum = document.getElementById('order-number').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const product = document.getElementById('product').value;
+      return orderNum && email && product;
+    }
+    if (stepNum === 2) {
+      return uploadedFile !== null;
+    }
+    return true;
+  }
+
+  nextBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const currentStep = parseInt(this.closest('.form-step').dataset.step);
+      if (validateStep(currentStep)) {
+        goToStep(currentStep + 1);
+      } else {
+        // Show validation error
+        const inputs = this.closest('.form-step').querySelectorAll('input[required], select[required]');
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            input.style.borderColor = '#ef4444';
+            setTimeout(() => input.style.borderColor = '', 2000);
+          }
+        });
+      }
+    });
+  });
+
+  prevBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const prevStep = parseInt(this.dataset.prev);
+      goToStep(prevStep);
+    });
+  });
+
+  // File upload handling
+  function handleFile(file) {
+    // Validate file type
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+    if (!validTypes.includes(file.type)) {
+      showError('Please upload a PNG, JPG, or WEBP image.');
+      return;
+    }
+
+    // Validate file size (5MB max)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      showError('File size must be under 5MB. Please compress or resize your image.');
+      return;
+    }
+
+    uploadedFile = file;
+    hideError();
+
+    // Show progress
+    uploadPlaceholder.style.display = 'none';
+    filePreview.style.display = 'none';
+    uploadProgress.style.display = 'block';
+    fileInput.style.display = 'none';
+
+    // Simulate processing with progress
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 30;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        showPreview(file);
+      }
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress < 100 ? 'Processing...' : 'Complete!';
+    }, 200);
+  }
+
+  function showPreview(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imageBase64 = e.target.result;
+      imageDataInput.value = imageBase64;
+      previewImage.src = imageBase64;
+      fileName.textContent = file.name;
+      fileSize.textContent = formatFileSize(file.size);
+
+      uploadProgress.style.display = 'none';
+      filePreview.style.display = 'flex';
+      continueToReview.disabled = false;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function showError(message) {
+    uploadError.textContent = message;
+    uploadError.style.display = 'block';
+  }
+
+  function hideError() {
+    uploadError.style.display = 'none';
+  }
+
+  function resetUpload() {
+    uploadedFile = null;
+    imageBase64 = null;
+    imageDataInput.value = '';
+    fileInput.value = '';
+    fileInput.style.display = 'block';
+    uploadPlaceholder.style.display = 'flex';
+    filePreview.style.display = 'none';
+    uploadProgress.style.display = 'none';
+    progressFill.style.width = '0%';
+    continueToReview.disabled = true;
+    hideError();
+  }
+
+  // File input change
+  fileInput.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  // Drag and drop
+  fileUploadZone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.classList.add('dragover');
+  });
+
+  fileUploadZone.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    this.classList.remove('dragover');
+  });
+
+  fileUploadZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('dragover');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  // Remove file button
+  removeFileBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    resetUpload();
+  });
+
+  // Update review section
+  function updateReview() {
+    document.getElementById('review-order').textContent = document.getElementById('order-number').value;
+    document.getElementById('review-email').textContent = document.getElementById('email').value;
+    document.getElementById('review-product').textContent = document.getElementById('product').value;
+    document.getElementById('review-preview').src = imageBase64;
+  }
+
+  // Rights checkbox enables submit
+  rightsCheckbox.addEventListener('change', function() {
+    submitBtn.disabled = !this.checked;
+  });
+
+  // Form submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!rightsCheckbox.checked || !uploadedFile) return;
+
+    // Show loading state
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'flex';
+    submitBtn.disabled = true;
+
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('order_number', document.getElementById('order-number').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('product', document.getElementById('product').value);
+    formData.append('notes', document.getElementById('notes').value);
+    formData.append('rights_confirmed', 'Yes');
+    formData.append('image', uploadedFile);
+
+    // Submit to FormSubmit (free form backend with file support)
+    // Replace with your email address
+    fetch('https://formsubmit.co/ajax/{{ shop.email | default: "HunterBos@BosBusinessServices.org" }}', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Show success
+      formSteps.forEach(step => step.classList.remove('active'));
+      document.querySelector('.upload-steps').style.display = 'none';
+      formSuccess.style.display = 'block';
+      document.getElementById('success-email').textContent = document.getElementById('email').value;
+    })
+    .catch(error => {
+      // Fallback: submit via Shopify contact form without file
+      submitShopifyContact();
+    });
+  });
+
+  function submitShopifyContact() {
+    // Create a hidden form for Shopify contact submission
+    const shopifyForm = document.createElement('form');
+    shopifyForm.method = 'POST';
+    shopifyForm.action = '/contact#contact_form';
+
+    const fields = {
+      'form_type': 'contact',
+      'utf8': '✓',
+      'contact[email]': document.getElementById('email').value,
+      'contact[subject]': 'Custom Image Upload - Order ' + document.getElementById('order-number').value,
+      'contact[body]': `Order Number: ${document.getElementById('order-number').value}
+Product: ${document.getElementById('product').value}
+Notes: ${document.getElementById('notes').value || 'None'}
+Rights Confirmed: Yes
+
+[IMAGE ATTACHED VIA FOLLOW-UP EMAIL - Customer will reply with image]
+
+Please reply to this email with your image attached, or contact us if you need assistance.`
+    };
+
+    for (const [key, value] of Object.entries(fields)) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      shopifyForm.appendChild(input);
+    }
+
+    document.body.appendChild(shopifyForm);
+    shopifyForm.submit();
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Custom Upload Page",
+  "tag": "section",
+  "class": "section-page-custom-upload",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Upload Your Image"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Complete this form after placing your order to upload your photo or logo for engraving."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_requirements",
+      "label": "Show Requirements Sidebar",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

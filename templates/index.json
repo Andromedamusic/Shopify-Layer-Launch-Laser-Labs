@@ -1,0 +1,305 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "trust-bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "trust-1": {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "location",
+            "text": "Made in Michigan"
+          }
+        },
+        "trust-2": {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "shipping",
+            "text": "Free Shipping $75+"
+          }
+        },
+        "trust-3": {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "quality",
+            "text": "Premium Quality"
+          }
+        },
+        "trust-4": {
+          "type": "trust_item",
+          "settings": {
+            "icon_name": "custom",
+            "text": "Custom Engraving"
+          }
+        }
+      },
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3",
+        "trust-4"
+      ],
+      "settings": {
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      }
+    },
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 30,
+        "height": "large",
+        "subheading": "Premium Custom Engraving",
+        "heading": "Personalized Slate Coasters",
+        "description": "<p>Transform your photos, logos, and ideas into premium engraved products that last a lifetime.</p>",
+        "text_alignment": "center",
+        "button_label": "Shop Coasters",
+        "button_link": "/collections/slate-coasters",
+        "secondary_button_label": "View Design Library",
+        "secondary_button_link": "/pages/design-library"
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "slate-coasters",
+            "title": "Slate Coasters",
+            "description": "Premium natural slate with custom engraving",
+            "button_label": "Shop Coasters"
+          }
+        },
+        "collection-4": {
+          "type": "collection",
+          "settings": {
+            "collection": "photo-engraving",
+            "title": "Photo Engravings",
+            "description": "Transform your photos into stunning keepsakes",
+            "button_label": "Shop Photo"
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "golf-items",
+            "title": "Golf Ball Markers",
+            "description": "Personalized accessories for the course",
+            "button_label": "Shop Golf"
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "branding-gifts",
+            "title": "Custom & Corporate",
+            "description": "Business gifts and custom order solutions",
+            "button_label": "Shop Gifts"
+          }
+        }
+      },
+      "block_order": [
+        "collection-1",
+        "collection-4",
+        "collection-2",
+        "collection-3"
+      ],
+      "settings": {
+        "heading": "Shop Our Collections",
+        "subheading": "Premium engraved products for every occasion",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "why-different": {
+      "type": "why-different",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Natural Slate",
+            "description": "Real stone with natural texture and weight you can feel."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "title": "Precision Laser Engraving",
+            "description": "Crisp, high-contrast lines that capture every detail."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "title": "Made to Order",
+            "description": "Each piece is crafted specifically for you, not mass-produced."
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "title": "True Personalization",
+            "description": "Your photos, logos, names, and ideas brought to life."
+          }
+        },
+        "feature-5": {
+          "type": "feature",
+          "settings": {
+            "title": "Michigan Made",
+            "description": "Proudly designed and crafted in Michigan, shipped nationwide."
+          }
+        }
+      },
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5"
+      ],
+      "settings": {
+        "subheading": "The LayerLaunch Difference",
+        "heading": "Craftsmanship That Stands Apart",
+        "description": "<p>Every piece we create is made to order with precision laser engraving on premium materials—slate, wood, leather, metal, and more. The result is a keepsake that feels personal, permanent, and unmistakably different from mass-produced alternatives.</p>",
+        "background_color": "#ffffff",
+        "button_label": "Learn Our Process",
+        "button_link": "/pages/about"
+      }
+    },
+    "design-library-preview": {
+      "type": "design-library-preview",
+      "settings": {
+        "heading": "Browse Our Design Library",
+        "subheading": "Choose from our curated collection or request a custom design",
+        "background_color": "#ffffff",
+        "button_label": "View Full Design Library",
+        "library_link": "/pages/design-library"
+      }
+    },
+    "custom-upload-cta": {
+      "type": "custom-upload-cta",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "text": "Order your product"
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "text": "Upload your image"
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "text": "Approve the proof"
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "text": "Receive your creation"
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ],
+      "settings": {
+        "icon_type": "photo",
+        "heading": "Have a Photo or Logo to Engrave?",
+        "description": "<p>Transform your favorite memories, business logo, or custom artwork into a stunning engraved keepsake. Our photo engraving process captures incredible detail on natural slate.</p>",
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 70,
+        "button_label": "Upload Your Image",
+        "button_link": "/pages/custom-upload",
+        "note": "Accepted formats: PNG, JPG. We'll send a proof before production."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Beautiful coasters. Fast communication and shipping. Love them!",
+            "author": "Lynn",
+            "location": "Michigan",
+            "product": "Custom Coasters",
+            "source": "Facebook"
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Great seller, phenomenal communication and lightning fast shipping.",
+            "author": "Scott",
+            "location": "Michigan",
+            "source": "Facebook"
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Excellent quality!! Very professional and delivered the product. VERY pleased!",
+            "author": "Heidi",
+            "location": "Michigan",
+            "source": "Facebook"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ],
+      "settings": {
+        "heading": "What Our Customers Say",
+        "subheading": "5-star rated on Facebook Marketplace with 15+ reviews",
+        "background_color": "#f8f8f8",
+        "facebook_url": "https://www.facebook.com/marketplace/profile/100003393673828/"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join Our Community",
+        "description": "Subscribe for exclusive designs, early access to new products, and special offers.",
+        "placeholder": "Enter your email",
+        "button_label": "Subscribe",
+        "incentive": "Get 10% off your first order!",
+        "success_message": "Thanks for subscribing! Check your email for your discount code.",
+        "privacy_text": "We respect your privacy. Unsubscribe at any time.",
+        "background_color": "#f8f8f8"
+      }
+    }
+  },
+  "order": [
+    "trust-bar",
+    "hero",
+    "testimonials",
+    "featured-collections",
+    "why-different",
+    "design-library-preview",
+    "custom-upload-cta",
+    "newsletter"
+  ]
+}

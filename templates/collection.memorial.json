@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Memorial & Tribute",
+        "badge": "Honor Their Memory",
+        "subtitle": "Dignified Keepsakes Crafted with Care",
+        "description": "Thoughtful memorial pieces to honor and remember loved ones with dignity and grace. Each item is crafted with reverence and care, creating lasting tributes that keep precious memories close to your heart.",
+        "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "View Memorial Items",
+        "material_style": "default",
+        "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": false,
+        "show_value_banner": true,
+        "show_bulk_cta": false
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

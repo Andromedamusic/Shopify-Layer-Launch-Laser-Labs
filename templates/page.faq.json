@@ -1,0 +1,116 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "description": "Find answers to common questions about our products, personalization, shipping, and more."
+      },
+      "blocks": {
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "title": "Products & Personalization"
+          }
+        },
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you use for coasters?",
+            "answer": "Our coasters are made from premium natural slate, which provides a beautiful dark surface that creates high contrast with our laser engraving. Each piece has unique natural variations in texture and color, making every coaster one-of-a-kind."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the personalization process work?",
+            "answer": "For text engraving, simply enter your text during checkout. For photos and logos, place your order first, then visit our Custom Upload page to submit your image. We'll prepare a digital proof for your approval before production begins."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "What file formats do you accept for photo/logo engraving?",
+            "answer": "We accept PNG, JPG, PDF, AI, and SVG files. For best results, we recommend high-resolution images (300 DPI or higher) with good contrast. Vector formats (AI, SVG) work best for logos."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my photo engrave well?",
+            "answer": "Photos with good contrast (clear light and dark areas) engrave beautifully. Portraits, pets, landscapes, and simple graphics work especially well. We'll review your image and let you know if we have any concerns before production."
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping & Delivery"
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Standard orders ship within 5-7 business days after proof approval. Custom/photo orders may take an additional 1-2 days for proofing. We offer expedited shipping options at checkout for time-sensitive orders."
+          }
+        },
+        "faq-6": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "We currently ship throughout the United States and Canada. International shipping to other countries may be available for bulk orders - please contact us for a quote."
+          }
+        },
+        "faq-7": {
+          "type": "faq",
+          "settings": {
+            "question": "Is free shipping available?",
+            "answer": "Yes! We offer free standard shipping on all orders over $75 within the United States."
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "title": "Returns & Issues"
+          }
+        },
+        "faq-8": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "Due to the custom nature of our products, we cannot accept returns on personalized items unless there is a defect in materials or workmanship. If your order arrives damaged, please contact us within 48 hours with photos and we'll make it right."
+          }
+        },
+        "faq-9": {
+          "type": "faq",
+          "settings": {
+            "question": "What if there's a mistake on my order?",
+            "answer": "We carefully review all orders before production. If we made an error (wrong engraving, wrong item), we'll replace it at no charge. If the error was in the information you provided, we can produce a corrected item at a discounted rate."
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "title": "Bulk & Corporate Orders"
+          }
+        },
+        "faq-10": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer bulk pricing?",
+            "answer": "Yes! We offer volume discounts starting at 25+ pieces. For larger orders, custom packaging, or corporate accounts, please use our Request a Quote form for personalized pricing."
+          }
+        },
+        "faq-11": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you engrave our company logo?",
+            "answer": "Absolutely! Logo engraving is one of our specialties. Simply provide your logo file (vector format preferred) and we'll create stunning branded products for your business, team, or organization."
+          }
+        }
+      },
+      "block_order": ["category-1", "faq-1", "faq-2", "faq-3", "faq-4", "category-2", "faq-5", "faq-6", "faq-7", "category-3", "faq-8", "faq-9", "category-4", "faq-10", "faq-11"]
+    }
+  },
+  "order": ["main"]
+}

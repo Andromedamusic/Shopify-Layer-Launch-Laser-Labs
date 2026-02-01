@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-design-library",
+      "settings": {
+        "heading": "Design Library",
+        "description": "Browse our collection of ready-to-engrave designs. Select any design to request it on your product."
+      },
+      "blocks": {
+        "filter-all": {
+          "type": "filter",
+          "settings": {
+            "label": "All Designs",
+            "tag": "all"
+          }
+        },
+        "filter-michigan": {
+          "type": "filter",
+          "settings": {
+            "label": "Michigan",
+            "tag": "michigan"
+          }
+        },
+        "filter-golf": {
+          "type": "filter",
+          "settings": {
+            "label": "Golf",
+            "tag": "golf"
+          }
+        },
+        "filter-seasonal": {
+          "type": "filter",
+          "settings": {
+            "label": "Seasonal",
+            "tag": "seasonal"
+          }
+        },
+        "filter-nature": {
+          "type": "filter",
+          "settings": {
+            "label": "Nature",
+            "tag": "nature"
+          }
+        },
+        "filter-monogram": {
+          "type": "filter",
+          "settings": {
+            "label": "Monogram",
+            "tag": "monogram"
+          }
+        }
+      },
+      "block_order": ["filter-all", "filter-michigan", "filter-golf", "filter-seasonal", "filter-nature", "filter-monogram"]
+    }
+  },
+  "order": ["main"]
+}

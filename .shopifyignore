@@ -1,0 +1,39 @@
+# Shopify Ignore File
+# These files/directories are excluded from Shopify theme sync
+
+# Documentation files
+*.md
+README.md
+DESIGN_DIRECTION.md
+IMPLEMENTATION_GUIDE.md
+IMPORT_GUIDE.md
+SHOPIFY_ADMIN_SETUP.md
+
+# Data files (not part of Shopify theme)
+data/
+data/*
+
+# Git files
+.git/
+.gitignore
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node.js (if applicable)
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
