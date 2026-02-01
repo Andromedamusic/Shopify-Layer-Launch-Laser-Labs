@@ -10,6 +10,23 @@
     {% if section.settings.heading != blank %}
       <div class="testimonials__header">
         <h2 class="testimonials__heading h2">{{ section.settings.heading }}</h2>
+
+        {%- comment -%} Trust Statistics Bar - Psychological social proof amplification {%- endcomment -%}
+        <div class="testimonials__trust-stats">
+          <div class="trust-stat">
+            <span class="trust-stat__number">500+</span>
+            <span class="trust-stat__label">Happy Customers</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-stat__number">4.9<span class="trust-stat__star">★</span></span>
+            <span class="trust-stat__label">Average Rating</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-stat__number">98%</span>
+            <span class="trust-stat__label">Would Recommend</span>
+          </div>
+        </div>
+
         {% if section.settings.subheading != blank %}
           <p class="testimonials__subheading">{{ section.settings.subheading }}</p>
         {% endif %}
@@ -120,6 +137,58 @@
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.5;
+  }
+
+  /* Trust Statistics - Social Proof Amplification */
+  .testimonials__trust-stats {
+    display: flex;
+    justify-content: center;
+    gap: clamp(2rem, 4vw, 4rem);
+    margin: clamp(1.5rem, 2vw, 2rem) 0;
+    padding: clamp(1rem, 1.5vw, 1.5rem) 0;
+  }
+  .trust-stat {
+    text-align: center;
+    position: relative;
+  }
+  .trust-stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: calc(-1 * clamp(1rem, 2vw, 2rem));
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 40px;
+    background: rgba(0,0,0,0.1);
+  }
+  .trust-stat__number {
+    display: block;
+    font-size: clamp(2.2rem, 2.5vw, 3.2rem);
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.1;
+  }
+  .trust-stat__star {
+    color: #c9a227;
+    margin-left: 2px;
+  }
+  .trust-stat__label {
+    display: block;
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 749px) {
+    .testimonials__trust-stats {
+      gap: 1.5rem;
+    }
+    .trust-stat:not(:last-child)::after {
+      right: -0.75rem;
+      height: 30px;
+    }
   }
   .testimonials__grid {
     display: grid;

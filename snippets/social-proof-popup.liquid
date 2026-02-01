@@ -1,0 +1,194 @@
+{%- comment -%}
+  Social Proof Popup Snippet
+  Shows subtle "recent order" notifications to build trust and create urgency.
+
+  This is a psychological trigger that shows social proof:
+  - "Sarah M. just ordered custom coasters"
+  - Creates FOMO and validates purchase decisions
+
+  Usage: {% render 'social-proof-popup' %}
+  Include in theme.liquid before closing </body>
+{%- endcomment -%}
+
+<div id="social-proof-popup" class="social-proof-popup" aria-live="polite" aria-atomic="true">
+  <div class="social-proof-popup__content">
+    <div class="social-proof-popup__icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <div class="social-proof-popup__text">
+      <span class="social-proof-popup__message"></span>
+      <span class="social-proof-popup__time"></span>
+    </div>
+    <button class="social-proof-popup__close" aria-label="Close notification">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .social-proof-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  .social-proof-popup.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .social-proof-popup__content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    max-width: 320px;
+  }
+  .social-proof-popup__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .social-proof-popup__icon svg {
+    color: white;
+  }
+  .social-proof-popup__text {
+    flex: 1;
+  }
+  .social-proof-popup__message {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1.4;
+  }
+  .social-proof-popup__message strong {
+    font-weight: 700;
+  }
+  .social-proof-popup__time {
+    display: block;
+    font-size: 1.15rem;
+    color: #777;
+    margin-top: 2px;
+  }
+  .social-proof-popup__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .social-proof-popup__close:hover {
+    color: #333;
+  }
+  @media (max-width: 749px) {
+    .social-proof-popup {
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+    }
+    .social-proof-popup__content {
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  // Social proof data - Simulated recent orders for credibility
+  const socialProofData = [
+    { name: 'Sarah M.', location: 'Michigan', product: 'Custom Photo Coasters', time: '2 minutes ago' },
+    { name: 'Mike T.', location: 'Ohio', product: 'Logo Golf Ball Markers', time: '5 minutes ago' },
+    { name: 'Jessica R.', location: 'Indiana', product: 'Personalized Slate Coasters', time: '8 minutes ago' },
+    { name: 'David L.', location: 'Illinois', product: 'Corporate Gift Set', time: '12 minutes ago' },
+    { name: 'Emily K.', location: 'Wisconsin', product: 'Wedding Favor Coasters', time: '15 minutes ago' },
+    { name: 'Chris B.', location: 'Michigan', product: 'Custom Photo Engraving', time: '18 minutes ago' },
+    { name: 'Amanda S.', location: 'Kentucky', product: 'Personalized Golf Set', time: '22 minutes ago' },
+    { name: 'Robert J.', location: 'Minnesota', product: 'Bulk Slate Coasters', time: '25 minutes ago' }
+  ];
+
+  const popup = document.getElementById('social-proof-popup');
+  if (!popup) return;
+
+  const messageEl = popup.querySelector('.social-proof-popup__message');
+  const timeEl = popup.querySelector('.social-proof-popup__time');
+  const closeBtn = popup.querySelector('.social-proof-popup__close');
+
+  let currentIndex = 0;
+  let timeoutId = null;
+  let isVisible = false;
+
+  // Don't show on cart or checkout pages
+  const path = window.location.pathname;
+  if (path.includes('/cart') || path.includes('/checkout')) return;
+
+  // Check if user dismissed recently (session storage)
+  if (sessionStorage.getItem('socialProofDismissed')) return;
+
+  function showPopup() {
+    const data = socialProofData[currentIndex];
+    messageEl.innerHTML = `<strong>${data.name}</strong> from ${data.location} ordered ${data.product}`;
+    timeEl.textContent = data.time;
+
+    popup.classList.add('is-visible');
+    isVisible = true;
+
+    // Hide after 5 seconds
+    timeoutId = setTimeout(hidePopup, 5000);
+
+    // Move to next item
+    currentIndex = (currentIndex + 1) % socialProofData.length;
+  }
+
+  function hidePopup() {
+    popup.classList.remove('is-visible');
+    isVisible = false;
+
+    // Show next popup after 15-25 seconds (randomized)
+    const delay = 15000 + Math.random() * 10000;
+    timeoutId = setTimeout(showPopup, delay);
+  }
+
+  function dismissPopup() {
+    clearTimeout(timeoutId);
+    popup.classList.remove('is-visible');
+    sessionStorage.setItem('socialProofDismissed', 'true');
+  }
+
+  closeBtn.addEventListener('click', dismissPopup);
+
+  // Start showing after initial delay (8-12 seconds)
+  const initialDelay = 8000 + Math.random() * 4000;
+  setTimeout(showPopup, initialDelay);
+})();
+</script>

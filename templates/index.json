@@ -295,11 +295,11 @@
   "order": [
     "trust-bar",
     "hero",
+    "testimonials",
     "featured-collections",
     "why-different",
     "design-library-preview",
     "custom-upload-cta",
-    "testimonials",
     "newsletter"
   ]
 }

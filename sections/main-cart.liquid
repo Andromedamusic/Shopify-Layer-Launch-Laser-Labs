@@ -61,17 +61,52 @@
       </div>
 
       <div class="cart-footer">
+        {%- comment -%} Trust/Reassurance Section - Reduces cart abandonment {%- endcomment -%}
+        <div class="cart-reassurance">
+          <div class="cart-reassurance__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Free design proof within 24-48 hours</span>
+          </div>
+          <div class="cart-reassurance__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            <span>Free shipping on orders over $75</span>
+          </div>
+          <div class="cart-reassurance__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Michigan-made quality guarantee</span>
+          </div>
+        </div>
+
         <div class="cart-footer__totals">
           <div class="cart-footer__subtotal">
             <span>Subtotal</span>
             <span>{{ cart.total_price | money }}</span>
           </div>
-          <p class="cart-footer__note">Shipping and taxes calculated at checkout.</p>
+          <p class="cart-footer__note">
+            <strong>What happens next:</strong> Shipping calculated at checkout.
+            You'll receive your design proof via email within 24-48 hours.
+          </p>
         </div>
 
         <div class="cart-footer__actions">
           <button type="submit" name="update" class="button button--secondary">Update Cart</button>
-          <button type="submit" name="checkout" class="button button--primary">Checkout</button>
+          <button type="submit" name="checkout" class="button button--primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Secure Checkout
+          </button>
         </div>
       </div>
     </form>
@@ -162,6 +197,45 @@
   .cart-footer {
     margin-top: 2rem;
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Cart Reassurance Section - Trust Building */
+  .cart-reassurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+  }
+  .cart-reassurance__item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    color: #2d3436;
+    flex: 1 1 auto;
+    min-width: 200px;
+  }
+  .cart-reassurance__item svg {
+    color: #27ae60;
+    flex-shrink: 0;
+  }
+  @media (max-width: 749px) {
+    .cart-reassurance {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cart-reassurance__item {
+      min-width: 100%;
+    }
+  }
+
+  .cart-footer__row {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -178,13 +252,32 @@
 
   .cart-footer__note {
     font-size: 1.4rem;
-    color: rgba(0,0,0,0.5);
-    margin: 0.5rem 0 0;
+    color: #555;
+    margin: 0.75rem 0 0;
+    line-height: 1.5;
+  }
+  .cart-footer__note strong {
+    color: #1a1a1a;
   }
 
   .cart-footer__actions {
     display: flex;
     gap: 1rem;
+    justify-content: flex-end;
+  }
+  .cart-footer__actions .button--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
+  .cart-footer__actions .button--primary:hover {
+    background: linear-gradient(135deg, #219a52 0%, #27ae60 100%);
+  }
+  .cart-footer__actions .button--primary svg {
+    stroke: white;
   }
 
   .cart-empty {

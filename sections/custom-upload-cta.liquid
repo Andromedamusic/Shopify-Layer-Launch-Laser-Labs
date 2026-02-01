@@ -49,6 +49,15 @@
         </a>
       {% endif %}
 
+      {%- comment -%} Urgency trigger - proof timeline {%- endcomment -%}
+      <div class="custom-upload-cta__urgency">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span><strong>Order by 2pm</strong> for your proof by tomorrow</span>
+      </div>
+
       {% if section.settings.note != blank %}
         <p class="custom-upload-cta__note">{{ section.settings.note }}</p>
       {% endif %}
@@ -169,8 +178,31 @@
     box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
     background: linear-gradient(135deg, #d4b340 0%, #c9a227 100%);
   }
+  .custom-upload-cta__urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: clamp(1.25rem, 1.5vw, 1.75rem);
+    padding: 0.6rem 1.2rem;
+    background: rgba(201, 162, 39, 0.2);
+    border: 1px solid rgba(201, 162, 39, 0.4);
+    border-radius: 50px;
+    font-size: clamp(1.25rem, 1vw, 1.45rem);
+    color: #f0d76c;
+  }
+  .custom-upload-cta__urgency svg {
+    color: #c9a227;
+    animation: pulse-clock 2s ease-in-out infinite;
+  }
+  .custom-upload-cta__urgency strong {
+    color: #c9a227;
+  }
+  @keyframes pulse-clock {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
   .custom-upload-cta__note {
-    margin-top: clamp(1.5rem, 2vw, 2rem);
+    margin-top: clamp(1rem, 1.5vw, 1.5rem);
     font-size: clamp(1.2rem, 1vw, 1.4rem);
     opacity: 0.7;
   }
