@@ -110,15 +110,24 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 1rem;
   line-height: 1.2;
+  color: #1a1a1a;
 }
 
 p {
   margin: 0 0 1rem;
+  color: #1a1a1a;
 }
 
 a {
-  color: inherit;
+  color: #1a1a1a;
   text-decoration: none;
+}
+
+/* Ensure links on dark backgrounds are visible */
+.dark-bg a,
+[style*="background-color: #1a1a1a"] a,
+[style*="background: #1a1a1a"] a {
+  color: #ffffff;
 }
 
 a:hover {
@@ -231,6 +240,34 @@ textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   transition: border-color 0.2s;
+  color: #1a1a1a;
+  background-color: #ffffff;
+}
+
+/* Placeholder styles - WCAG AA compliant (#767676 = 4.5:1 on white) */
+::placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+::-ms-input-placeholder {
+  color: #767676;
+  opacity: 1;
 }
 
 input:focus,

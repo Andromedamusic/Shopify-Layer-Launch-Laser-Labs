@@ -89,11 +89,13 @@
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: background 0.2s, transform 0.2s;
+    color: #1a1a1a;
   }
 
   .quick-view-modal__close:hover {
     background: #f5f5f5;
     transform: scale(1.05);
+    color: #1a1a1a;
   }
 
   .quick-view-modal__body {
@@ -175,17 +177,20 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
+    background: white;
+    color: #1a1a1a;
   }
 
   .quick-view-product__title {
     font-size: 2.2rem;
     margin: 0 0 0.5rem;
     padding-right: 40px;
+    color: #1a1a1a;
   }
 
   .quick-view-product__vendor {
     font-size: 1.4rem;
-    color: #666;
+    color: #595959;
     margin-bottom: 1rem;
   }
 
@@ -193,11 +198,12 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    color: #1a1a1a;
   }
 
   .quick-view-product__price-compare {
     font-size: 1.5rem;
-    color: #999;
+    color: #6b6b6b;
     text-decoration: line-through;
     margin-right: 0.5rem;
     font-weight: 400;
@@ -205,7 +211,7 @@
 
   .quick-view-product__description {
     font-size: 1.5rem;
-    color: #666;
+    color: #595959;
     line-height: 1.6;
     margin-bottom: 1.5rem;
     max-height: 100px;
@@ -225,6 +231,7 @@
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: #1a1a1a;
   }
 
   .quick-view-product__variant-select {
@@ -233,6 +240,8 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1.5rem;
+    background: white;
+    color: #1a1a1a;
   }
 
   .quick-view-product__quantity {
@@ -245,6 +254,7 @@
   .quick-view-product__qty-label {
     font-size: 1.4rem;
     font-weight: 600;
+    color: #1a1a1a;
   }
 
   .quick-view-product__qty-wrapper {
@@ -264,10 +274,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #1a1a1a;
   }
 
   .quick-view-product__qty-btn:hover {
-    background: #eee;
+    background: #e0e0e0;
+    color: #1a1a1a;
   }
 
   .quick-view-product__qty-input {
@@ -277,6 +289,8 @@
     text-align: center;
     font-size: 1.5rem;
     -moz-appearance: textfield;
+    background: white;
+    color: #1a1a1a;
   }
 
   .quick-view-product__qty-input::-webkit-outer-spin-button,
@@ -294,7 +308,7 @@
     display: block;
     text-align: center;
     font-size: 1.4rem;
-    color: #666;
+    color: #595959;
   }
 
   .quick-view-product__view-full:hover {
@@ -315,9 +329,10 @@
     font-weight: 600;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.2s, transform 0.2s, background 0.2s, color 0.2s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     white-space: nowrap;
+    color: #1a1a1a;
   }
 
   .product-card:hover .quick-view-btn {
@@ -360,8 +375,8 @@
     } catch (error) {
       console.error('Error loading quick view:', error);
       body.innerHTML = `
-        <div style="padding: 40px; text-align: center;">
-          <p>Sorry, we couldn't load this product.</p>
+        <div style="padding: 40px; text-align: center; background: white; color: #1a1a1a;">
+          <p style="color: #1a1a1a; margin-bottom: 1rem;">Sorry, we couldn't load this product.</p>
           <a href="/products/${productHandle}" class="button button--primary">View Product</a>
         </div>
       `;
