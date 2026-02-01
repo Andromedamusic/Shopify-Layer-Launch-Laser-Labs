@@ -105,7 +105,7 @@
 
         {%- comment -%} Contact Link {%- endcomment -%}
         <li class="header__menu-item">
-          <a href="/pages/contact" class="header__menu-link {% if request.path contains '/contact' %}header__menu-link--active{% endif %}">
+          <a href="/pages/contact" class="header__menu-link {% if request.path == '/pages/contact' %}header__menu-link--active{% endif %}">
             Contact
           </a>
         </li>
