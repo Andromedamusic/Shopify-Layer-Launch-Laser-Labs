@@ -5,9 +5,17 @@
       "settings": {
         "title": "Metal Engraving",
         "badge": "Built to Last",
-        "description": "Durable metal items with permanent laser marking. From dog tags to plaques, precision engraving on stainless steel, aluminum, and more.",
+        "subtitle": "Permanent Precision Marking",
+        "description": "Durable stainless steel, aluminum, and brass items with permanent laser marking that will never fade, peel, or wear away. From dog tags to industrial plaques, built for a lifetime of use.",
         "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "Shop Metal",
+        "material_style": "metal",
         "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
         "overlay_opacity": 50
       }
     },

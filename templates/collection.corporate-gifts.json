@@ -5,9 +5,17 @@
       "settings": {
         "title": "Corporate & Business Gifts",
         "badge": "Professional Quality",
-        "description": "Impressive custom gifts for clients, employees, and partners. Logo engraving, branded merchandise, and premium corporate items.",
+        "subtitle": "Impress Clients & Reward Teams",
+        "description": "Make lasting impressions with premium branded merchandise and recognition awards. Custom logo engraving, executive gifts, and employee recognition items that reflect your company's commitment to quality.",
         "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "Request Quote",
+        "material_style": "default",
         "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
         "overlay_opacity": 50
       }
     },
@@ -15,7 +23,7 @@
       "type": "collection-main",
       "settings": {
         "show_vendor": false,
-        "show_urgency_banner": true,
+        "show_urgency_banner": false,
         "show_value_banner": true,
         "show_bulk_cta": true
       }

@@ -3,11 +3,19 @@
     "hero": {
       "type": "collection-hero",
       "settings": {
-        "title": "On Sale",
+        "title": "Special Offers",
         "badge": "Limited Time Savings",
-        "description": "Premium quality at special prices. Same exceptional craftsmanship, exceptional value. Grab these deals before they're gone!",
+        "subtitle": "Premium Quality, Exceptional Value",
+        "description": "Same exceptional craftsmanship at special prices. These aren't seconds or clearance items—they're our premium products offered at limited-time savings. Quality you can trust, value you'll appreciate.",
         "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "Shop Savings",
+        "material_style": "default",
         "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
         "overlay_opacity": 50
       }
     },

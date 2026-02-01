@@ -5,9 +5,17 @@
       "settings": {
         "title": "Wedding & Anniversary Gifts",
         "badge": "Celebrate Love",
-        "description": "Timeless engraved keepsakes for weddings, anniversaries, and special moments. Personalized gifts that couples will treasure forever.",
+        "subtitle": "Heirloom-Quality Keepsakes",
+        "description": "Create memories that last a lifetime with heirloom-quality engraved keepsakes. From custom cutting boards to personalized champagne flutes, each piece tells your unique love story and becomes a cherished family treasure.",
         "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "Create Your Memory",
+        "material_style": "default",
         "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
         "overlay_opacity": 50
       }
     },

@@ -5,9 +5,17 @@
       "settings": {
         "title": "Leather Goods",
         "badge": "Classic Craftsmanship",
-        "description": "Genuine leather items with detailed laser engraving. Wallets, keychains, and accessories that combine durability with personalized style.",
+        "subtitle": "Timeless Elegance, Personal Touch",
+        "description": "Genuine full-grain leather items with detailed laser engraving that creates a distinguished, branded appearance. Wallets, keychains, and accessories that develop rich patina over time and last for generations.",
         "show_product_count": true,
+        "show_trust_signals": true,
+        "production_time": "3-5 Day Production",
+        "cta_text": "Shop Leather",
+        "material_style": "leather",
         "background_color": "#1a1a1a",
+        "accent_color": "#c9a227",
+        "enable_animations": true,
+        "hero_style": "standard",
         "overlay_opacity": 50
       }
     },
