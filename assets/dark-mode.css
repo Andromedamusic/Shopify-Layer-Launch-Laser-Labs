@@ -300,26 +300,44 @@
     border-color: var(--color-text);
   }
 
-  /* Footer */
+  /* Footer - Keep light theme for contrast */
   .footer {
-    background: var(--color-background-secondary);
-    border-top-color: var(--color-border);
+    background: #f8f8f8 !important;
+    border-top-color: #c5c5c5;
   }
 
-  .footer__title,
-  .footer__link,
-  .footer__social-link {
-    color: var(--color-text);
+  .footer__logo-text {
+    color: #1a1a1a !important;
   }
 
-  .footer__link:hover,
-  .footer__social-link:hover {
-    color: var(--color-accent);
+  .footer__tagline {
+    color: #444 !important;
+  }
+
+  .footer__menu-heading {
+    color: #1a1a1a !important;
+  }
+
+  .footer__menu-link,
+  .footer__contact-item a {
+    color: #3a3a3a !important;
+  }
+
+  .footer__menu-link:hover,
+  .footer__contact-item a:hover {
+    color: #1a1a1a !important;
+  }
+
+  .footer__contact-item {
+    color: #3a3a3a !important;
   }
 
   .footer__bottom {
-    border-top-color: var(--color-border);
-    color: var(--color-text-secondary);
+    border-top-color: #c5c5c5;
+  }
+
+  .footer__copyright {
+    color: #4a4a4a !important;
   }
 
   /* Cart Drawer */
