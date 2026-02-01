@@ -48,15 +48,15 @@
         "trust-4"
       ],
       "settings": {
-        "background_color": "#f8f8f8",
-        "text_color": "#333333"
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
       }
     },
     "hero": {
       "type": "hero-banner",
       "settings": {
         "background_color": "#1a1a1a",
-        "overlay_opacity": 15,
+        "overlay_opacity": 30,
         "height": "large",
         "subheading": "Premium Custom Engraving",
         "heading": "Personalized Slate Coasters",
