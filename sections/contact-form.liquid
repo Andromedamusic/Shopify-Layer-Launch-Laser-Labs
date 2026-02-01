@@ -1,0 +1,513 @@
+{%- comment -%}
+  Contact Form Section
+  A reusable contact form that can be added to any page.
+{%- endcomment -%}
+
+<div class="contact-form-section" style="background-color: {{ section.settings.background_color }};">
+  <div class="contact-form-section__inner page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="contact-form-section__header">
+        <h2 class="contact-form-section__title {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="contact-form-section__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="contact-form-section__form-wrapper">
+      {% form 'contact', class: 'contact-form' %}
+        {%- if form.posted_successfully? -%}
+          <div class="contact-form__success" role="status" aria-live="polite">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <p>{{ section.settings.success_message | default: 'Thank you for your message! We will get back to you shortly.' }}</p>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="contact-form__error" role="alert">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <p>{{ form.errors | default_errors }}</p>
+            </div>
+          {%- endif -%}
+
+          <div class="contact-form__fields">
+            {%- if section.settings.show_name_field -%}
+              <div class="contact-form__field contact-form__field--half">
+                <label for="ContactForm-name-{{ section.id }}">
+                  {{ 'contact.form.name' | t | default: 'Name' }}
+                  {%- if section.settings.name_required -%}<span class="contact-form__required" aria-hidden="true">*</span>{%- endif -%}
+                </label>
+                <input
+                  type="text"
+                  id="ContactForm-name-{{ section.id }}"
+                  name="contact[{{ 'contact.form.name' | t | default: 'Name' }}]"
+                  autocomplete="name"
+                  placeholder="{{ section.settings.name_placeholder | default: 'Your name' }}"
+                  {%- if section.settings.name_required -%}required{%- endif -%}
+                >
+              </div>
+            {%- endif -%}
+
+            <div class="contact-form__field {% if section.settings.show_name_field %}contact-form__field--half{% endif %}">
+              <label for="ContactForm-email-{{ section.id }}">
+                {{ 'contact.form.email' | t | default: 'Email' }}
+                <span class="contact-form__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="email"
+                id="ContactForm-email-{{ section.id }}"
+                name="contact[email]"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="{{ section.settings.email_placeholder | default: 'your@email.com' }}"
+                required
+              >
+            </div>
+
+            {%- if section.settings.show_phone_field -%}
+              <div class="contact-form__field contact-form__field--half">
+                <label for="ContactForm-phone-{{ section.id }}">
+                  {{ 'contact.form.phone' | t | default: 'Phone' }}
+                  {%- if section.settings.phone_required -%}<span class="contact-form__required" aria-hidden="true">*</span>{%- endif -%}
+                </label>
+                <input
+                  type="tel"
+                  id="ContactForm-phone-{{ section.id }}"
+                  name="contact[{{ 'contact.form.phone' | t | default: 'Phone' }}]"
+                  autocomplete="tel"
+                  placeholder="{{ section.settings.phone_placeholder | default: '(555) 123-4567' }}"
+                  {%- if section.settings.phone_required -%}required{%- endif -%}
+                >
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_subject_field -%}
+              <div class="contact-form__field {% if section.settings.show_phone_field %}contact-form__field--half{% endif %}">
+                <label for="ContactForm-subject-{{ section.id }}">
+                  {{ 'contact.form.subject' | t | default: 'Subject' }}
+                  {%- if section.settings.subject_required -%}<span class="contact-form__required" aria-hidden="true">*</span>{%- endif -%}
+                </label>
+                {%- if section.settings.subject_options != blank -%}
+                  <select
+                    id="ContactForm-subject-{{ section.id }}"
+                    name="contact[{{ 'contact.form.subject' | t | default: 'Subject' }}]"
+                    {%- if section.settings.subject_required -%}required{%- endif -%}
+                  >
+                    <option value="">{{ section.settings.subject_placeholder | default: 'Select a topic...' }}</option>
+                    {%- assign subject_options = section.settings.subject_options | split: ',' -%}
+                    {%- for option in subject_options -%}
+                      <option value="{{ option | strip }}">{{ option | strip }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- else -%}
+                  <input
+                    type="text"
+                    id="ContactForm-subject-{{ section.id }}"
+                    name="contact[{{ 'contact.form.subject' | t | default: 'Subject' }}]"
+                    placeholder="{{ section.settings.subject_placeholder | default: 'How can we help?' }}"
+                    {%- if section.settings.subject_required -%}required{%- endif -%}
+                  >
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <div class="contact-form__field contact-form__field--full">
+              <label for="ContactForm-body-{{ section.id }}">
+                {{ 'contact.form.message' | t | default: 'Message' }}
+                <span class="contact-form__required" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="ContactForm-body-{{ section.id }}"
+                name="contact[{{ 'contact.form.message' | t | default: 'Message' }}]"
+                rows="6"
+                placeholder="{{ section.settings.message_placeholder | default: 'Tell us about your project or question...' }}"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="contact-form__submit-wrapper">
+            <button type="submit" class="button button--primary contact-form__submit">
+              {{ section.settings.submit_button_text | default: 'Send Message' }}
+            </button>
+          </div>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .contact-form-section {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .contact-form-section__inner {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .contact-form-section__header {
+    text-align: {{ section.settings.text_alignment }};
+    margin-bottom: 3rem;
+  }
+
+  .contact-form-section__title {
+    margin-bottom: 0.75rem;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .contact-form-section__subheading {
+    font-size: 1.8rem;
+    color: {{ section.settings.text_color }};
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-form-section .contact-form__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 749px) {
+    .contact-form-section .contact-form__fields {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-form-section .contact-form__field--half {
+    grid-column: span 1;
+  }
+
+  .contact-form-section .contact-form__field--full {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 749px) {
+    .contact-form-section .contact-form__field--full {
+      grid-column: span 1;
+    }
+  }
+
+  .contact-form-section .contact-form__field label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: {{ section.settings.text_color }};
+  }
+
+  .contact-form-section .contact-form__required {
+    color: #c62828;
+    margin-left: 0.25rem;
+  }
+
+  .contact-form-section .contact-form__field input,
+  .contact-form-section .contact-form__field select,
+  .contact-form-section .contact-form__field textarea {
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    border: 2px solid {{ section.settings.border_color | default: '#d0d0d0' }};
+    border-radius: 8px;
+    font-size: 1.6rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #ffffff;
+    color: {{ section.settings.text_color }};
+  }
+
+  .contact-form-section .contact-form__field input:focus,
+  .contact-form-section .contact-form__field select:focus,
+  .contact-form-section .contact-form__field textarea:focus {
+    outline: none;
+    border-color: {{ section.settings.focus_color | default: '#1a1a1a' }};
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+  }
+
+  .contact-form-section .contact-form__field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .contact-form-section .contact-form__submit-wrapper {
+    margin-top: 2rem;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  .contact-form-section .contact-form__submit {
+    min-width: 200px;
+    padding: 1.4rem 2.5rem;
+    font-size: 1.6rem;
+  }
+
+  .contact-form-section .contact-form__success {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: #2e7d32;
+  }
+
+  .contact-form-section .contact-form__success svg {
+    margin-bottom: 1rem;
+    color: #2e7d32;
+  }
+
+  .contact-form-section .contact-form__success p {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  .contact-form-section .contact-form__error {
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #c62828;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .contact-form-section .contact-form__error p {
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "tag": "section",
+  "class": "section-contact-form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Have a question? We'd love to hear from you."
+    },
+    {
+      "type": "header",
+      "content": "Form Fields"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_name_field",
+      "label": "Show name field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "name_required",
+      "label": "Name required",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "your@email.com"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone_field",
+      "label": "Show phone field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "phone_required",
+      "label": "Phone required",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone placeholder",
+      "default": "(555) 123-4567"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subject_field",
+      "label": "Show subject field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "subject_required",
+      "label": "Subject required",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "subject_placeholder",
+      "label": "Subject placeholder",
+      "default": "Select a topic..."
+    },
+    {
+      "type": "text",
+      "id": "subject_options",
+      "label": "Subject dropdown options",
+      "info": "Comma-separated list. Leave blank for text input.",
+      "default": "General Inquiry, Custom Order, Bulk Order, Order Status, Returns, Other"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Message placeholder",
+      "default": "Tell us about your project or question..."
+    },
+    {
+      "type": "header",
+      "content": "Submit Button"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit button text",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for your message! We will get back to you shortly."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Input border color",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "color",
+      "id": "focus_color",
+      "label": "Input focus color",
+      "default": "#1a1a1a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form",
+      "settings": {
+        "heading": "Contact Us",
+        "subheading": "Have a question? We'd love to hear from you.",
+        "show_name_field": true,
+        "name_required": true,
+        "show_phone_field": true,
+        "phone_required": false,
+        "show_subject_field": true,
+        "subject_required": false
+      }
+    }
+  ],
+  "templates": ["page", "index", "article", "blog", "collection", "product"]
+}
+{% endschema %}
