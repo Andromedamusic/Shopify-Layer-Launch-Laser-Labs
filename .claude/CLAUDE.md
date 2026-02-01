@@ -53,7 +53,7 @@ These handles are used in navigation and must match your Shopify Admin collectio
 - `acrylic-products` → templates/collection.acrylic-products.json
 - `glass-etching` → templates/collection.glass-etching.json
 - `wedding-events` → templates/collection.wedding-events.json (for "Wedding & Events")
-- `corporate-gift-sets` → templates/collection.corporate-gift-sets.json (for "Corporate Gift Sets")
+- `corporate-gifts` → templates/collection.corporate-gifts.json (for "Corporate Gift Sets")
 - `pet-lovers` → templates/collection.pet-lovers.json (for "Pet Lovers")
 - `golf` → templates/collection.golf.json
 - `slate-coasters` → templates/collection.slate-coasters.json
