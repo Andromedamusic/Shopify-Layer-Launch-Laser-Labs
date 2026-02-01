@@ -42,24 +42,19 @@ Rating: 5 stars (15+ reviews)
 
 ### Collection 404 Errors (Resolved Pattern)
 **Problem**: Collections work in Shopify Admin preview but return 404 on live site.
-**Root Cause**: Theme has collection templates (templates/collection.{handle}.json) but the actual collections don't exist in Shopify Admin with matching handles.
+**Root Cause**: Theme templates and navigation links must use handles that match the actual Shopify collection handles (auto-generated from collection title).
 **Solution**:
-1. In Shopify Admin, go to Products > Collections
-2. Create collections with EXACT handles matching the template names:
-   - `acrylic` (not "acrylic-products")
-   - `glass` (not "glass-etching")
-   - `wedding-gifts` (not "wedding" or "weddings")
-   - `corporate-gifts` (not "corporate" or "business")
-   - `pet-products` (not "pets" or "pet-gifts")
-3. Ensure the collection handle in Shopify matches the template filename exactly
+1. Template filenames and navigation URLs have been updated to match Shopify's auto-generated handles
+2. When creating a collection named "Glass Etching", Shopify creates handle `glass-etching`
+3. Theme templates are now named to match these auto-generated handles
 
 ### Required Collection Handles for Theme Templates
-These handles MUST exist in Shopify Admin for pages to work:
-- `acrylic` → templates/collection.acrylic.json
-- `glass` → templates/collection.glass.json
-- `wedding-gifts` → templates/collection.wedding-gifts.json
-- `corporate-gifts` → templates/collection.corporate-gifts.json
-- `pet-products` → templates/collection.pet-products.json
+These handles are used in navigation and must match your Shopify Admin collections:
+- `acrylic-products` → templates/collection.acrylic-products.json
+- `glass-etching` → templates/collection.glass-etching.json
+- `wedding-events` → templates/collection.wedding-events.json (for "Wedding & Events")
+- `corporate-gift-sets` → templates/collection.corporate-gift-sets.json (for "Corporate Gift Sets")
+- `pet-lovers` → templates/collection.pet-lovers.json (for "Pet Lovers")
 - `golf` → templates/collection.golf.json
 - `slate-coasters` → templates/collection.slate-coasters.json
 - `wood-products` → templates/collection.wood-products.json
