@@ -203,15 +203,12 @@
   }
   .custom-upload-cta__urgency svg {
     color: #c9a227;
-    animation: pulse-clock 2s ease-in-out infinite;
+    animation: pulseClock 2s ease-in-out infinite;
   }
   .custom-upload-cta__urgency strong {
     color: #c9a227;
   }
-  @keyframes pulse-clock {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
+  /* pulseClock animation defined in animations.css */
   .custom-upload-cta__note {
     margin-top: clamp(1rem, 1.5vw, 1.5rem);
     font-size: clamp(1.2rem, 1vw, 1.4rem);

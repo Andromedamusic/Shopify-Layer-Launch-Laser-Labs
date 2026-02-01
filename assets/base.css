@@ -628,26 +628,14 @@ img {
   animation: shimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
+/* Shimmer animation defined in animations.css */
 
 /* Smooth Page Transitions */
 .page-transition-fade {
   animation: pageTransitionFade 0.3s ease-out;
 }
 
-@keyframes pageTransitionFade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* pageTransitionFade animation defined in animations.css */
 
 /* Premium Hover Effects */
 .hover-lift {
@@ -749,10 +737,7 @@ img {
   animation: focusRingPulse 1.5s ease-out infinite;
 }
 
-@keyframes focusRingPulse {
-  0%, 100% { box-shadow: 0 0 0 2px var(--color-brand-light), 0 0 0 4px var(--color-brand-gold); }
-  50% { box-shadow: 0 0 0 3px var(--color-brand-light), 0 0 0 6px rgba(201, 162, 39, 0.5); }
-}
+/* focusRingPulse animation defined in animations.css */
 
 /* Smooth Image Reveal */
 .image-reveal {
@@ -773,10 +758,7 @@ img {
   animation: highlightSweep 3s ease-in-out infinite;
 }
 
-@keyframes highlightSweep {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+/* highlightSweep animation defined in animations.css */
 
 /* Link Underline Grow */
 .link-underline-grow {
@@ -806,12 +788,7 @@ img {
   animation: iconBounce 0.4s ease;
 }
 
-@keyframes iconBounce {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(-4px); }
-  50% { transform: translateY(0); }
-  75% { transform: translateY(-2px); }
-}
+/* iconBounce animation defined in animations.css */
 
 /* Premium Input Focus Glow */
 .input-premium:focus {
@@ -859,10 +836,7 @@ img {
   animation: badgePulse 2s ease-in-out infinite;
 }
 
-@keyframes badgePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+/* badgePulse animation defined in animations.css */
 
 /* Subtle Gradient Text */
 .gradient-text-gold {

@@ -1,7 +1,8 @@
 /* Featured Collections Section Styles */
 
 .featured-collections {
-  padding: 60px 0;
+  /* Using fluid section padding from design system */
+  padding: var(--section-padding-y, clamp(50px, 8vw, 120px)) 0;
   /* Brand standard light background for consistency */
   background: #f8f8f8;
 }
@@ -25,7 +26,8 @@
 
 .featured-collections__grid {
   display: grid;
-  gap: 2rem;
+  /* Using fluid gap from design system */
+  gap: var(--gap-md, clamp(1rem, 1.5vw, 2.5rem));
 }
 
 .featured-collections__grid--1 {
@@ -94,7 +96,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  /* Using standardized animation timing from animations.css */
+  transition: transform var(--animation-duration-slow, 400ms) var(--animation-easing-premium, cubic-bezier(0.25, 0.46, 0.45, 0.94));
 }
 
 .featured-collections__link:hover .featured-collections__image {
@@ -107,7 +110,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+  /* Using standardized overlay-card values from animations.css */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, var(--overlay-card-start, 0.85)) 0%,
+    rgba(0, 0, 0, var(--overlay-card-mid, 0.3)) 40%,
+    rgba(0, 0, 0, var(--overlay-card-end, 0)) 70%
+  );
   pointer-events: none;
 }
 
@@ -133,7 +142,13 @@
   right: 0;
   padding: 2rem;
   color: #ffffff !important;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
+  /* Using standardized overlay-strong values from animations.css */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, var(--overlay-near-full, 0.9)) 0%,
+    rgba(0, 0, 0, var(--overlay-muted, 0.6)) 60%,
+    transparent 100%
+  );
   z-index: 2;
 }
 
@@ -161,7 +176,9 @@
   font-weight: 600;
   color: #ffffff !important;
   text-decoration: none;
-  transition: gap 0.2s, color 0.2s;
+  /* Using standardized fast animation timing */
+  transition: gap var(--animation-duration-fast, 200ms) ease,
+              color var(--animation-duration-fast, 200ms) ease;
   padding: 0.5rem 0;
 }
 
