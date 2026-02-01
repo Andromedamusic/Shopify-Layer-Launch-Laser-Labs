@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Sports & Awards",
+        "badge": "Celebrate Champions",
+        "description": "Custom trophies, plaques, and recognition awards. Perfect for leagues, tournaments, and celebrating athletic achievement.",
+        "show_product_count": true,
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

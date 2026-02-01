@@ -1,0 +1,200 @@
+{%- comment -%}
+  Collection Hero Section
+  Displays a customizable hero banner for collection pages
+{%- endcomment -%}
+
+<div class="collection-hero" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.image != blank %}
+    <div class="collection-hero__image-wrapper">
+      {{ section.settings.image | image_url: width: 1920 | image_tag:
+        loading: 'eager',
+        class: 'collection-hero__image',
+        alt: collection.title
+      }}
+      <div class="collection-hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+  {% endif %}
+
+  <div class="collection-hero__content page-width">
+    <div class="collection-hero__text">
+      {% if section.settings.badge != blank %}
+        <span class="collection-hero__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+
+      <h1 class="collection-hero__title">
+        {{ section.settings.title | default: collection.title }}
+      </h1>
+
+      {% if section.settings.description != blank %}
+        <p class="collection-hero__description">{{ section.settings.description }}</p>
+      {% elsif collection.description != blank %}
+        <p class="collection-hero__description">{{ collection.description | strip_html | truncate: 200 }}</p>
+      {% endif %}
+
+      {% if section.settings.show_product_count %}
+        <div class="collection-hero__count">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .collection-hero {
+    position: relative;
+    min-height: clamp(200px, 35vh, 400px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  }
+
+  .collection-hero__image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .collection-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collection-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+  }
+
+  .collection-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: clamp(40px, 6vw, 80px) 20px;
+    width: 100%;
+  }
+
+  .collection-hero__text {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .collection-hero__badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #c9a227;
+    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .collection-hero__title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+    line-height: 1.15;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .collection-hero__description {
+    font-size: clamp(1.4rem, 1.5vw, 1.8rem);
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .collection-hero__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    color: #c9a227;
+    font-weight: 500;
+  }
+
+  .collection-hero__count svg {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 749px) {
+    .collection-hero {
+      min-height: clamp(180px, 30vh, 280px);
+    }
+
+    .collection-hero__content {
+      padding: 30px 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "tag": "section",
+  "class": "section-collection-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank to use collection title"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "info": "Optional badge above title (e.g., 'Best Sellers', 'New Collection')"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "info": "Leave blank to use collection description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show Product Count",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    }
+  ]
+}
+{% endschema %}

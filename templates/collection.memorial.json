@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Memorial & Tribute",
+        "badge": "Honor Their Memory",
+        "description": "Thoughtful memorial pieces to honor and remember loved ones. Dignified keepsakes crafted with care and respect.",
+        "show_product_count": true,
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": false,
+        "show_value_banner": true,
+        "show_bulk_cta": false
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

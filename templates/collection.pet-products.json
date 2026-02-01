@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Pet Products",
+        "badge": "For Your Best Friend",
+        "description": "Custom pet tags, memorial items, and accessories for your furry family members. Durable and personalized with love.",
+        "show_product_count": true,
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

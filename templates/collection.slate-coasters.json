@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "Premium Slate Coasters",
+        "badge": "Our Signature Product",
+        "description": "Hand-selected natural slate with precision laser engraving. Each coaster features unique stone character and exceptional detail.",
+        "show_product_count": true,
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": true
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

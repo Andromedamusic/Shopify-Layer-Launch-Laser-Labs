@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {
+        "title": "On Sale",
+        "badge": "Limited Time Savings",
+        "description": "Premium quality at special prices. Same exceptional craftsmanship, exceptional value. Grab these deals before they're gone!",
+        "show_product_count": true,
+        "background_color": "#1a1a1a",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "show_vendor": false,
+        "show_urgency_banner": true,
+        "show_value_banner": true,
+        "show_bulk_cta": false
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}
