@@ -1,333 +1,385 @@
-<div class="page-about">
-  {%- comment -%} Hero Section {%- endcomment -%}
-  <div class="page-about__hero">
-    {% if section.settings.hero_image != blank %}
-      <div class="page-about__hero-image">
-        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: loading: 'eager', class: 'page-about__hero-bg' }}
-        <div class="page-about__hero-overlay"></div>
-      </div>
-    {% endif %}
-    <div class="page-about__hero-content page-width">
-      <h1 class="page-about__title h0">{{ section.settings.heading | default: page.title }}</h1>
-      {% if section.settings.intro != blank %}
-        <p class="page-about__intro">{{ section.settings.intro }}</p>
-      {% endif %}
-    </div>
-  </div>
-
-  {%- comment -%} Story Section {%- endcomment -%}
-  <div class="page-about__story page-width">
-    <div class="page-about__story-content">
-      <h2>Our Story</h2>
-      <p>LayerLaunch Laser Labs started with a simple idea: create products that people actually want to keep — not throw in a drawer. Based in Michigan, we combine precision laser technology with thoughtful design to transform everyday items into meaningful keepsakes.</p>
-      <p>Whether it's a photo of a beloved pet, a company logo, or a favorite golf course, we turn your ideas into premium engraved products that last a lifetime. Each piece is made to order in our Michigan workshop with attention to detail that mass manufacturers simply can't match.</p>
-    </div>
-    {% if section.settings.story_image != blank %}
-      <div class="page-about__story-image">
-        {{ section.settings.story_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
-      </div>
-    {% endif %}
-  </div>
-
-  {%- comment -%} Meet the Founder Section {%- endcomment -%}
-  <div class="page-about__founder">
-    <div class="page-width">
-      <div class="founder-grid">
-        <div class="founder-image">
-          {% if section.settings.founder_image != blank %}
-            {{ section.settings.founder_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'founder-image__photo' }}
-          {% else %}
-            <div class="founder-image__placeholder">
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
-              <p>Add your photo</p>
-            </div>
-          {% endif %}
-        </div>
-        <div class="founder-content">
-          <p class="founder-label">Meet the Founder</p>
-          <h2 class="founder-name">Hunter Bos</h2>
-          <p class="founder-title">Founder & Lead Craftsman</p>
-
-          <div class="founder-bio">
-            <p>I'm Hunter Bos — an automotive industry veteran turned laser engraving enthusiast. With over 9 years of experience as a Subject Matter Expert and Technical Curriculum Developer at Ford Motor Company, I've spent my career mastering precision, quality control, and attention to detail.</p>
-
-            <p>My background spans electric vehicle technology, aerospace systems, and advanced manufacturing processes. That same technical precision and commitment to excellence now drives every product we create at LayerLaunch Laser Labs.</p>
-
-            <p>When I'm not running the laser, I operate <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener">Bos Business Services</a> — offering professional photography, aerial cinematography (FAA Part 107 certified), photogrammetry, and multimedia production throughout Southeast Michigan.</p>
-          </div>
-
-          <div class="founder-credentials">
-            <div class="credential">
-              <div class="credential__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <span>9+ Years Automotive Industry Experience</span>
-            </div>
-            <div class="credential">
-              <div class="credential__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <span>FAA Part 107 Certified Drone Pilot</span>
-            </div>
-            <div class="credential">
-              <div class="credential__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <span>EV & High-Voltage Systems Specialist</span>
-            </div>
-            <div class="credential">
-              <div class="credential__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <span>Based in Southeast Michigan</span>
-            </div>
-          </div>
-
-          <div class="founder-social">
-            <a href="https://www.linkedin.com/in/hunterbos/" target="_blank" rel="noopener" class="founder-social__link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect x="2" y="9" width="4" height="12"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
-              <span>Connect on LinkedIn</span>
-            </a>
-            <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener" class="founder-social__link founder-social__link--secondary">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              <span>Bos Business Services</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {%- comment -%} Process Section {%- endcomment -%}
-  <div class="page-about__process">
-    <div class="page-width">
-      <h2 class="page-about__section-heading">Our Process</h2>
-      <p class="page-about__section-intro">From your idea to finished product, here's how we create your custom piece.</p>
-
-      <div class="process-steps">
-        <div class="process-step">
-          <div class="process-step__number">1</div>
-          <h3>Choose Your Product</h3>
-          <p>Select from our collection of premium slate coasters, golf items, or branding products. Pick a design from our library or prepare your own image.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step__number">2</div>
-          <h3>Personalize It</h3>
-          <p>Add your custom text, upload your photo or logo, or select from our design library. Our team reviews every submission for quality.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step__number">3</div>
-          <h3>Approve Your Proof</h3>
-          <p>For photo and logo orders, we'll send a digital proof for your approval. Make sure everything looks perfect before we engrave.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step__number">4</div>
-          <h3>Precision Engraving</h3>
-          <p>Using our professional laser equipment, we carefully engrave your design onto premium materials with crisp, high-contrast results.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step__number">5</div>
-          <h3>Quality Check & Ship</h3>
-          <p>Every piece is inspected before packaging. We ship directly to you with tracking so you know exactly when to expect your creation.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {%- comment -%} Quality Section {%- endcomment -%}
-  <div class="page-about__quality page-width">
-    <div class="quality-grid">
-      <div class="quality-item">
-        <div class="quality-item__icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-          </svg>
-        </div>
-        <h3>Premium Materials</h3>
-        <p>We use only high-quality natural slate with consistent thickness and texture for beautiful, durable results.</p>
-      </div>
-      <div class="quality-item">
-        <div class="quality-item__icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <h3>Made to Order</h3>
-        <p>Nothing sits on a shelf. Every product is created specifically for you, ensuring freshness and care in every piece.</p>
-      </div>
-      <div class="quality-item">
-        <div class="quality-item__icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-        </div>
-        <h3>Michigan Made</h3>
-        <p>Proudly designed and produced in Michigan. We're a small team that takes pride in American craftsmanship.</p>
-      </div>
-      <div class="quality-item">
-        <div class="quality-item__icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h3>Satisfaction Guaranteed</h3>
-        <p>If there's ever an issue with your order, we'll make it right. Your happiness is our priority.</p>
-      </div>
-    </div>
-  </div>
-
-  {%- comment -%} CTA Section {%- endcomment -%}
-  <div class="page-about__cta">
-    <div class="page-width">
-      <h2>Ready to Create Something Special?</h2>
-      <p>Browse our collection or contact us for custom projects.</p>
-      <div class="page-about__cta-buttons">
-        <a href="/collections/all" class="button button--primary">Shop Now</a>
-        <a href="/pages/contact" class="button button--secondary">Contact Us</a>
-        <a href="/pages/request-quote" class="button button--secondary">Request a Quote</a>
-      </div>
-    </div>
-  </div>
-</div>
+{%- comment -%}
+  LayerLaunch Laser Lab - About Page
+  Rebuilt with CEO Directives: 10 Sections, Full Accessibility, Brand Voice
+  "Precision. Personal. Permanent."
+{%- endcomment -%}
 
 <style>
-  .page-about__hero {
+  /* ================================================
+     ABOUT PAGE - MASTER STYLES
+     Brand Colors:
+     - Gold accent (dark bg): #c9a227
+     - Gold accent (light bg): #8b6914
+     - Dark background: #1a1a1a
+     - Light background: #f5f5f0
+     - Subtle footer: #f8f8f8
+     ================================================ */
+
+  /* Base Reset & Accessibility */
+  .about-page {
+    --gold-on-dark: #c9a227;
+    --gold-on-light: #8b6914;
+    --dark-bg: #1a1a1a;
+    --light-bg: #f5f5f0;
+    --subtle-bg: #f8f8f8;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: rgba(26, 26, 26, 0.7);
+    --text-light: rgba(255, 255, 255, 0.9);
+    --focus-outline: 3px solid var(--gold-on-dark);
+  }
+
+  .about-page *:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 3px;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .about-page *,
+    .about-page *::before,
+    .about-page *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ================================================
+     SECTION 1: HERO
+     Dark #1a1a1a background
+     ================================================ */
+  .about-hero {
     position: relative;
-    min-height: 400px;
+    min-height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1a1a1a;
-    color: white;
+    background: var(--dark-bg);
+    color: var(--white);
     text-align: center;
+    overflow: hidden;
   }
-  .page-about__hero-image {
+
+  .about-hero__background {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 0;
   }
-  .page-about__hero-bg {
+
+  .about-hero__background img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0.4;
   }
-  .page-about__hero-overlay {
+
+  .about-hero__overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 26, 26, 0.3) 0%,
+      rgba(26, 26, 26, 0.7) 100%
+    );
   }
-  .page-about__hero-content {
+
+  .about-hero__content {
     position: relative;
     z-index: 1;
-    padding: 60px 20px;
-  }
-  .page-about__title {
-    margin-bottom: 1rem;
-  }
-  .page-about__intro {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    max-width: 600px;
+    max-width: 900px;
+    padding: clamp(3rem, 8vw, 5rem) 1.5rem;
     margin: 0 auto;
   }
 
-  /* Story Section */
-  .page-about__story {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding: 80px 0;
-  }
-  @media (max-width: 989px) {
-    .page-about__story {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
-  .page-about__story h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2.8rem;
-  }
-  .page-about__story p {
-    color: rgba(0,0,0,0.7);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-    font-size: 1.7rem;
-  }
-  .page-about__story-image img {
-    width: 100%;
-    border-radius: 8px;
+  .about-hero__tagline {
+    display: inline-block;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-on-dark);
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--gold-on-dark);
+    border-radius: 2rem;
   }
 
-  /* Founder Section */
-  .page-about__founder {
-    background: #f8f8f8;
-    padding: 80px 0;
+  .about-hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1.5rem 0;
+    color: var(--white);
   }
-  .founder-grid {
+
+  .about-hero__subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.7;
+    color: var(--text-light);
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .about-hero__scroll-indicator {
+    margin-top: 2.5rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .about-hero__scroll-indicator:hover {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .about-hero__scroll-indicator svg {
+      animation: bounce 2s infinite;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+  }
+
+  /* ================================================
+     SECTION 2: ORIGIN STORY
+     White background - First-person emotional WHY
+     ================================================ */
+  .about-origin {
+    background: var(--white);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .about-origin__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 4rem;
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
   }
-  @media (max-width: 989px) {
-    .founder-grid {
+
+  @media (max-width: 900px) {
+    .about-origin__container {
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
   }
-  .founder-image {
+
+  .about-origin__image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  .about-origin__image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .about-origin__image-accent {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background: var(--gold-on-light);
+    opacity: 0.1;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .about-origin__content {
+    padding: 1rem 0;
+  }
+
+  .about-origin__label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-on-light);
+    margin-bottom: 1rem;
+  }
+
+  .about-origin__heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-dark);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .about-origin__story {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-origin__story:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .about-origin__story strong {
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  .about-origin__highlight {
+    display: block;
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--subtle-bg);
+    border-left: 4px solid var(--gold-on-light);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* ================================================
+     SECTION 3: MID-PAGE CTA
+     Gold gradient break
+     ================================================ */
+  .about-midcta {
+    background: linear-gradient(
+      135deg,
+      #8b6914 0%,
+      #c9a227 50%,
+      #dbb84a 100%
+    );
+    padding: clamp(3rem, 6vw, 4.5rem) 0;
+    text-align: center;
+  }
+
+  .about-midcta__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-midcta__heading {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 1rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .about-midcta__text {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 2rem 0;
+    line-height: 1.7;
+  }
+
+  .about-midcta__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .about-midcta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 52px;
+  }
+
+  .about-midcta__btn--primary {
+    background: var(--dark-bg);
+    color: var(--white);
+    border: none;
+  }
+
+  .about-midcta__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .about-midcta__btn--secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  .about-midcta__btn--secondary:hover {
+    background: var(--white);
+    color: var(--dark-bg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-midcta__btn:hover {
+      transform: none;
+    }
+  }
+
+  /* ================================================
+     SECTION 4: MEET HUNTER
+     Light #f5f5f0 background
+     ================================================ */
+  .about-hunter {
+    background: var(--light-bg);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .about-hunter__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .about-hunter__container {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .about-hunter__photo-wrapper {
     position: sticky;
     top: 100px;
   }
-  @media (max-width: 989px) {
-    .founder-image {
+
+  @media (max-width: 900px) {
+    .about-hunter__photo-wrapper {
       position: static;
-      max-width: 300px;
+      max-width: 280px;
       margin: 0 auto;
     }
   }
-  .founder-image__photo {
+
+  .about-hunter__photo {
     width: 100%;
     border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
   }
-  .founder-image__placeholder {
+
+  .about-hunter__photo-placeholder {
     width: 100%;
     aspect-ratio: 1;
-    background: white;
+    background: var(--white);
     border: 2px dashed #ddd;
     border-radius: 12px;
     display: flex;
@@ -335,241 +387,1491 @@
     align-items: center;
     justify-content: center;
     color: #999;
+    padding: 2rem;
+    text-align: center;
   }
-  .founder-image__placeholder p {
+
+  .about-hunter__photo-placeholder p {
     margin: 1rem 0 0;
-    font-size: 1.4rem;
+    font-size: 0.9rem;
   }
-  .founder-label {
-    text-transform: uppercase;
-    font-size: 1.3rem;
-    letter-spacing: 0.1em;
-    color: #c9a227;
+
+  .about-hunter__content {
+    padding-top: 0.5rem;
+  }
+
+  .about-hunter__label {
+    display: inline-block;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-on-light);
+    margin-bottom: 0.75rem;
   }
-  .founder-name {
-    font-size: 3.2rem;
+
+  .about-hunter__name {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: var(--text-dark);
     margin: 0 0 0.25rem 0;
-    color: #1a1a1a;
   }
-  .founder-title {
-    font-size: 1.6rem;
-    color: rgba(0,0,0,0.6);
+
+  .about-hunter__title-role {
+    font-size: 1.1rem;
+    color: var(--text-muted);
     margin: 0 0 2rem 0;
   }
-  .founder-bio p {
-    font-size: 1.7rem;
-    line-height: 1.75;
-    color: rgba(0,0,0,0.75);
+
+  .about-hunter__bio p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
     margin-bottom: 1.25rem;
   }
-  .founder-bio a {
-    color: #c9a227;
+
+  .about-hunter__bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-hunter__bio a {
+    color: var(--gold-on-light);
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s ease;
   }
-  .founder-bio a:hover {
+
+  .about-hunter__bio a:hover {
     text-decoration: underline;
   }
-  .founder-credentials {
+
+  .about-hunter__credentials {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 0.875rem;
   }
-  @media (max-width: 749px) {
-    .founder-credentials {
+
+  @media (max-width: 600px) {
+    .about-hunter__credentials {
       grid-template-columns: 1fr;
     }
   }
-  .credential {
+
+  .about-hunter__credential {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: white;
+    padding: 0.875rem 1rem;
+    background: var(--white);
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
-  .credential__icon {
-    color: #c9a227;
+
+  .about-hunter__credential-icon {
     flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 105, 20, 0.1);
+    border-radius: 50%;
+    color: var(--gold-on-light);
   }
-  .credential span {
-    font-size: 1.4rem;
-    color: #1a1a1a;
+
+  .about-hunter__credential span {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.4;
   }
-  .founder-social {
+
+  .about-hunter__social {
     margin-top: 2rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
   }
-  .founder-social__link {
+
+  .about-hunter__social-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.5rem;
-    background: #0077B5;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    transition: transform 0.2s, background 0.2s;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    min-height: 48px;
   }
-  .founder-social__link:hover {
-    transform: translateY(-2px);
+
+  .about-hunter__social-link--linkedin {
+    background: #0077B5;
+    color: var(--white);
+  }
+
+  .about-hunter__social-link--linkedin:hover {
     background: #005f8f;
+    transform: translateY(-2px);
   }
-  .founder-social__link--secondary {
-    background: #1a1a1a;
+
+  .about-hunter__social-link--website {
+    background: var(--dark-bg);
+    color: var(--white);
   }
-  .founder-social__link--secondary:hover {
+
+  .about-hunter__social-link--website:hover {
     background: #333;
+    transform: translateY(-2px);
   }
-  @media (max-width: 749px) {
-    .founder-name {
-      font-size: 2.6rem;
-    }
-    .founder-social {
+
+  @media (max-width: 600px) {
+    .about-hunter__social {
       flex-direction: column;
     }
-    .founder-social__link {
+    .about-hunter__social-link {
       justify-content: center;
     }
   }
 
-  /* Process Section */
-  .page-about__process {
-    background: #f8f8f8;
-    padding: 80px 0;
-  }
-  .page-about__section-heading {
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  .page-about__section-intro {
-    text-align: center;
-    color: rgba(0,0,0,0.6);
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
-  }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
-  }
-  @media (max-width: 989px) {
-    .process-steps {
-      grid-template-columns: repeat(3, 1fr);
+  @media (prefers-reduced-motion: reduce) {
+    .about-hunter__social-link:hover {
+      transform: none;
     }
   }
-  @media (max-width: 749px) {
-    .process-steps {
-      grid-template-columns: 1fr;
-    }
+
+  /* ================================================
+     SECTION 5: PROCESS
+     White background - 4 STEPS ONLY
+     ================================================ */
+  .about-process {
+    background: var(--white);
+    padding: clamp(4rem, 10vw, 7rem) 0;
   }
-  .process-step {
+
+  .about-process__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-process__header {
     text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3.5rem;
   }
-  .process-step__number {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1a1a1a;
-    color: white;
-    border-radius: 50%;
-    font-size: 1.25rem;
+
+  .about-process__label {
+    display: inline-block;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin: 0 auto 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-on-light);
+    margin-bottom: 1rem;
   }
-  .process-step h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+
+  .about-process__heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 1rem 0;
   }
-  .process-step p {
-    font-size: 0.9rem;
-    color: rgba(0,0,0,0.6);
-    line-height: 1.6;
+
+  .about-process__intro {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
     margin: 0;
   }
 
-  /* Quality Section */
-  .page-about__quality {
-    padding: 80px 0;
+  .about-process__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
   }
-  .quality-grid {
+
+  .about-process__steps::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ddd 10%, #ddd 90%, transparent);
+    z-index: 0;
+  }
+
+  @media (max-width: 900px) {
+    .about-process__steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 2rem;
+    }
+    .about-process__steps::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .about-process__steps {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .about-process__step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-process__number {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-bg);
+    color: var(--gold-on-dark);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.25rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* Minimum 64px touch target */
+    min-width: 64px;
+    min-height: 64px;
+  }
+
+  .about-process__step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 0.75rem 0;
+  }
+
+  .about-process__step-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ================================================
+     SECTION 6: QUALITY PROMISE
+     Dark #1a1a1a background - 4 pillars with icons
+     ================================================ */
+  .about-quality {
+    background: var(--dark-bg);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    color: var(--white);
+  }
+
+  .about-quality__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-quality__header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .about-quality__label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-on-dark);
+    margin-bottom: 1rem;
+  }
+
+  .about-quality__heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 1rem 0;
+  }
+
+  .about-quality__intro {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .about-quality__pillars {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
-  @media (max-width: 989px) {
-    .quality-grid {
+
+  @media (max-width: 900px) {
+    .about-quality__pillars {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
   }
-  @media (max-width: 749px) {
-    .quality-grid {
+
+  @media (max-width: 550px) {
+    .about-quality__pillars {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
   }
-  .quality-item {
+
+  .about-quality__pillar {
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
-  .quality-item__icon {
+
+  .about-quality__pillar:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-quality__pillar:hover {
+      transform: none;
+    }
+  }
+
+  .about-quality__icon {
     width: 70px;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8f8f8;
+    background: rgba(201, 162, 39, 0.15);
     border-radius: 50%;
-    margin: 0 auto 1rem;
-    color: #c9a227;
+    margin: 0 auto 1.25rem;
+    color: var(--gold-on-dark);
   }
-  .quality-item h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+
+  .about-quality__pillar-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    margin: 0 0 0.75rem 0;
   }
-  .quality-item p {
-    font-size: 0.9rem;
-    color: rgba(0,0,0,0.6);
-    line-height: 1.6;
+
+  .about-quality__pillar-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
     margin: 0;
   }
 
-  /* CTA Section */
-  .page-about__cta {
-    background: #1a1a1a;
-    color: white;
+  /* ================================================
+     SECTION 7: SOCIAL PROOF
+     Light #f5f5f0 background - Facebook reviews
+     ================================================ */
+  .about-social {
+    background: var(--light-bg);
+    padding: clamp(4rem, 8vw, 5.5rem) 0;
+  }
+
+  .about-social__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     text-align: center;
-    padding: 60px 20px;
   }
-  .page-about__cta h2 {
-    margin-bottom: 0.5rem;
+
+  .about-social__badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 3rem;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .page-about__cta p {
-    opacity: 0.8;
-    margin-bottom: 1.5rem;
+
+  .about-social__badge:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
   }
-  .page-about__cta-buttons {
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-social__badge:hover {
+      transform: none;
+    }
+  }
+
+  .about-social__stars {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-social__star {
+    color: #f5c518;
+    font-size: 1.75rem;
+  }
+
+  .about-social__rating {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+  }
+
+  .about-social__platform {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .about-social__link-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1877f2;
+  }
+
+  .about-social__link-text svg {
+    transition: transform 0.2s ease;
+  }
+
+  .about-social__badge:hover .about-social__link-text svg {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-social__badge:hover .about-social__link-text svg {
+      transform: none;
+    }
+  }
+
+  .about-social__quote {
+    margin-top: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-social__quote blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .about-social__quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-style: normal;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  /* ================================================
+     SECTION 8: CORPORATE CAPABILITIES
+     White background - B2B focus
+     ================================================ */
+  .about-corporate {
+    background: var(--white);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .about-corporate__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-corporate__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .about-corporate__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .about-corporate__content {
+    order: 1;
+  }
+
+  @media (max-width: 900px) {
+    .about-corporate__content {
+      order: 2;
+    }
+  }
+
+  .about-corporate__label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-on-light);
+    margin-bottom: 1rem;
+  }
+
+  .about-corporate__heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 1rem 0;
+  }
+
+  .about-corporate__text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .about-corporate__features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 550px) {
+    .about-corporate__features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .about-corporate__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .about-corporate__feature-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 105, 20, 0.1);
+    border-radius: 50%;
+    color: var(--gold-on-light);
+    margin-top: 2px;
+  }
+
+  .about-corporate__feature span {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+
+  .about-corporate__cta {
+    margin-top: 2.5rem;
+  }
+
+  .about-corporate__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--dark-bg);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .about-corporate__btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-corporate__btn:hover {
+      transform: none;
+    }
+  }
+
+  .about-corporate__visual {
+    order: 2;
+  }
+
+  @media (max-width: 900px) {
+    .about-corporate__visual {
+      order: 1;
+    }
+  }
+
+  .about-corporate__card {
+    background: var(--light-bg);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .about-corporate__card-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .about-corporate__sla {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .about-corporate__sla-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .about-corporate__sla-item:last-child {
+    border-bottom: none;
+  }
+
+  .about-corporate__sla-label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+
+  .about-corporate__sla-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .about-corporate__contact {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--gold-on-light);
+  }
+
+  .about-corporate__contact-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-on-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .about-corporate__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .about-corporate__contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .about-corporate__contact-link:hover {
+    color: var(--gold-on-light);
+  }
+
+  /* ================================================
+     SECTION 9: FINAL CTA
+     Dark #1a1a1a background - Strong close
+     ================================================ */
+  .about-finalcta {
+    background: var(--dark-bg);
+    padding: clamp(4rem, 10vw, 6rem) 0;
+    text-align: center;
+    color: var(--white);
+  }
+
+  .about-finalcta__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-finalcta__heading {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .about-finalcta__text {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0 0 2.5rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-finalcta__buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
   }
-  .page-about__cta .button--primary {
-    background: white;
-    color: #1a1a1a;
+
+  .about-finalcta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    min-height: 52px;
   }
-  .page-about__cta .button--secondary {
+
+  .about-finalcta__btn--primary {
+    background: var(--gold-on-dark);
+    color: var(--dark-bg);
+    border: none;
+  }
+
+  .about-finalcta__btn--primary:hover {
+    background: #dbb84a;
+    transform: translateY(-2px);
+  }
+
+  .about-finalcta__btn--secondary {
     background: transparent;
-    color: white;
-    border: 1px solid white;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  .about-finalcta__btn--secondary:hover {
+    background: var(--white);
+    color: var(--dark-bg);
+  }
+
+  .about-finalcta__btn--tertiary {
+    background: transparent;
+    color: var(--gold-on-dark);
+    border: 2px solid var(--gold-on-dark);
+  }
+
+  .about-finalcta__btn--tertiary:hover {
+    background: var(--gold-on-dark);
+    color: var(--dark-bg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-finalcta__btn:hover {
+      transform: none;
+    }
+  }
+
+  .about-finalcta__tagline {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-on-dark);
+    opacity: 0.9;
+  }
+
+  /* ================================================
+     SECTION 10: TRUST FOOTER
+     Subtle #f8f8f8 background - Policy links
+     ================================================ */
+  .about-trust {
+    background: var(--subtle-bg);
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+    border-top: 1px solid #eee;
+  }
+
+  .about-trust__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .about-trust__grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+  }
+
+  .about-trust__item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .about-trust__item svg {
+    color: var(--gold-on-light);
+    flex-shrink: 0;
+  }
+
+  .about-trust__links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .about-trust__link {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .about-trust__link:hover {
+    color: var(--gold-on-light);
+  }
+
+  .about-trust__copyright {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(26, 26, 26, 0.5);
+  }
+</style>
+
+<div class="about-page">
+  {%- comment -%} ========================================
+     SECTION 1: HERO
+     Dark background, emotional headline
+  ======================================== {%- endcomment -%}
+  <section class="about-hero" aria-labelledby="about-hero-heading">
+    {% if section.settings.hero_image != blank %}
+      <div class="about-hero__background">
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag:
+          loading: 'eager',
+          alt: 'LayerLaunch Laser Lab workshop showcasing precision laser engraving equipment',
+          class: 'about-hero__bg-img'
+        }}
+        <div class="about-hero__overlay" aria-hidden="true"></div>
+      </div>
+    {% endif %}
+
+    <div class="about-hero__content">
+      <span class="about-hero__tagline">Precision. Personal. Permanent.</span>
+      <h1 id="about-hero-heading" class="about-hero__title">
+        {{ section.settings.hero_heading | default: 'Where Your Memories Become Heirlooms' }}
+      </h1>
+      <p class="about-hero__subtitle">
+        {{ section.settings.hero_subtitle | default: 'We transform your most treasured moments into handcrafted keepsakes that last generations. Each piece tells your story, etched with care in our Michigan workshop.' }}
+      </p>
+      <div class="about-hero__scroll-indicator" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 2: ORIGIN STORY
+     White background, first-person emotional WHY
+  ======================================== {%- endcomment -%}
+  <section class="about-origin" aria-labelledby="about-origin-heading">
+    <div class="about-origin__container">
+      <div class="about-origin__image-wrapper">
+        {% if section.settings.story_image != blank %}
+          {{ section.settings.story_image | image_url: width: 800 | image_tag:
+            loading: 'lazy',
+            alt: 'Handcrafted laser-engraved keepsake demonstrating precision craftsmanship',
+            class: 'about-origin__image'
+          }}
+        {% else %}
+          <div style="width:100%;aspect-ratio:4/3;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;">
+            <span>Add story image</span>
+          </div>
+        {% endif %}
+        <div class="about-origin__image-accent" aria-hidden="true"></div>
+      </div>
+
+      <div class="about-origin__content">
+        <span class="about-origin__label">Our Story</span>
+        <h2 id="about-origin-heading" class="about-origin__heading">
+          It Started With a Gift That Meant Everything
+        </h2>
+
+        <p class="about-origin__story">
+          {{ section.settings.origin_paragraph_1 | default: "I'll never forget the look on my grandmother's face when I handed her that first engraved piece. It was just a simple slate coaster with an old family photo — but the way her eyes lit up, the way she held it like it was made of gold... that moment changed everything for me." }}
+        </p>
+
+        <p class="about-origin__story">
+          {{ section.settings.origin_paragraph_2 | default: "I realized something powerful that day: <strong>in a world of factory-made products, there's still magic in something made just for you.</strong> Something that holds a memory. Something that says 'I took the time to make this personal.'" }}
+        </p>
+
+        <p class="about-origin__story">
+          {{ section.settings.origin_paragraph_3 | default: "That's why I started LayerLaunch Laser Lab. Not to create products — but to help people create moments. The gift that makes someone cry happy tears. The award that sits proudly on a desk for decades. The memorial piece that keeps a loved one's memory alive." }}
+        </p>
+
+        <span class="about-origin__highlight">
+          "Every piece we create carries a piece of someone's heart. That's a responsibility I never take lightly."
+        </span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 3: MID-PAGE CTA
+     Gold gradient conversion break
+  ======================================== {%- endcomment -%}
+  <section class="about-midcta" aria-labelledby="about-midcta-heading">
+    <div class="about-midcta__container">
+      <h2 id="about-midcta-heading" class="about-midcta__heading">
+        Ready to Create Something Meaningful?
+      </h2>
+      <p class="about-midcta__text">
+        Browse our collection of laser-engraved products or start a custom project today.
+      </p>
+      <div class="about-midcta__buttons">
+        <a href="/collections/all" class="about-midcta__btn about-midcta__btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          Shop Our Collection
+        </a>
+        <a href="/pages/contact" class="about-midcta__btn about-midcta__btn--secondary">
+          Start Custom Project
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 4: MEET HUNTER
+     Light background, Ford heritage, personal story
+  ======================================== {%- endcomment -%}
+  <section class="about-hunter" aria-labelledby="about-hunter-heading">
+    <div class="about-hunter__container">
+      <div class="about-hunter__photo-wrapper">
+        {% if section.settings.founder_image != blank %}
+          {{ section.settings.founder_image | image_url: width: 640 | image_tag:
+            loading: 'lazy',
+            alt: 'Hunter Bos, Founder of LayerLaunch Laser Lab',
+            class: 'about-hunter__photo'
+          }}
+        {% else %}
+          <div class="about-hunter__photo-placeholder">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <p>Add founder photo in theme settings</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="about-hunter__content">
+        <span class="about-hunter__label">Meet the Founder</span>
+        <h3 id="about-hunter-heading" class="about-hunter__name">Hunter Bos</h3>
+        <p class="about-hunter__title-role">Founder & Lead Craftsman</p>
+
+        <div class="about-hunter__bio">
+          <p>
+            I'm Hunter Bos — an automotive industry veteran turned laser engraving enthusiast. With over 9 years as a Subject Matter Expert and Technical Curriculum Developer at <strong>Ford Motor Company</strong>, I've spent my career mastering precision, quality control, and attention to detail.
+          </p>
+          <p>
+            My background spans electric vehicle technology, aerospace systems, and advanced manufacturing processes. That same technical precision and commitment to excellence now drives every product we create at LayerLaunch Laser Labs.
+          </p>
+          <p>
+            When I'm not running the laser, I operate <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener">Bos Business Services</a> — offering professional photography, aerial cinematography (FAA Part 107 certified), photogrammetry, and multimedia production throughout Southeast Michigan.
+          </p>
+        </div>
+
+        <div class="about-hunter__credentials">
+          <div class="about-hunter__credential">
+            <div class="about-hunter__credential-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <span>9+ Years Ford Motor Company</span>
+          </div>
+          <div class="about-hunter__credential">
+            <div class="about-hunter__credential-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <span>FAA Part 107 Certified Pilot</span>
+          </div>
+          <div class="about-hunter__credential">
+            <div class="about-hunter__credential-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <span>EV & High-Voltage Specialist</span>
+          </div>
+          <div class="about-hunter__credential">
+            <div class="about-hunter__credential-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <span>Southeast Michigan Based</span>
+          </div>
+        </div>
+
+        <div class="about-hunter__social">
+          <a href="https://www.linkedin.com/in/hunterbos/" target="_blank" rel="noopener" class="about-hunter__social-link about-hunter__social-link--linkedin">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            Connect on LinkedIn
+          </a>
+          <a href="https://www.bosbusinessservices.org/" target="_blank" rel="noopener" class="about-hunter__social-link about-hunter__social-link--website">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            Bos Business Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 5: PROCESS
+     White background, 4 STEPS ONLY
+  ======================================== {%- endcomment -%}
+  <section class="about-process" aria-labelledby="about-process-heading">
+    <div class="about-process__container">
+      <header class="about-process__header">
+        <span class="about-process__label">How It Works</span>
+        <h2 id="about-process-heading" class="about-process__heading">
+          From Your Vision to Your Doorstep
+        </h2>
+        <p class="about-process__intro">
+          Our streamlined process ensures your custom piece is crafted with precision and delivered with care.
+        </p>
+      </header>
+
+      <div class="about-process__steps" role="list">
+        <div class="about-process__step" role="listitem">
+          <div class="about-process__number" aria-hidden="true">1</div>
+          <h3 class="about-process__step-title">Choose & Customize</h3>
+          <p class="about-process__step-desc">
+            Select your product and personalize it with your own photo, logo, or design from our library.
+          </p>
+        </div>
+
+        <div class="about-process__step" role="listitem">
+          <div class="about-process__number" aria-hidden="true">2</div>
+          <h3 class="about-process__step-title">Approve Your Proof</h3>
+          <p class="about-process__step-desc">
+            We send a digital preview for your approval. You confirm it's perfect before we engrave.
+          </p>
+        </div>
+
+        <div class="about-process__step" role="listitem">
+          <div class="about-process__number" aria-hidden="true">3</div>
+          <h3 class="about-process__step-title">Precision Engraving</h3>
+          <p class="about-process__step-desc">
+            Your design is carefully laser-etched onto premium materials with crisp, high-contrast results.
+          </p>
+        </div>
+
+        <div class="about-process__step" role="listitem">
+          <div class="about-process__number" aria-hidden="true">4</div>
+          <h3 class="about-process__step-title">Quality Check & Ship</h3>
+          <p class="about-process__step-desc">
+            Every piece is inspected and carefully packaged. Track your order from workshop to doorstep.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 6: QUALITY PROMISE
+     Dark background, 4 pillars with icons
+  ======================================== {%- endcomment -%}
+  <section class="about-quality" aria-labelledby="about-quality-heading">
+    <div class="about-quality__container">
+      <header class="about-quality__header">
+        <span class="about-quality__label">Our Promise</span>
+        <h2 id="about-quality-heading" class="about-quality__heading">
+          Quality You Can See, Feel, and Trust
+        </h2>
+        <p class="about-quality__intro">
+          Every product we create reflects our commitment to excellence — no shortcuts, no compromises.
+        </p>
+      </header>
+
+      <div class="about-quality__pillars" role="list">
+        <div class="about-quality__pillar" role="listitem">
+          <div class="about-quality__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+          </div>
+          <h3 class="about-quality__pillar-title">Premium Materials</h3>
+          <p class="about-quality__pillar-desc">
+            We source only the finest slate, wood, glass, and metals for exceptional, lasting results.
+          </p>
+        </div>
+
+        <div class="about-quality__pillar" role="listitem">
+          <div class="about-quality__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="about-quality__pillar-title">Made to Order</h3>
+          <p class="about-quality__pillar-desc">
+            Nothing sits on a shelf. Every piece is crafted specifically for you with fresh attention to detail.
+          </p>
+        </div>
+
+        <div class="about-quality__pillar" role="listitem">
+          <div class="about-quality__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3 class="about-quality__pillar-title">Michigan Made</h3>
+          <p class="about-quality__pillar-desc">
+            Proudly designed and produced in Southeast Michigan with American craftsmanship pride.
+          </p>
+        </div>
+
+        <div class="about-quality__pillar" role="listitem">
+          <div class="about-quality__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="about-quality__pillar-title">Satisfaction Guaranteed</h3>
+          <p class="about-quality__pillar-desc">
+            If there's ever an issue with your order, we'll make it right. Your happiness is our priority.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 7: SOCIAL PROOF
+     Light background, Facebook 5-star badge
+  ======================================== {%- endcomment -%}
+  <section class="about-social" aria-labelledby="about-social-heading">
+    <div class="about-social__container">
+      <h2 id="about-social-heading" class="visually-hidden">Customer Reviews</h2>
+
+      <a href="https://www.facebook.com/marketplace/profile/100003393673828/"
+         target="_blank"
+         rel="noopener"
+         class="about-social__badge"
+         aria-label="View our 5-star reviews on Facebook Marketplace">
+        <div class="about-social__stars" aria-hidden="true">
+          <span class="about-social__star">★</span>
+          <span class="about-social__star">★</span>
+          <span class="about-social__star">★</span>
+          <span class="about-social__star">★</span>
+          <span class="about-social__star">★</span>
+        </div>
+        <p class="about-social__rating">5.0 Stars</p>
+        <p class="about-social__platform">15+ Reviews on Facebook Marketplace</p>
+        <span class="about-social__link-text">
+          Read Our Reviews
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </a>
+
+      <div class="about-social__quote">
+        <blockquote>
+          "The attention to detail is incredible. Hunter took my blurry old family photo and turned it into the most beautiful coaster. My mom cried when she opened it. Absolutely worth every penny."
+        </blockquote>
+        <cite>— Verified Facebook Marketplace Customer</cite>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 8: CORPORATE CAPABILITIES
+     White background, B2B focus, SLA
+  ======================================== {%- endcomment -%}
+  <section class="about-corporate" aria-labelledby="about-corporate-heading">
+    <div class="about-corporate__container">
+      <div class="about-corporate__grid">
+        <div class="about-corporate__content">
+          <span class="about-corporate__label">For Business</span>
+          <h2 id="about-corporate-heading" class="about-corporate__heading">
+            Corporate & Bulk Orders Welcome
+          </h2>
+          <p class="about-corporate__text">
+            From employee recognition awards to branded corporate gifts, we partner with businesses of all sizes to create memorable, high-quality engraved products that elevate your brand.
+          </p>
+
+          <div class="about-corporate__features" role="list">
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Volume pricing discounts</span>
+            </div>
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Custom branding options</span>
+            </div>
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Dedicated project manager</span>
+            </div>
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Rush delivery available</span>
+            </div>
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Net-30 payment terms</span>
+            </div>
+            <div class="about-corporate__feature" role="listitem">
+              <div class="about-corporate__feature-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span>Reorder with one click</span>
+            </div>
+          </div>
+
+          <div class="about-corporate__cta">
+            <a href="/pages/request-quote" class="about-corporate__btn">
+              Request a Quote
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="about-corporate__visual">
+          <div class="about-corporate__card">
+            <h3 class="about-corporate__card-heading">Service Level Agreement</h3>
+            <div class="about-corporate__sla">
+              <div class="about-corporate__sla-item">
+                <span class="about-corporate__sla-label">Standard Production</span>
+                <span class="about-corporate__sla-value">5-7 Business Days</span>
+              </div>
+              <div class="about-corporate__sla-item">
+                <span class="about-corporate__sla-label">Rush Orders</span>
+                <span class="about-corporate__sla-value">2-3 Business Days</span>
+              </div>
+              <div class="about-corporate__sla-item">
+                <span class="about-corporate__sla-label">Proof Turnaround</span>
+                <span class="about-corporate__sla-value">24-48 Hours</span>
+              </div>
+              <div class="about-corporate__sla-item">
+                <span class="about-corporate__sla-label">Response Time</span>
+                <span class="about-corporate__sla-value">Same Business Day</span>
+              </div>
+            </div>
+
+            <div class="about-corporate__contact">
+              <p class="about-corporate__contact-label">Direct Contact</p>
+              <div class="about-corporate__contact-info">
+                <a href="mailto:HunterBos@BosBusinessServices.org" class="about-corporate__contact-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  HunterBos@BosBusinessServices.org
+                </a>
+                <a href="tel:+12488388314" class="about-corporate__contact-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  (248) 838-8314
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 9: FINAL CTA
+     Dark background, strong close
+  ======================================== {%- endcomment -%}
+  <section class="about-finalcta" aria-labelledby="about-finalcta-heading">
+    <div class="about-finalcta__container">
+      <h2 id="about-finalcta-heading" class="about-finalcta__heading">
+        Let's Create Something You'll Treasure Forever
+      </h2>
+      <p class="about-finalcta__text">
+        Whether it's a heartfelt gift, a corporate award, or a memorial tribute — we're here to help you turn your vision into a lasting keepsake.
+      </p>
+      <div class="about-finalcta__buttons">
+        <a href="/collections/all" class="about-finalcta__btn about-finalcta__btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          Shop Now
+        </a>
+        <a href="/pages/contact" class="about-finalcta__btn about-finalcta__btn--secondary">
+          Contact Us
+        </a>
+        <a href="/pages/request-quote" class="about-finalcta__btn about-finalcta__btn--tertiary">
+          Request a Quote
+        </a>
+      </div>
+      <p class="about-finalcta__tagline" aria-hidden="true">
+        Precision. Personal. Permanent.
+      </p>
+    </div>
+  </section>
+
+  {%- comment -%} ========================================
+     SECTION 10: TRUST FOOTER
+     Subtle background, policies links
+  ======================================== {%- endcomment -%}
+  <section class="about-trust" aria-labelledby="about-trust-heading">
+    <div class="about-trust__container">
+      <h2 id="about-trust-heading" class="visually-hidden">Trust and Policies</h2>
+
+      <div class="about-trust__grid">
+        <div class="about-trust__item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Secure Checkout</span>
+        </div>
+        <div class="about-trust__item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Satisfaction Guaranteed</span>
+        </div>
+        <div class="about-trust__item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+          <span>Fast, Tracked Shipping</span>
+        </div>
+        <div class="about-trust__item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Made in Michigan, USA</span>
+        </div>
+      </div>
+
+      <nav class="about-trust__links" aria-label="Policy links">
+        <a href="/policies/shipping-policy" class="about-trust__link">Shipping Policy</a>
+        <a href="/policies/refund-policy" class="about-trust__link">Refund Policy</a>
+        <a href="/policies/privacy-policy" class="about-trust__link">Privacy Policy</a>
+        <a href="/policies/terms-of-service" class="about-trust__link">Terms of Service</a>
+        <a href="/pages/faq" class="about-trust__link">FAQs</a>
+      </nav>
+
+      <p class="about-trust__copyright">
+        &copy; {{ 'now' | date: '%Y' }} LayerLaunch Laser Lab. All rights reserved.
+      </p>
+    </div>
+  </section>
+</div>
+
+{%- comment -%} Visually Hidden Class for Screen Readers {%- endcomment -%}
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>
 
@@ -580,36 +1882,70 @@
   "class": "section-page-about",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Page Heading",
-      "default": "About LayerLaunch Laser Labs"
-    },
-    {
-      "type": "textarea",
-      "id": "intro",
-      "label": "Introduction",
-      "default": "We create premium custom engraved products that feel personal and permanent — not mass-produced."
+      "type": "header",
+      "content": "Hero Section"
     },
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero Background Image"
+      "label": "Hero Background Image",
+      "info": "Recommended: 1920x800px minimum"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero Heading",
+      "default": "Where Your Memories Become Heirlooms"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "We transform your most treasured moments into handcrafted keepsakes that last generations. Each piece tells your story, etched with care in our Michigan workshop."
+    },
+    {
+      "type": "header",
+      "content": "Origin Story Section"
     },
     {
       "type": "image_picker",
       "id": "story_image",
-      "label": "Story Section Image"
+      "label": "Story Image",
+      "info": "Recommended: 800x600px minimum"
+    },
+    {
+      "type": "textarea",
+      "id": "origin_paragraph_1",
+      "label": "Origin Story - Paragraph 1",
+      "default": "I'll never forget the look on my grandmother's face when I handed her that first engraved piece. It was just a simple slate coaster with an old family photo — but the way her eyes lit up, the way she held it like it was made of gold... that moment changed everything for me."
+    },
+    {
+      "type": "textarea",
+      "id": "origin_paragraph_2",
+      "label": "Origin Story - Paragraph 2",
+      "default": "I realized something powerful that day: <strong>in a world of factory-made products, there's still magic in something made just for you.</strong> Something that holds a memory. Something that says 'I took the time to make this personal.'"
+    },
+    {
+      "type": "textarea",
+      "id": "origin_paragraph_3",
+      "label": "Origin Story - Paragraph 3",
+      "default": "That's why I started LayerLaunch Laser Lab. Not to create products — but to help people create moments. The gift that makes someone cry happy tears. The award that sits proudly on a desk for decades. The memorial piece that keeps a loved one's memory alive."
     },
     {
       "type": "header",
-      "content": "Meet the Founder"
+      "content": "Meet the Founder Section"
     },
     {
       "type": "image_picker",
       "id": "founder_image",
       "label": "Founder Photo",
-      "info": "Recommended: Square image, at least 500x500px"
+      "info": "Recommended: Square image, at least 640x640px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Page",
+      "category": "Pages"
     }
   ]
 }
