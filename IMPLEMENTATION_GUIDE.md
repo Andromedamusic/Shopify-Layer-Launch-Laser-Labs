@@ -68,7 +68,7 @@ Create menu called "Main Menu" with:
 | Design Library | Page | /pages/design-library |
 | Custom Upload | Page | /pages/custom-upload |
 | Request a Quote | Page | /pages/request-quote |
-| About | Page | /pages/about |
+| About | Page | /pages/about-us |
 | FAQ | Page | /pages/faq |
 
 ---

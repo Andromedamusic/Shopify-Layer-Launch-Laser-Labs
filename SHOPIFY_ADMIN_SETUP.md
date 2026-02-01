@@ -104,7 +104,7 @@ Shop
 Design Library (link: /pages/design-library)
 Custom Upload (link: /pages/custom-upload)
 Request a Quote (link: /pages/request-quote)
-About (link: /pages/about)
+About (link: /pages/about-us)
 FAQ (link: /pages/faq)
 ```
 
@@ -114,7 +114,7 @@ FAQ (link: /pages/faq)
 
 ```
 Shop (link: /collections/all)
-About Us (link: /pages/about)
+About Us (link: /pages/about-us)
 FAQ (link: /pages/faq)
 Shipping Policy (link: /policies/shipping-policy)
 Returns Policy (link: /policies/refund-policy)

@@ -123,7 +123,7 @@ Upload the contents of the `/theme` directory to your Shopify theme:
 | Design Library | `/pages/design-library` | `page.design-library` | Browse designs |
 | Custom Upload | `/pages/custom-upload` | `page.custom-upload` | Image upload form |
 | Request Quote | `/pages/request-quote` | `page.quote` | Bulk order form |
-| About | `/pages/about` | `page.about` | Company info |
+| About | `/pages/about-us` | `page.about-us` | Company info |
 | FAQ | `/pages/faq` | `page.faq` | Common questions |
 
 ## Personalization Workflow
