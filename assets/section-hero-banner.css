@@ -164,6 +164,7 @@
 
 .hero-banner__description p {
   margin: 0;
+  color: #ffffff !important;
 }
 
 /* Premium Button Styles - Inspired by Tesla/Rivian */
@@ -262,6 +263,7 @@
   font-weight: 700;
   color: #c9a227;
   line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 
 .hero-banner__trust-label {
