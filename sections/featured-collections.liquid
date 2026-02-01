@@ -10,7 +10,7 @@
     </div>
   {% endif %}
 
-  <div class="featured-collections__grid featured-collections__grid--{{ section.blocks.size }}">
+  <div class="featured-collections__grid featured-collections__grid--{{ section.blocks.size }}" role="list" aria-label="Featured product collections">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'collection' %}
@@ -20,38 +20,45 @@
             {% assign collection_url = '/collections/' | append: block.settings.collection %}
           {% endif %}
           {% assign collection_url = collection_url | default: '/collections/all' %}
-          <div class="featured-collections__item" {{ block.shopify_attributes }}>
-            <a href="{{ collection_url }}" class="featured-collections__link">
+          {% assign card_title = block.settings.title | default: collection.title | default: 'Collection' %}
+          <div class="featured-collections__item" {{ block.shopify_attributes }} role="listitem">
+            <a href="{{ collection_url }}" class="featured-collections__link" aria-label="Shop {{ card_title }}">
               <div class="featured-collections__image-wrapper">
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 600 | image_tag:
                     loading: 'lazy',
                     class: 'featured-collections__image',
-                    alt: collection.title | default: block.settings.title
+                    alt: card_title
                   }}
                 {% elsif collection.featured_image != blank %}
                   {{ collection.featured_image | image_url: width: 600 | image_tag:
                     loading: 'lazy',
                     class: 'featured-collections__image',
-                    alt: collection.title
+                    alt: card_title
                   }}
                 {% else %}
+                  {%- comment -%} Premium placeholder with laser engraving icon {%- endcomment -%}
                   <div class="featured-collections__placeholder">
-                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    <svg class="featured-collections__placeholder-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <circle cx="40" cy="40" r="30" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                      <path d="M40 20V35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="40" cy="42" r="6" stroke="currentColor" stroke-width="2"/>
+                      <path d="M28 55L40 48L52 55" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <rect x="25" y="58" width="30" height="6" rx="2" fill="currentColor" opacity="0.2"/>
+                    </svg>
+                    <span class="featured-collections__placeholder-text">{{ card_title }}</span>
                   </div>
                 {% endif %}
                 <div class="featured-collections__overlay"></div>
               </div>
               <div class="featured-collections__content">
-                <h3 class="featured-collections__title h3">
-                  {{ block.settings.title | default: collection.title | default: 'Collection' }}
-                </h3>
+                <h3 class="featured-collections__title h3">{{ card_title }}</h3>
                 {% if block.settings.description != blank %}
                   <p class="featured-collections__description">{{ block.settings.description }}</p>
                 {% endif %}
-                <span class="featured-collections__cta button button--link">
+                <span class="featured-collections__cta">
                   {{ block.settings.button_label | default: 'Shop Now' }}
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                     <path d="M4.16669 10H15.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10 4.16669L15.8333 10L10 15.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -75,13 +82,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Shop Our Collections"
+      "default": "Handcrafted for Life's Moments"
     },
     {
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Premium engraved products for every occasion"
+      "default": "Michigan-made laser engravings that turn memories into heirlooms"
     },
     {
       "type": "range",
@@ -147,25 +154,33 @@
         {
           "type": "collection",
           "settings": {
-            "title": "Slate Coasters",
-            "description": "Premium natural slate with custom engraving",
-            "button_label": "Shop Coasters"
+            "title": "Natural Slate Coasters",
+            "description": "Real stone, permanent art. Your designs etched into premium natural slate.",
+            "button_label": "Create Your Set"
           }
         },
         {
           "type": "collection",
           "settings": {
-            "title": "Golf Items",
-            "description": "Personalized accessories for the course",
-            "button_label": "Shop Golf"
+            "title": "Photo Keepsakes",
+            "description": "Turn cherished photos into heirloom keepsakes with stunning laser detail.",
+            "button_label": "Upload Your Photo"
           }
         },
         {
           "type": "collection",
           "settings": {
-            "title": "Branding Gifts",
-            "description": "Corporate and business gift solutions",
-            "button_label": "Shop Gifts"
+            "title": "Personalized Golf Markers",
+            "description": "Stand out on the green. The perfect gift for the golfer who has everything.",
+            "button_label": "Shop Golf Gifts"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Corporate & Custom",
+            "description": "Branded gifts and bulk orders crafted to your standards. Impress clients, reward teams.",
+            "button_label": "Request a Quote"
           }
         }
       ]

@@ -1,58 +1,73 @@
-/* Featured Collections Section Styles */
+/* Featured Collections Section - Premium Tesla/Rivian Inspired Design */
 
+/* ============================================
+   Section Container
+   ============================================ */
 .featured-collections {
-  /* Using fluid section padding from design system */
-  padding: var(--section-padding-y, clamp(50px, 8vw, 120px)) 0;
-  /* Brand standard light background for consistency */
-  background: #f8f8f8;
+  padding: var(--section-padding-y, clamp(60px, 10vw, 140px)) 0;
+  background: linear-gradient(180deg, #f8f8f8 0%, #fafafa 50%, #f8f8f8 100%);
+  position: relative;
 }
 
+/* Decorative gold accent line at top */
+.featured-collections::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #c9a227, transparent);
+  border-radius: 2px;
+}
+
+/* ============================================
+   Header Typography
+   ============================================ */
 .featured-collections__header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
 }
 
 .featured-collections__heading {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #1a1a1a !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .featured-collections__subheading {
-  /* Improved contrast: #2a2a2a on #f8f8f8 = 15.8:1 (WCAG AAA) vs previous #555555 = 9.6:1 */
-  color: #2a2a2a !important;
+  color: #4a4a4a !important;
   font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* ============================================
+   Grid Layout
+   ============================================ */
 .featured-collections__grid {
   display: grid;
-  /* Using fluid gap from design system */
-  gap: var(--gap-md, clamp(1rem, 1.5vw, 2.5rem));
+  gap: clamp(1.25rem, 2vw, 2rem);
 }
 
 .featured-collections__grid--1 {
   grid-template-columns: 1fr;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-.featured-collections__grid--2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.featured-collections__grid--3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.featured-collections__grid--4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
+.featured-collections__grid--2 { grid-template-columns: repeat(2, 1fr); }
+.featured-collections__grid--3 { grid-template-columns: repeat(3, 1fr); }
+.featured-collections__grid--4 { grid-template-columns: repeat(4, 1fr); }
 .featured-collections__grid--5,
-.featured-collections__grid--6 {
-  grid-template-columns: repeat(3, 1fr);
-}
+.featured-collections__grid--6 { grid-template-columns: repeat(3, 1fr); }
 
 @media (max-width: 989px) {
   .featured-collections__grid--3,
@@ -64,122 +79,271 @@
 }
 
 @media (max-width: 749px) {
-  .featured-collections__grid--2,
-  .featured-collections__grid--3,
-  .featured-collections__grid--4,
-  .featured-collections__grid--5,
-  .featured-collections__grid--6 {
+  .featured-collections__grid {
     grid-template-columns: 1fr;
+    gap: clamp(1rem, 3vw, 1.5rem);
   }
 }
 
+/* ============================================
+   Card Container - Premium Elevation
+   ============================================ */
 .featured-collections__item {
   position: relative;
+  border-radius: 16px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 24px 48px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 500ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+/* Gold accent line at bottom of card */
+.featured-collections__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a227, transparent);
+  transition: width 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10;
+  border-radius: 2px;
+}
+
+/* Hover: Premium lift & subtle gold glow */
+.featured-collections__item:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.12),
+    0 32px 64px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(201, 162, 39, 0.08);
+}
+
+.featured-collections__item:hover::after {
+  width: 60%;
+}
+
+/* ============================================
+   Card Link & Focus States
+   ============================================ */
 .featured-collections__link {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: 12px;
+  border-radius: inherit;
   overflow: hidden;
+  position: relative;
 }
 
+.featured-collections__link:focus {
+  outline: none;
+}
+
+.featured-collections__link:focus-visible {
+  outline: 3px solid #c9a227;
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+/* ============================================
+   Image Wrapper
+   ============================================ */
 .featured-collections__image-wrapper {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   background: #1a1a1a;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 .featured-collections__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Using standardized animation timing from animations.css */
-  transition: transform var(--animation-duration-slow, 400ms) var(--animation-easing-premium, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+  transition:
+    transform 600ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 400ms ease;
 }
 
 .featured-collections__link:hover .featured-collections__image {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: brightness(1.05);
 }
 
+/* ============================================
+   Gradient Overlay
+   ============================================ */
 .featured-collections__overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* Using standardized overlay-card values from animations.css */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, var(--overlay-card-start, 0.85)) 0%,
-    rgba(0, 0, 0, var(--overlay-card-mid, 0.3)) 40%,
-    rgba(0, 0, 0, var(--overlay-card-end, 0)) 70%
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 35%,
+    rgba(0, 0, 0, 0.1) 60%,
+    transparent 100%
   );
   pointer-events: none;
+  transition: opacity 400ms ease;
 }
 
+.featured-collections__link:hover .featured-collections__overlay {
+  opacity: 0.85;
+}
+
+/* ============================================
+   Premium Placeholder
+   ============================================ */
 .featured-collections__placeholder {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  gap: 1.5rem;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(201, 162, 39, 0.05) 0%, transparent 40%),
+    linear-gradient(165deg, #2a2a2a 0%, #1a1a1a 50%, #151515 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.featured-collections__placeholder .placeholder-svg {
-  width: 50%;
-  height: auto;
-  fill: rgba(255, 255, 255, 0.15);
+/* Subtle shimmer animation */
+.featured-collections__placeholder::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.02) 50%,
+    transparent 70%
+  );
+  animation: placeholder-shimmer 8s ease-in-out infinite;
 }
 
+@keyframes placeholder-shimmer {
+  0%, 100% { transform: translateX(-30%) translateY(-30%); }
+  50% { transform: translateX(30%) translateY(30%); }
+}
+
+.featured-collections__placeholder-icon {
+  width: 80px;
+  height: 80px;
+  color: #c9a227;
+  opacity: 0.6;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms ease;
+}
+
+.featured-collections__link:hover .featured-collections__placeholder-icon {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.featured-collections__placeholder-text {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   Content Area
+   ============================================ */
 .featured-collections__content {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding-top: clamp(3rem, 5vw, 5rem);
   color: #ffffff !important;
-  /* Using standardized overlay-strong values from animations.css */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, var(--overlay-near-full, 0.9)) 0%,
-    rgba(0, 0, 0, var(--overlay-muted, 0.6)) 60%,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(20, 20, 20, 0.7) 50%,
     transparent 100%
   );
   z-index: 2;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.featured-collections__link:hover .featured-collections__content {
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   Typography
+   ============================================ */
 .featured-collections__title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.8rem;
-  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  font-size: clamp(1.6rem, 1.4rem + 0.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+  position: relative;
+}
+
+/* Gold underline accent on title */
+.featured-collections__title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #c9a227 0%, transparent 100%);
+  margin-top: 0.6rem;
+  transition: width 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.featured-collections__link:hover .featured-collections__title::after {
+  width: 60px;
 }
 
 .featured-collections__description {
-  font-size: 1.4rem;
-  margin: 0 0 1rem 0;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9) !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-size: clamp(1.3rem, 1.2rem + 0.2vw, 1.5rem);
+  font-weight: 400;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.01em;
 }
 
+/* ============================================
+   CTA Button
+   ============================================ */
 .featured-collections__cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.4rem;
+  gap: 0.6rem;
+  font-size: 1.3rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #ffffff !important;
   text-decoration: none;
-  /* Using standardized fast animation timing */
-  transition: gap var(--animation-duration-fast, 200ms) ease,
-              color var(--animation-duration-fast, 200ms) ease;
+  transition:
+    color 300ms ease,
+    gap 300ms cubic-bezier(0.23, 1, 0.32, 1);
   padding: 0.5rem 0;
 }
 
@@ -187,6 +351,61 @@
   color: #c9a227 !important;
 }
 
+.featured-collections__cta svg {
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.featured-collections__link:hover .featured-collections__cta svg {
+  transform: translateX(4px);
+}
+
 .featured-collections__link:hover .featured-collections__cta {
-  gap: 0.75rem;
+  gap: 0.85rem;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 989px) {
+  .featured-collections__content {
+    padding: 1.5rem;
+    padding-top: 3rem;
+  }
+}
+
+@media (max-width: 749px) {
+  .featured-collections__image-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .featured-collections__item:hover {
+    transform: translateY(-4px);
+  }
+
+  .featured-collections__link:hover .featured-collections__content {
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================================
+   Reduced Motion Preference
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .featured-collections__item,
+  .featured-collections__image,
+  .featured-collections__content,
+  .featured-collections__cta,
+  .featured-collections__cta svg,
+  .featured-collections__placeholder-icon,
+  .featured-collections__title::after {
+    transition: none;
+  }
+
+  .featured-collections__placeholder::before {
+    animation: none;
+  }
+
+  .featured-collections__item:hover {
+    transform: none;
+  }
 }
