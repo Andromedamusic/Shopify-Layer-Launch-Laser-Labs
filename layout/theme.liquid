@@ -213,7 +213,81 @@
       {{ content_for_layout }}
     </main>
 
-    {% section 'site-footer' %}
+    {%- comment -%} Inline Footer - bypasses section system for reliability {%- endcomment -%}
+    <footer class="footer">
+      <div class="footer__wrapper page-width">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="/" class="footer__logo">
+              <span class="footer__logo-text">{{ shop.name }}</span>
+            </a>
+            <p class="footer__tagline">Premium custom engraved products, made to order in Michigan.</p>
+            <div class="footer__social">
+              {%- if settings.social_facebook_link != blank -%}
+                <a href="{{ settings.social_facebook_link }}" class="footer__social-link" aria-label="Facebook">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <a href="{{ settings.social_instagram_link }}" class="footer__social-link" aria-label="Instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="footer__menu">
+            <h3 class="footer__menu-heading">Shop</h3>
+            <ul class="footer__menu-list">
+              <li class="footer__menu-item"><a href="/collections/all" class="footer__menu-link">All Products</a></li>
+              <li class="footer__menu-item"><a href="/pages/design-library" class="footer__menu-link">Design Library</a></li>
+              <li class="footer__menu-item"><a href="/pages/custom-upload" class="footer__menu-link">Custom Orders</a></li>
+            </ul>
+          </div>
+          <div class="footer__menu">
+            <h3 class="footer__menu-heading">Help</h3>
+            <ul class="footer__menu-list">
+              <li class="footer__menu-item"><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+              <li class="footer__menu-item"><a href="/pages/shipping" class="footer__menu-link">Shipping Info</a></li>
+              <li class="footer__menu-item"><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer__contact">
+            <h3 class="footer__menu-heading">Contact</h3>
+            <p class="footer__contact-item"><a href="mailto:HunterBos@BosBusinessServices.org">HunterBos@BosBusinessServices.org</a></p>
+            <p class="footer__contact-item"><a href="tel:+12488388314">(248) 838-8314</a></p>
+            <p class="footer__contact-item">Southeast Michigan</p>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__copyright">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.</p>
+          <div class="footer__payment">{{ shop.enabled_payment_types | payment_type_svg_tag }}</div>
+        </div>
+      </div>
+    </footer>
+    <style>
+      .footer{background:#f8f8f8;padding:70px 0 0;margin-top:auto}
+      .footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:50px;border-bottom:1px solid #c5c5c5}
+      @media(max-width:989px){.footer__grid{grid-template-columns:1fr 1fr}}
+      @media(max-width:749px){.footer__grid{grid-template-columns:1fr;text-align:center}}
+      .footer__logo{display:inline-block;text-decoration:none;margin-bottom:1.25rem}
+      .footer__logo-text{font-size:2.2rem;font-weight:700;color:#1a1a1a}
+      .footer__tagline{color:#555;font-size:1.6rem;margin-bottom:1.75rem;line-height:1.6}
+      .footer__social{display:flex;gap:1rem}
+      @media(max-width:749px){.footer__social{justify-content:center}}
+      .footer__social-link{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#1a1a1a;color:#fff;border-radius:50%;transition:all .2s}
+      .footer__social-link:hover{opacity:.8;transform:translateY(-2px)}
+      .footer__menu-heading{font-size:1.6rem;font-weight:700;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em;color:#1a1a1a}
+      .footer__menu-list{list-style:none;padding:0;margin:0}
+      .footer__menu-item{margin-bottom:.75rem}
+      .footer__menu-link,.footer__contact-item a{color:#4a4a4a;font-size:1.6rem;text-decoration:none;transition:color .2s}
+      .footer__menu-link:hover,.footer__contact-item a:hover{color:#1a1a1a;text-decoration:underline}
+      .footer__contact-item{color:#4a4a4a;font-size:1.6rem;margin-bottom:.75rem;line-height:1.5}
+      .footer__bottom{display:flex;justify-content:space-between;align-items:center;padding:24px 0;flex-wrap:wrap;gap:1rem}
+      @media(max-width:749px){.footer__bottom{flex-direction:column;text-align:center}}
+      .footer__copyright{font-size:1.4rem;color:#595959;margin:0}
+      .footer__payment svg{height:28px;width:auto;margin-left:10px}
+    </style>
+
     {% section 'cart-drawer' %}
     {% render 'quick-view' %}
     {% render 'wishlist' %}
