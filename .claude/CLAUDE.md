@@ -79,9 +79,9 @@ Rating: 5 stars (15+ reviews)
 - `metal-engraving` → templates/collection.metal-engraving.json
 - `memorial` → templates/collection.memorial.json
 - `holiday-gifts` → templates/collection.holiday-gifts.json
-- `best-sellers` → templates/collection.best-sellers.json
+- `best-sellers` → templates/collection.best-sellers.json (ALSO used for "On Sale" nav link - same collection with 5% discount strategy)
 - `new-arrivals` → templates/collection.new-arrivals.json
-- `sale` → templates/collection.sale.json (VERIFY: check if handle is `sale` or `on-sale` in Shopify Admin)
+- NOTE: "On Sale" navigation links to `best-sellers` collection (no separate `sale` collection exists)
 
 ### Section Group Naming Conflicts (Footer Error Fix)
 **Problem**: "Error in tag 'section' - 'footer' is not a valid section type"
