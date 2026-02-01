@@ -1004,20 +1004,18 @@ section,
   border-radius: 4px;
 }
 
-/* Softer section backgrounds with gradient edges */
+/* Section background - REMOVED problematic transparent edge gradients */
+/* Previously had transparent edges that could cause visual artifacts */
 .section-soft-bg {
-  background:
-    linear-gradient(90deg, transparent 0%, rgba(248, 248, 248, 1) 3%, rgba(248, 248, 248, 1) 97%, transparent 100%);
+  /* Clean, consistent background without edge artifacts */
+  background: #f8f8f8;
 }
 
-/* Dark section soft edges */
+/* Dark section soft edges - REMOVED problematic gradient that caused dark corner artifacts */
+/* Previously had transparent edges that created visual artifacts on light backgrounds */
 .section-dark-soft {
-  background:
-    linear-gradient(90deg,
-      transparent 0%,
-      rgba(26, 26, 26, 1) 2%,
-      rgba(26, 26, 26, 1) 98%,
-      transparent 100%);
+  /* Clean background without edge artifacts */
+  background: none;
 }
 
 /* Form input softer styling */

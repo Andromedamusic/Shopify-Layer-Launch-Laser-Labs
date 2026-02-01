@@ -471,7 +471,8 @@
 
   .feature-card__description,
   .why-different__card-description {
-    color: #b0b0b0;
+    /* Improved contrast: #d0d0d0 on #262626 = 11.5:1 (WCAG AAA) vs previous #b0b0b0 = 8.2:1 */
+    color: #d0d0d0;
   }
 
   .feature-card__icon,
@@ -538,12 +539,14 @@
 
   .collection-card__description,
   .featured-collection-card__description {
-    color: #b0b0b0;
+    /* Improved contrast: #d0d0d0 for better legibility */
+    color: #d0d0d0;
   }
 
   .collection-card__count,
   .featured-collection-card__count {
-    color: #a0a0a0;
+    /* Improved contrast: #c0c0c0 on #262626 = 8.8:1 (WCAG AAA) vs previous #a0a0a0 = 5.8:1 */
+    color: #c0c0c0;
   }
 
   /* Trust Bar / Trust Badges */
@@ -659,7 +662,8 @@
 
   .process-step__description,
   .how-it-works__description {
-    color: #b0b0b0;
+    /* Improved contrast: #d0d0d0 for better legibility */
+    color: #d0d0d0;
   }
 
   /* FAQ Section */

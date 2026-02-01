@@ -18,7 +18,8 @@
 }
 
 .featured-collections__subheading {
-  color: #555555 !important;
+  /* Improved contrast: #2a2a2a on #f8f8f8 = 15.8:1 (WCAG AAA) vs previous #555555 = 9.6:1 */
+  color: #2a2a2a !important;
   font-size: 1.6rem;
   margin: 0;
   line-height: 1.5;

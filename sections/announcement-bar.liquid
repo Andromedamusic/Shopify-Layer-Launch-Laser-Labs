@@ -14,10 +14,13 @@
 
 <style>
   .announcement-bar {
-    padding: 10px 0;
+    padding: 12px 0;
     text-align: center;
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    /* Ensure minimum contrast with text shadow for any color combo */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .announcement-bar__text,
@@ -25,10 +28,34 @@
     margin: 0;
     color: inherit;
     text-decoration: none;
+    /* Enhanced legibility */
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    /* Ensure white text is always visible on dark backgrounds */
+    text-shadow:
+      0 0 1px currentColor,
+      0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   .announcement-bar__link:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Force high contrast for common dark background scenarios */
+  .announcement-bar[style*="background-color: #1a1a1a"] .announcement-bar__text,
+  .announcement-bar[style*="background-color: #1a1a1a"] .announcement-bar__link,
+  .announcement-bar[style*="background-color:#1a1a1a"] .announcement-bar__text,
+  .announcement-bar[style*="background-color:#1a1a1a"] .announcement-bar__link,
+  .announcement-bar[style*="background-color: #333"] .announcement-bar__text,
+  .announcement-bar[style*="background-color: #333"] .announcement-bar__link,
+  .announcement-bar[style*="background-color: rgb(26"] .announcement-bar__text,
+  .announcement-bar[style*="background-color: rgb(26"] .announcement-bar__link {
+    color: #ffffff !important;
+    text-shadow:
+      0 0 2px rgba(255, 255, 255, 0.5),
+      0 1px 3px rgba(0, 0, 0, 0.5);
   }
 </style>
 
