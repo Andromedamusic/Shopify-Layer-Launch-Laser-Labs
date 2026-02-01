@@ -1,60 +1,119 @@
+{%- comment -%}
+  Count actual design blocks (not categories)
+{%- endcomment -%}
+{%- assign design_count = 0 -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'design' -%}
+    {%- assign design_count = design_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Only show section if there are actual designs OR show the CTA card fallback
+{%- endcomment -%}
 <div class="design-library-preview section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
   <div class="design-library-preview__wrapper page-width">
     <div class="design-library-preview__header">
       {% if section.settings.heading != blank %}
-        <h2 class="design-library-preview__heading h2">{{ section.settings.heading }}</h2>
+        <h2 class="design-library-preview__heading">{{ section.settings.heading }}</h2>
       {% endif %}
       {% if section.settings.subheading != blank %}
         <p class="design-library-preview__subheading">{{ section.settings.subheading }}</p>
       {% endif %}
     </div>
 
-    <div class="design-library-preview__categories">
-      {% for block in section.blocks %}
-        {% if block.type == 'category' %}
-          <button class="design-library-preview__category-btn {% if forloop.first %}active{% endif %}"
-                  data-category="{{ block.settings.category_tag | handle }}"
-                  {{ block.shopify_attributes }}>
-            {{ block.settings.category_name }}
-          </button>
-        {% endif %}
-      {% endfor %}
-    </div>
+    {%- if design_count > 0 -%}
+      {%- comment -%} Show category filters only when there are designs {%- endcomment -%}
+      <div class="design-library-preview__categories">
+        {% for block in section.blocks %}
+          {% if block.type == 'category' %}
+            <button class="design-library-preview__category-btn {% if forloop.first %}active{% endif %}"
+                    data-category="{{ block.settings.category_tag | handle }}"
+                    {{ block.shopify_attributes }}>
+              {{ block.settings.category_name }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
 
-    <div class="design-library-preview__grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'design' %}
-          <div class="design-library-preview__item"
-               data-category="{{ block.settings.category_tag | handle }}"
-               {{ block.shopify_attributes }}>
-            <div class="design-library-preview__image-wrapper">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 400 | image_tag:
-                  loading: 'lazy',
-                  class: 'design-library-preview__image',
-                  alt: block.settings.design_name
-                }}
-              {% else %}
-                <div class="design-library-preview__placeholder">
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      <div class="design-library-preview__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'design' %}
+            <div class="design-library-preview__item"
+                 data-category="{{ block.settings.category_tag | handle }}"
+                 {{ block.shopify_attributes }}>
+              <div class="design-library-preview__image-wrapper">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 400 | image_tag:
+                    loading: 'lazy',
+                    class: 'design-library-preview__image',
+                    alt: block.settings.design_name
+                  }}
+                {% else %}
+                  <div class="design-library-preview__placeholder">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+                <div class="design-library-preview__item-overlay">
+                  <span class="design-library-preview__item-name">{{ block.settings.design_name }}</span>
+                  <a href="{{ block.settings.product_link | default: section.settings.library_link }}" class="design-library-preview__item-cta">
+                    {{ block.settings.cta_text | default: 'Request This Design' }}
+                  </a>
                 </div>
-              {% endif %}
-              <div class="design-library-preview__item-overlay">
-                <span class="design-library-preview__item-name">{{ block.settings.design_name }}</span>
-                <a href="{{ block.settings.product_link | default: section.settings.library_link }}" class="design-library-preview__item-cta">
-                  {{ block.settings.cta_text | default: 'Request This Design' }}
-                </a>
               </div>
+              {% if block.settings.design_tag != blank %}
+                <span class="design-library-preview__tag">{{ block.settings.design_tag }}</span>
+              {% endif %}
             </div>
-            {% if block.settings.design_tag != blank %}
-              <span class="design-library-preview__tag">{{ block.settings.design_tag }}</span>
-            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {%- else -%}
+      {%- comment -%} Engaging CTA cards when no designs are configured {%- endcomment -%}
+      <div class="design-library-preview__cta-grid">
+        <a href="{{ section.settings.library_link }}" class="design-library-preview__cta-card">
+          <div class="design-library-preview__cta-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+          <h3 class="design-library-preview__cta-title">Browse Pre-Made Designs</h3>
+          <p class="design-library-preview__cta-text">Michigan themes, golf motifs, holidays, sports & more</p>
+          <span class="design-library-preview__cta-link">View Design Library <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
 
-    {% if section.settings.button_label != blank %}
+        <a href="/pages/custom-upload" class="design-library-preview__cta-card design-library-preview__cta-card--accent">
+          <div class="design-library-preview__cta-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="17,8 12,3 7,8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3 class="design-library-preview__cta-title">Upload Your Own</h3>
+          <p class="design-library-preview__cta-text">Photos, logos, artwork - we'll engrave anything</p>
+          <span class="design-library-preview__cta-link">Start Custom Order <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a href="/collections/all" class="design-library-preview__cta-card">
+          <div class="design-library-preview__cta-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </div>
+          <h3 class="design-library-preview__cta-title">Shop All Products</h3>
+          <p class="design-library-preview__cta-text">Slate, wood, leather, acrylic, metal & glass</p>
+          <span class="design-library-preview__cta-link">Browse Products <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    {%- endif -%}
+
+    {% if section.settings.button_label != blank and design_count > 0 %}
       <div class="design-library-preview__footer">
         <a href="{{ section.settings.library_link }}" class="design-library-preview__button button button--secondary">
           {{ section.settings.button_label }}
@@ -70,18 +129,111 @@
 
 <style>
   .design-library-preview {
-    padding: 60px 0;
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
   }
   .design-library-preview__header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
   }
   .design-library-preview__heading {
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
   }
   .design-library-preview__subheading {
-    color: rgba(0,0,0,0.6);
-    font-size: 1.1rem;
+    color: #666;
+    font-size: clamp(1.5rem, 1.2vw, 1.8rem);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* CTA Card Grid - shown when no designs configured */
+  .design-library-preview__cta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 989px) {
+    .design-library-preview__cta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 749px) {
+    .design-library-preview__cta-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+  }
+  .design-library-preview__cta-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(2rem, 3vw, 3rem);
+    background: #ffffff;
+    border-radius: clamp(12px, 1vw, 16px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid transparent;
+  }
+  .design-library-preview__cta-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: #c9a227;
+  }
+  .design-library-preview__cta-card--accent {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+  .design-library-preview__cta-card--accent .design-library-preview__cta-icon {
+    color: #c9a227;
+  }
+  .design-library-preview__cta-card--accent .design-library-preview__cta-title,
+  .design-library-preview__cta-card--accent .design-library-preview__cta-text {
+    color: #ffffff;
+  }
+  .design-library-preview__cta-card--accent .design-library-preview__cta-link {
+    color: #c9a227;
+  }
+  .design-library-preview__cta-card--accent:hover {
+    border-color: #c9a227;
+  }
+  .design-library-preview__cta-icon {
+    color: #c9a227;
+    margin-bottom: 1.25rem;
+  }
+  .design-library-preview__cta-title {
+    font-size: clamp(1.6rem, 1.3vw, 2rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 0.75rem 0;
+  }
+  .design-library-preview__cta-text {
+    font-size: clamp(1.3rem, 1vw, 1.5rem);
+    color: #666;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.5;
+  }
+  .design-library-preview__cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: clamp(1.3rem, 1vw, 1.5rem);
+    font-weight: 600;
+    color: #c9a227;
+    margin-top: auto;
+  }
+  .design-library-preview__cta-link svg {
+    transition: transform 0.2s;
+  }
+  .design-library-preview__cta-card:hover .design-library-preview__cta-link svg {
+    transform: translateX(4px);
   }
   .design-library-preview__categories {
     display: flex;

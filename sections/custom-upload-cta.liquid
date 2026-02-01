@@ -59,8 +59,10 @@
 <style>
   .custom-upload-cta {
     position: relative;
-    padding: 80px 0;
+    padding: clamp(60px, 8vw, 100px) 0;
     color: white;
+    /* Softer gradient with warm undertones instead of stark black */
+    background: linear-gradient(135deg, #2a2520 0%, #1a1815 50%, #1a1a1a 100%);
   }
   .custom-upload-cta__bg-image {
     position: absolute;
@@ -81,77 +83,95 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: linear-gradient(135deg, rgba(42, 37, 32, 0.85) 0%, rgba(26, 26, 26, 0.9) 100%);
   }
   .custom-upload-cta__wrapper {
     position: relative;
     z-index: 1;
   }
   .custom-upload-cta__content {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
   }
   .custom-upload-cta__icon {
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
+    margin-bottom: clamp(1.25rem, 2vw, 2rem);
+    color: #c9a227;
   }
   .custom-upload-cta__icon svg {
-    width: 64px;
-    height: 64px;
+    width: clamp(56px, 5vw, 72px);
+    height: clamp(56px, 5vw, 72px);
   }
   .custom-upload-cta__heading {
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
     color: inherit;
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    font-weight: 700;
   }
   .custom-upload-cta__description {
-    font-size: 1.1rem;
+    font-size: clamp(1.5rem, 1.2vw, 1.8rem);
     opacity: 0.9;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(2rem, 3vw, 3rem);
     line-height: 1.6;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .custom-upload-cta__description p {
+    margin: 0;
   }
   .custom-upload-cta__steps {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-bottom: clamp(2rem, 3vw, 3rem);
     flex-wrap: wrap;
   }
   .custom-upload-cta__step {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 1vw, 1rem);
   }
   .custom-upload-cta__step-number {
-    width: 32px;
-    height: 32px;
+    width: clamp(36px, 3vw, 44px);
+    height: clamp(36px, 3vw, 44px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.2);
+    background: linear-gradient(135deg, rgba(201, 162, 39, 0.25) 0%, rgba(201, 162, 39, 0.15) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.4);
     border-radius: 50%;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: clamp(1.3rem, 1vw, 1.5rem);
+    color: #c9a227;
   }
   .custom-upload-cta__step-text {
-    font-size: 0.95rem;
+    font-size: clamp(1.4rem, 1.1vw, 1.6rem);
+    font-weight: 500;
   }
   .custom-upload-cta__button {
-    background: white;
-    color: #1a1a1a;
-    padding: 1rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #c9a227 0%, #d4b340 100%);
+    color: white;
+    padding: clamp(14px, 1.5vw, 18px) clamp(28px, 3vw, 40px);
+    font-size: clamp(1.4rem, 1.1vw, 1.7rem);
     font-weight: 600;
     border: none;
+    border-radius: clamp(6px, 0.5vw, 10px);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 162, 39, 0.3);
   }
   .custom-upload-cta__button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+    background: linear-gradient(135deg, #d4b340 0%, #c9a227 100%);
   }
   .custom-upload-cta__note {
-    margin-top: 1.5rem;
-    font-size: 0.875rem;
+    margin-top: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
     opacity: 0.7;
   }
   @media (max-width: 749px) {
@@ -159,6 +179,17 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+    }
+  }
+  /* Large displays */
+  @media (min-width: 1440px) {
+    .custom-upload-cta__content {
+      max-width: 900px;
+    }
+  }
+  @media (min-width: 1920px) {
+    .custom-upload-cta__content {
+      max-width: 1000px;
     }
   }
 </style>
