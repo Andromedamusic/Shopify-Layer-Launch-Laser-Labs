@@ -162,10 +162,11 @@
     margin-bottom: 0.75rem;
   }
   .page-design-library__description {
-    color: rgba(0,0,0,0.6);
-    font-size: 1.1rem;
+    color: rgba(0,0,0,0.7);
+    font-size: clamp(1.4rem, 1.2vw, 1.6rem);
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
   }
 
   /* Filters */
@@ -177,19 +178,23 @@
     flex-wrap: wrap;
   }
   .design-filter-btn {
-    padding: 0.5rem 1.25rem;
-    border: 1px solid #ddd;
+    padding: 0.6rem 1.5rem;
+    border: 2px solid #c9a227;
     background: white;
     border-radius: 100px;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
+    color: #1a1a1a;
   }
-  .design-filter-btn:hover,
+  .design-filter-btn:hover {
+    background: rgba(201, 162, 39, 0.1);
+  }
   .design-filter-btn.active {
-    background: #1a1a1a;
+    background: #c9a227;
     color: white;
-    border-color: #1a1a1a;
+    border-color: #c9a227;
   }
 
   /* Design Grid */
@@ -238,7 +243,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #eee;
+    background: linear-gradient(135deg, #2a2520 0%, #1a1815 100%);
+    position: relative;
+  }
+  .design-card__placeholder::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(201, 162, 39, 0.3);
+    border-radius: 50%;
+  }
+  .design-card__placeholder::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #c9a227 0%, #d4b340 100%);
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  .design-card__placeholder .placeholder-svg {
+    display: none;
   }
   .design-card__overlay {
     position: absolute;
@@ -323,8 +355,9 @@
     margin: 0 0 0.5rem 0;
   }
   .custom-design-cta__content p {
-    color: rgba(0,0,0,0.6);
+    color: rgba(0,0,0,0.7);
     margin: 0 0 1rem 0;
+    font-size: 1.4rem;
   }
   .custom-design-cta__buttons {
     display: flex;
