@@ -55,9 +55,10 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "background_image": "shopify://shop_images/banner.png",
         "background_color": "#1a1a1a",
         "overlay_opacity": 30,
-        "height": "large",
+        "height": "medium",
         "subheading": "Premium Custom Engraving",
         "heading": "Personalized Slate Coasters",
         "description": "<p>Transform your photos, logos, and ideas into premium engraved products that last a lifetime.</p>",
@@ -65,7 +66,9 @@
         "button_label": "Shop Coasters",
         "button_link": "/collections/slate-coasters",
         "secondary_button_label": "View Design Library",
-        "secondary_button_link": "/pages/design-library"
+        "secondary_button_link": "/pages/design-library",
+        "show_trust_row": true,
+        "show_scroll_indicator": true
       }
     },
     "featured-collections": {
@@ -75,6 +78,7 @@
           "type": "collection",
           "settings": {
             "collection": "slate-coasters",
+            "image": "shopify://shop_images/IMG20251207093125.jpg",
             "title": "Slate Coasters",
             "description": "Premium natural slate with custom engraving",
             "button_label": "Shop Coasters"
