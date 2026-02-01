@@ -72,7 +72,7 @@ Rating: 5 stars (15+ reviews)
 - `wedding-events` → templates/collection.wedding-events.json (for "Wedding & Events")
 - `gift-sets` → templates/collection.gift-sets.json (for "Corporate Gift Sets" - handle differs from title!)
 - `pet-lovers` → templates/collection.pet-lovers.json (for "Pet Lovers")
-- `golf` → templates/collection.golf.json
+- `golf-items` → templates/collection.golf-items.json (for "Golf Items" / "Golf Ball Markers")
 - `slate-coasters` → templates/collection.slate-coasters.json
 - `wood-products` → templates/collection.wood-products.json
 - `leather-goods` → templates/collection.leather-goods.json
@@ -81,7 +81,7 @@ Rating: 5 stars (15+ reviews)
 - `holiday-gifts` → templates/collection.holiday-gifts.json
 - `best-sellers` → templates/collection.best-sellers.json
 - `new-arrivals` → templates/collection.new-arrivals.json
-- `sale` → templates/collection.sale.json
+- `sale` → templates/collection.sale.json (VERIFY: check if handle is `sale` or `on-sale` in Shopify Admin)
 
 ### Section Group Naming Conflicts (Footer Error Fix)
 **Problem**: "Error in tag 'section' - 'footer' is not a valid section type"
