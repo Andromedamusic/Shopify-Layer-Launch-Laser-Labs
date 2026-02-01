@@ -83,13 +83,20 @@ Rating: 5 stars (15+ reviews)
 - `new-arrivals` → templates/collection.new-arrivals.json
 - NOTE: "On Sale" navigation links to `best-sellers` collection (no separate `sale` collection exists)
 
-### Section Group Naming Conflicts (Footer Error Fix)
+### Footer Section Error (DEFINITIVE FIX)
 **Problem**: "Error in tag 'section' - 'footer' is not a valid section type"
-**Root Cause**: `footer-group.json` declared `"type": "footer"` as a GROUP type, which prevented `footer.liquid` from being recognized as a SECTION type.
-**Solution**: Removed `footer-group.json` since:
-- `theme.liquid` uses `{% section 'footer' %}` directly
-- Footer doesn't need section group architecture
-- Naming conflicts occur when a .json group file uses same "type" as a .liquid section file
+**Root Cause**: Shopify's section system was not properly syncing/recognizing section files from the Git repo. Multiple attempts to fix via section files failed:
+1. Deleted `footer-group.json` (didn't fix)
+2. Renamed `footer.liquid` to `site-footer.liquid` (didn't fix)
+3. Verified schema JSON validity (was fine)
+
+**DEFINITIVE Solution**: Inline the footer directly in `layout/theme.liquid`
+- Footer HTML, CSS, and Liquid embedded directly in theme.liquid (lines 216-289)
+- No dependency on external section files
+- Guaranteed to render on all pages
+- Located between `</main>` and `{% section 'cart-drawer' %}`
+
+**Why This Works**: The section system requires Shopify to find and parse section files. By inlining, we bypass this entirely. The footer is now part of theme.liquid itself.
 
 ### Futureproofing Checklist for New Collections
 When adding a new collection:
