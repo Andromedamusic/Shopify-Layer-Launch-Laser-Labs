@@ -33,3 +33,53 @@ This ensures continuous kaizen (improvement) with each addition and inclusion to
 ## Facebook Marketplace Reviews
 Profile: https://www.facebook.com/marketplace/profile/100003393673828/
 Rating: 5 stars (15+ reviews)
+
+## Contact Information
+- Email: HunterBos@BosBusinessServices.org
+- Phone: (248) 838-8314
+
+## Lessons Learned & Solutions
+
+### Collection 404 Errors (Resolved Pattern)
+**Problem**: Collections work in Shopify Admin preview but return 404 on live site.
+**Root Cause**: Theme has collection templates (templates/collection.{handle}.json) but the actual collections don't exist in Shopify Admin with matching handles.
+**Solution**:
+1. In Shopify Admin, go to Products > Collections
+2. Create collections with EXACT handles matching the template names:
+   - `acrylic` (not "acrylic-products")
+   - `glass` (not "glass-etching")
+   - `wedding-gifts` (not "wedding" or "weddings")
+   - `corporate-gifts` (not "corporate" or "business")
+   - `pet-products` (not "pets" or "pet-gifts")
+3. Ensure the collection handle in Shopify matches the template filename exactly
+
+### Required Collection Handles for Theme Templates
+These handles MUST exist in Shopify Admin for pages to work:
+- `acrylic` → templates/collection.acrylic.json
+- `glass` → templates/collection.glass.json
+- `wedding-gifts` → templates/collection.wedding-gifts.json
+- `corporate-gifts` → templates/collection.corporate-gifts.json
+- `pet-products` → templates/collection.pet-products.json
+- `golf` → templates/collection.golf.json
+- `slate-coasters` → templates/collection.slate-coasters.json
+- `wood-products` → templates/collection.wood-products.json
+- `leather-goods` → templates/collection.leather-goods.json
+- `metal-engraving` → templates/collection.metal-engraving.json
+- `memorial` → templates/collection.memorial.json
+- `holiday-gifts` → templates/collection.holiday-gifts.json
+- `best-sellers` → templates/collection.best-sellers.json
+- `new-arrivals` → templates/collection.new-arrivals.json
+- `sale` → templates/collection.sale.json
+
+### Soft Edge Styling Added
+CSS classes added to base.css for softer visual appearance:
+- Subtle vignette effect on body
+- Soft inset shadows on large displays (1440px+)
+- `.section-fade-top` / `.section-fade-bottom` for gradient blends
+- `.section-rounded` for rounded section corners
+- `.section-soft-bg` / `.section-dark-soft` for gradient-edged sections
+- Enhanced card shadows with layered soft shadows
+- Softer form inputs and buttons with hover lift effects
+
+### Sports/Awards Section Removed
+Removed due to copyright concerns - avoid sports team logos and trademarked content.

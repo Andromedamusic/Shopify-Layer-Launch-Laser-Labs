@@ -159,7 +159,7 @@
         "type": "text",
         "id": "contact_email",
         "label": "Contact Email",
-        "default": "orders@layerlaunchlaserlabs.com"
+        "default": "HunterBos@BosBusinessServices.org"
       },
       {
         "type": "text",
