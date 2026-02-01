@@ -133,6 +133,8 @@
   line-height: 1.05;
   font-weight: 300;
   letter-spacing: -0.02em;
+  /* Pure white text */
+  color: #ffffff !important;
   /* Strong text shadow for readability over any image */
   text-shadow:
     0 2px 4px rgba(0, 0, 0, 0.5),
@@ -147,6 +149,8 @@
   line-height: 1.7;
   font-weight: 300;
   max-width: 600px;
+  /* Pure white text */
+  color: #ffffff !important;
   /* Text shadow for readability */
   text-shadow:
     0 1px 3px rgba(0, 0, 0, 0.5),
@@ -264,7 +268,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.9;
+  color: #ffffff !important;
   margin-top: 0.25rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
