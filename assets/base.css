@@ -4,6 +4,19 @@
    CSS Custom Properties for Responsive Scaling
    ============================================ */
 :root {
+  /* Brand Colors */
+  --color-brand-gold: #c9a227;
+  --color-brand-gold-hover: #d4b340;
+  --color-brand-dark: #1a1a1a;
+  --color-brand-light: #f8f8f8;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #767676;
+  --color-text-inverse: #ffffff;
+  --color-border: #dddddd;
+  --color-border-light: rgba(0, 0, 0, 0.08);
+  --color-border-dark: rgba(255, 255, 255, 0.1);
+
   /* Base spacing unit - scales with viewport */
   --spacing-unit: clamp(0.5rem, 0.4rem + 0.25vw, 1rem);
 
