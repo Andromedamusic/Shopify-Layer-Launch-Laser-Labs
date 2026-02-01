@@ -231,53 +231,6 @@
         "note": "Accepted formats: PNG, JPG. We'll send a proof before production."
       }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "review-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Beautiful coasters. Fast communication and shipping. Love them!",
-            "author": "Lynn",
-            "location": "Michigan",
-            "product": "Custom Coasters",
-            "source": "Facebook"
-          }
-        },
-        "review-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Great seller, phenomenal communication and lightning fast shipping.",
-            "author": "Scott",
-            "location": "Michigan",
-            "source": "Facebook"
-          }
-        },
-        "review-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Excellent quality!! Very professional and delivered the product. VERY pleased!",
-            "author": "Heidi",
-            "location": "Michigan",
-            "source": "Facebook"
-          }
-        }
-      },
-      "block_order": [
-        "review-1",
-        "review-2",
-        "review-3"
-      ],
-      "settings": {
-        "heading": "What Our Customers Say",
-        "subheading": "5-star rated on Facebook Marketplace with 15+ reviews",
-        "background_color": "#f8f8f8",
-        "facebook_url": "https://www.facebook.com/marketplace/profile/100003393673828/"
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -295,7 +248,6 @@
   "order": [
     "trust-bar",
     "hero",
-    "testimonials",
     "featured-collections",
     "why-different",
     "design-library-preview",

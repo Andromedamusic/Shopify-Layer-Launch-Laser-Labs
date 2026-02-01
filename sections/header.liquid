@@ -103,6 +103,13 @@
           </a>
         </li>
 
+        {%- comment -%} About Link {%- endcomment -%}
+        <li class="header__menu-item">
+          <a href="/pages/about" class="header__menu-link {% if request.path == '/pages/about' %}header__menu-link--active{% endif %}">
+            About
+          </a>
+        </li>
+
         {%- comment -%} Contact Link {%- endcomment -%}
         <li class="header__menu-item">
           <a href="/pages/contact" class="header__menu-link {% if request.path == '/pages/contact' %}header__menu-link--active{% endif %}">
@@ -202,6 +209,14 @@
         <a href="/collections/all" class="header__mobile-link" style="display: flex !important; align-items: center; color: #ffffff !important; padding: 18px 20px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span style="color: #ffffff;">Catalog</span>
+        </a>
+      </li>
+
+      {%- comment -%} About {%- endcomment -%}
+      <li class="header__mobile-item" style="display: block !important; min-height: 56px;">
+        <a href="/pages/about" class="header__mobile-link {% if request.path == '/pages/about' %}header__mobile-link--active{% endif %}" style="display: flex !important; align-items: center; color: #ffffff !important; padding: 18px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" style="margin-right: 10px; flex-shrink: 0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="color: #ffffff;">About</span>
         </a>
       </li>
 

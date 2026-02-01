@@ -27,25 +27,6 @@
     "newsletter_heading": "Join Our Community",
     "newsletter_text": "Subscribe for exclusive designs, early access to new products, and 10% off your first order.",
     "footer_tagline": "Premium custom engraved products, made to order in Michigan.",
-    "sections": {
-      "header-group": {
-        "type": "header",
-        "sections": {
-          "announcement-bar": {
-            "type": "announcement-bar",
-            "settings": {
-              "text": "Free Shipping on Orders Over $75!",
-              "link": "/collections/all"
-            }
-          },
-          "header": {
-            "type": "header",
-            "settings": {}
-          }
-        },
-        "order": ["announcement-bar", "header"]
-      }
-    },
     "content_for_index": []
   },
   "presets": {
