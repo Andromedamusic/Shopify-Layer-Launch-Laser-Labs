@@ -85,6 +85,14 @@ body {
   overscroll-behavior-x: none; /* Prevent horizontal overscroll bounce */
 }
 
+/* Mobile menu open - scroll lock without layout shift */
+body.mobile-menu-open {
+  overflow: hidden;
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
+  overscroll-behavior: none;
+}
+
 /* Accessibility */
 .skip-to-content-link {
   position: absolute;
