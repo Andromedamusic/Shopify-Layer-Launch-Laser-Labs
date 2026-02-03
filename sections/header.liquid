@@ -1138,25 +1138,28 @@
           e.stopPropagation();
         }
 
-        // Save current scroll position and reset any horizontal scroll
+        // Save current scroll position
         savedScrollY = window.scrollY;
-        window.scrollTo(0, savedScrollY); // Reset horizontal scroll to 0
 
-        mobileDrawer.classList.add('is-open');
-        mobileDrawer.setAttribute('aria-hidden', 'false');
-        mobileToggle.setAttribute('aria-expanded', 'true');
-
-        if (mobileOverlay) {
-          mobileOverlay.classList.add('is-visible');
-        }
-
-        // Lock body scroll while preserving position
+        // FIRST: Lock body scroll immediately (before any animation)
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
         document.body.style.top = '-' + savedScrollY + 'px';
         document.body.style.left = '0';
         document.body.style.right = '0';
+        document.body.style.width = '100%';
         document.body.classList.add('mobile-menu-open');
+
+        // THEN: Open drawer on next frame (after body is locked)
+        requestAnimationFrame(function() {
+          mobileDrawer.classList.add('is-open');
+          mobileDrawer.setAttribute('aria-hidden', 'false');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+
+          if (mobileOverlay) {
+            mobileOverlay.classList.add('is-visible');
+          }
+        });
 
         setTimeout(function() {
           if (mobileClose) mobileClose.focus();
@@ -1169,6 +1172,7 @@
           e.stopPropagation();
         }
 
+        // Close drawer first
         mobileDrawer.classList.remove('is-open');
         mobileDrawer.setAttribute('aria-hidden', 'true');
         mobileToggle.setAttribute('aria-expanded', 'false');
@@ -1177,16 +1181,19 @@
           mobileOverlay.classList.remove('is-visible');
         }
 
-        // Restore body scroll
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.left = '';
-        document.body.style.right = '';
-        document.body.classList.remove('mobile-menu-open');
+        // Wait for drawer animation to complete, then restore body
+        setTimeout(function() {
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.left = '';
+          document.body.style.right = '';
+          document.body.style.width = '';
+          document.body.classList.remove('mobile-menu-open');
 
-        // Restore scroll position
-        window.scrollTo(0, savedScrollY);
+          // Restore scroll position instantly
+          window.scrollTo({ top: savedScrollY, left: 0, behavior: 'instant' });
+        }, 300); // Match drawer transition duration
 
         mobileToggle.focus();
       }
