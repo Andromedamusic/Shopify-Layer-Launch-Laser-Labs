@@ -28,11 +28,10 @@
             method="POST"
             enctype="multipart/form-data"
           >
-            {%- comment -%} Web3Forms Access Key - User needs to get free key from web3forms.com {%- endcomment -%}
-            <input type="hidden" name="access_key" value="{{ section.settings.web3forms_key | default: 'YOUR_ACCESS_KEY_HERE' }}">
+            {%- comment -%} Web3Forms Access Key {%- endcomment -%}
+            <input type="hidden" name="access_key" value="{{ section.settings.web3forms_key | default: '3923826b-365c-4692-b1a2-64e2f2a04c4c' }}">
             <input type="hidden" name="subject" value="New Custom Order Request - LayerLaunch Laser Lab">
             <input type="hidden" name="from_name" value="LayerLaunch Custom Order Form">
-            <input type="hidden" name="redirect" value="{{ shop.url }}/pages/custom-orders?submitted=true">
 
             {%- comment -%} Honeypot for spam prevention {%- endcomment -%}
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
@@ -1013,20 +1012,66 @@
     }
   }
 
-  // Form submission handling
+  // Form submission handling with async/await
   var form = document.getElementById('custom-order-form');
   var submitBtn = document.getElementById('submit-btn');
+  var successDiv = document.getElementById('form-success');
 
   if (form && submitBtn) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
       var btnText = submitBtn.querySelector('.btn-text');
       var btnLoading = submitBtn.querySelector('.btn-loading');
 
+      // Show loading state
       if (btnText && btnLoading) {
         btnText.style.display = 'none';
         btnLoading.style.display = 'flex';
       }
       submitBtn.disabled = true;
+
+      try {
+        var formData = new FormData(form);
+
+        var response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        var data = await response.json();
+
+        if (response.ok && data.success) {
+          // Success - show success message
+          form.style.display = 'none';
+          if (successDiv) {
+            successDiv.style.display = 'block';
+          }
+          form.reset();
+          // Reset file preview
+          if (filePreview) filePreview.style.display = 'none';
+          if (uploadDisplay) uploadDisplay.style.display = 'block';
+        } else {
+          // Error from API
+          alert('Error: ' + (data.message || 'Something went wrong. Please try again.'));
+          // Reset button
+          if (btnText && btnLoading) {
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+          }
+          submitBtn.disabled = false;
+        }
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Something went wrong. Please check your connection and try again.');
+        // Reset button
+        if (btnText && btnLoading) {
+          btnText.style.display = 'inline';
+          btnLoading.style.display = 'none';
+        }
+        submitBtn.disabled = false;
+      }
     });
   }
 
