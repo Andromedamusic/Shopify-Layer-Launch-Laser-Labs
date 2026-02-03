@@ -4,7 +4,7 @@
    ============================================ */
 
 /* ============================================
-   Animation Timing Tokens
+   Animation Timing Tokens (Enhanced)
    ============================================ */
 :root {
   /* Standard durations */
@@ -14,10 +14,25 @@
   --animation-duration-slower: 600ms;
   --animation-duration-entrance: 800ms;
 
+  /* Enhanced timing tokens from research */
+  --anim-instant: 100ms;
+  --anim-quick: 150ms;
+  --anim-normal: 250ms;
+  --anim-medium: 350ms;
+  --anim-slow: 500ms;
+  --anim-page: 400ms;
+  --stagger-offset: 50ms;
+
   /* Standard easing - Premium feel */
   --animation-easing-premium: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --animation-easing-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --animation-easing-smooth: ease-out;
+
+  /* Enhanced easing curves from research */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-soft: cubic-bezier(0.5, 1.5, 0.5, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* Opacity tokens for consistency */
   --opacity-disabled: 0.5;
@@ -239,6 +254,398 @@
    Reduced Motion Support
    ============================================ */
 
+/* ============================================
+   Cart Badge Bounce Animation
+   ============================================ */
+
+@keyframes cartBadgeBounce {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.3); }
+  40% { transform: scale(0.9); }
+  60% { transform: scale(1.15); }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cartBadgePop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.cart-badge-bounce {
+  animation: cartBadgeBounce 0.6s var(--ease-out-back);
+}
+
+/* ============================================
+   Toast Notification Animations
+   ============================================ */
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes toastProgressBar {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+/* ============================================
+   Button Loading Spinner
+   ============================================ */
+
+@keyframes buttonSpinner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.button--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.button--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: buttonSpinner 0.8s linear infinite;
+}
+
+.button--primary.button--loading::after {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+}
+
+.button--secondary.button--loading::after {
+  border-color: rgba(26, 26, 26, 0.3);
+  border-top-color: #1a1a1a;
+}
+
+/* ============================================
+   Laser Engraving Reveal Effect (Brand Signature)
+   ============================================ */
+
+@keyframes laserScan {
+  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+@keyframes laserBeam {
+  0% { left: 0; opacity: 1; }
+  100% { left: 100%; opacity: 0.3; }
+}
+
+@keyframes laserGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(201, 162, 39, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.8), 0 0 40px rgba(201, 162, 39, 0.4); }
+}
+
+.laser-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.laser-reveal__content {
+  animation: laserScan 1.5s var(--ease-out-expo) forwards;
+}
+
+.laser-reveal__beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.8) 20%,
+    #c9a227 50%,
+    rgba(201, 162, 39, 0.8) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 15px rgba(201, 162, 39, 0.8), 0 0 30px rgba(201, 162, 39, 0.4);
+  animation: laserBeam 1.5s var(--ease-out-expo) forwards;
+}
+
+/* ============================================
+   Tagline Animation (Precision. Personal. Permanent.)
+   ============================================ */
+
+@keyframes taglineWordFade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes taglineDotPulse {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.tagline-animated {
+  display: inline-flex;
+  gap: 0.2em;
+}
+
+.tagline-animated__word {
+  opacity: 0;
+  animation: taglineWordFade 0.6s var(--ease-out-expo) forwards;
+}
+
+.tagline-animated__word:nth-child(1) { animation-delay: 0.1s; }
+.tagline-animated__word:nth-child(2) { animation-delay: 0.3s; }
+.tagline-animated__word:nth-child(3) { animation-delay: 0.5s; }
+
+.tagline-animated__dot {
+  opacity: 0;
+  color: var(--color-brand-gold, #c9a227);
+  animation: taglineDotPulse 0.4s var(--ease-out-back) forwards;
+}
+
+.tagline-animated__dot:nth-child(2) { animation-delay: 0.25s; }
+.tagline-animated__dot:nth-child(4) { animation-delay: 0.45s; }
+.tagline-animated__dot:nth-child(6) { animation-delay: 0.65s; }
+
+/* ============================================
+   Header Hide/Show on Scroll
+   ============================================ */
+
+.header--animated {
+  transition: transform var(--anim-medium) var(--ease-out-expo),
+              box-shadow var(--anim-normal) ease;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+}
+
+.header--scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Product Grid Stagger Animation
+   ============================================ */
+
+@keyframes gridItemReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.grid-stagger-animate .product-card,
+.grid-stagger-animate .collection-card {
+  opacity: 0;
+  animation: gridItemReveal 0.5s var(--ease-out-expo) forwards;
+}
+
+.grid-stagger-animate .product-card:nth-child(1),
+.grid-stagger-animate .collection-card:nth-child(1) { animation-delay: 0ms; }
+.grid-stagger-animate .product-card:nth-child(2),
+.grid-stagger-animate .collection-card:nth-child(2) { animation-delay: 50ms; }
+.grid-stagger-animate .product-card:nth-child(3),
+.grid-stagger-animate .collection-card:nth-child(3) { animation-delay: 100ms; }
+.grid-stagger-animate .product-card:nth-child(4),
+.grid-stagger-animate .collection-card:nth-child(4) { animation-delay: 150ms; }
+.grid-stagger-animate .product-card:nth-child(5),
+.grid-stagger-animate .collection-card:nth-child(5) { animation-delay: 200ms; }
+.grid-stagger-animate .product-card:nth-child(6),
+.grid-stagger-animate .collection-card:nth-child(6) { animation-delay: 250ms; }
+.grid-stagger-animate .product-card:nth-child(7),
+.grid-stagger-animate .collection-card:nth-child(7) { animation-delay: 300ms; }
+.grid-stagger-animate .product-card:nth-child(8),
+.grid-stagger-animate .collection-card:nth-child(8) { animation-delay: 350ms; }
+.grid-stagger-animate .product-card:nth-child(n+9),
+.grid-stagger-animate .collection-card:nth-child(n+9) { animation-delay: 400ms; }
+
+/* ============================================
+   3D Card Tilt Effect
+   ============================================ */
+
+.card-3d-tilt {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform var(--anim-normal) var(--ease-out-expo);
+}
+
+.card-3d-tilt:hover {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.02);
+}
+
+.card-3d-tilt__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--shine-angle, 135deg),
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--anim-normal) ease;
+}
+
+.card-3d-tilt:hover .card-3d-tilt__shine {
+  opacity: 1;
+}
+
+/* ============================================
+   Character-by-Character Text Reveal
+   ============================================ */
+
+@keyframes charReveal {
+  from {
+    opacity: 0;
+    transform: translateY(100%) rotateX(-80deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+.text-reveal-chars .char {
+  display: inline-block;
+  opacity: 0;
+  animation: charReveal 0.5s var(--ease-out-expo) forwards;
+}
+
+/* Dynamic delays applied via JS, but here's a CSS fallback */
+.text-reveal-chars .char:nth-child(1) { animation-delay: 0ms; }
+.text-reveal-chars .char:nth-child(2) { animation-delay: 30ms; }
+.text-reveal-chars .char:nth-child(3) { animation-delay: 60ms; }
+.text-reveal-chars .char:nth-child(4) { animation-delay: 90ms; }
+.text-reveal-chars .char:nth-child(5) { animation-delay: 120ms; }
+.text-reveal-chars .char:nth-child(6) { animation-delay: 150ms; }
+.text-reveal-chars .char:nth-child(7) { animation-delay: 180ms; }
+.text-reveal-chars .char:nth-child(8) { animation-delay: 210ms; }
+.text-reveal-chars .char:nth-child(9) { animation-delay: 240ms; }
+.text-reveal-chars .char:nth-child(10) { animation-delay: 270ms; }
+
+/* ============================================
+   Hamburger Menu Morph Animation
+   ============================================ */
+
+.hamburger-morph {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 24px;
+}
+
+.hamburger-morph__line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transition: transform var(--anim-normal) var(--ease-out-expo),
+              opacity var(--anim-quick) ease;
+  transform-origin: center;
+}
+
+.hamburger-morph[aria-expanded="true"] .hamburger-morph__line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-morph[aria-expanded="true"] .hamburger-morph__line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-morph[aria-expanded="true"] .hamburger-morph__line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================
+   CTA Pulse Glow Effect
+   ============================================ */
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(201, 162, 39, 0.3),
+                0 0 15px rgba(201, 162, 39, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(201, 162, 39, 0.5),
+                0 0 30px rgba(201, 162, 39, 0.3),
+                0 0 45px rgba(201, 162, 39, 0.1);
+  }
+}
+
+.cta-pulse-glow {
+  animation: ctaPulseGlow 2s ease-in-out infinite;
+}
+
+.cta-pulse-glow:hover {
+  animation: none;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.6),
+              0 0 40px rgba(201, 162, 39, 0.3);
+}
+
+/* ============================================
+   Parallax Scroll Classes
+   ============================================ */
+
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-layer--slow {
+  --parallax-speed: 0.3;
+}
+
+.parallax-layer--medium {
+  --parallax-speed: 0.5;
+}
+
+.parallax-layer--fast {
+  --parallax-speed: 0.7;
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -246,5 +653,26 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .laser-reveal__content,
+  .laser-reveal__beam,
+  .tagline-animated__word,
+  .tagline-animated__dot,
+  .grid-stagger-animate .product-card,
+  .grid-stagger-animate .collection-card,
+  .text-reveal-chars .char {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  .header--animated {
+    transition: none !important;
+  }
+
+  .cta-pulse-glow {
+    animation: none !important;
   }
 }
