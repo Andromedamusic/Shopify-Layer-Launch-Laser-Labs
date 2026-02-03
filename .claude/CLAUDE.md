@@ -119,3 +119,38 @@ CSS classes added to base.css for softer visual appearance:
 
 ### Sports/Awards Section Removed
 Removed due to copyright concerns - avoid sports team logos and trademarked content.
+
+### CRITICAL: Custom Upload Page 404 (Action Required in Shopify Admin)
+**Problem**: `/pages/custom-upload` returns 404 error - this is a primary conversion funnel blocker.
+**Root Cause**: The theme template exists (`templates/page.custom-upload.json`) and section exists (`sections/page-custom-upload.liquid`), but the **actual Page must be created in Shopify Admin**.
+
+**Solution - Create the Page in Shopify Admin:**
+1. Go to Shopify Admin → Online Store → Pages
+2. Click "Add page"
+3. Title: "Upload Your Image" (or "Custom Upload")
+4. In the right sidebar under "Online store", find "Theme template"
+5. Select `page.custom-upload` from the dropdown
+6. Save the page
+
+**Verify the handle matches:**
+- The page URL handle should be `custom-upload` (check SEO preview)
+- Navigation links use `/pages/custom-upload`
+
+**Same Pattern Applies to Other Pages:**
+- `request-quote` → needs Page with template `page.request-quote`
+- `bulk-orders` → needs Page with template `page.bulk-orders`
+- `custom-orders` → needs Page with template `page.custom-orders`
+- `design-library` → needs Page with template `page.design-library`
+- `faq` → needs Page with template `page.faq`
+- `contact` → needs Page with template `page.contact`
+- `shipping` → needs Page with template `page.shipping`
+- `about-us` → needs Page with template `page.about-us`
+
+### Gold Text Contrast Issue (WCAG Compliance)
+**Problem**: Gold text (#c9a227) on light backgrounds fails WCAG AA contrast requirements.
+- Current ratio: ~2.14:1 (needs 4.5:1 for normal text, 3:1 for large text)
+
+**Solutions:**
+1. **On light backgrounds**: Use darker gold (#8B6914) or dark text (#1a1a1a) with gold accents (borders, icons)
+2. **On dark backgrounds**: Gold (#c9a227) works well with sufficient contrast
+3. **Alternative approach**: Use gold for decorative elements only, not for essential text

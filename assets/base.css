@@ -7,6 +7,7 @@
   /* Brand Colors */
   --color-brand-gold: #c9a227;
   --color-brand-gold-hover: #d4b340;
+  --color-brand-gold-dark: #8b6914; /* WCAG AA compliant gold for light backgrounds */
   --color-brand-dark: #1a1a1a;
   --color-brand-light: #f8f8f8;
   --color-text-primary: #1a1a1a;
