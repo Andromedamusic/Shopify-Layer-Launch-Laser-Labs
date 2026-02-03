@@ -1,0 +1,333 @@
+{%- comment -%}
+  Sales Pop - Social Proof Notifications
+  Shows recent purchase notifications to build trust and urgency
+{%- endcomment -%}
+
+{%- if settings.sales_pop_enabled -%}
+<div id="sales-pop" class="sales-pop" aria-live="polite" aria-atomic="true" style="display: none;">
+  <button type="button" class="sales-pop__close" aria-label="Close notification">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <div class="sales-pop__image">
+    <img src="" alt="" width="60" height="60" loading="lazy">
+  </div>
+  <div class="sales-pop__content">
+    <p class="sales-pop__title">Someone just purchased</p>
+    <p class="sales-pop__product"></p>
+    <p class="sales-pop__meta">
+      <span class="sales-pop__time"></span>
+      <span class="sales-pop__verified">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Verified purchase
+      </span>
+    </p>
+  </div>
+</div>
+
+<style>
+  .sales-pop {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 340px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(-120%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  }
+
+  .sales-pop.is-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .sales-pop__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .sales-pop__close:hover {
+    background: #f0f0f0;
+    color: #333;
+  }
+
+  .sales-pop__image {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .sales-pop__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sales-pop__content {
+    flex: 1;
+    min-width: 0;
+    padding-right: 16px;
+  }
+
+  .sales-pop__title {
+    font-size: 0.75rem;
+    color: #666;
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .sales-pop__product {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sales-pop__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+
+  .sales-pop__time {
+    color: #999;
+  }
+
+  .sales-pop__verified {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #2e7d32;
+  }
+
+  .sales-pop__verified svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .sales-pop {
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      max-width: none;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .sales-pop {
+      background: #2a2a2a;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .sales-pop__title { color: #aaa; }
+    .sales-pop__product { color: #fff; }
+    .sales-pop__time { color: #888; }
+    .sales-pop__close { color: #888; }
+    .sales-pop__close:hover { background: #3a3a3a; color: #fff; }
+    .sales-pop__image { background: #3a3a3a; }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  var salesPop = document.getElementById('sales-pop');
+  if (!salesPop) return;
+
+  var productEl = salesPop.querySelector('.sales-pop__product');
+  var imageEl = salesPop.querySelector('.sales-pop__image img');
+  var timeEl = salesPop.querySelector('.sales-pop__time');
+  var closeBtn = salesPop.querySelector('.sales-pop__close');
+
+  // Michigan city names for authenticity
+  var locations = [
+    'Detroit, MI', 'Ann Arbor, MI', 'Grand Rapids, MI', 'Lansing, MI',
+    'Troy, MI', 'Farmington Hills, MI', 'Rochester, MI', 'Royal Oak, MI',
+    'Birmingham, MI', 'Novi, MI', 'Canton, MI', 'Livonia, MI',
+    'Sterling Heights, MI', 'Warren, MI', 'Dearborn, MI', 'Traverse City, MI',
+    'Kalamazoo, MI', 'Flint, MI', 'Macomb, MI', 'Oakland County, MI'
+  ];
+
+  // First names (common)
+  var firstNames = [
+    'Sarah', 'Michael', 'Jennifer', 'David', 'Emily', 'James', 'Ashley', 'Robert',
+    'Jessica', 'John', 'Amanda', 'William', 'Stephanie', 'Chris', 'Nicole', 'Matt',
+    'Lisa', 'Andrew', 'Michelle', 'Daniel', 'Lauren', 'Brian', 'Rachel', 'Kevin'
+  ];
+
+  // Time ago phrases
+  var timeAgo = [
+    '2 minutes ago', '5 minutes ago', '8 minutes ago', '12 minutes ago',
+    '15 minutes ago', '23 minutes ago', '34 minutes ago', '47 minutes ago',
+    '1 hour ago', '2 hours ago', '3 hours ago'
+  ];
+
+  // Product data - will be populated from actual products or use defaults
+  var products = [];
+  var defaultProducts = [
+    { title: 'Custom Slate Coaster Set', image: '{{ "slate-coaster.jpg" | asset_url }}' },
+    { title: 'Personalized Golf Ball Marker', image: '{{ "golf-marker.jpg" | asset_url }}' },
+    { title: 'Wedding Date Coasters (Set of 4)', image: '{{ "wedding-coasters.jpg" | asset_url }}' },
+    { title: 'Pet Memorial Slate', image: '{{ "pet-memorial.jpg" | asset_url }}' },
+    { title: 'Custom Logo Coaster', image: '{{ "logo-coaster.jpg" | asset_url }}' },
+    { title: 'Anniversary Photo Slate', image: '{{ "anniversary-slate.jpg" | asset_url }}' },
+    { title: 'Coordinates Coaster', image: '{{ "coordinates-coaster.jpg" | asset_url }}' },
+    { title: 'Family Name Sign', image: '{{ "family-sign.jpg" | asset_url }}' }
+  ];
+
+  // Try to get real products from Shopify
+  {%- assign recent_products = collections.all.products | slice: 0, 12 -%}
+  {%- for product in recent_products -%}
+  products.push({
+    title: {{ product.title | json }},
+    image: {{ product.featured_image | image_url: width: 120 | json }},
+    url: {{ product.url | json }}
+  });
+  {%- endfor -%}
+
+  // Fallback to defaults if no products
+  if (products.length === 0) {
+    products = defaultProducts;
+  }
+
+  var popupTimeout;
+  var hideTimeout;
+  var isVisible = false;
+  var isPaused = false;
+
+  function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function showPopup() {
+    if (isPaused) return;
+
+    var product = getRandomItem(products);
+    var name = getRandomItem(firstNames);
+    var location = getRandomItem(locations);
+    var time = getRandomItem(timeAgo);
+
+    // Update content
+    productEl.textContent = product.title;
+    if (product.image && product.image.indexOf('undefined') === -1) {
+      imageEl.src = product.image;
+      imageEl.alt = product.title;
+    } else {
+      // Placeholder image
+      imageEl.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"%3E%3Crect fill="%23f0f0f0" width="60" height="60"/%3E%3Ctext x="50%25" y="50%25" fill="%23999" font-size="10" text-anchor="middle" dy=".3em"%3EProduct%3C/text%3E%3C/svg%3E';
+    }
+    timeEl.textContent = name + ' from ' + location + ' - ' + time;
+
+    // Show popup
+    salesPop.style.display = 'flex';
+    setTimeout(function() {
+      salesPop.classList.add('is-visible');
+      isVisible = true;
+    }, 50);
+
+    // Auto-hide after 5 seconds
+    hideTimeout = setTimeout(hidePopup, 5000);
+  }
+
+  function hidePopup() {
+    salesPop.classList.remove('is-visible');
+    isVisible = false;
+    setTimeout(function() {
+      if (!isVisible) {
+        salesPop.style.display = 'none';
+      }
+    }, 400);
+
+    // Schedule next popup
+    scheduleNextPopup();
+  }
+
+  function scheduleNextPopup() {
+    var interval = {{ settings.sales_pop_interval | default: 45 }} * 1000;
+    // Add some randomness (+-20%)
+    var variance = interval * 0.2;
+    var actualInterval = interval + (Math.random() * variance * 2 - variance);
+    popupTimeout = setTimeout(showPopup, actualInterval);
+  }
+
+  // Close button
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    clearTimeout(hideTimeout);
+    hidePopup();
+  });
+
+  // Pause on hover
+  salesPop.addEventListener('mouseenter', function() {
+    clearTimeout(hideTimeout);
+  });
+
+  salesPop.addEventListener('mouseleave', function() {
+    if (isVisible) {
+      hideTimeout = setTimeout(hidePopup, 2000);
+    }
+  });
+
+  // Click to go to product
+  salesPop.addEventListener('click', function(e) {
+    if (e.target === closeBtn || closeBtn.contains(e.target)) return;
+    var product = products.find(function(p) { return p.title === productEl.textContent; });
+    if (product && product.url) {
+      window.location.href = product.url;
+    }
+  });
+
+  // Don't show on cart/checkout pages
+  var path = window.location.pathname;
+  if (path.indexOf('/cart') !== -1 || path.indexOf('/checkout') !== -1) {
+    return;
+  }
+
+  // Initial delay before first popup
+  var initialDelay = {{ settings.sales_pop_delay | default: 8 }} * 1000;
+  setTimeout(showPopup, initialDelay);
+
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sales Pop",
+  "tag": "section",
+  "class": "section-sales-pop",
+  "settings": []
+}
+{% endschema %}

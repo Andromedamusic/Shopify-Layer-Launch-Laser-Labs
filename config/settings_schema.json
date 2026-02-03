@@ -323,6 +323,45 @@
         "id": "default_meta_description",
         "label": "Default Meta Description",
         "default": "Premium custom laser engraving on natural slate. Personalized coasters, golf markers, and gifts. Made in Michigan with precision craftsmanship."
+      },
+      {
+        "type": "header",
+        "content": "Microsoft Clarity (Free Heatmaps)"
+      },
+      {
+        "type": "text",
+        "id": "clarity_project_id",
+        "label": "Clarity Project ID",
+        "info": "Get free at clarity.microsoft.com - shows heatmaps and session recordings"
+      },
+      {
+        "type": "header",
+        "content": "Sales Pop Notifications"
+      },
+      {
+        "type": "checkbox",
+        "id": "sales_pop_enabled",
+        "label": "Enable Sales Pop Notifications",
+        "default": true,
+        "info": "Shows recent purchase notifications to build social proof"
+      },
+      {
+        "type": "range",
+        "id": "sales_pop_delay",
+        "label": "Initial Delay (seconds)",
+        "min": 3,
+        "max": 30,
+        "step": 1,
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "sales_pop_interval",
+        "label": "Interval Between Pops (seconds)",
+        "min": 15,
+        "max": 120,
+        "step": 5,
+        "default": 45
       }
     ]
   }

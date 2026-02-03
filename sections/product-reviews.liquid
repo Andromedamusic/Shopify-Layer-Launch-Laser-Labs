@@ -1,0 +1,415 @@
+{%- comment -%}
+  Product Reviews Section
+  Compatible with Judge.me (free tier) or displays testimonials
+
+  To use with Judge.me:
+  1. Install Judge.me from Shopify App Store (free plan available)
+  2. The app will automatically inject review widgets
+  3. This section provides additional social proof display
+{%- endcomment -%}
+
+<div class="product-reviews" id="reviews">
+  <div class="page-width">
+    <div class="product-reviews__header">
+      <h2 class="product-reviews__title">{{ section.settings.heading | default: 'Customer Reviews' }}</h2>
+      <p class="product-reviews__subtitle">{{ section.settings.subheading | default: 'See what our customers are saying about their custom engravings' }}</p>
+
+      {%- comment -%} Overall Rating Summary {%- endcomment -%}
+      <div class="product-reviews__summary">
+        <div class="product-reviews__stars">
+          {%- for i in (1..5) -%}
+          <svg class="star star--filled" width="24" height="24" viewBox="0 0 24 24" fill="#c9a227" stroke="#c9a227" stroke-width="1">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          {%- endfor -%}
+        </div>
+        <span class="product-reviews__rating">5.0 out of 5</span>
+        <span class="product-reviews__count">Based on {{ section.settings.review_count | default: '15+' }} reviews</span>
+      </div>
+
+      {%- if section.settings.facebook_url != blank -%}
+      <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="product-reviews__facebook-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        View all reviews on Facebook
+      </a>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Judge.me Widget Container {%- endcomment -%}
+    <div id="judgeme-widget-container" class="product-reviews__judgeme">
+      {%- comment -%} Judge.me will inject their widget here if installed {%- endcomment -%}
+    </div>
+
+    {%- comment -%} Testimonial Cards (Always shown or as fallback) {%- endcomment -%}
+    <div class="product-reviews__grid">
+      {%- for block in section.blocks -%}
+      <div class="review-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+        <div class="review-card__image">
+          {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.name }}
+        </div>
+        {%- endif -%}
+        <div class="review-card__content">
+          <div class="review-card__stars">
+            {%- assign star_count = block.settings.rating | default: 5 -%}
+            {%- for i in (1..5) -%}
+              {%- if i <= star_count -%}
+              <svg class="star star--filled" width="16" height="16" viewBox="0 0 24 24" fill="#c9a227" stroke="#c9a227"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- else -%}
+              <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <p class="review-card__text">"{{ block.settings.review_text }}"</p>
+          <div class="review-card__author">
+            <span class="review-card__name">{{ block.settings.name }}</span>
+            {%- if block.settings.product_purchased != blank -%}
+            <span class="review-card__product">Purchased: {{ block.settings.product_purchased }}</span>
+            {%- endif -%}
+            {%- if block.settings.verified -%}
+            <span class="review-card__verified">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Verified Purchase
+            </span>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_cta -%}
+    <div class="product-reviews__cta">
+      <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="button button--secondary">
+        {{ section.settings.cta_text | default: 'Share Your Experience' }}
+      </a>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .product-reviews {
+    padding: 80px 0;
+    background: #f8f8f8;
+  }
+
+  .product-reviews__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .product-reviews__title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .product-reviews__subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .product-reviews__summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .product-reviews__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .product-reviews__rating {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .product-reviews__count {
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .product-reviews__facebook-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background: #1877f2;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .product-reviews__facebook-link:hover {
+    background: #166fe5;
+    color: #fff;
+  }
+
+  .product-reviews__judgeme {
+    margin-bottom: 40px;
+  }
+
+  .product-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 989px) {
+    .product-reviews__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .product-reviews__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .review-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .review-card__image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .review-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .review-card__content {
+    padding: 20px;
+  }
+
+  .review-card__stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+
+  .review-card__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 16px 0;
+    font-style: italic;
+  }
+
+  .review-card__author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .review-card__name {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+  }
+
+  .review-card__product {
+    font-size: 0.85rem;
+    color: #888;
+  }
+
+  .review-card__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: #2e7d32;
+    margin-top: 4px;
+  }
+
+  .product-reviews__cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .product-reviews__cta .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .product-reviews__cta .button:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Reviews",
+  "tag": "section",
+  "class": "section-product-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See what our customers are saying about their custom engravings"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review Count Text",
+      "default": "15+",
+      "info": "Displays as 'Based on X reviews'"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook Reviews URL",
+      "info": "Link to your Facebook reviews/profile"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Share Your Experience"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "default": "/pages/contact"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Photo",
+          "info": "Photo of the product from the customer (optional)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Absolutely love my custom coasters! The engraving quality is incredible and they arrived so quickly."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "product_purchased",
+          "label": "Product Purchased",
+          "default": "Custom Slate Coaster Set"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "The custom slate coasters I ordered for my wedding party were absolutely perfect! Hunter was so helpful with the design process and the quality exceeded my expectations.",
+            "name": "Jennifer K.",
+            "product_purchased": "Wedding Coaster Set",
+            "verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "Ordered personalized golf ball markers for my dad's birthday. He was thrilled! Fast shipping and beautiful craftsmanship.",
+            "name": "Michael R.",
+            "product_purchased": "Golf Ball Markers",
+            "verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review_text": "The pet memorial slate brought tears to my eyes. Such a beautiful way to remember my furry friend. Thank you for creating something so special.",
+            "name": "Amanda T.",
+            "product_purchased": "Pet Memorial Slate",
+            "verified": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

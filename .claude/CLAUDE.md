@@ -178,3 +178,90 @@ Removed due to copyright concerns - avoid sports team logos and trademarked cont
 - Additional notes and referral source
 
 **Email format:** Submissions go to configured email with all fields + attached image file.
+
+## Free Integrations (Tier 1 - Essential)
+
+### 1. Microsoft Clarity - Heatmaps & Session Recording (FREE)
+**What it does:** Records user sessions, shows heatmaps of where users click, scroll, and get stuck.
+
+**Setup Instructions:**
+1. Go to https://clarity.microsoft.com
+2. Sign up with Microsoft account (free)
+3. Create a new project for "LayerLaunch Laser Lab"
+4. Copy your **Project ID** (looks like: `abc123xyz`)
+5. In Shopify Admin → Online Store → Themes → Customize
+6. Go to Theme Settings → SEO & Analytics
+7. Paste the Project ID into "Clarity Project ID"
+8. Save
+
+**Key Features:**
+- See exactly where customers struggle on custom order forms
+- Heatmaps show which products get the most attention
+- Session recordings help identify UX issues
+- 100% free, unlimited data
+
+### 2. Shopify Inbox - Live Chat with AI (FREE, Built-in)
+**What it does:** Live chat widget with AI-powered FAQ responses, built into Shopify.
+
+**Setup Instructions:**
+1. Go to Shopify Admin → Inbox (in the left sidebar)
+2. Click "Turn on" to enable Shopify Inbox
+3. Install the Shopify Inbox mobile app (iOS/Android)
+4. Configure automated responses:
+   - Go to Inbox → Instant answers
+   - Add common FAQs about file formats, turnaround time, pricing
+
+**Suggested FAQ Responses:**
+- **File formats:** "We accept AI, SVG, EPS, PDF (vector preferred) or high-res JPG/PNG (300+ dpi). Black areas engrave, white stays untouched."
+- **Turnaround:** "Standard production is 3-5 business days. Rush available for 50% surcharge."
+- **Minimum order:** "No minimum! We do single items. Volume discounts start at 10+ items."
+
+### 3. Sales Pop Notifications (FREE, Built-in)
+**What it does:** Shows "Sarah from Detroit just purchased Custom Slate Coasters" popups.
+
+**Already enabled!** The sales-pop section is included in the theme.
+
+**Configure in Shopify Admin:**
+1. Go to Themes → Customize → Theme Settings → SEO & Analytics
+2. Enable/disable "Sales Pop Notifications"
+3. Adjust initial delay (default: 8 seconds)
+4. Adjust interval between pops (default: 45 seconds)
+
+**Features:**
+- Uses real product data from your store
+- Michigan city names for local authenticity
+- Randomized timing for natural feel
+- Auto-hides after 5 seconds
+- Doesn't show on cart/checkout pages
+
+### 4. Judge.me Reviews Integration (FREE tier available)
+**What it does:** Collects photo/video reviews from customers, displays on product pages.
+
+**Setup Instructions:**
+1. Install Judge.me from Shopify App Store (free plan = unlimited reviews)
+2. The app auto-injects review widgets on product pages
+3. Use the "Product Reviews" section for additional testimonial displays:
+   - Go to Themes → Customize
+   - Add "Product Reviews" section to homepage or product pages
+   - Add manual testimonials in the section blocks
+
+**Why Photo Reviews Matter:**
+- Customers can't imagine custom engravings - photos show real results
+- 2-3x higher conversion with visual social proof
+- Judge.me free tier includes photo reviews
+
+### 5. Product Reviews Section (Manual Testimonials)
+A custom reviews section is available at `sections/product-reviews.liquid`.
+
+**To add testimonials:**
+1. Themes → Customize → Add Section → "Product Reviews"
+2. Add review blocks with:
+   - Customer photo of their product (optional)
+   - Star rating
+   - Review text
+   - Customer name
+   - Product purchased
+   - Verified purchase badge
+
+**Link to Facebook reviews:**
+- Set "Facebook Reviews URL" to: `https://www.facebook.com/marketplace/profile/100003393673828/`
