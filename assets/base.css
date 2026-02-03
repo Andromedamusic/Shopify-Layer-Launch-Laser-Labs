@@ -72,6 +72,7 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevent horizontal scroll from off-screen elements */
 }
 
 body {
@@ -80,6 +81,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal overflow on foldable devices */
+  overscroll-behavior-x: none; /* Prevent horizontal overscroll bounce */
 }
 
 /* Accessibility */

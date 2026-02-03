@@ -806,18 +806,22 @@
     width: 85%;
     max-width: 320px;
     height: 100%;
+    height: 100dvh; /* Use dynamic viewport height for foldables */
     background: #0d0d0d;
     z-index: 1000;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
+    visibility: hidden; /* Hide when off-screen to prevent viewport expansion */
+    transition: transform 0.3s ease, visibility 0.3s;
     display: flex;
     flex-direction: column;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    overflow-x: hidden; /* Prevent any horizontal overflow within drawer */
   }
 
   .header__mobile-drawer.is-open {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .header__mobile-header {
@@ -1126,11 +1130,17 @@
 
       initialized = true;
 
+      var savedScrollY = 0;
+
       function openMobileMenu(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
+
+        // Save current scroll position and reset any horizontal scroll
+        savedScrollY = window.scrollY;
+        window.scrollTo(0, savedScrollY); // Reset horizontal scroll to 0
 
         mobileDrawer.classList.add('is-open');
         mobileDrawer.setAttribute('aria-hidden', 'false');
@@ -1140,7 +1150,12 @@
           mobileOverlay.classList.add('is-visible');
         }
 
+        // Lock body scroll while preserving position
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + savedScrollY + 'px';
+        document.body.style.left = '0';
+        document.body.style.right = '0';
         document.body.classList.add('mobile-menu-open');
 
         setTimeout(function() {
@@ -1162,8 +1177,16 @@
           mobileOverlay.classList.remove('is-visible');
         }
 
+        // Restore body scroll
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
         document.body.classList.remove('mobile-menu-open');
+
+        // Restore scroll position
+        window.scrollTo(0, savedScrollY);
 
         mobileToggle.focus();
       }
