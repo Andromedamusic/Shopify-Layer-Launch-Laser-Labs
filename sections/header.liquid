@@ -1102,14 +1102,14 @@
 
 <script>
   /**
-   * Mobile Menu - Robust Touch-Friendly Implementation
-   * Addresses: iOS/Android touch issues, z-index conflicts, event bubbling
+   * Mobile Menu - Robust Implementation for All Devices
+   * Fixed: Close button works on vertical desktop, touch devices, and all viewports
    */
   (function() {
     'use strict';
 
-    // Track initialization to prevent duplicate handlers
     var initialized = false;
+    var touchHandled = false;
 
     function initMobileMenu() {
       if (initialized) return;
@@ -1119,7 +1119,6 @@
       var mobileOverlay = document.querySelector('.header__mobile-overlay');
       var mobileClose = document.querySelector('.header__mobile-close');
 
-      // Exit if elements not found
       if (!mobileToggle || !mobileDrawer) {
         console.warn('Mobile menu elements not found');
         return;
@@ -1144,10 +1143,8 @@
         document.body.style.overflow = 'hidden';
         document.body.classList.add('mobile-menu-open');
 
-        // Focus first focusable element in drawer
         setTimeout(function() {
-          var firstLink = mobileDrawer.querySelector('a, button');
-          if (firstLink) firstLink.focus();
+          if (mobileClose) mobileClose.focus();
         }, 100);
       }
 
@@ -1168,56 +1165,69 @@
         document.body.style.overflow = '';
         document.body.classList.remove('mobile-menu-open');
 
-        // Return focus to toggle
         mobileToggle.focus();
       }
 
-      // Helper to add both click and touch events
-      function addTapHandler(element, handler) {
+      // Unified click/tap handler that works on ALL devices
+      function addUnifiedHandler(element, handler) {
         if (!element) return;
 
-        // Track touch state to prevent ghost clicks
+        var touchStarted = false;
         var touchMoved = false;
 
+        // Touch start - mark that touch began
         element.addEventListener('touchstart', function(e) {
+          touchStarted = true;
           touchMoved = false;
         }, { passive: true });
 
+        // Touch move - mark if user scrolled
         element.addEventListener('touchmove', function(e) {
           touchMoved = true;
         }, { passive: true });
 
+        // Touch end - handle tap if no scroll
         element.addEventListener('touchend', function(e) {
-          if (!touchMoved) {
+          if (touchStarted && !touchMoved) {
+            e.preventDefault();
+            touchHandled = true;
+            handler(e);
+            // Reset after short delay
+            setTimeout(function() { touchHandled = false; }, 300);
+          }
+          touchStarted = false;
+        }, { passive: false });
+
+        // Click handler - for mouse/keyboard, skip if touch just handled it
+        element.addEventListener('click', function(e) {
+          if (!touchHandled) {
             e.preventDefault();
             handler(e);
           }
-        }, { passive: false });
+        });
 
-        // Click handler for non-touch devices
-        element.addEventListener('click', function(e) {
-          handler(e);
+        // Pointer events for hybrid devices (Surface, iPad with mouse)
+        element.addEventListener('pointerup', function(e) {
+          // Only handle pointer if it's a mouse click (not touch)
+          if (e.pointerType === 'mouse' && !touchHandled) {
+            // Let click handler deal with it
+          }
         });
       }
 
-      // Attach handlers to toggle button
-      addTapHandler(mobileToggle, openMobileMenu);
-
-      // Attach handlers to close button
-      addTapHandler(mobileClose, closeMobileMenu);
-
-      // Attach handlers to overlay
-      addTapHandler(mobileOverlay, closeMobileMenu);
+      // Attach handlers
+      addUnifiedHandler(mobileToggle, openMobileMenu);
+      addUnifiedHandler(mobileClose, closeMobileMenu);
+      addUnifiedHandler(mobileOverlay, closeMobileMenu);
 
       // Expandable submenu handlers
       document.querySelectorAll('.header__mobile-expand').forEach(function(button) {
-        addTapHandler(button, function(e) {
+        addUnifiedHandler(button, function(e) {
           var parent = button.closest('.header__mobile-item--expandable');
           if (!parent) return;
 
           var isExpanded = parent.classList.contains('is-expanded');
 
-          // Close all other expanded items
           document.querySelectorAll('.header__mobile-item--expandable.is-expanded').forEach(function(item) {
             if (item !== parent) {
               item.classList.remove('is-expanded');
@@ -1226,9 +1236,8 @@
             }
           });
 
-          // Toggle current item
           parent.classList.toggle('is-expanded');
-          button.setAttribute('aria-expanded', !isExpanded);
+          button.setAttribute('aria-expanded', String(!isExpanded));
         });
       });
 
@@ -1239,36 +1248,41 @@
         }
       });
 
-      // Close when clicking links inside drawer (for SPA navigation)
+      // Close when clicking links inside drawer
       mobileDrawer.querySelectorAll('a').forEach(function(link) {
         link.addEventListener('click', function() {
-          // Delay to allow navigation
           setTimeout(closeMobileMenu, 100);
         });
       });
+
+      // Direct onclick as fallback for close button (most reliable)
+      if (mobileClose) {
+        mobileClose.onclick = function(e) {
+          closeMobileMenu(e);
+          return false;
+        };
+      }
     }
 
-    // Initialize on multiple events for robustness
+    // Initialize
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initMobileMenu);
     } else {
-      // DOM already loaded
       initMobileMenu();
     }
 
-    // Also listen for Shopify section events (for theme editor)
+    // Shopify theme editor support
     document.addEventListener('shopify:section:load', function() {
       initialized = false;
       initMobileMenu();
     });
 
-    // Fallback: try again after a short delay
+    // Fallback initialization
     setTimeout(initMobileMenu, 500);
 
     // Scroll detection for header shadow
     var header = document.querySelector('.header');
     if (header) {
-      var lastScrollY = 0;
       var ticking = false;
 
       function updateHeaderOnScroll() {
@@ -1281,16 +1295,12 @@
       }
 
       window.addEventListener('scroll', function() {
-        lastScrollY = window.scrollY;
         if (!ticking) {
-          window.requestAnimationFrame(function() {
-            updateHeaderOnScroll();
-          });
+          window.requestAnimationFrame(updateHeaderOnScroll);
           ticking = true;
         }
       }, { passive: true });
 
-      // Initial check
       updateHeaderOnScroll();
     }
   })();

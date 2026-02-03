@@ -154,3 +154,27 @@ Removed due to copyright concerns - avoid sports team logos and trademarked cont
 1. **On light backgrounds**: Use darker gold (#8B6914) or dark text (#1a1a1a) with gold accents (borders, icons)
 2. **On dark backgrounds**: Gold (#c9a227) works well with sufficient contrast
 3. **Alternative approach**: Use gold for decorative elements only, not for essential text
+
+### Custom Order Form - Web3Forms Setup (REQUIRED for Email with Attachments)
+**Problem**: Shopify doesn't natively support email forms with file attachments.
+**Solution**: The Custom Orders page uses Web3Forms (free service) to send emails with image attachments.
+
+**Setup Instructions:**
+1. Go to https://web3forms.com
+2. Enter your email address: `HunterBos@BosBusinessServices.org`
+3. Click "Create Access Key"
+4. Check your email and copy the access key
+5. In Shopify Admin → Online Store → Themes → Customize
+6. Navigate to the Custom Orders page
+7. Find "Form Configuration" section
+8. Paste the access key into "Web3Forms Access Key" field
+9. Save
+
+**What the form collects:**
+- Contact info (name, email, phone, company)
+- Project details (order type, quantity, material, timeline)
+- Project description
+- Image/logo upload (attached to email)
+- Additional notes and referral source
+
+**Email format:** Submissions go to configured email with all fields + attached image file.
