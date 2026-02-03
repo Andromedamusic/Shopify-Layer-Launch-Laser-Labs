@@ -85,12 +85,34 @@ body {
   overscroll-behavior-x: none; /* Prevent horizontal overscroll bounce */
 }
 
-/* Mobile menu open - scroll lock without layout shift */
+/* ============================================
+   Mobile Menu Scroll Lock - Bulletproof System
+   Prevents layout shift from scrollbar removal
+   ============================================ */
+
+/* CSS variable for scrollbar width - dynamically set by JavaScript */
+:root {
+  --scrollbar-width: 0px;
+}
+
+/* Apply overflow hidden to html element for better control */
+html.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Mobile menu open - scroll lock with scrollbar compensation */
 body.mobile-menu-open {
   overflow: hidden;
   touch-action: none;
   -webkit-overflow-scrolling: none;
   overscroll-behavior: none;
+  /* Compensate for scrollbar removal to prevent layout shift */
+  padding-right: var(--scrollbar-width, 0px);
+}
+
+/* Keep header aligned when menu is open (compensate for body padding) */
+html.mobile-menu-open .header {
+  padding-right: var(--scrollbar-width, 0px);
 }
 
 /* Accessibility */

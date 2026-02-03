@@ -789,39 +789,75 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    /* Use opacity + pointer-events instead of visibility */
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    /* GPU acceleration */
+    will-change: opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Prevent any layout interference */
+    contain: strict;
   }
 
   .header__mobile-overlay.is-visible {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
   }
 
+  /* ============================================
+     Mobile Drawer - Bulletproof Animation System
+     Prevents layout shift on foldable/mobile devices
+     ============================================ */
   .header__mobile-drawer {
     position: fixed;
     top: 0;
     right: 0;
-    width: 85%;
-    max-width: 320px;
+    /* Fixed width prevents percentage-based recalculation during animation */
+    width: 320px;
+    max-width: 85vw;
     height: 100%;
-    height: 100dvh; /* Use dynamic viewport height for foldables */
+    height: 100svh; /* Use SMALL viewport height - more stable on foldables */
     background: #0d0d0d;
     z-index: 1000;
+    /* GPU-only transform for smooth animation */
     transform: translateX(100%);
-    visibility: hidden; /* Hide when off-screen to prevent viewport expansion */
-    transition: transform 0.3s ease, visibility 0.3s;
+    /* Use opacity + pointer-events instead of visibility (no reflow) */
+    opacity: 0;
+    pointer-events: none;
+    /* iOS-like spring timing for premium feel */
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1),
+                opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
     display: flex;
     flex-direction: column;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
     color: #ffffff;
-    overflow-x: hidden; /* Prevent any horizontal overflow within drawer */
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* GPU acceleration hints - pre-composite the layer */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* CSS containment - isolate layout calculations */
+    contain: layout style paint;
+    /* Prevent text selection during animation */
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .header__mobile-drawer.is-open {
     transform: translateX(0);
-    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+
+  /* Remove will-change after animation settles (performance) */
+  .header__mobile-drawer.is-open.animation-settled {
+    will-change: auto;
   }
 
   .header__mobile-header {
@@ -1130,34 +1166,60 @@
 
       initialized = true;
 
+      /**
+       * Bulletproof Mobile Menu Open
+       * Prevents layout shift by compensating for scrollbar removal
+       */
       function openMobileMenu(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
 
-        // Add class to body - CSS handles scroll lock
+        // STEP 1: Calculate scrollbar width BEFORE hiding it
+        var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
+
+        // STEP 2: Apply scroll lock to html (with scrollbar compensation already set)
+        document.documentElement.classList.add('mobile-menu-open');
         document.body.classList.add('mobile-menu-open');
 
-        // Open drawer and overlay together
-        mobileDrawer.classList.add('is-open');
-        mobileDrawer.setAttribute('aria-hidden', 'false');
-        mobileToggle.setAttribute('aria-expanded', 'true');
+        // STEP 3: Use requestAnimationFrame to batch DOM operations
+        // This ensures all style calculations are complete before animation starts
+        requestAnimationFrame(function() {
+          // Remove animation-settled class if present
+          mobileDrawer.classList.remove('animation-settled');
 
-        if (mobileOverlay) {
-          mobileOverlay.classList.add('is-visible');
-        }
+          // Open drawer
+          mobileDrawer.classList.add('is-open');
+          mobileDrawer.setAttribute('aria-hidden', 'false');
+          mobileToggle.setAttribute('aria-expanded', 'true');
 
-        setTimeout(function() {
-          if (mobileClose) mobileClose.focus();
-        }, 100);
+          if (mobileOverlay) {
+            mobileOverlay.classList.add('is-visible');
+          }
+
+          // Focus close button after animation
+          setTimeout(function() {
+            if (mobileClose) mobileClose.focus();
+            // Add settled class after animation completes (performance optimization)
+            mobileDrawer.classList.add('animation-settled');
+          }, 350);
+        });
       }
 
+      /**
+       * Bulletproof Mobile Menu Close
+       * Properly cleans up scrollbar compensation
+       */
       function closeMobileMenu(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
+
+        // Remove animation-settled to re-enable will-change for close animation
+        mobileDrawer.classList.remove('animation-settled');
 
         // Close drawer and overlay
         mobileDrawer.classList.remove('is-open');
@@ -1168,10 +1230,13 @@
           mobileOverlay.classList.remove('is-visible');
         }
 
-        // Remove body class after transition
+        // STEP: Remove scroll lock and scrollbar compensation AFTER animation
         setTimeout(function() {
+          document.documentElement.classList.remove('mobile-menu-open');
           document.body.classList.remove('mobile-menu-open');
-        }, 300);
+          // Reset scrollbar width variable
+          document.documentElement.style.setProperty('--scrollbar-width', '0px');
+        }, 350);
 
         mobileToggle.focus();
       }
