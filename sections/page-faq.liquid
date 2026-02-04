@@ -79,8 +79,12 @@
 </div>
 
 <style>
+  /* ============================================
+     FAQ Page Styles - Light Mode Compatible
+     ============================================ */
   .page-faq {
     padding: 40px 0 80px;
+    background: #f8f8f8; /* Explicit light background */
   }
   .page-faq__header {
     text-align: center;
@@ -88,9 +92,10 @@
   }
   .page-faq__title {
     margin-bottom: 0.75rem;
+    color: #1a1a1a; /* Dark text for light background */
   }
   .page-faq__description {
-    color: rgba(255,255,255,0.8);
+    color: #555555; /* Dark gray for readability */
     font-size: 1.8rem;
     max-width: 600px;
     margin: 0 auto;
@@ -113,19 +118,26 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   }
   .faq-category {
     font-size: 2.2rem;
     margin: 2.5rem 0 1.25rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-    color: #ffffff;
+    border-bottom: 2px solid #c9a227; /* Gold accent border */
+    color: #1a1a1a; /* Dark text */
   }
   .faq-category:first-child {
     margin-top: 0;
   }
   .faq-item {
-    border-bottom: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Dark border for light bg */
+  }
+  .faq-item:last-child {
+    border-bottom: none;
   }
   .faq-item__question {
     display: flex;
@@ -137,7 +149,11 @@
     font-weight: 600;
     font-size: 1.9rem;
     gap: 1rem;
-    color: #ffffff;
+    color: #1a1a1a; /* Dark text */
+    transition: color 0.2s ease;
+  }
+  .faq-item__question:hover {
+    color: #c9a227; /* Gold on hover */
   }
   .faq-item__question::-webkit-details-marker {
     display: none;
@@ -145,17 +161,20 @@
   .faq-item__icon {
     flex-shrink: 0;
     transition: transform 0.2s;
-    color: #ffffff;
+    color: #c9a227; /* Gold icon */
   }
   .faq-item[open] .faq-item__icon {
     transform: rotate(180deg);
+  }
+  .faq-item[open] .faq-item__question {
+    color: #c9a227; /* Gold when open */
   }
   .faq-item__answer {
     padding: 0 0 1.25rem 0;
   }
   .faq-item__answer p {
     margin: 0;
-    color: rgba(255,255,255,0.85);
+    color: #4a4a4a; /* Dark gray text for readability */
     line-height: 1.7;
     font-size: 1.8rem;
   }
