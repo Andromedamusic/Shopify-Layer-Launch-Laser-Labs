@@ -646,6 +646,226 @@
    Reduced Motion Support
    ============================================ */
 
+/* ============================================
+   Premium Gold Shimmer Effect
+   Adds luxury metallic feel to text and elements
+   ============================================ */
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    120deg,
+    #c9a227 0%,
+    #e8d48b 20%,
+    #fff9e6 35%,
+    #e8d48b 50%,
+    #c9a227 65%,
+    #9a7b1a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+
+.gold-shimmer--subtle {
+  animation-duration: 6s;
+}
+
+.gold-shimmer--fast {
+  animation-duration: 2s;
+}
+
+/* Static gold gradient for hover states */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #c9a227 0%, #e8d48b 50%, #c9a227 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+   Scroll-Triggered Reveal Animations
+   Elements animate when entering viewport
+   ============================================ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-on-scroll--left {
+  transform: translateX(-40px);
+}
+
+.reveal-on-scroll--left.is-visible {
+  transform: translateX(0);
+}
+
+.reveal-on-scroll--right {
+  transform: translateX(40px);
+}
+
+.reveal-on-scroll--right.is-visible {
+  transform: translateX(0);
+}
+
+.reveal-on-scroll--scale {
+  transform: scale(0.9);
+}
+
+.reveal-on-scroll--scale.is-visible {
+  transform: scale(1);
+}
+
+/* Staggered reveals for lists/grids */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-out-expo),
+              transform 0.6s var(--ease-out-expo);
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   Premium Button Hover Effects
+   ============================================ */
+
+.button-premium {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out-expo),
+              box-shadow 0.3s var(--ease-out-expo);
+}
+
+.button-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s var(--ease-out-expo);
+}
+
+.button-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.button-premium:hover::before {
+  left: 100%;
+}
+
+/* Gold button variant */
+.button-premium--gold {
+  background: linear-gradient(135deg, #c9a227 0%, #9a7b1a 100%);
+}
+
+.button-premium--gold:hover {
+  box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+}
+
+/* ============================================
+   Smooth Image Hover Zoom
+   ============================================ */
+
+.image-zoom-container {
+  overflow: hidden;
+}
+
+.image-zoom-container img {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.image-zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Subtle zoom variant */
+.image-zoom-container--subtle:hover img {
+  transform: scale(1.04);
+}
+
+/* ============================================
+   Premium Underline Animation
+   ============================================ */
+
+.underline-reveal {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c9a227, #e8d48b);
+  transition: width 0.4s var(--ease-out-expo);
+}
+
+.underline-reveal:hover::after,
+.underline-reveal:focus::after {
+  width: 100%;
+}
+
+/* ============================================
+   Luxury Float Animation
+   Subtle hovering effect for featured elements
+   ============================================ */
+
+@keyframes luxuryFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.luxury-float {
+  animation: luxuryFloat 4s ease-in-out infinite;
+}
+
+.luxury-float--slow {
+  animation-duration: 6s;
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

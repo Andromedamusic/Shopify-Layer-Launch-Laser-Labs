@@ -107,16 +107,19 @@
 
   // Scroll Animation Observer
   const initScrollAnimations = () => {
+    // Selector for all scroll-animated elements
+    const animationSelector = '.animate-on-scroll, .section-reveal, .reveal-on-scroll, .reveal-stagger';
+
     // Skip if user prefers reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // Make all animated elements visible immediately
-      document.querySelectorAll('.animate-on-scroll, .section-reveal').forEach(el => {
+      document.querySelectorAll(animationSelector).forEach(el => {
         el.classList.add('is-visible');
       });
       return;
     }
 
-    const animatedElements = document.querySelectorAll('.animate-on-scroll, .section-reveal');
+    const animatedElements = document.querySelectorAll(animationSelector);
 
     if (animatedElements.length === 0) return;
 
